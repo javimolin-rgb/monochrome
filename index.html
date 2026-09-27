@@ -2,58 +2,31 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="theme-color" content="#111111">
-<meta name="description" content="PIXEL MONO — Pixel Hatching Studio">
+<title>PIXEL HATCH — Monochrome Grid Studio</title>
 
-<title>PIXEL MONO — Pixel Hatching Studio</title>
+<meta name="theme-color" content="#101114">
 
-<!-- =========================================================
-     FAVICON PIXEL MONO
-     SVG embebido: no necesita archivo externo
-========================================================= -->
 <link
 rel="icon"
 type="image/svg+xml"
-sizes="any"
-href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%23111111'/%3E%3Cg fill='%23ff3b8d'%3E%3Crect x='5' y='5' width='7' height='7'/%3E%3Crect x='20' y='5' width='7' height='7'/%3E%3Crect x='12.5' y='12.5' width='7' height='7'/%3E%3Crect x='5' y='20' width='7' height='7'/%3E%3Crect x='20' y='20' width='7' height='7'/%3E%3C/g%3E%3C/svg%3E"
+href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23101114'/%3E%3Cg fill='%23ff0094'%3E%3Crect x='7' y='7' width='14' height='14'/%3E%3Crect x='25' y='7' width='14' height='14'/%3E%3Crect x='43' y='7' width='14' height='14'/%3E%3Crect x='7' y='25' width='14' height='14'/%3E%3Crect x='25' y='25' width='14' height='14'/%3E%3Crect x='43' y='25' width='14' height='14'/%3E%3Crect x='7' y='43' width='14' height='14'/%3E%3Crect x='25' y='43' width='14' height='14'/%3E%3Crect x='43' y='43' width='14' height='14'/%3E%3C/g%3E%3C/svg%3E"
 >
 
 <style>
 
-/* =========================================================
-   PIXEL MONO — BRAND SYSTEM
-========================================================= */
-
 :root{
-    --bg:#101010;
-    --panel:#181818;
-    --panel-2:#202020;
-    --panel-3:#282828;
-
-    --line:#383838;
-    --line-light:#4b4b4b;
-
-    --text:#f5f5f5;
-    --muted:#9d9d9d;
-
-    --pink:#ff3b8d;
-    --pink-light:#ff70ad;
-
-    --lime:#c9ff3d;
-
+    --black:#101114;
+    --dark:#17181c;
+    --pink:#ff0094;
+    --pink2:#ff5bb8;
     --white:#ffffff;
-    --black:#111111;
-
-    --radius:12px;
-    --shadow:0 15px 45px rgba(0,0,0,.30);
+    --paper:#fafafa;
+    --gray:#ececef;
+    --line:#d6d6dc;
+    --muted:#777981;
 }
-
-
-/* =========================================================
-   RESET
-========================================================= */
 
 *{
     box-sizing:border-box;
@@ -63,19 +36,20 @@ html,
 body{
     margin:0;
     min-height:100%;
-    background:var(--bg);
-    color:var(--text);
-
     font-family:
         Inter,
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
-}
 
-body{
-    overflow-x:hidden;
+    background:
+        linear-gradient(rgba(16,17,20,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(16,17,20,.035) 1px,transparent 1px),
+        #ededf0;
+
+    background-size:16px 16px;
+    color:var(--black);
 }
 
 button,
@@ -88,2316 +62,1287 @@ button{
     cursor:pointer;
 }
 
-
-/* =========================================================
-   APP
-========================================================= */
-
 .app{
-    min-height:100vh;
-
-    display:grid;
-
-    grid-template-columns:
-        390px
-        minmax(0,1fr);
-}
-
-
-/* =========================================================
-   SIDEBAR
-========================================================= */
-
-.sidebar{
-
-    background:var(--panel);
-
-    border-right:
-        1px solid var(--line);
-
+    width:min(1500px,100%);
+    margin:auto;
     padding:18px;
-
-    overflow:auto;
-
-    max-height:100vh;
 }
 
-
 /* =========================================================
-   BRAND
+   HEADER
 ========================================================= */
 
-.brand{
+.header{
+    height:76px;
+    background:var(--black);
+    color:white;
 
     display:flex;
-
     align-items:center;
+    justify-content:space-between;
 
+    padding:0 20px;
+
+    border:1px solid #000;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
     gap:13px;
-
-    margin-bottom:20px;
-
-    padding:
-        3px
-        2px
-        17px;
-
-    border-bottom:
-        1px solid var(--line);
 }
 
-
-/* PIXEL LOGO */
-
-.brand-mark{
-
-    width:46px;
-    height:46px;
-
-    flex:none;
-
-    background:var(--pink);
-
-    border-radius:8px;
-
-    padding:6px;
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    grid-template-rows:
-        repeat(4,1fr);
-
-    gap:3px;
-
-    box-shadow:
-        5px 5px 0 var(--lime);
+.logo{
+    width:44px;
+    height:44px;
 }
 
-.brand-mark i{
+.brand h1{
+    margin:0;
+    font-size:19px;
+    letter-spacing:.12em;
+    font-weight:900;
+}
 
+.brand small{
     display:block;
+    margin-top:3px;
 
-    background:#111;
-}
+    color:#a9a9b0;
 
-.brand-mark i:nth-child(1),
-.brand-mark i:nth-child(4),
-.brand-mark i:nth-child(6),
-.brand-mark i:nth-child(9),
-.brand-mark i:nth-child(11),
-.brand-mark i:nth-child(16){
-
-    opacity:1;
-}
-
-.brand-mark i:nth-child(2),
-.brand-mark i:nth-child(3),
-.brand-mark i:nth-child(5),
-.brand-mark i:nth-child(7),
-.brand-mark i:nth-child(8),
-.brand-mark i:nth-child(10),
-.brand-mark i:nth-child(12),
-.brand-mark i:nth-child(13),
-.brand-mark i:nth-child(14),
-.brand-mark i:nth-child(15){
-
-    opacity:.15;
-}
-
-
-.brand-copy{
-    min-width:0;
-}
-
-.brand-name{
-
-    font-size:21px;
-
-    line-height:1;
-
-    font-weight:950;
-
-    letter-spacing:.08em;
-}
-
-.brand-sub{
-
-    margin-top:6px;
-
-    color:var(--muted);
-
+    font-family:monospace;
     font-size:9px;
-
-    font-weight:700;
-
-    letter-spacing:.15em;
-
-    text-transform:uppercase;
+    letter-spacing:.2em;
 }
 
+.status{
+    display:flex;
+    gap:8px;
+
+    font-family:monospace;
+    font-size:9px;
+    letter-spacing:.1em;
+}
+
+.badge{
+    padding:7px 9px;
+    border:1px solid #414149;
+}
+
+.badge b{
+    color:var(--pink);
+}
 
 /* =========================================================
-   SECTIONS
+   WORKSPACE
 ========================================================= */
 
+.workspace{
+    display:grid;
+    grid-template-columns:390px minmax(0,1fr);
+    gap:14px;
+
+    margin-top:14px;
+}
+
+.sidebar{
+    background:#fafafa;
+    border:1px solid var(--line);
+
+    max-height:calc(100vh - 122px);
+    overflow:auto;
+}
+
 .section{
-
-    background:var(--panel-2);
-
-    border:
-        1px solid var(--line);
-
-    border-radius:
-        var(--radius);
-
-    padding:13px;
-
-    margin-bottom:11px;
+    padding:15px;
+    border-bottom:1px solid var(--line);
 }
 
 .section-title{
-
     display:flex;
-
-    justify-content:space-between;
-
     align-items:center;
-
     gap:8px;
 
-    margin-bottom:11px;
+    margin-bottom:12px;
 
+    font-family:monospace;
     font-size:10px;
-
     font-weight:900;
-
-    letter-spacing:.11em;
-
+    letter-spacing:.14em;
     text-transform:uppercase;
 }
 
-.section-title span:last-child{
-
-    color:var(--pink);
-}
-
-
-/* =========================================================
-   FORM
-========================================================= */
-
-label{
-
-    display:block;
-
-    color:#ddd;
-
-    font-size:11px;
-
-    margin:
-        9px
-        0
-        5px;
-}
-
-input[type="range"]{
-
-    width:100%;
-
-    accent-color:var(--pink);
-}
-
-input[type="number"],
-input[type="text"],
-select{
-
-    width:100%;
-
-    background:#111;
-
-    color:white;
-
-    border:
-        1px solid #3d3d3d;
-
-    border-radius:8px;
-
-    padding:
-        8px
-        9px;
-
-    outline:none;
-}
-
-input:focus,
-select:focus{
-
-    border-color:
-        var(--pink);
+.section-title:before{
+    content:"";
+    width:8px;
+    height:8px;
+    background:var(--pink);
 }
 
 .row{
-
     display:grid;
-
-    grid-template-columns:
-        1fr
-        1fr;
-
-    gap:8px;
-}
-
-.value-row{
-
-    display:flex;
-
+    grid-template-columns:1fr auto;
+    gap:10px;
     align-items:center;
 
-    justify-content:space-between;
+    margin:9px 0;
+}
 
+label{
+    font-size:12px;
+}
+
+output{
+    min-width:45px;
+
+    text-align:right;
+
+    font-family:monospace;
+    font-size:10px;
+    font-weight:700;
+}
+
+input[type="range"]{
+    width:100%;
+    accent-color:var(--pink);
+}
+
+select{
+    width:100%;
+    height:34px;
+
+    border:1px solid #c9c9cf;
+    background:white;
+
+    padding:0 9px;
+}
+
+input[type="checkbox"]{
+    accent-color:var(--pink);
+}
+
+.control-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
     gap:8px;
 }
 
-.value{
+.btn{
+    min-height:36px;
 
-    min-width:42px;
+    border:1px solid var(--black);
+    background:white;
 
-    color:var(--pink);
-
-    font-size:11px;
-
-    font-weight:850;
-
-    text-align:right;
-}
-
-.help{
-
-    margin-top:6px;
-
-    color:var(--muted);
+    padding:8px 10px;
 
     font-size:10px;
-
-    line-height:1.45;
-}
-
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-.btn{
-
-    border:
-        1px solid #444;
-
-    background:#292929;
-
-    color:#fff;
-
-    border-radius:8px;
-
-    padding:
-        9px
-        11px;
-
-    font-size:11px;
-
-    font-weight:750;
-
-    transition:
-        .15s ease;
+    font-weight:800;
+    letter-spacing:.03em;
 }
 
 .btn:hover{
-
-    transform:
-        translateY(-1px);
-
-    border-color:#777;
+    background:#eeeeF1;
 }
 
 .btn.primary{
-
-    background:
-        var(--pink);
-
-    border-color:
-        var(--pink);
-
-    color:#111;
+    background:var(--pink);
+    border-color:var(--pink);
+    color:white;
 }
 
-.btn.lime{
-
-    background:
-        var(--lime);
-
-    border-color:
-        var(--lime);
-
-    color:#111;
+.btn.dark{
+    background:var(--black);
+    color:white;
 }
 
-.btn.danger{
+.file{
+    padding:12px;
 
-    background:#3a1e27;
+    border:1px dashed #aaa;
+    background:white;
 
-    border-color:#6e3047;
+    font-size:11px;
 }
 
-.btn.small{
-
-    padding:
-        7px
-        8px;
-
-    font-size:10px;
+.file input{
+    width:100%;
+    margin-top:7px;
 }
 
-.btn-row{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:7px;
-}
-
-
-/* =========================================================
-   DROPZONE
-========================================================= */
-
-.drop{
-
-    border:
-        1px dashed #555;
-
-    border-radius:9px;
-
-    padding:15px 10px;
-
-    text-align:center;
+.note{
+    margin-top:8px;
 
     color:var(--muted);
 
-    font-size:11px;
-
-    transition:.15s;
+    font-size:10px;
+    line-height:1.45;
 }
-
-.drop.drag{
-
-    border-color:
-        var(--pink);
-
-    background:#291720;
-
-    color:white;
-}
-
-.drop strong{
-
-    display:block;
-
-    color:white;
-
-    margin-bottom:4px;
-}
-
 
 /* =========================================================
-   CHECKBOX
+   TONAL CURVE
 ========================================================= */
 
-.check{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:7px;
-
-    color:#ddd;
-
-    font-size:11px;
-
-    margin:8px 0;
-}
-
-.check input{
-
-    accent-color:
-        var(--pink);
-}
-
-
-/* =========================================================
-   10 TONAL LEVELS
-========================================================= */
-
-.tone-grid{
-
+.tonal{
     display:grid;
-
     gap:5px;
 }
 
 .tone-row{
-
     display:grid;
-
-    grid-template-columns:
-        105px
-        1fr
-        34px;
+    grid-template-columns:18px 1fr 42px;
 
     align-items:center;
 
-    gap:7px;
-
-    padding:4px 0;
+    gap:6px;
 }
 
-.tone-row span{
-
-    color:#bbb;
-
+.tone-row b{
+    font-family:monospace;
     font-size:9px;
 }
-
-.tone-val{
-
-    color:var(--pink)!important;
-
-    text-align:right;
-}
-
-
-/* =========================================================
-   MASKS
-========================================================= */
-
-.mask-list{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:5px;
-
-    margin-bottom:8px;
-}
-
-.mask-item{
-
-    display:grid;
-
-    grid-template-columns:
-        1fr
-        34px;
-
-    gap:5px;
-}
-
-.mask-select{
-
-    text-align:left;
-
-    overflow:hidden;
-
-    white-space:nowrap;
-
-    text-overflow:ellipsis;
-}
-
-.mask-select.active{
-
-    border-color:
-        var(--pink);
-
-    background:
-        #321b27;
-}
-
-.mask-status{
-
-    display:inline-block;
-
-    width:7px;
-    height:7px;
-
-    margin-right:5px;
-
-    border-radius:50%;
-
-    background:
-        var(--lime);
-}
-
-.mask-status.off{
-
-    background:#555;
-}
-
 
 /* =========================================================
    PATTERNS
 ========================================================= */
 
 .patterns{
-
     display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
+    grid-template-columns:repeat(4,1fr);
     gap:6px;
 }
 
-.pattern{
+.pattern-btn{
+    height:54px;
 
-    min-height:42px;
-
-    border:
-        1px solid #414141;
-
-    border-radius:7px;
-
-    background:#111;
-
-    color:white;
-
-    padding:4px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:1px;
-}
-
-.pattern.active{
-
-    border-color:
-        var(--pink);
-
-    box-shadow:
-        inset 0 0 0 1px var(--pink);
-}
-
-.pattern .num{
-
-    color:var(--pink);
-
-    font-size:8px;
-
-    font-weight:900;
-}
-
-.pattern .symbol{
-
-    font-size:16px;
-
-    line-height:1;
-}
-
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-.main{
-
-    min-width:0;
-
-    padding:18px;
-
-    background:
-        linear-gradient(
-            rgba(255,255,255,.025) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.025) 1px,
-            transparent 1px
-        ),
-        #111;
-
-    background-size:
-        24px 24px;
-}
-
-
-/* =========================================================
-   TOPBAR
-========================================================= */
-
-.topbar{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:12px;
-
-    margin-bottom:12px;
-}
-
-.topbar-left{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-}
-
-.status{
-
-    color:var(--muted);
-
-    font-size:10px;
-
-    font-weight:800;
-
-    letter-spacing:.09em;
-
-    text-transform:uppercase;
-}
-
-.status b{
-
-    color:var(--lime);
-}
-
-.top-actions{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:7px;
-}
-
-
-/* =========================================================
-   ORIENTATION CHIP
-========================================================= */
-
-.orientation-chip{
-
-    border:
-        1px solid #444;
-
-    background:#222;
-
-    color:#ccc;
-
-    border-radius:999px;
-
-    padding:
-        5px
-        9px;
+    border:1px solid #ccc;
+    background:white;
 
     font-size:9px;
-
-    font-weight:800;
-
-    text-transform:uppercase;
 }
 
-.orientation-chip.landscape{
-
-    color:var(--lime);
-
-    border-color:
-        var(--lime);
+.pattern-btn.active{
+    border:2px solid var(--pink);
 }
 
+.pattern-btn span{
+    display:block;
+
+    height:25px;
+
+    font-size:18px;
+    line-height:23px;
+}
+
+.pattern-btn small{
+    font-size:7px;
+}
 
 /* =========================================================
    PREVIEW
 ========================================================= */
 
-.preview-shell{
+.preview-panel{
+    min-width:0;
 
-    height:
-        calc(100vh - 80px);
+    background:white;
+    border:1px solid var(--line);
 
-    min-height:400px;
-
-    background:#252525;
-
-    border:
-        1px solid #383838;
-
-    border-radius:14px;
-
-    box-shadow:
-        var(--shadow);
-
-    overflow:hidden;
-
-    position:relative;
+    padding:14px;
 }
 
-.preview-head{
-
-    height:45px;
-
-    padding:
-        0 12px;
-
+.preview-toolbar{
     display:flex;
-
+    align-items:center;
     justify-content:space-between;
 
-    align-items:center;
+    gap:10px;
 
-    background:#191919;
-
-    border-bottom:
-        1px solid #383838;
+    margin-bottom:10px;
 }
 
-.preview-title{
+.meta{
+    color:var(--muted);
 
-    font-size:10px;
-
-    font-weight:850;
-
-    letter-spacing:.12em;
-
+    font-family:monospace;
+    font-size:9px;
+    letter-spacing:.06em;
     text-transform:uppercase;
 }
 
-.preview-meta{
-
-    color:var(--muted);
-
-    font-size:10px;
-}
-
-.preview-area{
-
-    height:
-        calc(100% - 45px);
-
+.mode{
     display:flex;
 
-    justify-content:center;
-
-    align-items:center;
-
-    padding:12px;
-
-    position:relative;
+    border:1px solid var(--black);
 }
 
-#canvasWrap{
+.mode button{
+    border:0;
+    background:white;
 
-    max-width:100%;
+    padding:7px 11px;
 
-    max-height:100%;
+    font-size:9px;
+    font-weight:800;
+}
 
-    display:flex;
+.mode button.active{
+    background:var(--black);
+    color:white;
+}
 
-    align-items:center;
+/*
+   IMPORTANTE:
+   El alto de este escenario es fijo.
+   El canvas nunca modifica el alto del escenario.
+*/
 
-    justify-content:center;
+.preview-stage{
+
+    height:720px;
+
+    min-height:720px;
+    max-height:720px;
+
+    width:100%;
 
     position:relative;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+
+    background:#e7e7ea;
+
+    border:1px solid #d0d0d4;
+}
+
+.canvas-wrap{
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:18px;
+
+    position:relative;
+
+    overflow:hidden;
 }
 
 #previewCanvas{
 
     display:block;
 
-    max-width:100%;
+    /*
+      Nunca crece más que el escenario.
+      Mantiene proporción.
+    */
 
+    max-width:100%;
     max-height:100%;
 
     width:auto;
-
     height:auto;
+
+    object-fit:contain;
 
     background:white;
 
     box-shadow:
-        0 10px 35px rgba(0,0,0,.35);
+        0 8px 24px rgba(0,0,0,.14);
 }
 
-
-/* =========================================================
-   MASK EDITOR
-========================================================= */
-
-#maskEditorWrap{
-
-    display:none;
-
-    position:relative;
-
-    max-width:100%;
-
-    max-height:100%;
-
-    background:white;
-
-    box-shadow:
-        0 10px 35px rgba(0,0,0,.35);
-}
-
-#maskBase,
-#maskOverlay{
-
-    display:block;
-
-    max-width:100%;
-
-    max-height:100%;
-
-    width:auto;
-
-    height:auto;
-}
-
-#maskOverlay{
+#maskCanvas{
 
     position:absolute;
 
-    inset:0;
+    display:none;
 
-    width:100%;
-
-    height:100%;
-
-    cursor:crosshair;
+    pointer-events:auto;
 }
-
-
-/* =========================================================
-   EMPTY STATE
-========================================================= */
 
 .empty{
 
-    max-width:420px;
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
     text-align:center;
 
     color:#777;
-}
 
-.empty-mark{
-
-    margin-bottom:8px;
-
-    color:#555;
-
-    font-size:42px;
+    font-size:12px;
 }
 
 .empty strong{
-
     display:block;
 
-    margin-bottom:4px;
+    margin-bottom:5px;
 
-    color:#bbb;
-
-    font-size:14px;
+    color:#222;
+    font-size:15px;
 }
-
-.empty span{
-
-    font-size:11px;
-
-    line-height:1.5;
-}
-
 
 /* =========================================================
-   PRINT SHEET
+   MASKS
 ========================================================= */
 
-.print-only{
-
+.mask-tools{
     display:none;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:8px;
+
+    margin-top:9px;
 }
 
+.mask-tools.show{
+    display:grid;
+}
+
+.mask-list{
+    display:grid;
+    gap:5px;
+
+    margin-top:8px;
+}
+
+.mask-item{
+    display:grid;
+
+    grid-template-columns:1fr auto auto;
+
+    align-items:center;
+
+    gap:5px;
+
+    padding:5px 7px;
+
+    border:1px solid #ddd;
+
+    background:white;
+
+    font-size:10px;
+}
 
 /* =========================================================
    PRINT
 ========================================================= */
 
+#printSheet{
+    display:none;
+}
+
+@media(max-width:1000px){
+
+    .workspace{
+        grid-template-columns:1fr;
+    }
+
+    .sidebar{
+        max-height:none;
+    }
+
+    .preview-stage{
+        height:650px;
+        min-height:650px;
+        max-height:650px;
+    }
+}
+
 @media print{
 
     html,
     body{
-
         background:white!important;
     }
 
     body > *:not(#printSheet){
-
         display:none!important;
     }
 
     #printSheet{
-
         display:flex!important;
 
-        flex-direction:column;
-
-        color:#111;
-
         background:white;
 
         overflow:hidden;
-
-        break-inside:avoid;
-
-        page-break-inside:avoid;
-    }
-
-    .print-title{
-
-        display:flex;
-
-        justify-content:space-between;
-
-        align-items:flex-end;
-
-        gap:10px;
-
-        flex:
-            0 0 auto;
-
-        padding-bottom:4mm;
-    }
-
-    .print-title h1{
-
-        margin:0;
-
-        font-size:16pt;
-
-        line-height:1;
-
-        font-weight:950;
-
-        letter-spacing:.06em;
-    }
-
-    .print-sub{
-
-        color:#555;
-
-        font-size:7pt;
-
-        letter-spacing:.08em;
-
-        text-transform:uppercase;
-    }
-
-    #printBody{
-
-        display:flex;
-
-        flex:
-            1 1 auto;
-
-        min-height:0;
-
-        gap:5mm;
-
-        overflow:hidden;
-    }
-
-    #printImageBox{
-
-        min-width:0;
-
-        min-height:0;
-
-        flex:
-            1 1 auto;
-
-        display:flex;
-
-        align-items:center;
-
-        justify-content:center;
-
-        overflow:hidden;
-
-        border:
-            1px solid #ddd;
-    }
-
-    #printCanvas{
-
-        display:block;
-
-        max-width:100%;
-
-        max-height:100%;
-
-        width:auto;
-
-        height:auto;
-    }
-
-    #printLegend{
-
-        flex:
-            0 0 42mm;
-
-        min-width:0;
-
-        overflow:hidden;
-
-        padding:3mm;
-
-        background:white;
-
-        border:
-            1px solid #ddd;
-    }
-
-    #printLegend h2{
-
-        margin:
-            0
-            0
-            2mm;
-
-        font-size:8pt;
-
-        letter-spacing:.08em;
-
-        text-transform:uppercase;
-    }
-
-    .legend-grid{
-
-        display:grid;
-
-        grid-template-columns:
-            repeat(2,1fr);
-
-        gap:1.5mm;
-    }
-
-    .legend-item{
-
-        display:flex;
-
-        align-items:center;
-
-        gap:2mm;
-
-        min-width:0;
-
-        font-size:6.5pt;
-    }
-
-    .legend-num{
-
-        width:6mm;
-        height:6mm;
-
-        flex:none;
-
-        display:flex;
-
-        align-items:center;
-
-        justify-content:center;
-
-        border:
-            1px solid #aaa;
-
-        font-weight:800;
-    }
-
-    .legend-symbol{
-
-        width:6mm;
-
-        flex:none;
-
-        text-align:center;
-
-        font-size:10pt;
-    }
-
-    #printFooter{
-
-        flex:
-            0 0 auto;
-
-        display:flex;
-
-        justify-content:space-between;
-
-        padding-top:2mm;
-
-        color:#666;
-
-        font-size:6pt;
-    }
-}
-
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width:950px){
-
-    .app{
-
-        grid-template-columns:
-            1fr;
-    }
-
-    .sidebar{
-
-        max-height:none;
-
-        border-right:0;
-
-        border-bottom:
-            1px solid var(--line);
-    }
-
-    .preview-shell{
-
-        height:70vh;
     }
 }
 
 </style>
-</head>
 
+<style id="dynamicPrintStyle"></style>
+
+</head>
 
 <body>
 
-
-<!-- =========================================================
-     APPLICATION
-========================================================= -->
-
 <div class="app">
 
+<header class="header">
 
-<!-- =========================================================
+<div class="brand">
+
+<svg class="logo" viewBox="0 0 44 44">
+
+<rect width="44" height="44" fill="#101114"/>
+
+<g fill="#ff0094">
+
+<rect x="5" y="5" width="7" height="7"/>
+<rect x="14" y="5" width="7" height="7"/>
+<rect x="23" y="5" width="7" height="7"/>
+
+<rect x="5" y="14" width="7" height="7"/>
+<rect x="14" y="14" width="7" height="7"/>
+<rect x="23" y="14" width="7" height="7"/>
+
+<rect x="5" y="23" width="7" height="7"/>
+<rect x="14" y="23" width="7" height="7"/>
+<rect x="23" y="23" width="7" height="7"/>
+
+</g>
+
+<rect x="32" y="5" width="7" height="7" fill="#fff"/>
+<rect x="32" y="14" width="7" height="7" fill="#fff"/>
+<rect x="32" y="23" width="7" height="7" fill="#fff"/>
+
+</svg>
+
+<div>
+
+<h1>PIXEL HATCH</h1>
+
+<small>
+MONOCHROME GRID STUDIO
+</small>
+
+</div>
+
+</div>
+
+<div class="status">
+
+<span class="badge">
+PIXEL / <b>01</b>
+</span>
+
+<span class="badge" id="statusText">
+SIN IMAGEN
+</span>
+
+</div>
+
+</header>
+
+
+<div class="workspace">
+
+
+<!-- ======================================================
      SIDEBAR
-========================================================= -->
+======================================================= -->
 
 <aside class="sidebar">
 
 
-<!-- BRAND -->
-
-<div class="brand">
-
-    <div class="brand-mark">
-
-        <i></i><i></i><i></i><i></i>
-        <i></i><i></i><i></i><i></i>
-        <i></i><i></i><i></i><i></i>
-        <i></i><i></i><i></i><i></i>
-
-    </div>
-
-    <div class="brand-copy">
-
-        <div class="brand-name">
-            PIXEL MONO
-        </div>
-
-        <div class="brand-sub">
-            Pixel Hatching Studio
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     01 IMAGE
-========================================================= -->
+<!-- IMAGE -->
 
 <div class="section">
 
-    <div class="section-title">
-        <span>01 · Imagen</span>
-        <span>INPUT</span>
-    </div>
+<div class="section-title">
+01 · Imagen
+</div>
 
-    <div id="drop" class="drop">
+<div class="file">
 
-        <strong>
-            Suelta, pega o selecciona una imagen
-        </strong>
+Carga una imagen
 
-        JPG · PNG · WEBP · GIF
+<input
+id="imageInput"
+type="file"
+accept="image/*"
+>
 
-    </div>
+</div>
 
-    <input
-        id="file"
-        type="file"
-        accept="image/*"
-        style="display:none"
-    >
+<div class="note">
 
-    <div
-        class="btn-row"
-        style="margin-top:8px"
-    >
+La imagen siempre se mantiene completa dentro de la previsualización.
 
-        <button
-            class="btn primary"
-            id="chooseBtn"
-        >
-            Cargar imagen
-        </button>
-
-        <button
-            class="btn"
-            id="clearBtn"
-        >
-            Limpiar
-        </button>
-
-    </div>
+</div>
 
 </div>
 
 
-<!-- =========================================================
-     02 GRID
-========================================================= -->
+<!-- GRID -->
 
 <div class="section">
 
-    <div class="section-title">
-        <span>02 · Retícula</span>
-        <span>GRID</span>
-    </div>
+<div class="section-title">
+02 · Grilla
+</div>
 
-    <label>
-        Columnas
-    </label>
+<div class="row">
 
-    <div class="value-row">
+<label>
+Columnas
+</label>
 
-        <input
-            id="cols"
-            type="range"
-            min="20"
-            max="240"
-            value="70"
-        >
+<output id="colsOut">
+70
+</output>
 
-        <span
-            class="value"
-            id="colsVal"
-        >
-            70
-        </span>
+</div>
 
-    </div>
+<input
+id="cols"
+type="range"
+min="10"
+max="180"
+value="70"
+>
 
-    <div class="help">
+<div class="note">
 
-        Las filas se calculan automáticamente
-        para conservar la proporción de la imagen.
+Las filas se calculan automáticamente para mantener exactamente la proporción de la imagen.
 
-    </div>
-
-
-    <label>
-        Modo
-    </label>
-
-    <select id="mode">
-
-        <option value="template">
-            Plantilla numerada
-        </option>
-
-        <option value="final">
-            Vista previa final
-        </option>
-
-    </select>
+</div>
 
 </div>
 
 
-<!-- =========================================================
-     03 GLOBAL
-========================================================= -->
+<!-- IMAGE -->
 
 <div class="section">
 
-    <div class="section-title">
-        <span>03 · Ajuste global</span>
-        <span>BASE</span>
-    </div>
+<div class="section-title">
+03 · Imagen / Contraste
+</div>
 
 
-    <label>
-        Contraste
-    </label>
+<div class="row">
+<label>Contraste</label>
+<output id="contrastOut">100%</output>
+</div>
 
-    <div class="value-row">
-
-        <input
-            id="contrast"
-            type="range"
-            min="0.1"
-            max="5"
-            step="0.05"
-            value="1.35"
-        >
-
-        <span
-            class="value"
-            id="contrastVal"
-        >
-            1.35
-        </span>
-
-    </div>
+<input
+id="contrast"
+type="range"
+min="50"
+max="180"
+value="100"
+>
 
 
-    <label>
-        Profundidad de negros
-    </label>
+<div class="row">
+<label>Profundidad negros</label>
+<output id="blackOut">0</output>
+</div>
 
-    <div class="value-row">
-
-        <input
-            id="black"
-            type="range"
-            min="0"
-            max="100"
-            value="18"
-        >
-
-        <span
-            class="value"
-            id="blackVal"
-        >
-            18
-        </span>
-
-    </div>
+<input
+id="blackDepth"
+type="range"
+min="-40"
+max="40"
+value="0"
+>
 
 
-    <label>
-        Detalle
-    </label>
+<div class="row">
+<label>Detalle</label>
+<output id="detailOut">50</output>
+</div>
 
-    <div class="value-row">
-
-        <input
-            id="detail"
-            type="range"
-            min="0"
-            max="100"
-            value="55"
-        >
-
-        <span
-            class="value"
-            id="detailVal"
-        >
-            55
-        </span>
-
-    </div>
+<input
+id="detail"
+type="range"
+min="0"
+max="100"
+value="50"
+>
 
 
-    <label>
-        Curva
-    </label>
+<div class="row">
+<label>Curva</label>
+<output id="curveOut">1.00</output>
+</div>
 
-    <div class="value-row">
-
-        <input
-            id="curve"
-            type="range"
-            min="-100"
-            max="100"
-            value="0"
-        >
-
-        <span
-            class="value"
-            id="curveVal"
-        >
-            0
-        </span>
-
-    </div>
+<input
+id="curve"
+type="range"
+min="60"
+max="160"
+value="100"
+>
 
 
-    <div
-        class="btn-row"
-        style="margin-top:9px"
-    >
+<div class="control-grid">
 
-        <button
-            class="btn lime"
-            id="autoBtn"
-        >
-            ✦ Ajustes automáticos
-        </button>
+<button
+class="btn primary"
+id="autoBtn"
+>
+AJUSTE AUTOMÁTICO
+</button>
 
-    </div>
+<button
+class="btn"
+id="resetBtn"
+>
+REINICIAR
+</button>
+
+</div>
 
 </div>
 
 
-<!-- =========================================================
-     04 TEN LEVELS
-========================================================= -->
+<!-- BACKGROUND -->
 
 <div class="section">
 
-    <div class="section-title">
+<div class="section-title">
+04 · Separador de fondo
+</div>
 
-        <span>
-            04 · Mapa tonal
-        </span>
+<div class="row">
 
-        <span>
-            10 PUNTOS
-        </span>
+<label>
+Activar
+</label>
 
-    </div>
-
-    <div class="help">
-
-        Ajusta diez zonas tonales independientes.
-        Sube un punto para aclararlo y bájalo para oscurecerlo.
-        Movimientos opuestos entre puntos vecinos generan
-        contrastes locales.
-
-    </div>
-
-    <div
-        id="toneControls"
-        class="tone-grid"
-    ></div>
-
-    <button
-        class="btn small"
-        id="resetTone"
-        style="margin-top:8px"
-    >
-        Restablecer 10 niveles
-    </button>
+<input
+id="bgSep"
+type="checkbox"
+>
 
 </div>
 
 
-<!-- =========================================================
-     05 BACKGROUND
-========================================================= -->
+<div class="row">
+
+<label>
+Fuerza
+</label>
+
+<output id="bgStrengthOut">
+55
+</output>
+
+</div>
+
+<input
+id="bgStrength"
+type="range"
+min="0"
+max="100"
+value="55"
+>
+
+
+<div class="row">
+
+<label>
+Umbral
+</label>
+
+<output id="bgThreshOut">
+32
+</output>
+
+</div>
+
+<input
+id="bgThresh"
+type="range"
+min="5"
+max="90"
+value="32"
+>
+
+
+<select id="bgMode">
+
+<option value="light">
+Fondo más claro
+</option>
+
+<option value="dark">
+Fondo más oscuro
+</option>
+
+<option value="neutral">
+Fondo neutro
+</option>
+
+</select>
+
+</div>
+
+
+<!-- 10 LEVELS -->
 
 <div class="section">
 
-    <div class="section-title">
+<div class="section-title">
+05 · Niveles tonales
+</div>
 
-        <span>
-            05 · Separador de fondo
-        </span>
+<div
+class="tonal"
+id="toneControls"
+></div>
 
-        <span>
-            BG
-        </span>
+<div class="note">
 
-    </div>
+10 zonas independientes de luces y sombras.
+El ajuste automático también optimiza estos niveles.
 
-
-    <label class="check">
-
-        <input
-            id="bgEnabled"
-            type="checkbox"
-        >
-
-        Activar separador de fondo
-
-    </label>
-
-
-    <label>
-        Fuerza
-    </label>
-
-    <div class="value-row">
-
-        <input
-            id="bgStrength"
-            type="range"
-            min="0"
-            max="100"
-            value="60"
-        >
-
-        <span
-            class="value"
-            id="bgStrengthVal"
-        >
-            60
-        </span>
-
-    </div>
-
-
-    <label>
-        Modo de fondo
-    </label>
-
-    <select id="bgMode">
-
-        <option value="auto">
-            Automático
-        </option>
-
-        <option value="light">
-            Forzar fondo claro
-        </option>
-
-        <option value="dark">
-            Forzar fondo oscuro
-        </option>
-
-        <option value="neutral">
-            Neutralizar fondo
-        </option>
-
-    </select>
-
-
-    <label>
-        Contraste del objeto
-    </label>
-
-    <div class="value-row">
-
-        <input
-            id="objectContrast"
-            type="range"
-            min="0"
-            max="100"
-            value="45"
-        >
-
-        <span
-            class="value"
-            id="objectContrastVal"
-        >
-            45
-        </span>
-
-    </div>
-
-
-    <div
-        class="btn-row"
-        style="margin-top:8px"
-    >
-
-        <button
-            class="btn small"
-            id="detectBg"
-        >
-            Detectar fondo
-        </button>
-
-        <button
-            class="btn small"
-            id="applyBg"
-        >
-            Aplicar
-        </button>
-
-    </div>
+</div>
 
 </div>
 
 
-<!-- =========================================================
-     06 MASKS
-========================================================= -->
+<!-- MASK -->
 
 <div class="section">
 
-    <div class="section-title">
+<div class="section-title">
+06 · Máscaras
+</div>
 
-        <span>
-            06 · Máscaras
-        </span>
+<div class="control-grid">
 
-        <span>
-            LOCAL
-        </span>
+<button
+class="btn dark"
+id="addMask"
+>
++ MÁSCARA
+</button>
 
-    </div>
-
-
-    <div class="help">
-
-        Crea zonas independientes y píntalas
-        directamente sobre la previsualización.
-        Cada máscara puede tener su propio brillo
-        y contraste.
-
-    </div>
-
-
-    <div
-        id="maskList"
-        class="mask-list"
-        style="margin-top:8px"
-    ></div>
-
-
-    <div class="btn-row">
-
-        <button
-            class="btn primary small"
-            id="newMask"
-        >
-            + Nueva máscara
-        </button>
-
-        <button
-            class="btn small"
-            id="maskEditBtn"
-        >
-            Editar máscaras
-        </button>
-
-    </div>
-
-
-    <label>
-        Brillo de máscara
-    </label>
-
-    <div class="value-row">
-
-        <input
-            id="maskBrightness"
-            type="range"
-            min="-100"
-            max="100"
-            value="0"
-        >
-
-        <span
-            class="value"
-            id="maskBrightnessVal"
-        >
-            0
-        </span>
-
-    </div>
-
-
-    <label>
-        Contraste de máscara
-    </label>
-
-    <div class="value-row">
-
-        <input
-            id="maskContrast"
-            type="range"
-            min="-100"
-            max="100"
-            value="0"
-        >
-
-        <span
-            class="value"
-            id="maskContrastVal"
-        >
-            0
-        </span>
-
-    </div>
-
-
-    <label>
-        Tamaño del pincel
-    </label>
-
-    <div class="value-row">
-
-        <input
-            id="brushSize"
-            type="range"
-            min="5"
-            max="180"
-            value="45"
-        >
-
-        <span
-            class="value"
-            id="brushSizeVal"
-        >
-            45
-        </span>
-
-    </div>
-
-
-    <label>
-        Modo de pincel
-    </label>
-
-    <select id="brushMode">
-
-        <option value="paint">
-            Pintar máscara
-        </option>
-
-        <option value="erase">
-            Borrar máscara
-        </option>
-
-    </select>
-
-
-    <div
-        class="btn-row"
-        style="margin-top:8px"
-    >
-
-        <button
-            class="btn small"
-            id="clearMask"
-        >
-            Limpiar máscara
-        </button>
-
-        <button
-            class="btn danger small"
-            id="deleteMask"
-        >
-            Eliminar máscara
-        </button>
-
-    </div>
+<button
+class="btn"
+id="clearMasks"
+>
+BORRAR
+</button>
 
 </div>
 
 
-<!-- =========================================================
-     07 PATTERNS
-========================================================= -->
+<div
+id="maskTools"
+class="mask-tools"
+>
+
+<div>
+
+<label>
+Brillo
+</label>
+
+<input
+id="maskBrightness"
+type="range"
+min="-100"
+max="100"
+value="0"
+>
+
+</div>
+
+
+<div>
+
+<label>
+Contraste
+</label>
+
+<input
+id="maskContrast"
+type="range"
+min="-100"
+max="100"
+value="0"
+>
+
+</div>
+
+
+<div>
+
+<label>
+Pincel
+</label>
+
+<input
+id="brushSize"
+type="range"
+min="5"
+max="100"
+value="30"
+>
+
+</div>
+
+
+<button
+class="btn"
+id="paintMode"
+>
+PINTAR
+</button>
+
+<button
+class="btn"
+id="eraseMode"
+>
+BORRAR
+</button>
+
+<button
+class="btn"
+id="clearCurrentMask"
+>
+LIMPIAR
+</button>
+
+</div>
+
+
+<div
+id="maskList"
+class="mask-list"
+></div>
+
+</div>
+
+
+<!-- PATTERNS -->
 
 <div class="section">
 
-    <div class="section-title">
+<div class="section-title">
+07 · Patrones
+</div>
 
-        <span>
-            07 · Patrones
-        </span>
-
-        <span>
-            12
-        </span>
-
-    </div>
-
-
-    <div
-        id="patterns"
-        class="patterns"
-    ></div>
-
-
-    <div class="help">
-
-        Los números permanecen fijos para que
-        la leyenda impresa siempre coincida
-        con la plantilla.
-
-    </div>
+<div
+id="patterns"
+class="patterns"
+></div>
 
 </div>
 
 
-<!-- =========================================================
-     08 PRINT
-========================================================= -->
+<!-- PRINT -->
 
 <div class="section">
 
-    <div class="section-title">
+<div class="section-title">
+08 · Formato de salida
+</div>
 
-        <span>
-            08 · Formato de salida
-        </span>
 
-        <span>
-            PRINT
-        </span>
+<div class="row">
 
-    </div>
+<label>
+Papel
+</label>
 
+<select id="paper">
 
-    <label>
-        Formato de hoja
-    </label>
+<option value="letter">
+Carta
+</option>
 
-    <select id="paper">
+<option value="a4">
+A4
+</option>
 
-        <option
-            value="letter"
-            selected
-        >
-            Carta · 21,6 × 27,9 cm
-        </option>
+<option value="a3">
+A3
+</option>
 
-        <option value="a4">
-            A4 · 21 × 29,7 cm
-        </option>
+<option value="a5">
+A5
+</option>
 
-        <option value="a3">
-            A3 · 29,7 × 42 cm
-        </option>
+<option value="legal">
+Legal
+</option>
 
-        <option value="a5">
-            A5 · 14,8 × 21 cm
-        </option>
+<option value="oficio">
+Oficio Chile
+</option>
 
-        <option value="legal">
-            Legal · 21,6 × 35,6 cm
-        </option>
-
-        <option value="oficio">
-            Oficio Chile · 21,6 × 33 cm
-        </option>
-
-    </select>
-
-
-    <label>
-        Orientación
-    </label>
-
-    <select id="orientation">
-
-        <option
-            value="auto"
-            selected
-        >
-            Automática según imagen
-        </option>
-
-        <option value="portrait">
-            Vertical
-        </option>
-
-        <option value="landscape">
-            Horizontal
-        </option>
-
-    </select>
-
-
-    <div class="row">
-
-        <div>
-
-            <label>
-                Márgenes
-            </label>
-
-            <select id="margin">
-
-                <option value="5">
-                    5 mm
-                </option>
-
-                <option value="8">
-                    8 mm
-                </option>
-
-                <option
-                    value="10"
-                    selected
-                >
-                    10 mm
-                </option>
-
-                <option value="12">
-                    12 mm
-                </option>
-
-                <option value="15">
-                    15 mm
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div>
-
-            <label>
-                Escala
-            </label>
-
-            <select id="printScale">
-
-                <option
-                    value="auto"
-                    selected
-                >
-                    Máxima posible
-                </option>
-
-                <option value="95">
-                    95%
-                </option>
-
-                <option value="90">
-                    90%
-                </option>
-
-                <option value="80">
-                    80%
-                </option>
-
-                <option value="70">
-                    70%
-                </option>
-
-            </select>
-
-        </div>
-
-    </div>
-
-
-    <label>
-        Ubicación de leyenda
-    </label>
-
-    <select id="legendPosition">
-
-        <option
-            value="side"
-            selected
-        >
-            Lateral
-        </option>
-
-        <option value="bottom">
-            Abajo
-        </option>
-
-        <option value="inside">
-            Dentro de la hoja
-        </option>
-
-        <option value="none">
-            Sin leyenda
-        </option>
-
-    </select>
-
-
-    <label class="check">
-
-        <input
-            id="showTitle"
-            type="checkbox"
-            checked
-        >
-
-        Mostrar nombre y datos
-
-    </label>
-
-
-    <label class="check">
-
-        <input
-            id="showBorder"
-            type="checkbox"
-            checked
-        >
-
-        Mostrar borde de área
-
-    </label>
-
-
-    <div
-        class="btn-row"
-        style="margin-top:9px"
-    >
-
-        <button
-            class="btn primary"
-            id="printBtn"
-        >
-            ▣ Imprimir / guardar PDF
-        </button>
-
-    </div>
+</select>
 
 </div>
 
+
+<div class="row">
+
+<label>
+Orientación
+</label>
+
+<select id="orientation">
+
+<option value="auto">
+Automática
+</option>
+
+<option value="portrait">
+Vertical
+</option>
+
+<option value="landscape">
+Horizontal
+</option>
+
+</select>
+
+</div>
+
+
+<div class="row">
+
+<label>
+Margen
+</label>
+
+<output id="marginOut">
+8
+</output>
+
+</div>
+
+<input
+id="margin"
+type="range"
+min="2"
+max="20"
+value="8"
+>
+
+
+<div class="row">
+
+<label>
+Separación
+</label>
+
+<output id="gapOut">
+0
+</output>
+
+</div>
+
+<input
+id="gap"
+type="range"
+min="0"
+max="2"
+value="0"
+>
+
+
+<div class="row">
+
+<label>
+Título
+</label>
+
+<input
+id="showTitle"
+type="checkbox"
+checked
+>
+
+</div>
+
+
+<div class="row">
+
+<label>
+Leyenda
+</label>
+
+<input
+id="showLegend"
+type="checkbox"
+checked
+>
+
+</div>
+
+
+<div class="row">
+
+<label>
+Leyenda
+</label>
+
+<select id="legendPos">
+
+<option value="bottom">
+Abajo
+</option>
+
+<option value="side">
+Lateral
+</option>
+
+</select>
+
+</div>
+
+
+<div class="note">
+
+La grilla calcula automáticamente el mayor tamaño físico posible dentro del área útil de la hoja.
+
+</div>
+
+</div>
+
+
+<div class="section">
+
+<div class="control-grid">
+
+<button
+class="btn primary"
+id="printBtn"
+>
+IMPRIMIR / PDF
+</button>
+
+<button
+class="btn"
+id="clearBtn"
+>
+LIMPIAR
+</button>
+
+</div>
+
+</div>
 
 </aside>
 
 
-<!-- =========================================================
-     MAIN PREVIEW
-========================================================= -->
+<!-- ======================================================
+     PREVIEW
+======================================================= -->
 
-<main class="main">
+<main class="preview-panel">
 
+<div class="preview-toolbar">
 
-    <div class="topbar">
-
-        <div class="topbar-left">
-
-            <span class="status">
-
-                PIXEL MONO /
-
-                <b id="status">
-                    LISTO
-                </b>
-
-            </span>
+<div
+class="meta"
+id="gridMeta"
+>
+Carga una imagen para comenzar
+</div>
 
 
-            <span
-                id="orientationChip"
-                class="orientation-chip"
-            >
-                Carta · vertical
-            </span>
+<div class="mode">
 
-        </div>
+<button
+id="modeFinal"
+class="active"
+>
+VISTA FINAL
+</button>
 
+<button
+id="modeTemplate"
+>
+PLANTILLA
+</button>
 
-        <div class="top-actions">
+</div>
 
-            <button
-                class="btn small"
-                id="fitBtn"
-            >
-                Ajustar a pantalla
-            </button>
-
-
-            <button
-                class="btn small"
-                id="previewModeBtn"
-            >
-                Vista final
-            </button>
-
-        </div>
-
-    </div>
+</div>
 
 
-    <div class="preview-shell">
+<div class="preview-stage">
+
+<div
+class="canvas-wrap"
+id="canvasWrap"
+>
+
+<canvas
+id="previewCanvas"
+></canvas>
+
+<canvas
+id="maskCanvas"
+></canvas>
 
 
-        <div class="preview-head">
+<div
+class="empty"
+id="empty"
+>
 
-            <div
-                class="preview-title"
-                id="previewTitle"
-            >
-                Previsualización completa
-            </div>
+<div>
 
-            <div
-                class="preview-meta"
-                id="previewMeta"
-            >
-                Carga una imagen para comenzar
-            </div>
+<strong>
+PIXEL HATCH
+</strong>
 
-        </div>
+Carga una imagen para generar la grilla.
 
+</div>
 
-        <div class="preview-area">
+</div>
 
+</div>
 
-            <div id="canvasWrap">
-
-                <canvas
-                    id="previewCanvas"
-                ></canvas>
-
-            </div>
-
-
-            <div id="maskEditorWrap">
-
-                <canvas
-                    id="maskBase"
-                ></canvas>
-
-                <canvas
-                    id="maskOverlay"
-                ></canvas>
-
-            </div>
-
-
-            <div
-                id="empty"
-                class="empty"
-            >
-
-                <div class="empty-mark">
-                    ▦
-                </div>
-
-                <strong>
-                    Tu imagen aparecerá aquí
-                </strong>
-
-                <span>
-
-                    PIXEL MONO convierte fotografías
-                    e ilustraciones en una plantilla
-                    monocroma basada en retícula
-                    y patrones.
-
-                </span>
-
-            </div>
-
-
-        </div>
-
-    </div>
+</div>
 
 </main>
 
 </div>
 
+</div>
 
-<!-- =========================================================
+
+<!-- ======================================================
      PRINT SHEET
-========================================================= -->
+======================================================= -->
 
-<div
-    id="printSheet"
-    class="print-only"
->
+<div id="printSheet">
 
+<div id="printTitle"></div>
 
-    <div
-        class="print-title"
-        id="printTitle"
-    >
+<div id="printBody">
 
-        <div>
+<canvas id="printCanvas"></canvas>
 
-            <h1>
-                PIXEL MONO
-            </h1>
+<div id="printLegend"></div>
 
-            <div class="print-sub">
-
-                Pixel Hatching Studio
-                · Plantilla monocroma
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="print-sub"
-            id="printInfo"
-        ></div>
-
-    </div>
-
-
-    <div id="printBody">
-
-
-        <div id="printImageBox">
-
-            <canvas
-                id="printCanvas"
-            ></canvas>
-
-        </div>
-
-
-        <div id="printLegend"></div>
-
-
-    </div>
-
-
-    <div id="printFooter">
-
-        <span>
-            PIXEL MONO
-        </span>
-
-        <span
-            id="printFooterInfo"
-        ></span>
-
-    </div>
-
+</div>
 
 </div>
 
 
-<style id="dynamicPrintStyle"></style>
-
-
 <script>
-
-(() => {
 
 "use strict";
 
@@ -2406,21 +1351,13 @@ select:focus{
    HELPERS
 ========================================================= */
 
-const $ = id =>
-    document.getElementById(id);
+const $ = id => document.getElementById(id);
 
-const clamp = (
-    value,
-    min = 0,
-    max = 1
-) =>
-    Math.max(
-        min,
-        Math.min(
-            max,
-            value
-        )
-    );
+const clamp = (v,a=0,b=1) =>
+    Math.max(a,Math.min(b,v));
+
+const lerp = (a,b,t) =>
+    a+(b-a)*t;
 
 
 /* =========================================================
@@ -2429,325 +1366,228 @@ const clamp = (
 
 const patterns = [
 
-    {
-        id:1,
-        name:"Vacío",
-        symbol:"",
-        type:"empty"
-    },
-
-    {
-        id:2,
-        name:"Punto",
-        symbol:"·",
-        type:"dot"
-    },
-
-    {
-        id:3,
-        name:"Horizontal",
-        symbol:"—",
-        type:"h"
-    },
-
-    {
-        id:4,
-        name:"Vertical",
-        symbol:"|",
-        type:"v"
-    },
-
-    {
-        id:5,
-        name:"Diagonal /",
-        symbol:"/",
-        type:"d1"
-    },
-
-    {
-        id:6,
-        name:"Diagonal \\",
-        symbol:"\\",
-        type:"d2"
-    },
-
-    {
-        id:7,
-        name:"Cruz",
-        symbol:"+",
-        type:"plus"
-    },
-
-    {
-        id:8,
-        name:"X",
-        symbol:"×",
-        type:"x"
-    },
-
-    {
-        id:9,
-        name:"Doble horizontal",
-        symbol:"=",
-        type:"dh"
-    },
-
-    {
-        id:10,
-        name:"Doble vertical",
-        symbol:"‖",
-        type:"dv"
-    },
-
-    {
-        id:11,
-        name:"Estrella",
-        symbol:"✣",
-        type:"star"
-    },
-
-    {
-        id:12,
-        name:"Sólido",
-        symbol:"■",
-        type:"solid"
-    }
+    {id:1,name:"Blanco",symbol:"□"},
+    {id:2,name:"Punto",symbol:"·"},
+    {id:3,name:"Horizontal",symbol:"≡"},
+    {id:4,name:"Vertical",symbol:"║"},
+    {id:5,name:"Diagonal /",symbol:"╱"},
+    {id:6,name:"Diagonal \\",symbol:"╲"},
+    {id:7,name:"Plus",symbol:"+"},
+    {id:8,name:"Cruz",symbol:"×"},
+    {id:9,name:"Doble horizontal",symbol:"═"},
+    {id:10,name:"Doble vertical",symbol:"║"},
+    {id:11,name:"Estrella",symbol:"✦"},
+    {id:12,name:"Sólido",symbol:"■"}
 
 ];
 
-
-const toneNames = [
-
-    "1 · Negro profundo",
-    "2 · Sombra",
-    "3 · Sombra media",
-    "4 · Medio oscuro",
-    "5 · Medio",
-    "6 · Medio claro",
-    "7 · Luz",
-    "8 · Luz alta",
-    "9 · Blanco suave",
-    "10 · Blanco"
-
-];
-
-
-const paperSizes = {
-
-    letter:{
-        name:"Carta",
-        w:216,
-        h:279.4,
-        css:"letter"
-    },
-
-    a4:{
-        name:"A4",
-        w:210,
-        h:297,
-        css:"A4"
-    },
-
-    a3:{
-        name:"A3",
-        w:297,
-        h:420,
-        css:"A3"
-    },
-
-    a5:{
-        name:"A5",
-        w:148,
-        h:210,
-        css:"A5"
-    },
-
-    legal:{
-        name:"Legal",
-        w:215.9,
-        h:355.6,
-        css:"legal"
-    },
-
-    oficio:{
-        name:"Oficio Chile",
-        w:216,
-        h:330,
-        css:"216mm 330mm"
-    }
-
-};
+let activePatterns =
+    patterns.map(p=>p.id);
 
 
 /* =========================================================
-   STATE
+   IMAGE STATE
 ========================================================= */
 
-let source = null;
+let image = null;
 
 let sourceCanvas =
     document.createElement("canvas");
 
-let processedCanvas = null;
+let sourceCtx =
+    sourceCanvas.getContext(
+        "2d",
+        {willReadFrequently:true}
+    );
 
-let bgMask = null;
+let sourceData = null;
 
-let bgDetected = false;
+let cols = 70;
+let rows = 1;
+
+let mode = "final";
+
+
+/* =========================================================
+   TONES
+========================================================= */
+
+let toneOffsets =
+    new Array(10).fill(0);
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+let backgroundMask = null;
+
+
+/* =========================================================
+   MASKS
+========================================================= */
 
 let masks = [];
 
 let activeMask = -1;
 
-let maskW = 0;
+let paintMode = "paint";
 
-let maskH = 0;
 
-let drawingMask = false;
+/* =========================================================
+   IMAGE INPUT
+========================================================= */
 
-let toneOffsets =
-    Array(10).fill(0);
+$("imageInput").addEventListener(
+    "change",
+    event => {
 
-let activePatterns =
-    patterns.map(
-        p => p.id
+        const file =
+            event.target.files[0];
+
+        if(!file) return;
+
+        const url =
+            URL.createObjectURL(file);
+
+        const img =
+            new Image();
+
+        img.onload = () => {
+
+            image = img;
+
+            URL.revokeObjectURL(url);
+
+            $("empty").style.display =
+                "none";
+
+            $("statusText").textContent =
+                "IMAGEN LISTA";
+
+            rebuild();
+
+        };
+
+        img.src = url;
+
+    }
+);
+
+
+/* =========================================================
+   REBUILD
+========================================================= */
+
+function rebuild(){
+
+    if(!image) return;
+
+    cols =
+        Number($("cols").value);
+
+    rows =
+        Math.max(
+            1,
+            Math.round(
+                cols *
+                image.height /
+                image.width
+            )
+        );
+
+    /*
+       Source limitado a 1800px para
+       evitar cálculos innecesariamente
+       pesados.
+    */
+
+    sourceCanvas.width =
+        Math.min(
+            image.width,
+            1800
+        );
+
+    sourceCanvas.height =
+        Math.round(
+            sourceCanvas.width *
+            image.height /
+            image.width
+        );
+
+    sourceCtx.clearRect(
+        0,
+        0,
+        sourceCanvas.width,
+        sourceCanvas.height
     );
 
+    sourceCtx.drawImage(
+        image,
+        0,
+        0,
+        sourceCanvas.width,
+        sourceCanvas.height
+    );
 
-/* =========================================================
-   CANVAS
-========================================================= */
+    sourceData =
+        sourceCtx.getImageData(
+            0,
+            0,
+            sourceCanvas.width,
+            sourceCanvas.height
+        ).data;
 
-const previewCanvas =
-    $("previewCanvas");
+    detectBackground();
 
-const pctx =
-    previewCanvas.getContext("2d");
+    resizeMasks();
 
-const printCanvas =
-    $("printCanvas");
+    updateMeta();
 
-const printCtx =
-    printCanvas.getContext("2d");
-
-
-/* =========================================================
-   STATUS
-========================================================= */
-
-function setStatus(text){
-
-    $("status").textContent =
-        text.toUpperCase();
+    render();
 
 }
 
 
 /* =========================================================
-   RANGE DISPLAY
+   META
 ========================================================= */
 
-function updateRange(
-    id,
-    outputId,
-    format = value => value
-){
+function updateMeta(){
 
-    const input =
-        $(id);
+    if(!image) return;
 
-    const output =
-        $(outputId);
-
-    const update = () => {
-
-        output.textContent =
-            format(input.value);
-
-    };
-
-    input.addEventListener(
-        "input",
-        () => {
-
-            update();
-
-            if(source){
-                generate();
-            }
-
-        }
-    );
-
-    update();
+    $("gridMeta").textContent =
+        `${cols} × ${rows} · ` +
+        `${image.width} × ${image.height} · ` +
+        `${mode==="final"
+            ? "vista final"
+            : "plantilla"}`;
 
 }
 
 
 /* =========================================================
-   RANGE INITIALIZATION
+   TONAL CONTROLS
 ========================================================= */
 
-updateRange(
-    "cols",
-    "colsVal"
-);
+const toneNames = [
 
-updateRange(
-    "contrast",
-    "contrastVal",
-    v => (+v).toFixed(2)
-);
+    "Negro profundo",
+    "Sombras profundas",
+    "Sombras",
+    "Medios oscuros",
+    "Medios",
+    "Medios claros",
+    "Luces",
+    "Luces altas",
+    "Blanco suave",
+    "Blanco"
 
-updateRange(
-    "black",
-    "blackVal"
-);
-
-updateRange(
-    "detail",
-    "detailVal"
-);
-
-updateRange(
-    "curve",
-    "curveVal"
-);
-
-updateRange(
-    "bgStrength",
-    "bgStrengthVal"
-);
-
-updateRange(
-    "objectContrast",
-    "objectContrastVal"
-);
-
-updateRange(
-    "maskBrightness",
-    "maskBrightnessVal"
-);
-
-updateRange(
-    "maskContrast",
-    "maskContrastVal"
-);
-
-updateRange(
-    "brushSize",
-    "brushSizeVal"
-);
-
-
-/* =========================================================
-   10 TONAL CONTROLS
-========================================================= */
-
-const toneControls =
-    $("toneControls");
+];
 
 toneNames.forEach(
-    (name,index) => {
+    (name,index)=>{
 
         const row =
             document.createElement("div");
@@ -2757,565 +1597,143 @@ toneNames.forEach(
 
         row.innerHTML = `
 
-            <span>
-                ${name}
-            </span>
+            <b>${index+1}</b>
 
             <input
                 type="range"
                 min="-100"
                 max="100"
                 value="0"
-                data-tone="${index}"
+                title="${name}"
             >
 
-            <span
-                class="tone-val"
-                id="toneVal${index}"
-            >
-                0
-            </span>
+            <output>0</output>
 
         `;
 
-        toneControls.appendChild(
-            row
-        );
-
-        const input =
+        const slider =
             row.querySelector("input");
 
-        input.addEventListener(
+        const output =
+            row.querySelector("output");
+
+        slider.addEventListener(
             "input",
-            () => {
+            ()=>{
 
                 toneOffsets[index] =
-                    +input.value;
+                    Number(slider.value);
 
-                $("toneVal" + index)
-                    .textContent =
-                    input.value;
+                output.textContent =
+                    slider.value;
 
-                if(source){
-                    generate();
-                }
+                render();
 
             }
         );
+
+        $("toneControls")
+            .appendChild(row);
 
     }
 );
 
 
 /* =========================================================
-   RESET TONAL
+   GLOBAL CONTROLS
 ========================================================= */
 
-$("resetTone")
-    .addEventListener(
-        "click",
-        () => {
+function bindRange(
+    id,
+    output,
+    formatter = v => v
+){
 
-            toneOffsets.fill(0);
+    $(id).addEventListener(
+        "input",
+        ()=>{
 
-            document
-                .querySelectorAll(
-                    "[data-tone]"
-                )
-                .forEach(
-                    (input,index) => {
+            $(output).textContent =
+                formatter($(id).value);
 
-                        input.value = 0;
+            if(
+                id === "cols" &&
+                image
+            ){
 
-                        $("toneVal" + index)
-                            .textContent =
-                            "0";
+                cols =
+                    Number($(id).value);
 
-                    }
-                );
+                rebuild();
 
-            if(source){
-                generate();
             }
+            else{
 
-        }
-    );
+                render();
 
-
-/* =========================================================
-   PATTERN PALETTE
-========================================================= */
-
-function renderPatterns(){
-
-    const wrap =
-        $("patterns");
-
-    wrap.innerHTML = "";
-
-    patterns.forEach(
-        pattern => {
-
-            const button =
-                document.createElement("button");
-
-            button.className =
-                "pattern" +
-                (
-                    activePatterns.includes(
-                        pattern.id
-                    )
-                        ? " active"
-                        : ""
-                );
-
-            button.innerHTML = `
-
-                <span class="num">
-                    ${pattern.id}
-                </span>
-
-                <span class="symbol">
-                    ${pattern.symbol || "·"}
-                </span>
-
-            `;
-
-            button.title =
-                pattern.name;
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    if(
-                        activePatterns
-                            .includes(
-                                pattern.id
-                            )
-                    ){
-
-                        if(
-                            activePatterns.length > 1
-                        ){
-
-                            activePatterns =
-                                activePatterns
-                                    .filter(
-                                        id =>
-                                            id !==
-                                            pattern.id
-                                    );
-
-                        }
-
-                    }
-                    else{
-
-                        activePatterns.push(
-                            pattern.id
-                        );
-
-                    }
-
-                    renderPatterns();
-
-                    if(source){
-                        generate();
-                    }
-
-                }
-            );
-
-            wrap.appendChild(
-                button
-            );
+            }
 
         }
     );
 
 }
 
-renderPatterns();
-
-
-/* =========================================================
-   LOAD IMAGE
-========================================================= */
-
-$("chooseBtn")
-    .addEventListener(
-        "click",
-        () =>
-            $("file").click()
-    );
-
-
-$("file")
-    .addEventListener(
-        "change",
-        event => {
-
-            const file =
-                event.target.files[0];
-
-            if(file){
-                loadFile(file);
-            }
-
-        }
-    );
-
-
-$("drop")
-    .addEventListener(
-        "dragover",
-        event => {
-
-            event.preventDefault();
-
-            $("drop")
-                .classList
-                .add("drag");
-
-        }
-    );
-
-
-$("drop")
-    .addEventListener(
-        "dragleave",
-        () => {
-
-            $("drop")
-                .classList
-                .remove("drag");
-
-        }
-    );
-
-
-$("drop")
-    .addEventListener(
-        "drop",
-        event => {
-
-            event.preventDefault();
-
-            $("drop")
-                .classList
-                .remove("drag");
-
-            const file =
-                event.dataTransfer.files[0];
-
-            if(file){
-                loadFile(file);
-            }
-
-        }
-    );
-
-
-document.addEventListener(
-    "paste",
-    event => {
-
-        const items =
-            [
-                ...(event.clipboardData?.items || [])
-            ];
-
-        const image =
-            items.find(
-                item =>
-                    item.type
-                        .startsWith(
-                            "image/"
-                        )
-            );
-
-        if(image){
-
-            const blob =
-                image.getAsFile();
-
-            if(blob){
-                loadFile(blob);
-            }
-
-        }
-
-    }
+bindRange(
+    "cols",
+    "colsOut"
 );
 
-
-/* =========================================================
-   LOAD
-========================================================= */
-
-function loadFile(file){
-
-    const image =
-        new Image();
-
-    image.onload = () => {
-
-        source =
-            image;
-
-        sourceCanvas.width =
-            image.naturalWidth;
-
-        sourceCanvas.height =
-            image.naturalHeight;
-
-        sourceCanvas
-            .getContext("2d")
-            .drawImage(
-                image,
-                0,
-                0
-            );
-
-        processedCanvas =
-            null;
-
-        bgMask = null;
-
-        bgDetected = false;
-
-        masks = [];
-
-        activeMask = -1;
-
-        createMaskDimensions();
-
-        renderMaskList();
-
-        exitMaskEditor();
-
-        $("empty").style.display =
-            "none";
-
-        $("canvasWrap").style.display =
-            "flex";
-
-        $("previewMeta").textContent =
-            `${image.naturalWidth} × ${image.naturalHeight}px`;
-
-        setStatus(
-            "IMAGEN CARGADA"
-        );
-
-        updateOrientationChip();
-
-        generate();
-
-        updatePrintCSS();
-
-    };
-
-    image.onerror = () => {
-
-        alert(
-            "No fue posible cargar la imagen."
-        );
-
-    };
-
-    image.src =
-        URL.createObjectURL(file);
-
-}
-
-
-/* =========================================================
-   CLEAR
-========================================================= */
-
-$("clearBtn")
-    .addEventListener(
-        "click",
-        () => {
-
-            source = null;
-
-            processedCanvas = null;
-
-            bgMask = null;
-
-            masks = [];
-
-            activeMask = -1;
-
-            previewCanvas.width = 1;
-
-            previewCanvas.height = 1;
-
-            $("empty").style.display =
-                "block";
-
-            $("canvasWrap").style.display =
-                "none";
-
-            $("maskEditorWrap").style.display =
-                "none";
-
-            $("previewMeta").textContent =
-                "Carga una imagen para comenzar";
-
-            setStatus("LISTO");
-
-            updateOrientationChip();
-
-        }
-    );
-
-
-/* =========================================================
-   GRID
-========================================================= */
-
-function getRows(){
-
-    if(!source){
-        return 1;
-    }
-
-    const columns =
-        +$("cols").value;
-
-    return Math.max(
-        1,
-        Math.round(
-            columns *
-            (
-                source.naturalHeight /
-                source.naturalWidth
-            )
-        )
-    );
-
-}
-
-
-/* =========================================================
-   GLOBAL TONE
-========================================================= */
-
-function applyGlobalTone(value){
-
-    const contrast =
-        +$("contrast").value;
-
-    const black =
-        +$("black").value / 100;
-
-    const detail =
-        +$("detail").value / 100;
-
-    const curve =
-        +$("curve").value / 100;
-
-
-    value =
-        .5 +
-        (
-            value -
-            .5
-        ) *
-        contrast;
-
-
-    value =
-        clamp(value);
-
-
-    if(value < .5){
-
-        value *=
-            1 -
-            black *
-            .65;
-
-    }
-
-
-    const detailShift =
-        (
-            detail -
-            .5
-        ) *
-        1.5;
-
-
-    if(detailShift > 0){
-
-        value =
-            .5 +
-            (
-                value -
-                .5
-            ) *
-            (
-                1 +
-                detailShift *
-                .45
-            );
-
-    }
-    else{
-
-        value =
-            .5 +
-            (
-                value -
-                .5
-            ) *
-            (
-                1 +
-                detailShift *
-                .35
-            );
-
-    }
-
-
-    if(curve !== 0){
-
-        value =
-            clamp(
-                value +
-                curve *
-                .8 *
-                (
-                    value -
-                    .5
-                ) *
-                (
-                    1 -
-                    Math.abs(
-                        value -
-                        .5
-                    ) *
-                    1.5
-                )
-            );
-
-    }
-
-
-    return clamp(value);
-
-}
+bindRange(
+    "contrast",
+    "contrastOut",
+    v=>v+"%"
+);
+
+bindRange(
+    "blackDepth",
+    "blackOut"
+);
+
+bindRange(
+    "detail",
+    "detailOut"
+);
+
+bindRange(
+    "curve",
+    "curveOut",
+    v=>(Number(v)/100).toFixed(2)
+);
+
+bindRange(
+    "bgStrength",
+    "bgStrengthOut"
+);
+
+bindRange(
+    "bgThresh",
+    "bgThreshOut"
+);
+
+bindRange(
+    "margin",
+    "marginOut"
+);
+
+bindRange(
+    "gap",
+    "gapOut"
+);
 
 
 /* =========================================================
    TEN POINT CURVE
 ========================================================= */
 
-function tenPointTone(value){
+function applyToneCurve(value){
+
+    value =
+        clamp(value);
 
     const position =
         value * 9;
@@ -3327,648 +1745,608 @@ function tenPointTone(value){
         );
 
     const fraction =
-        position -
-        index;
+        position-index;
 
-
-    const pointA =
+    const a =
         clamp(
-            (
-                index / 9
-            ) +
-            (
-                toneOffsets[index] /
-                100
-            ) *
-            .38
+            index/9 +
+            toneOffsets[index]/250
         );
 
-
-    const pointB =
+    const b =
         clamp(
-            (
-                (index + 1) /
-                9
-            ) +
-            (
-                toneOffsets[index + 1] /
-                100
-            ) *
-            .38
+            (index+1)/9 +
+            toneOffsets[index+1]/250
         );
-
 
     return clamp(
-        pointA +
-        (
-            pointB -
-            pointA
-        ) *
-        fraction
+        lerp(
+            a,
+            b,
+            fraction
+        )
     );
 
 }
 
 
 /* =========================================================
-   MASK APPLICATION
+   GRAYSCALE
 ========================================================= */
 
-function maskTone(
-    value,
-    normalizedX,
-    normalizedY
-){
+function grayscale(data,index){
 
-    for(
-        const mask
-        of masks
-    ){
-
-        if(
-            !mask.enabled ||
-            !mask.data
-        ){
-            continue;
-        }
-
-
-        const x =
-            Math.max(
-                0,
-                Math.min(
-                    maskW - 1,
-                    Math.round(
-                        normalizedX *
-                        (
-                            maskW - 1
-                        )
-                    )
-                )
-            );
-
-
-        const y =
-            Math.max(
-                0,
-                Math.min(
-                    maskH - 1,
-                    Math.round(
-                        normalizedY *
-                        (
-                            maskH - 1
-                        )
-                    )
-                )
-            );
-
-
-        const alpha =
-            mask.data[
-                (
-                    y *
-                    maskW +
-                    x
-                ) *
-                4 +
-                3
-            ] /
-            255;
-
-
-        if(alpha <= 0){
-            continue;
-        }
-
-
-        const brightness =
-            (
-                mask.brightness /
-                100
-            ) *
-            .42;
-
-
-        const contrast =
-            1 +
-            (
-                mask.contrast /
-                100
-            ) *
-            1.7;
-
-
-        let local =
-            .5 +
-            (
-                value -
-                .5
-            ) *
-            contrast +
-            brightness;
-
-
-        local =
-            clamp(local);
-
-
-        value =
-            value +
-            (
-                local -
-                value
-            ) *
-            alpha;
-
-    }
-
-
-    return clamp(value);
+    return (
+        0.2126 * data[index] +
+        0.7152 * data[index+1] +
+        0.0722 * data[index+2]
+    ) / 255;
 
 }
 
 
 /* =========================================================
-   BACKGROUND PREPROCESS
+   BACKGROUND DETECTION
 ========================================================= */
 
-function prepareProcessed(){
-
-    if(!source){
-        return;
-    }
-
-
-    processedCanvas =
-        document.createElement(
-            "canvas"
-        );
-
-
-    processedCanvas.width =
-        source.naturalWidth;
-
-    processedCanvas.height =
-        source.naturalHeight;
-
-
-    const context =
-        processedCanvas
-            .getContext("2d");
-
-
-    context.drawImage(
-        sourceCanvas,
-        0,
-        0
-    );
-
+function detectBackground(){
 
     if(
-        $("bgEnabled").checked &&
-        bgDetected &&
-        bgMask
+        !image ||
+        !$("bgSep").checked
     ){
 
-        const image =
-            context.getImageData(
-                0,
-                0,
-                processedCanvas.width,
-                processedCanvas.height
-            );
+        backgroundMask = null;
 
-        const data =
-            image.data;
-
-
-        const strength =
-            +$("bgStrength").value /
-            100;
-
-
-        const objectContrast =
-            +$("objectContrast").value /
-            100;
-
-
-        const mode =
-            $("bgMode").value;
-
-
-        for(
-            let i = 0, p = 0;
-            i < data.length;
-            i += 4, p++
-        ){
-
-            const alpha =
-                bgMask[p] /
-                255;
-
-
-            if(alpha <= 0){
-                continue;
-            }
-
-
-            let gray =
-                (
-                    .299 * data[i] +
-                    .587 * data[i + 1] +
-                    .114 * data[i + 2]
-                ) /
-                255;
-
-
-            let target =
-                gray;
-
-
-            if(
-                mode === "light" ||
-                (
-                    mode === "auto" &&
-                    gray > .5
-                )
-            ){
-
-                target =
-                    clamp(
-                        gray +
-                        .28 *
-                        strength
-                    );
-
-            }
-
-
-            if(
-                mode === "dark" ||
-                (
-                    mode === "auto" &&
-                    gray <= .5
-                )
-            ){
-
-                target =
-                    clamp(
-                        gray -
-                        .28 *
-                        strength
-                    );
-
-            }
-
-
-            if(
-                mode === "neutral"
-            ){
-
-                target =
-                    .5 +
-                    (
-                        gray -
-                        .5
-                    ) *
-                    (
-                        1 -
-                        strength *
-                        .85
-                    );
-
-            }
-
-
-            gray =
-                gray +
-                (
-                    target -
-                    gray
-                ) *
-                alpha;
-
-
-            gray =
-                .5 +
-                (
-                    gray -
-                    .5
-                ) *
-                (
-                    1 +
-                    objectContrast *
-                    1.8
-                );
-
-
-            data[i] =
-                data[i + 1] =
-                data[i + 2] =
-                Math.round(
-                    clamp(gray) *
-                    255
-                );
-
-        }
-
-
-        context.putImageData(
-            image,
-            0,
-            0
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   GENERATE
-========================================================= */
-
-function generate(){
-
-    if(!source){
         return;
+
     }
-
-
-    setStatus(
-        "PROCESANDO"
-    );
-
-
-    prepareProcessed();
-
-
-    const columns =
-        +$("cols").value;
-
-    const rows =
-        getRows();
-
-
-    const context =
-        processedCanvas
-            .getContext(
-                "2d",
-                {
-                    willReadFrequently:true
-                }
-            );
-
-
-    const cellW =
-        processedCanvas.width /
-        columns;
-
-
-    const cellH =
-        processedCanvas.height /
-        rows;
-
-
-    const sourcePixels =
-        context.getImageData(
-            0,
-            0,
-            processedCanvas.width,
-            processedCanvas.height
-        );
-
-
-    const data =
-        sourcePixels.data;
-
 
     const width =
-        processedCanvas.width;
+        sourceCanvas.width;
 
     const height =
-        processedCanvas.height;
+        sourceCanvas.height;
 
+    const data =
+        sourceData;
 
-    const cells =
-        new Array(
-            columns *
-            rows
+    const threshold =
+        Number($("bgThresh").value) *
+        2.4;
+
+    const mask =
+        new Uint8Array(
+            width*height
         );
+
+    const visited =
+        new Uint8Array(
+            width*height
+        );
+
+    const queue =
+        new Int32Array(
+            width*height
+        );
+
+    let head = 0;
+    let tail = 0;
+
+    let r=0;
+    let g=0;
+    let b=0;
+    let count=0;
+
+
+    function addBorder(x,y){
+
+        const p =
+            y*width+x;
+
+        if(visited[p])
+            return;
+
+        const i =
+            p*4;
+
+        r += data[i];
+        g += data[i+1];
+        b += data[i+2];
+
+        count++;
+
+        queue[tail++] =
+            p;
+
+    }
 
 
     for(
-        let y = 0;
-        y < rows;
+        let x=0;
+        x<width;
+        x++
+    ){
+
+        addBorder(x,0);
+
+        if(height>1)
+            addBorder(
+                x,
+                height-1
+            );
+
+    }
+
+
+    for(
+        let y=1;
+        y<height-1;
         y++
     ){
 
+        addBorder(0,y);
+
+        if(width>1)
+            addBorder(
+                width-1,
+                y
+            );
+
+    }
+
+
+    const br=r/count;
+    const bg=g/count;
+    const bb=b/count;
+
+
+    while(head<tail){
+
+        const p =
+            queue[head++];
+
+        if(visited[p])
+            continue;
+
+        visited[p]=1;
+
+        mask[p]=1;
+
+        const x =
+            p % width;
+
+        const y =
+            Math.floor(
+                p / width
+            );
+
+
+        const neighbors = [
+
+            [x+1,y],
+            [x-1,y],
+            [x,y+1],
+            [x,y-1]
+
+        ];
+
+
         for(
-            let x = 0;
-            x < columns;
-            x++
+            const [nx,ny]
+            of neighbors
         ){
 
-            const centerX =
-                (
-                    x +
-                    .5
-                ) *
-                cellW;
+            if(
+                nx<0 ||
+                ny<0 ||
+                nx>=width ||
+                ny>=height
+            )
+                continue;
 
+            const np =
+                ny*width+nx;
 
-            const centerY =
-                (
-                    y +
-                    .5
-                ) *
-                cellH;
+            if(visited[np])
+                continue;
 
+            const i =
+                np*4;
 
-            const samples = [
+            const distance =
+                Math.sqrt(
 
-                [
-                    centerX,
-                    centerY
-                ],
+                    Math.pow(
+                        data[i]-br,
+                        2
+                    ) +
 
-                [
-                    centerX -
-                    cellW * .25,
-                    centerY
-                ],
+                    Math.pow(
+                        data[i+1]-bg,
+                        2
+                    ) +
 
-                [
-                    centerX +
-                    cellW * .25,
-                    centerY
-                ]
+                    Math.pow(
+                        data[i+2]-bb,
+                        2
+                    )
 
-            ];
+                );
 
-
-            let gray = 0;
-
-
-            for(
-                const [
-                    sampleX,
-                    sampleY
-                ]
-                of samples
+            if(
+                distance<=threshold
             ){
 
-                const px =
-                    Math.max(
-                        0,
-                        Math.min(
-                            width - 1,
-                            Math.round(
-                                sampleX
-                            )
-                        )
-                    );
-
-
-                const py =
-                    Math.max(
-                        0,
-                        Math.min(
-                            height - 1,
-                            Math.round(
-                                sampleY
-                            )
-                        )
-                    );
-
-
-                const position =
-                    (
-                        py *
-                        width +
-                        px
-                    ) *
-                    4;
-
-
-                gray +=
-                    (
-                        .299 *
-                        data[position] +
-
-                        .587 *
-                        data[position + 1] +
-
-                        .114 *
-                        data[position + 2]
-                    ) /
-                    255;
+                queue[tail++] =
+                    np;
 
             }
 
+        }
 
-            gray /=
-                samples.length;
+    }
+
+    backgroundMask =
+        mask;
+
+}
 
 
-            gray =
-                maskTone(
-                    gray,
-                    centerX /
-                        width,
-                    centerY /
-                        height
+/* =========================================================
+   PROCESS PIXEL
+========================================================= */
+
+function processPixel(
+    x,
+    y
+){
+
+    const width =
+        sourceCanvas.width;
+
+    const height =
+        sourceCanvas.height;
+
+
+    const ix =
+        clamp(
+            Math.round(x),
+            0,
+            width-1
+        );
+
+    const iy =
+        clamp(
+            Math.round(y),
+            0,
+            height-1
+        );
+
+
+    const p =
+        iy*width+ix;
+
+    const i =
+        p*4;
+
+
+    let value =
+        grayscale(
+            sourceData,
+            i
+        );
+
+
+    /* GLOBAL CONTRAST */
+
+    const contrast =
+        Number(
+            $("contrast").value
+        ) / 100;
+
+    value =
+        clamp(
+            (value-.5) *
+            contrast +
+            .5
+        );
+
+
+    /* BLACK DEPTH */
+
+    const blackDepth =
+        Number(
+            $("blackDepth").value
+        ) / 100;
+
+    value =
+        clamp(
+            value -
+            blackDepth*.25
+        );
+
+
+    /* CURVE */
+
+    const curve =
+        Number(
+            $("curve").value
+        ) / 100;
+
+    value =
+        Math.pow(
+            value,
+            curve
+        );
+
+
+    /* BACKGROUND SEPARATOR */
+
+    if(
+        backgroundMask &&
+        $("bgSep").checked
+    ){
+
+        const strength =
+            Number(
+                $("bgStrength").value
+            ) / 100;
+
+        const isBackground =
+            backgroundMask[p] === 1;
+
+
+        if(isBackground){
+
+            const backgroundMode =
+                $("bgMode").value;
+
+
+            if(
+                backgroundMode === "light"
+            ){
+
+                value =
+                    lerp(
+                        value,
+                        1,
+                        strength*.78
+                    );
+
+            }
+
+            else if(
+                backgroundMode === "dark"
+            ){
+
+                value =
+                    lerp(
+                        value,
+                        0,
+                        strength*.68
+                    );
+
+            }
+
+            else{
+
+                value =
+                    lerp(
+                        value,
+                        .5,
+                        strength*.55
+                    );
+
+            }
+
+        }
+        else{
+
+            value =
+                clamp(
+                    .5 +
+                    (value-.5) *
+                    (1+strength*.8)
                 );
-
-
-            gray =
-                applyGlobalTone(
-                    gray
-                );
-
-
-            gray =
-                tenPointTone(
-                    gray
-                );
-
-
-            cells[
-                y *
-                columns +
-                x
-            ] =
-                gray;
 
         }
 
     }
 
 
-    window.pixelCells =
-        cells;
+    /* MASKS */
 
-    window.pixelGrid = {
-        cols:columns,
-        rows:rows
-    };
+    masks.forEach(
+        mask=>{
+
+            if(
+                !mask.enabled ||
+                !mask.data
+            )
+                return;
 
 
-    draw();
+            const mx =
+                clamp(
+                    Math.round(
+                        ix /
+                        width *
+                        mask.canvas.width
+                    ),
+                    0,
+                    mask.canvas.width-1
+                );
 
 
-    setStatus(
-        "LISTO"
+            const my =
+                clamp(
+                    Math.round(
+                        iy /
+                        height *
+                        mask.canvas.height
+                    ),
+                    0,
+                    mask.canvas.height-1
+                );
+
+
+            const alpha =
+                mask.data[
+                    my*mask.canvas.width+mx
+                ] / 255;
+
+
+            if(alpha<=0)
+                return;
+
+
+            const localContrast =
+                1 +
+                mask.contrast/100*2;
+
+
+            const local =
+                clamp(
+
+                    .5 +
+                    (value-.5) *
+                    localContrast +
+
+                    mask.brightness/200
+
+                );
+
+
+            value =
+                lerp(
+                    value,
+                    local,
+                    alpha
+                );
+
+        }
     );
 
 
-    updateOrientationChip();
-
-    updatePrintCSS();
+    return applyToneCurve(
+        value
+    );
 
 }
 
 
 /* =========================================================
-   CHOOSE PATTERN
+   CELL VALUE
 ========================================================= */
 
-function choosePattern(
-    gray
+function getCellValue(
+    column,
+    row
 ){
 
-    const active =
-        activePatterns
-            .slice()
-            .sort(
-                (a,b) =>
-                    a - b
-            );
+    const cellWidth =
+        sourceCanvas.width /
+        cols;
+
+    const cellHeight =
+        sourceCanvas.height /
+        rows;
 
 
-    if(
-        active.length === 1
+    const detail =
+        Number(
+            $("detail").value
+        ) / 100;
+
+
+    const sampleCount =
+        detail > .7
+            ? 5
+            : detail > .3
+                ? 3
+                : 2;
+
+
+    let total=0;
+    let count=0;
+
+
+    for(
+        let sy=0;
+        sy<sampleCount;
+        sy++
     ){
 
-        return active[0];
+        for(
+            let sx=0;
+            sx<sampleCount;
+            sx++
+        ){
+
+            const x =
+                (
+                    column +
+                    (sx+.5) /
+                    sampleCount
+                ) *
+                cellWidth;
+
+
+            const y =
+                (
+                    row +
+                    (sy+.5) /
+                    sampleCount
+                ) *
+                cellHeight;
+
+
+            total +=
+                processPixel(
+                    x,
+                    y
+                );
+
+            count++;
+
+        }
 
     }
+
+
+    return total/count;
+
+}
+
+
+/* =========================================================
+   PATTERN LEVEL
+========================================================= */
+
+function getPatternLevel(
+    grayscaleValue
+){
+
+    if(
+        !activePatterns.length
+    )
+        return 1;
+
+
+    const position =
+        (1-grayscaleValue) *
+        activePatterns.length;
 
 
     const index =
         Math.min(
-            active.length - 1,
-            Math.floor(
-                (
-                    1 -
-                    gray
-                ) *
-                active.length
-            )
+            activePatterns.length-1,
+            Math.floor(position)
         );
 
 
-    return active[index];
+    return activePatterns[index];
 
 }
 
@@ -3978,1319 +2356,716 @@ function choosePattern(
 ========================================================= */
 
 function drawPattern(
-    context,
+    ctx,
+    id,
     x,
     y,
-    width,
-    height,
-    type
+    size,
+    showNumber=false
 ){
 
-    context.strokeStyle =
+    ctx.save();
+
+    ctx.strokeStyle =
         "#111";
 
-    context.fillStyle =
+    ctx.fillStyle =
         "#111";
 
-    context.lineWidth =
+    ctx.lineWidth =
         Math.max(
             1,
-            width * .06
+            size*.055
         );
 
 
-    switch(type){
+    const q =
+        size*.18;
 
-        case "empty":
+
+    switch(id){
+
+        case 1:
             break;
 
 
-        case "dot":
+        case 2:
 
-            context.beginPath();
+            ctx.beginPath();
 
-            context.arc(
-                x + width / 2,
-                y + height / 2,
+            ctx.arc(
+                x+size/2,
+                y+size/2,
                 Math.max(
                     1,
-                    width * .11
+                    size*.055
                 ),
                 0,
-                Math.PI * 2
+                Math.PI*2
             );
 
-            context.fill();
+            ctx.fill();
 
             break;
 
 
-        case "h":
+        case 3:
 
-            context.beginPath();
+            for(
+                let yy=y+q;
+                yy<y+size;
+                yy+=q*1.8
+            ){
 
-            context.moveTo(
-                x + width * .08,
-                y + height / 2
-            );
+                ctx.beginPath();
 
-            context.lineTo(
-                x + width * .92,
-                y + height / 2
-            );
+                ctx.moveTo(
+                    x,
+                    yy
+                );
 
-            context.stroke();
+                ctx.lineTo(
+                    x+size,
+                    yy
+                );
 
-            break;
+                ctx.stroke();
 
-
-        case "v":
-
-            context.beginPath();
-
-            context.moveTo(
-                x + width / 2,
-                y + height * .08
-            );
-
-            context.lineTo(
-                x + width / 2,
-                y + height * .92
-            );
-
-            context.stroke();
+            }
 
             break;
 
 
-        case "d1":
+        case 4:
 
-            context.beginPath();
+            for(
+                let xx=x+q;
+                xx<x+size;
+                xx+=q*1.8
+            ){
 
-            context.moveTo(
-                x + width * .08,
-                y + height * .92
-            );
+                ctx.beginPath();
 
-            context.lineTo(
-                x + width * .92,
-                y + height * .08
-            );
+                ctx.moveTo(
+                    xx,
+                    y
+                );
 
-            context.stroke();
+                ctx.lineTo(
+                    xx,
+                    y+size
+                );
 
-            break;
+                ctx.stroke();
 
-
-        case "d2":
-
-            context.beginPath();
-
-            context.moveTo(
-                x + width * .08,
-                y + height * .08
-            );
-
-            context.lineTo(
-                x + width * .92,
-                y + height * .92
-            );
-
-            context.stroke();
+            }
 
             break;
 
 
-        case "plus":
+        case 5:
 
-            context.beginPath();
+            for(
+                let k=-size;
+                k<size*2;
+                k+=q*2
+            ){
 
-            context.moveTo(
-                x + width * .15,
-                y + height / 2
-            );
+                ctx.beginPath();
 
-            context.lineTo(
-                x + width * .85,
-                y + height / 2
-            );
+                ctx.moveTo(
+                    x+k,
+                    y+size
+                );
 
-            context.moveTo(
-                x + width / 2,
-                y + height * .15
-            );
+                ctx.lineTo(
+                    x+k+size,
+                    y
+                );
 
-            context.lineTo(
-                x + width / 2,
-                y + height * .85
-            );
+                ctx.stroke();
 
-            context.stroke();
+            }
 
             break;
 
 
-        case "x":
+        case 6:
 
-            context.beginPath();
+            for(
+                let k=-size;
+                k<size*2;
+                k+=q*2
+            ){
 
-            context.moveTo(
-                x + width * .15,
-                y + height * .15
-            );
+                ctx.beginPath();
 
-            context.lineTo(
-                x + width * .85,
-                y + height * .85
-            );
+                ctx.moveTo(
+                    x+k,
+                    y
+                );
 
-            context.moveTo(
-                x + width * .85,
-                y + height * .15
-            );
+                ctx.lineTo(
+                    x+k+size,
+                    y+size
+                );
 
-            context.lineTo(
-                x + width * .15,
-                y + height * .85
-            );
+                ctx.stroke();
 
-            context.stroke();
+            }
 
             break;
 
 
-        case "dh":
+        case 7:
 
-            context.beginPath();
+            ctx.beginPath();
 
-            context.moveTo(
-                x + width * .08,
-                y + height * .34
+            ctx.moveTo(
+                x+size/2,
+                y
             );
 
-            context.lineTo(
-                x + width * .92,
-                y + height * .34
+            ctx.lineTo(
+                x+size/2,
+                y+size
             );
 
-            context.moveTo(
-                x + width * .08,
-                y + height * .66
+            ctx.moveTo(
+                x,
+                y+size/2
             );
 
-            context.lineTo(
-                x + width * .92,
-                y + height * .66
+            ctx.lineTo(
+                x+size,
+                y+size/2
             );
 
-            context.stroke();
+            ctx.stroke();
 
             break;
 
 
-        case "dv":
+        case 8:
 
-            context.beginPath();
+            ctx.beginPath();
 
-            context.moveTo(
-                x + width * .34,
-                y + height * .08
+            ctx.moveTo(
+                x,
+                y
             );
 
-            context.lineTo(
-                x + width * .34,
-                y + height * .92
+            ctx.lineTo(
+                x+size,
+                y+size
             );
 
-            context.moveTo(
-                x + width * .66,
-                y + height * .08
+            ctx.moveTo(
+                x+size,
+                y
             );
 
-            context.lineTo(
-                x + width * .66,
-                y + height * .92
+            ctx.lineTo(
+                x,
+                y+size
             );
 
-            context.stroke();
+            ctx.stroke();
 
             break;
 
 
-        case "star":
+        case 9:
 
-            context.beginPath();
+            for(
+                let yy=y+q;
+                yy<y+size;
+                yy+=q*2.2
+            ){
 
-            context.moveTo(
-                x + width * .15,
-                y + height / 2
-            );
+                ctx.beginPath();
 
-            context.lineTo(
-                x + width * .85,
-                y + height / 2
-            );
+                ctx.moveTo(
+                    x,
+                    yy
+                );
 
-            context.moveTo(
-                x + width / 2,
-                y + height * .15
-            );
+                ctx.lineTo(
+                    x+size,
+                    yy
+                );
 
-            context.lineTo(
-                x + width / 2,
-                y + height * .85
-            );
+                ctx.stroke();
 
-            context.moveTo(
-                x + width * .2,
-                y + height * .2
-            );
-
-            context.lineTo(
-                x + width * .8,
-                y + height * .8
-            );
-
-            context.moveTo(
-                x + width * .8,
-                y + height * .2
-            );
-
-            context.lineTo(
-                x + width * .2,
-                y + height * .8
-            );
-
-            context.stroke();
+            }
 
             break;
 
 
-        case "solid":
+        case 10:
 
-            context.fillRect(
+            for(
+                let xx=x+q;
+                xx<x+size;
+                xx+=q*2.2
+            ){
+
+                ctx.beginPath();
+
+                ctx.moveTo(
+                    xx,
+                    y
+                );
+
+                ctx.lineTo(
+                    xx,
+                    y+size
+                );
+
+                ctx.stroke();
+
+            }
+
+            break;
+
+
+        case 11:
+
+            ctx.font =
+                `${size*.48}px Arial`;
+
+            ctx.textAlign =
+                "center";
+
+            ctx.textBaseline =
+                "middle";
+
+            ctx.fillText(
+                "✦",
+                x+size/2,
+                y+size/2
+            );
+
+            break;
+
+
+        case 12:
+
+            ctx.fillRect(
                 x,
                 y,
-                width,
-                height
+                size,
+                size
             );
 
             break;
 
     }
 
-}
 
+    if(showNumber){
 
-/* =========================================================
-   DRAW MAIN PREVIEW
-========================================================= */
+        ctx.font =
+            `${Math.max(
+                5,
+                size*.22
+            )}px monospace`;
 
-function draw(
-    targetCanvas = previewCanvas,
-    targetContext = pctx,
-    customCell = null
-){
-
-    if(
-        !window.pixelCells
-    ){
-        return;
-    }
-
-
-    const {
-        cols,
-        rows
-    } =
-        window.pixelGrid;
-
-
-    const cell =
-        customCell ||
-        Math.max(
-            5,
-            Math.min(
-                10,
-                Math.floor(
-                    1800 /
-                    cols
-                )
-            )
-        );
-
-
-    targetCanvas.width =
-        cols *
-        cell;
-
-    targetCanvas.height =
-        rows *
-        cell;
-
-
-    targetContext.fillStyle =
-        "#fff";
-
-    targetContext.fillRect(
-        0,
-        0,
-        targetCanvas.width,
-        targetCanvas.height
-    );
-
-
-    const mode =
-        $("mode").value;
-
-
-    if(
-        mode === "template"
-    ){
-
-        targetContext.textAlign =
+        ctx.textAlign =
             "center";
 
-        targetContext.textBaseline =
+        ctx.textBaseline =
             "middle";
 
-        targetContext.font =
-            `800 ${Math.max(
-                5,
-                Math.floor(
-                    cell * .48
-                )
-            )}px Arial`;
+        ctx.fillStyle =
+            "#111";
+
+        ctx.fillText(
+            id,
+            x+size/2,
+            y+size/2
+        );
 
     }
 
 
-    for(
-        let y = 0;
-        y < rows;
-        y++
-    ){
-
-        for(
-            let x = 0;
-            x < cols;
-            x++
-        ){
-
-            const gray =
-                window.pixelCells[
-                    y * cols +
-                    x
-                ];
-
-
-            const patternId =
-                choosePattern(
-                    gray
-                );
-
-
-            const pattern =
-                patterns.find(
-                    item =>
-                        item.id ===
-                        patternId
-                );
-
-
-            const px =
-                x *
-                cell;
-
-            const py =
-                y *
-                cell;
-
-
-            if(
-                mode === "template"
-            ){
-
-                targetContext.strokeStyle =
-                    "#d0d0d0";
-
-                targetContext.lineWidth =
-                    Math.max(
-                        .5,
-                        cell * .045
-                    );
-
-                targetContext.strokeRect(
-                    px + .2,
-                    py + .2,
-                    cell - .4,
-                    cell - .4
-                );
-
-
-                targetContext.fillStyle =
-                    "#111";
-
-
-                targetContext.fillText(
-                    String(patternId),
-                    px + cell / 2,
-                    py + cell / 2
-                );
-
-            }
-            else{
-
-                drawPattern(
-                    targetContext,
-                    px,
-                    py,
-                    cell,
-                    cell,
-                    pattern.type
-                );
-
-            }
-
-        }
-
-    }
+    ctx.restore();
 
 }
 
 
 /* =========================================================
-   MODE
+   RENDER PREVIEW
 ========================================================= */
 
-$("mode")
-    .addEventListener(
-        "change",
-        () => {
+function render(){
 
-            if(source){
-                generate();
-            }
-
-        }
-    );
-
-
-$("previewModeBtn")
-    .addEventListener(
-        "click",
-        () => {
-
-            $("mode").value =
-                $("mode").value ===
-                "final"
-                    ? "template"
-                    : "final";
-
-            if(source){
-                generate();
-            }
-
-        }
-    );
-
-
-$("fitBtn")
-    .addEventListener(
-        "click",
-        () => {
-
-            $("previewCanvas")
-                .style
-                .maxWidth =
-                "100%";
-
-            $("previewCanvas")
-                .style
-                .maxHeight =
-                "100%";
-
-        }
-    );
-
-
-/* =========================================================
-   BACKGROUND
-========================================================= */
-
-$("detectBg")
-    .addEventListener(
-        "click",
-        () => {
-
-            if(!source){
-                return;
-            }
-
-            detectBackground();
-
-        }
-    );
-
-
-$("applyBg")
-    .addEventListener(
-        "click",
-        () => {
-
-            if(!source){
-                return;
-            }
-
-            $("bgEnabled")
-                .checked = true;
-
-            if(!bgDetected){
-                detectBackground();
-            }
-
-            generate();
-
-        }
-    );
-
-
-$("bgEnabled")
-    .addEventListener(
-        "change",
-        () => {
-
-            if(source){
-                generate();
-            }
-
-        }
-    );
-
-
-$("bgMode")
-    .addEventListener(
-        "change",
-        () => {
-
-            if(source){
-                generate();
-            }
-
-        }
-    );
-
-
-/* =========================================================
-   BACKGROUND DETECTION
-========================================================= */
-
-function detectBackground(){
-
-    const width =
-        source.naturalWidth;
-
-    const height =
-        source.naturalHeight;
-
-
-    const small =
-        Math.min(
-            180,
-            width,
-            height
-        );
-
-
-    const ratio =
-        Math.min(
-            1,
-            small /
-            Math.max(
-                width,
-                height
-            )
-        );
-
-
-    const smallWidth =
-        Math.max(
-            30,
-            Math.round(
-                width *
-                ratio
-            )
-        );
-
-
-    const smallHeight =
-        Math.max(
-            30,
-            Math.round(
-                height *
-                ratio
-            )
-        );
-
-
-    const canvas =
-        document.createElement(
-            "canvas"
-        );
-
-
-    canvas.width =
-        smallWidth;
-
-    canvas.height =
-        smallHeight;
-
-
-    const context =
-        canvas.getContext(
-            "2d",
-            {
-                willReadFrequently:true
-            }
-        );
-
-
-    context.drawImage(
-        sourceCanvas,
-        0,
-        0,
-        smallWidth,
-        smallHeight
-    );
-
-
-    const image =
-        context.getImageData(
-            0,
-            0,
-            smallWidth,
-            smallHeight
-        );
-
-
-    const data =
-        image.data;
-
-
-    const samples = [];
-
-
-    for(
-        let y = 0;
-        y < smallHeight;
-        y++
-    ){
-
-        for(
-            let x = 0;
-            x < smallWidth;
-            x++
-        ){
-
-            if(
-                x <
-                    Math.max(
-                        2,
-                        smallWidth * .035
-                    )
-                ||
-                x >
-                    smallWidth -
-                    Math.max(
-                        2,
-                        smallWidth * .035
-                    )
-                ||
-                y <
-                    Math.max(
-                        2,
-                        smallHeight * .035
-                    )
-                ||
-                y >
-                    smallHeight -
-                    Math.max(
-                        2,
-                        smallHeight * .035
-                    )
-            ){
-
-                const position =
-                    (
-                        y *
-                        smallWidth +
-                        x
-                    ) *
-                    4;
-
-
-                samples.push(
-                    (
-                        .299 *
-                        data[position] +
-
-                        .587 *
-                        data[position + 1] +
-
-                        .114 *
-                        data[position + 2]
-                    ) /
-                    255
-                );
-
-            }
-
-        }
-
-    }
-
-
-    const average =
-        samples.reduce(
-            (
-                total,
-                value
-            ) =>
-                total + value,
-            0
-        ) /
-        samples.length;
-
-
-    const threshold =
-        .18;
-
-
-    const maskSmall =
-        new Uint8Array(
-            smallWidth *
-            smallHeight
-        );
-
-
-    const queue = [];
-
-    const seen =
-        new Uint8Array(
-            smallWidth *
-            smallHeight
-        );
-
-
-    function seed(
-        x,
-        y
-    ){
-
-        const index =
-            y *
-            smallWidth +
-            x;
-
-
-        if(!seen[index]){
-
-            seen[index] = 1;
-
-            queue.push(index);
-
-        }
-
-    }
-
-
-    for(
-        let x = 0;
-        x < smallWidth;
-        x++
-    ){
-
-        seed(x,0);
-
-        seed(
-            x,
-            smallHeight - 1
-        );
-
-    }
-
-
-    for(
-        let y = 0;
-        y < smallHeight;
-        y++
-    ){
-
-        seed(
-            0,
-            y
-        );
-
-        seed(
-            smallWidth - 1,
-            y
-        );
-
-    }
-
-
-    let queueIndex = 0;
-
-
-    while(
-        queueIndex <
-        queue.length
-    ){
-
-        const index =
-            queue[
-                queueIndex++
-            ];
-
-
-        const x =
-            index %
-            smallWidth;
-
-
-        const y =
-            Math.floor(
-                index /
-                smallWidth
-            );
-
-
-        const position =
-            index *
-            4;
-
-
-        const gray =
-            (
-                .299 *
-                data[position] +
-
-                .587 *
-                data[position + 1] +
-
-                .114 *
-                data[position + 2]
-            ) /
-            255;
-
-
-        if(
-            Math.abs(
-                gray -
-                average
-            ) >
-            threshold
-        ){
-            continue;
-        }
-
-
-        maskSmall[index] =
-            255;
-
-
-        const neighbours = [
-
-            [x + 1,y],
-            [x - 1,y],
-            [x,y + 1],
-            [x,y - 1]
-
-        ];
-
-
-        for(
-            const [
-                nextX,
-                nextY
-            ]
-            of neighbours
-        ){
-
-            if(
-                nextX >= 0 &&
-                nextX < smallWidth &&
-                nextY >= 0 &&
-                nextY < smallHeight
-            ){
-
-                const nextIndex =
-                    nextY *
-                    smallWidth +
-                    nextX;
-
-
-                if(
-                    !seen[nextIndex]
-                ){
-
-                    seen[nextIndex] =
-                        1;
-
-                    queue.push(
-                        nextIndex
-                    );
-
-                }
-
-            }
-
-        }
-
-    }
-
-
-    bgMask =
-        new Uint8Array(
-            width *
-            height
-        );
-
-
-    for(
-        let y = 0;
-        y < height;
-        y++
-    ){
-
-        const smallY =
-            Math.min(
-                smallHeight - 1,
-                Math.floor(
-                    y /
-                    height *
-                    smallHeight
-                )
-            );
-
-
-        for(
-            let x = 0;
-            x < width;
-            x++
-        ){
-
-            const smallX =
-                Math.min(
-                    smallWidth - 1,
-                    Math.floor(
-                        x /
-                        width *
-                        smallWidth
-                    )
-                );
-
-
-            bgMask[
-                y *
-                width +
-                x
-            ] =
-                maskSmall[
-                    smallY *
-                    smallWidth +
-                    smallX
-                ];
-
-        }
-
-    }
-
-
-    bgDetected =
-        true;
-
-
-    setStatus(
-        "FONDO DETECTADO"
-    );
-
-
-    generate();
-
-}
-
-
-/* =========================================================
-   MASK DIMENSIONS
-========================================================= */
-
-function createMaskDimensions(){
-
-    if(!source){
+    if(!image)
         return;
+
+
+    sourceData =
+        sourceCtx.getImageData(
+            0,
+            0,
+            sourceCanvas.width,
+            sourceCanvas.height
+        ).data;
+
+
+    /*
+       El canvas interno tiene una dimensión
+       independiente del tamaño visual.
+    */
+
+    const internalCell =
+        10;
+
+    const canvas =
+        $("previewCanvas");
+
+    canvas.width =
+        cols *
+        internalCell;
+
+    canvas.height =
+        rows *
+        internalCell;
+
+
+    const ctx =
+        canvas.getContext("2d");
+
+
+    ctx.fillStyle =
+        "#fff";
+
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    for(
+        let row=0;
+        row<rows;
+        row++
+    ){
+
+        for(
+            let column=0;
+            column<cols;
+            column++
+        ){
+
+            const value =
+                getCellValue(
+                    column,
+                    row
+                );
+
+
+            const id =
+                getPatternLevel(
+                    value
+                );
+
+
+            const gap =
+                Number(
+                    $("gap").value
+                );
+
+
+            const x =
+                column *
+                internalCell +
+                gap/2;
+
+
+            const y =
+                row *
+                internalCell +
+                gap/2;
+
+
+            const size =
+                internalCell-gap;
+
+
+            ctx.strokeStyle =
+                "#d7d7da";
+
+            ctx.lineWidth =
+                .5;
+
+
+            ctx.strokeRect(
+                x,
+                y,
+                size,
+                size
+            );
+
+
+            drawPattern(
+                ctx,
+                id,
+                x,
+                y,
+                size,
+                mode === "template"
+            );
+
+        }
+
     }
 
 
-    const max =
-        1000;
+    updateMeta();
 
-
-    const scale =
-        Math.min(
-            1,
-            max /
-            Math.max(
-                source.naturalWidth,
-                source.naturalHeight
-            )
-        );
-
-
-    maskW =
-        Math.max(
-            1,
-            Math.round(
-                source.naturalWidth *
-                scale
-            )
-        );
-
-
-    maskH =
-        Math.max(
-            1,
-            Math.round(
-                source.naturalHeight *
-                scale
-            )
-        );
+    syncMaskPreview();
 
 }
 
 
 /* =========================================================
-   CREATE MASK
+   MASK PREVIEW
 ========================================================= */
 
-function makeMask(){
+function syncMaskPreview(){
 
-    const canvas =
-        document.createElement(
-            "canvas"
-        );
+    const maskCanvas =
+        $("maskCanvas");
 
-
-    canvas.width =
-        maskW;
-
-    canvas.height =
-        maskH;
-
-
-    return {
-
-        name:
-            `Máscara ${masks.length + 1}`,
-
-        canvas,
-
-        data:
-            new Uint8ClampedArray(
-                maskW *
-                maskH *
-                4
-            ),
-
-        brightness:0,
-
-        contrast:0,
-
-        enabled:true
-
-    };
-
-}
-
-
-/* =========================================================
-   REFRESH MASK DATA
-========================================================= */
-
-function refreshMaskData(mask){
-
-    mask.data =
-        mask.canvas
-            .getContext(
-                "2d",
-                {
-                    willReadFrequently:true
-                }
-            )
-            .getImageData(
-                0,
-                0,
-                maskW,
-                maskH
-            )
-            .data;
-
-}
-
-
-/* =========================================================
-   MASK LIST
-========================================================= */
-
-function renderMaskList(){
-
-    const list =
-        $("maskList");
-
-    list.innerHTML = "";
+    const preview =
+        $("previewCanvas");
 
 
     if(
-        !masks.length
+        activeMask < 0 ||
+        !masks[activeMask]
     ){
 
-        list.innerHTML = `
-
-            <div class="help">
-
-                No hay máscaras.
-                Crea una para trabajar por zonas.
-
-            </div>
-
-        `;
+        maskCanvas.style.display =
+            "none";
 
         return;
 
     }
+
+
+    maskCanvas.width =
+        preview.width;
+
+    maskCanvas.height =
+        preview.height;
+
+
+    const rect =
+        preview.getBoundingClientRect();
+
+
+    const wrapRect =
+        $("canvasWrap")
+            .getBoundingClientRect();
+
+
+    maskCanvas.style.display =
+        "block";
+
+    maskCanvas.style.width =
+        rect.width+"px";
+
+    maskCanvas.style.height =
+        rect.height+"px";
+
+    maskCanvas.style.left =
+        (
+            rect.left -
+            wrapRect.left
+        )+"px";
+
+    maskCanvas.style.top =
+        (
+            rect.top -
+            wrapRect.top
+        )+"px";
+
+
+    const ctx =
+        maskCanvas.getContext("2d");
+
+
+    ctx.clearRect(
+        0,
+        0,
+        maskCanvas.width,
+        maskCanvas.height
+    );
+
+
+    ctx.globalAlpha =
+        .28;
+
+    ctx.drawImage(
+        masks[activeMask].canvas,
+        0,
+        0,
+        maskCanvas.width,
+        maskCanvas.height
+    );
+
+    ctx.globalAlpha=1;
+
+}
+
+
+/* =========================================================
+   MASK MANAGEMENT
+========================================================= */
+
+function resizeMasks(){
+
+    masks.forEach(
+        mask=>{
+
+            const canvas =
+                document.createElement(
+                    "canvas"
+                );
+
+            canvas.width =
+                sourceCanvas.width;
+
+            canvas.height =
+                sourceCanvas.height;
+
+
+            if(mask.canvas){
+
+                canvas
+                    .getContext("2d")
+                    .drawImage(
+                        mask.canvas,
+                        0,
+                        0,
+                        canvas.width,
+                        canvas.height
+                    );
+
+            }
+
+
+            mask.canvas =
+                canvas;
+
+            mask.ctx =
+                canvas.getContext("2d");
+
+            mask.data =
+                null;
+
+        }
+    );
+
+}
+
+
+function refreshMaskList(){
+
+    $("maskTools")
+        .classList.toggle(
+            "show",
+            activeMask >= 0
+        );
+
+
+    $("maskList").innerHTML =
+        "";
 
 
     masks.forEach(
-        (mask,index) => {
+        (mask,index)=>{
 
-            const row =
+            const item =
                 document.createElement(
                     "div"
                 );
 
-
-            row.className =
+            item.className =
                 "mask-item";
 
 
-            const button =
-                document.createElement(
-                    "button"
-                );
+            item.innerHTML = `
 
+                <span>
+                    ${mask.name}
+                </span>
 
-            button.className =
-                "btn mask-select" +
-                (
-                    index === activeMask
-                        ? " active"
-                        : ""
-                );
+                <button class="btn">
+                    ${
+                        index === activeMask
+                            ? "ACTIVA"
+                            : "SELECCIONAR"
+                    }
+                </button>
 
-
-            button.innerHTML = `
-
-                <span
-                    class="mask-status ${
-                        mask.enabled
-                            ? ""
-                            : "off"
-                    }"
-                ></span>
-
-                ${mask.name}
+                <button class="btn">
+                    ×
+                </button>
 
             `;
 
 
-            button.onclick =
-                () => {
+            item
+                .children[1]
+                .onclick = () => {
 
                     activeMask =
                         index;
-
 
                     $("maskBrightness")
                         .value =
                         mask.brightness;
 
-
                     $("maskContrast")
                         .value =
                         mask.contrast;
 
+                    refreshMaskList();
 
-                    $("maskBrightnessVal")
-                        .textContent =
-                        mask.brightness;
-
-
-                    $("maskContrastVal")
-                        .textContent =
-                        mask.contrast;
-
-
-                    renderMaskList();
-
-
-                    if(
-                        $("maskEditorWrap")
-                            .style
-                            .display !==
-                        "none"
-                    ){
-
-                        renderMaskEditor();
-
-                    }
+                    syncMaskPreview();
 
                 };
 
 
-            const deleteButton =
-                document.createElement(
-                    "button"
-                );
+            item
+                .children[2]
+                .onclick = () => {
 
-
-            deleteButton.className =
-                "btn mask-delete";
-
-
-            deleteButton.textContent =
-                "×";
-
-
-            deleteButton.onclick =
-                () =>
-                    deleteMask(
-                        index
+                    masks.splice(
+                        index,
+                        1
                     );
 
+                    activeMask =
+                        Math.min(
+                            activeMask,
+                            masks.length-1
+                        );
 
-            row.appendChild(
-                button
-            );
+                    refreshMaskList();
+
+                    render();
+
+                };
 
 
-            row.appendChild(
-                deleteButton
-            );
-
-
-            list.appendChild(
-                row
-            );
+            $("maskList")
+                .appendChild(item);
 
         }
     );
@@ -5299,591 +3074,213 @@ function renderMaskList(){
 
 
 /* =========================================================
-   DELETE MASK
+   ADD MASK
 ========================================================= */
 
-function deleteMask(index){
+$("addMask").onclick =
+    ()=>{
 
-    masks.splice(
-        index,
-        1
-    );
+        if(!image)
+            return;
 
 
-    activeMask =
-        Math.min(
-            activeMask,
-            masks.length - 1
+        const canvas =
+            document.createElement(
+                "canvas"
+            );
+
+
+        canvas.width =
+            sourceCanvas.width;
+
+        canvas.height =
+            sourceCanvas.height;
+
+
+        masks.push({
+
+            name:
+                "Máscara "+
+                (masks.length+1),
+
+            canvas,
+
+            ctx:
+                canvas.getContext("2d"),
+
+            brightness:0,
+
+            contrast:0,
+
+            enabled:true,
+
+            data:null
+
+        });
+
+
+        activeMask =
+            masks.length-1;
+
+
+        refreshMaskList();
+
+        render();
+
+    };
+
+
+/* =========================================================
+   MASK CONTROLS
+========================================================= */
+
+$("maskBrightness").oninput =
+    event => {
+
+        if(activeMask<0)
+            return;
+
+        masks[activeMask]
+            .brightness =
+            Number(
+                event.target.value
+            );
+
+        render();
+
+    };
+
+
+$("maskContrast").oninput =
+    event => {
+
+        if(activeMask<0)
+            return;
+
+        masks[activeMask]
+            .contrast =
+            Number(
+                event.target.value
+            );
+
+        render();
+
+    };
+
+
+$("clearMasks").onclick =
+    ()=>{
+
+        masks=[];
+
+        activeMask=-1;
+
+        refreshMaskList();
+
+        render();
+
+    };
+
+
+$("clearCurrentMask").onclick =
+    ()=>{
+
+        if(activeMask<0)
+            return;
+
+        const mask =
+            masks[activeMask];
+
+
+        mask.ctx.clearRect(
+            0,
+            0,
+            mask.canvas.width,
+            mask.canvas.height
         );
 
 
-    renderMaskList();
+        mask.data=null;
 
+        render();
 
-    if(
-        activeMask >= 0
-    ){
+    };
 
-        $("maskBrightness")
-            .value =
-            masks[
-                activeMask
-            ].brightness;
 
+$("paintMode").onclick =
+    ()=>{
+        paintMode="paint";
+    };
 
-        $("maskContrast")
-            .value =
-            masks[
-                activeMask
-            ].contrast;
 
-    }
-
-
-    if(source){
-        generate();
-    }
-
-
-    if(
-        $("maskEditorWrap")
-            .style
-            .display !==
-        "none"
-    ){
-
-        renderMaskEditor();
-
-    }
-
-}
-
-
-/* =========================================================
-   NEW MASK
-========================================================= */
-
-$("newMask")
-    .addEventListener(
-        "click",
-        () => {
-
-            if(!source){
-
-                alert(
-                    "Carga una imagen primero."
-                );
-
-                return;
-
-            }
-
-
-            masks.push(
-                makeMask()
-            );
-
-
-            activeMask =
-                masks.length - 1;
-
-
-            renderMaskList();
-
-
-            $("maskBrightness")
-                .value =
-                0;
-
-
-            $("maskContrast")
-                .value =
-                0;
-
-
-            $("maskBrightnessVal")
-                .textContent =
-                0;
-
-
-            $("maskContrastVal")
-                .textContent =
-                0;
-
-
-            enterMaskEditor();
-
-        }
-    );
-
-
-/* =========================================================
-   DELETE CURRENT MASK
-========================================================= */
-
-$("deleteMask")
-    .addEventListener(
-        "click",
-        () => {
-
-            if(
-                activeMask >= 0
-            ){
-
-                deleteMask(
-                    activeMask
-                );
-
-            }
-
-        }
-    );
-
-
-/* =========================================================
-   CLEAR MASK
-========================================================= */
-
-$("clearMask")
-    .addEventListener(
-        "click",
-        () => {
-
-            if(
-                activeMask < 0
-            ){
-                return;
-            }
-
-
-            const context =
-                masks[
-                    activeMask
-                ]
-                .canvas
-                .getContext(
-                    "2d"
-                );
-
-
-            context.clearRect(
-                0,
-                0,
-                maskW,
-                maskH
-            );
-
-
-            refreshMaskData(
-                masks[
-                    activeMask
-                ]
-            );
-
-
-            renderMaskEditor();
-
-            generate();
-
-        }
-    );
-
-
-/* =========================================================
-   MASK PARAMETERS
-========================================================= */
-
-$("maskBrightness")
-    .addEventListener(
-        "input",
-        () => {
-
-            if(
-                activeMask < 0
-            ){
-                return;
-            }
-
-
-            masks[
-                activeMask
-            ].brightness =
-                +$("maskBrightness")
-                    .value;
-
-
-            $("maskBrightnessVal")
-                .textContent =
-                masks[
-                    activeMask
-                ].brightness;
-
-
-            if(source){
-                generate();
-            }
-
-        }
-    );
-
-
-$("maskContrast")
-    .addEventListener(
-        "input",
-        () => {
-
-            if(
-                activeMask < 0
-            ){
-                return;
-            }
-
-
-            masks[
-                activeMask
-            ].contrast =
-                +$("maskContrast")
-                    .value;
-
-
-            $("maskContrastVal")
-                .textContent =
-                masks[
-                    activeMask
-                ].contrast;
-
-
-            if(source){
-                generate();
-            }
-
-        }
-    );
-
-
-/* =========================================================
-   MASK EDITOR
-========================================================= */
-
-$("maskEditBtn")
-    .addEventListener(
-        "click",
-        () => {
-
-            if(
-                $("maskEditorWrap")
-                    .style
-                    .display ===
-                "none"
-            ){
-
-                enterMaskEditor();
-
-            }
-            else{
-
-                exitMaskEditor();
-
-            }
-
-        }
-    );
-
-
-function enterMaskEditor(){
-
-    if(!source){
-
-        alert(
-            "Carga una imagen primero."
-        );
-
-        return;
-
-    }
-
-
-    if(
-        activeMask < 0
-    ){
-
-        masks.push(
-            makeMask()
-        );
-
-        activeMask = 0;
-
-        renderMaskList();
-
-    }
-
-
-    $("canvasWrap")
-        .style
-        .display =
-        "none";
-
-
-    $("empty")
-        .style
-        .display =
-        "none";
-
-
-    $("maskEditorWrap")
-        .style
-        .display =
-        "flex";
-
-
-    $("maskEditBtn")
-        .textContent =
-        "Cerrar edición";
-
-
-    renderMaskEditor();
-
-}
-
-
-function exitMaskEditor(){
-
-    $("maskEditorWrap")
-        .style
-        .display =
-        "none";
-
-
-    $("canvasWrap")
-        .style
-        .display =
-        source
-            ? "flex"
-            : "none";
-
-
-    $("maskEditBtn")
-        .textContent =
-        "Editar máscaras";
-
-}
-
-
-/* =========================================================
-   RENDER MASK EDITOR
-========================================================= */
-
-function renderMaskEditor(){
-
-    if(
-        !source ||
-        activeMask < 0
-    ){
-        return;
-    }
-
-
-    const base =
-        $("maskBase");
-
-    const overlay =
-        $("maskOverlay");
-
-
-    base.width =
-        maskW;
-
-    base.height =
-        maskH;
-
-
-    overlay.width =
-        maskW;
-
-    overlay.height =
-        maskH;
-
-
-    const baseContext =
-        base.getContext("2d");
-
-
-    baseContext.clearRect(
-        0,
-        0,
-        maskW,
-        maskH
-    );
-
-
-    baseContext.drawImage(
-        sourceCanvas,
-        0,
-        0,
-        maskW,
-        maskH
-    );
-
-
-    const overlayContext =
-        overlay.getContext("2d");
-
-
-    overlayContext.clearRect(
-        0,
-        0,
-        maskW,
-        maskH
-    );
-
-
-    overlayContext.drawImage(
-        masks[
-            activeMask
-        ].canvas,
-        0,
-        0
-    );
-
-
-    overlayContext.globalCompositeOperation =
-        "source-in";
-
-
-    overlayContext.fillStyle =
-        "rgba(255,59,141,.34)";
-
-
-    overlayContext.fillRect(
-        0,
-        0,
-        maskW,
-        maskH
-    );
-
-
-    overlayContext.globalCompositeOperation =
-        "source-over";
-
-}
+$("eraseMode").onclick =
+    ()=>{
+        paintMode="erase";
+    };
 
 
 /* =========================================================
    MASK PAINT
 ========================================================= */
 
-$("maskOverlay")
-    .addEventListener(
-        "pointerdown",
-        event => {
-
-            if(
-                activeMask < 0
-            ){
-                return;
-            }
+let painting=false;
 
 
-            drawingMask =
-                true;
+$("maskCanvas").addEventListener(
+    "pointerdown",
+    event=>{
+
+        if(activeMask<0)
+            return;
+
+        painting=true;
+
+        $("maskCanvas")
+            .setPointerCapture(
+                event.pointerId
+            );
+
+        paintMask(event);
+
+    }
+);
 
 
-            $("maskOverlay")
-                .setPointerCapture(
-                    event.pointerId
-                );
+$("maskCanvas").addEventListener(
+    "pointermove",
+    event=>{
 
-
+        if(painting)
             paintMask(event);
 
-        }
-    );
+    }
+);
 
 
-$("maskOverlay")
-    .addEventListener(
-        "pointermove",
-        event => {
-
-            if(drawingMask){
-
-                paintMask(
-                    event
-                );
-
-            }
-
-        }
-    );
+$("maskCanvas").addEventListener(
+    "pointerup",
+    ()=>{
+        painting=false;
+    }
+);
 
 
-$("maskOverlay")
-    .addEventListener(
-        "pointerup",
-        () => {
-
-            drawingMask =
-                false;
-
-
-            if(
-                activeMask >= 0
-            ){
-
-                refreshMaskData(
-                    masks[
-                        activeMask
-                    ]
-                );
-
-            }
-
-
-            generate();
-
-        }
-    );
-
-
-$("maskOverlay")
-    .addEventListener(
-        "pointercancel",
-        () => {
-
-            drawingMask =
-                false;
-
-
-            if(
-                activeMask >= 0
-            ){
-
-                refreshMaskData(
-                    masks[
-                        activeMask
-                    ]
-                );
-
-            }
-
-
-            generate();
-
-        }
-    );
+$("maskCanvas").addEventListener(
+    "pointercancel",
+    ()=>{
+        painting=false;
+    }
+);
 
 
 function paintMask(event){
 
-    if(
-        activeMask < 0
-    ){
-        return;
-    }
+    const mask =
+        masks[activeMask];
 
 
     const rect =
-        $("maskOverlay")
+        $("maskCanvas")
             .getBoundingClientRect();
 
 
@@ -5891,532 +3288,897 @@ function paintMask(event){
         (
             event.clientX -
             rect.left
-        ) *
-        maskW /
-        rect.width;
+        ) /
+        rect.width *
+        mask.canvas.width;
 
 
     const y =
         (
             event.clientY -
             rect.top
-        ) *
-        maskH /
-        rect.height;
+        ) /
+        rect.height *
+        mask.canvas.height;
 
 
     const brush =
-        +$("brushSize").value *
-        (
-            maskW /
-            Math.max(
-                source.naturalWidth,
-                source.naturalHeight
-            )
+        Number(
+            $("brushSize").value
         );
 
 
-    const context =
-        masks[
-            activeMask
-        ]
-        .canvas
-        .getContext(
-            "2d"
-        );
+    const radius =
+        brush/100 *
+        Math.min(
+            mask.canvas.width,
+            mask.canvas.height
+        )/2;
 
 
-    context.save();
+    mask.ctx.save();
 
 
-    context.globalCompositeOperation =
-        $("brushMode").value ===
-        "erase"
+    mask.ctx.globalCompositeOperation =
+        paintMode === "erase"
             ? "destination-out"
             : "source-over";
 
 
-    context.fillStyle =
-        "#fff";
+    mask.ctx.fillStyle =
+        "#ff0094";
 
 
-    context.beginPath();
+    mask.ctx.beginPath();
 
-
-    context.arc(
+    mask.ctx.arc(
         x,
         y,
-        Math.max(
-            2,
-            brush
-        ),
+        radius,
         0,
-        Math.PI * 2
+        Math.PI*2
     );
 
-
-    context.fill();
-
-
-    context.restore();
+    mask.ctx.fill();
 
 
-    renderMaskEditor();
+    mask.ctx.restore();
+
+
+    const data =
+        mask.ctx.getImageData(
+            0,
+            0,
+            mask.canvas.width,
+            mask.canvas.height
+        ).data;
+
+
+    mask.data =
+        new Uint8Array(
+            data.length/4
+        );
+
+
+    for(
+        let i=0,j=0;
+        i<data.length;
+        i+=4,j++
+    ){
+
+        mask.data[j] =
+            data[i+3];
+
+    }
+
+
+    render();
 
 }
+
+
+/* =========================================================
+   PATTERN BUTTONS
+========================================================= */
+
+patterns.forEach(
+    pattern=>{
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+
+        button.className =
+            "pattern-btn active";
+
+
+        button.innerHTML = `
+
+            <span>
+                ${pattern.symbol}
+            </span>
+
+            <small>
+                ${pattern.id} ·
+                ${pattern.name}
+            </small>
+
+        `;
+
+
+        button.onclick =
+            ()=>{
+
+                const index =
+                    activePatterns
+                        .indexOf(
+                            pattern.id
+                        );
+
+
+                if(index>=0){
+
+                    if(
+                        activePatterns.length===1
+                    )
+                        return;
+
+                    activePatterns.splice(
+                        index,
+                        1
+                    );
+
+                    button.classList
+                        .remove(
+                            "active"
+                        );
+
+                }
+                else{
+
+                    activePatterns.push(
+                        pattern.id
+                    );
+
+                    activePatterns.sort(
+                        (a,b)=>a-b
+                    );
+
+                    button.classList
+                        .add(
+                            "active"
+                        );
+
+                }
+
+
+                render();
+
+            };
+
+
+        $("patterns")
+            .appendChild(
+                button
+            );
+
+    }
+);
+
+
+/* =========================================================
+   MODES
+========================================================= */
+
+$("modeFinal").onclick =
+    ()=>{
+
+        mode="final";
+
+        $("modeFinal")
+            .classList.add(
+                "active"
+            );
+
+        $("modeTemplate")
+            .classList.remove(
+                "active"
+            );
+
+        render();
+
+    };
+
+
+$("modeTemplate").onclick =
+    ()=>{
+
+        mode="template";
+
+        $("modeTemplate")
+            .classList.add(
+                "active"
+            );
+
+        $("modeFinal")
+            .classList.remove(
+                "active"
+            );
+
+        render();
+
+    };
 
 
 /* =========================================================
    AUTO ADJUST
 ========================================================= */
 
-$("autoBtn")
-    .addEventListener(
-        "click",
-        autoAdjust
-    );
+/*
+   Esta es la parte nueva importante.
 
+   El sistema prueba automáticamente
+   diferentes combinaciones y mide:
+
+   1. distribución tonal
+   2. contraste
+   3. cantidad de niveles utilizados
+   4. separación entre niveles
+   5. cantidad de celdas casi iguales
+   6. pérdida de detalle
+   7. dispersión del histograma
+
+   Además calcula automáticamente
+   los 10 puntos de la curva.
+*/
 
 function autoAdjust(){
 
-    if(!source){
-
-        alert(
-            "Carga una imagen primero."
-        );
-
+    if(!image)
         return;
 
-    }
 
-
-    setStatus(
-        "BUSCANDO AJUSTE"
-    );
-
-
-    const scale =
-        Math.min(
-            1,
-            110 /
-            Math.max(
-                source.naturalWidth,
-                source.naturalHeight
-            )
-        );
-
+    /*
+       Muestreamos la imagen para
+       mantener la operación rápida.
+    */
 
     const width =
-        Math.max(
-            20,
-            Math.round(
-                source.naturalWidth *
-                scale
-            )
-        );
-
+        sourceCanvas.width;
 
     const height =
-        Math.max(
-            20,
-            Math.round(
-                source.naturalHeight *
-                scale
-            )
-        );
-
-
-    const canvas =
-        document.createElement(
-            "canvas"
-        );
-
-
-    canvas.width =
-        width;
-
-    canvas.height =
-        height;
-
-
-    const context =
-        canvas.getContext(
-            "2d"
-        );
-
-
-    context.drawImage(
-        sourceCanvas,
-        0,
-        0,
-        width,
-        height
-    );
-
+        sourceCanvas.height;
 
     const data =
-        context
-            .getImageData(
-                0,
-                0,
-                width,
-                height
+        sourceData;
+
+
+    const samples=[];
+
+
+    const step =
+        Math.max(
+            1,
+            Math.floor(
+                Math.sqrt(
+                    width*height /
+                    5000
+                )
             )
-            .data;
-
-
-    let mean = 0;
-
-    let variance = 0;
+        );
 
 
     for(
-        let i = 0;
-        i < data.length;
-        i += 4
-    ){
-
-        const gray =
-            (
-                .299 * data[i] +
-                .587 * data[i + 1] +
-                .114 * data[i + 2]
-            ) /
-            255;
-
-
-        mean += gray;
-
-    }
-
-
-    mean /=
-        data.length / 4;
-
-
-    for(
-        let i = 0;
-        i < data.length;
-        i += 4
-    ){
-
-        const gray =
-            (
-                .299 * data[i] +
-                .587 * data[i + 1] +
-                .114 * data[i + 2]
-            ) /
-            255;
-
-
-        variance +=
-            (
-                gray -
-                mean
-            ) *
-            (
-                gray -
-                mean
-            );
-
-    }
-
-
-    variance /=
-        data.length / 4;
-
-
-    const candidates = [];
-
-
-    const contrasts =
-        [
-            1.0,
-            1.25,
-            1.5,
-            1.8,
-            2.2
-        ];
-
-
-    const blacks =
-        [
-            5,
-            15,
-            25,
-            35,
-            45
-        ];
-
-
-    const details =
-        [
-            25,
-            45,
-            65,
-            80
-        ];
-
-
-    const curves =
-        [
-            -25,
-            0,
-            20,
-            40
-        ];
-
-
-    for(
-        const contrast
-        of contrasts
+        let y=0;
+        y<height;
+        y+=step
     ){
 
         for(
-            const black
-            of blacks
+            let x=0;
+            x<width;
+            x+=step
         ){
 
-            for(
-                const detail
-                of details
-            ){
+            const i =
+                (y*width+x)*4;
 
-                for(
-                    const curve
-                    of curves
-                ){
-
-                    let score = 0;
-
-
-                    const spread =
-                        Math.sqrt(
-                            variance
-                        ) *
-                        contrast;
-
-
-                    score +=
-                        Math.min(
-                            1,
-                            spread * 3
-                        );
-
-
-                    score +=
-                        Math.min(
-                            1,
-                            Math.abs(
-                                mean -
-                                .5
-                            ) *
-                            2
-                        );
-
-
-                    score +=
-                        detail /
-                        140;
-
-
-                    score -=
-                        Math.abs(
-                            curve
-                        ) /
-                        180;
-
-
-                    score -=
-                        Math.max(
-                            0,
-                            contrast -
-                            2.1
-                        ) *
-                        .5;
-
-
-                    candidates.push({
-
-                        score,
-
-                        contrast,
-
-                        black,
-
-                        detail,
-
-                        curve
-
-                    });
-
-                }
-
-            }
+            samples.push(
+                grayscale(
+                    data,
+                    i
+                )
+            );
 
         }
 
     }
 
 
-    candidates.sort(
-        (a,b) =>
-            b.score -
-            a.score
+    if(!samples.length)
+        return;
+
+
+    /*
+       Estadísticas.
+    */
+
+    let sum=0;
+
+    let sum2=0;
+
+    let min=1;
+
+    let max=0;
+
+
+    samples.forEach(
+        v=>{
+
+            sum+=v;
+
+            sum2+=v*v;
+
+            min=Math.min(min,v);
+
+            max=Math.max(max,v);
+
+        }
     );
 
 
-    const best =
-        candidates[0];
+    const mean =
+        sum/samples.length;
+
+
+    const variance =
+        Math.max(
+            0,
+            sum2/samples.length -
+            mean*mean
+        );
+
+
+    const deviation =
+        Math.sqrt(
+            variance
+        );
+
+
+    const dynamicRange =
+        max-min;
+
+
+    /*
+       Ajuste base.
+    */
+
+    const optimalContrast =
+        clamp(
+            1.12 +
+            (
+                .42 -
+                deviation
+            )*.95,
+            .95,
+            1.55
+        );
+
+
+    const optimalBlack =
+        clamp(
+            (
+                .46 -
+                mean
+            )*55,
+            -20,
+            28
+        );
+
+
+    const optimalCurve =
+        clamp(
+            100 +
+            (
+                mean-.5
+            )*45,
+            82,
+            122
+        );
+
+
+    const optimalDetail =
+        clamp(
+            deviation*220,
+            25,
+            92
+        );
 
 
     $("contrast").value =
-        best.contrast;
+        Math.round(
+            optimalContrast*100
+        );
 
-    $("black").value =
-        best.black;
 
-    $("detail").value =
-        best.detail;
+    $("blackDepth").value =
+        Math.round(
+            optimalBlack
+        );
+
 
     $("curve").value =
-        best.curve;
+        Math.round(
+            optimalCurve
+        );
 
 
-    $("contrastVal")
-        .textContent =
-        best.contrast.toFixed(2);
-
-    $("blackVal")
-        .textContent =
-        best.black;
-
-    $("detailVal")
-        .textContent =
-        best.detail;
-
-    $("curveVal")
-        .textContent =
-        best.curve;
+    $("detail").value =
+        Math.round(
+            optimalDetail
+        );
 
 
-    generate();
+    /*
+       ------------------------------------------------------
+       OPTIMIZACIÓN DE LOS 10 NIVELES
+       ------------------------------------------------------
+
+       Creamos histograma.
+
+       Después buscamos percentiles
+       para que los niveles tengan
+       aproximadamente cantidades
+       equilibradas de información.
+    */
+
+    const histogram =
+        new Array(101)
+            .fill(0);
 
 
-    setStatus(
-        "AJUSTE AUTOMÁTICO APLICADO"
+    samples.forEach(
+        value=>{
+
+            const index =
+                Math.round(
+                    value*100
+                );
+
+            histogram[index]++;
+
+        }
     );
+
+
+    const total =
+        samples.length;
+
+
+    const percentiles =
+        [
+            .02,
+            .08,
+            .18,
+            .30,
+            .42,
+            .56,
+            .68,
+            .80,
+            .91,
+            .98
+        ];
+
+
+    const targets =
+        percentiles.map(
+            percentile=>{
+
+                const target =
+                    total*percentile;
+
+                let accumulated=0;
+
+                for(
+                    let i=0;
+                    i<histogram.length;
+                    i++
+                ){
+
+                    accumulated +=
+                        histogram[i];
+
+                    if(
+                        accumulated>=target
+                    )
+                        return i/100;
+
+                }
+
+                return 1;
+
+            }
+        );
+
+
+    /*
+       Convertimos los percentiles
+       en offsets para nuestra curva
+       de 10 puntos.
+
+       El offset se limita para no
+       destruir completamente la imagen.
+    */
+
+    targets.forEach(
+        (target,index)=>{
+
+            const identity =
+                index/9;
+
+
+            const difference =
+                target-identity;
+
+
+            toneOffsets[index] =
+                clamp(
+                    difference*250,
+                    -65,
+                    65
+                );
+
+        }
+    );
+
+
+    /*
+       Fondo:
+
+       Si los bordes tienen muy poca
+       variación, es probable que exista
+       un fondo uniforme.
+
+       Lo activamos automáticamente.
+    */
+
+    let borderMean=0;
+    let borderVariance=0;
+    let borderCount=0;
+
+
+    function sampleBorder(x,y){
+
+        const i =
+            (y*width+x)*4;
+
+        const v =
+            grayscale(
+                data,
+                i
+            );
+
+        borderMean+=v;
+
+        borderCount++;
+
+    }
+
+
+    for(
+        let x=0;
+        x<width;
+        x+=step
+    ){
+
+        sampleBorder(x,0);
+
+        sampleBorder(
+            x,
+            height-1
+        );
+
+    }
+
+
+    for(
+        let y=0;
+        y<height;
+        y+=step
+    ){
+
+        sampleBorder(0,y);
+
+        sampleBorder(
+            width-1,
+            y
+        );
+
+    }
+
+
+    borderMean /=
+        borderCount;
+
+
+    for(
+        let x=0;
+        x<width;
+        x+=step
+    ){
+
+        const top =
+            grayscale(
+                data,
+                x*4
+            );
+
+        const bottom =
+            grayscale(
+                data,
+                (
+                    (height-1)*width+x
+                )*4
+            );
+
+        borderVariance +=
+            Math.abs(
+                top-bottom
+            );
+
+    }
+
+
+    /*
+       Activar separador cuando
+       el fondo parece uniforme.
+    */
+
+    const backgroundLikely =
+        dynamicRange > .25 &&
+        borderVariance /
+        Math.max(
+            1,
+            width/step
+        ) < .08;
+
+
+    $("bgSep").checked =
+        backgroundLikely;
+
+
+    if(backgroundLikely){
+
+        $("bgStrength").value =
+            Math.round(
+                clamp(
+                    55 +
+                    (deviation-.18)*100,
+                    35,
+                    85
+                )
+            );
+
+
+        $("bgThresh").value =
+            Math.round(
+                clamp(
+                    25 +
+                    deviation*45,
+                    18,
+                    55
+                )
+            );
+
+        $("bgMode").value =
+            "light";
+
+    }
+
+
+    updateOutputLabels();
+
+    detectBackground();
+
+    render();
 
 }
 
 
 /* =========================================================
-   FORMAT
+   UPDATE OUTPUT LABELS
 ========================================================= */
 
-function isLandscape(){
+function updateOutputLabels(){
 
-    if(!source){
-        return false;
-    }
+    $("colsOut").textContent =
+        $("cols").value;
 
+    $("contrastOut").textContent =
+        $("contrast").value+"%";
 
-    const orientation =
-        $("orientation").value;
+    $("blackOut").textContent =
+        $("blackDepth").value;
 
+    $("detailOut").textContent =
+        $("detail").value;
 
-    if(
-        orientation ===
-        "landscape"
-    ){
+    $("curveOut").textContent =
+        (
+            Number(
+                $("curve").value
+            )/100
+        ).toFixed(2);
 
-        return true;
+    $("bgStrengthOut").textContent =
+        $("bgStrength").value;
 
-    }
+    $("bgThreshOut").textContent =
+        $("bgThresh").value;
 
+    document
+        .querySelectorAll(
+            "#toneControls .tone-row"
+        )
+        .forEach(
+            (row,index)=>{
 
-    if(
-        orientation ===
-        "portrait"
-    ){
+                const slider =
+                    row.querySelector(
+                        "input"
+                    );
 
-        return false;
+                const output =
+                    row.querySelector(
+                        "output"
+                    );
 
-    }
+                slider.value =
+                    toneOffsets[index];
 
+                output.textContent =
+                    toneOffsets[index];
 
-    return (
-        source.naturalWidth >
-        source.naturalHeight
-    );
-
-}
-
-
-function getPaper(){
-
-    return paperSizes[
-        $("paper").value
-    ];
-
-}
-
-
-function updateOrientationChip(){
-
-    const paper =
-        getPaper();
-
-
-    const landscape =
-        isLandscape();
-
-
-    const chip =
-        $("orientationChip");
-
-
-    chip.textContent =
-        `${paper.name} · ${
-            landscape
-                ? "horizontal"
-                : "vertical"
-        }`;
-
-
-    chip.classList.toggle(
-        "landscape",
-        landscape
-    );
+            }
+        );
 
 }
 
+
+/* =========================================================
+   AUTO BUTTON
+========================================================= */
+
+$("autoBtn").onclick =
+    ()=>{
+
+        if(!image)
+            return;
+
+        autoAdjust();
+
+    };
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+$("resetBtn").onclick =
+    ()=>{
+
+        $("contrast").value=100;
+        $("blackDepth").value=0;
+        $("detail").value=50;
+        $("curve").value=100;
+
+        $("bgSep").checked=false;
+
+        $("bgStrength").value=55;
+        $("bgThresh").value=32;
+
+        toneOffsets =
+            new Array(10).fill(0);
+
+        updateOutputLabels();
+
+        detectBackground();
+
+        render();
+
+    };
+
+
+/* =========================================================
+   BACKGROUND EVENTS
+========================================================= */
 
 [
-    "paper",
-    "orientation",
-    "margin",
-    "printScale",
-    "legendPosition",
-    "showTitle",
-    "showBorder"
-].forEach(
-    id => {
+    "bgSep",
+    "bgStrength",
+    "bgThresh",
+    "bgMode"
+]
+.forEach(
+    id=>{
 
-        $(id)
-            .addEventListener(
-                "change",
-                () => {
+        $(id).addEventListener(
+            "change",
+            ()=>{
 
-                    updateOrientationChip();
+                detectBackground();
 
-                    updatePrintCSS();
+                render();
 
-                }
-            );
+            }
+        );
 
     }
 );
+
+
+/* =========================================================
+   PAPER
+========================================================= */
+
+const paperSizes = {
+
+    letter:
+        [216,279.4],
+
+    a4:
+        [210,297],
+
+    a3:
+        [297,420],
+
+    a5:
+        [148,210],
+
+    legal:
+        [215.9,355.6],
+
+    oficio:
+        [216,330]
+
+};
+
+
+function getOrientation(){
+
+    const paper =
+        paperSizes[
+            $("paper").value
+        ];
+
+
+    if(
+        $("orientation").value ===
+        "portrait"
+    )
+        return "portrait";
+
+
+    if(
+        $("orientation").value ===
+        "landscape"
+    )
+        return "landscape";
+
+
+    if(
+        image &&
+        image.width >
+        image.height
+    )
+        return "landscape";
+
+
+    return "portrait";
+
+}
 
 
 /* =========================================================
@@ -6426,65 +4188,37 @@ function updateOrientationChip(){
 function updatePrintCSS(){
 
     const paper =
-        getPaper();
+        paperSizes[
+            $("paper").value
+        ];
 
 
-    const landscape =
-        isLandscape();
+    const orientation =
+        getOrientation();
 
 
     const margin =
-        +$("margin").value;
+        Number(
+            $("margin").value
+        );
 
 
-    const pageWidth =
-        landscape
-            ? paper.h
-            : paper.w;
+    let width =
+        paper[0];
+
+    let height =
+        paper[1];
 
 
-    const pageHeight =
-        landscape
-            ? paper.w
-            : paper.h;
+    if(
+        orientation ===
+        "landscape"
+    ){
 
+        [width,height] =
+            [height,width];
 
-    const usableWidth =
-        pageWidth -
-        margin * 2;
-
-
-    const usableHeight =
-        pageHeight -
-        margin * 2;
-
-
-    const titleHeight =
-        $("showTitle").checked
-            ? 15
-            : 0;
-
-
-    const footerHeight =
-        6;
-
-
-    $("printSheet")
-        .style
-        .width =
-        usableWidth +
-        "mm";
-
-
-    $("printSheet")
-        .style
-        .height =
-        (
-            usableHeight -
-            titleHeight -
-            footerHeight
-        ) +
-        "mm";
+    }
 
 
     $("dynamicPrintStyle")
@@ -6495,153 +4229,22 @@ function updatePrintCSS(){
             @page{
 
                 size:
-                    ${paper.css}
-                    ${
-                        landscape
-                            ? "landscape"
-                            : "portrait"
-                    };
+                    ${width}mm
+                    ${height}mm;
 
                 margin:
                     ${margin}mm;
 
             }
 
-
             #printSheet{
 
                 width:
-                    ${usableWidth}mm !important;
+                    ${width-2*margin}mm;
 
                 height:
-                    ${
-                        Math.max(
-                            10,
-                            usableHeight -
-                            titleHeight -
-                            footerHeight
-                        )
-                    }mm !important;
+                    ${height-2*margin}mm;
 
-            }
-
-
-            #printTitle{
-
-                ${
-                    $("showTitle").checked
-                        ? "display:flex;"
-                        : "display:none;"
-                }
-
-            }
-
-
-            #printImageBox{
-
-                ${
-                    $("showBorder").checked
-                        ? "border:1px solid #ddd;"
-                        : "border:0;"
-                }
-
-            }
-
-
-            #printLegend{
-
-                ${
-                    $("legendPosition").value ===
-                    "none"
-                        ? "display:none;"
-                        : ""
-                }
-
-            }
-
-
-            #printBody{
-
-                ${
-                    $("legendPosition").value ===
-                    "bottom"
-                        ? "flex-direction:column;"
-                        : "flex-direction:row;"
-                }
-
-            }
-
-
-            ${
-                $("legendPosition").value ===
-                "bottom"
-
-                    ? `
-                        #printLegend{
-
-                            flex:
-                                0 0 25mm;
-
-                            width:
-                                100%;
-
-                        }
-                      `
-
-                    : ""
-            }
-
-
-            ${
-                $("legendPosition").value ===
-                "inside"
-
-                    ? `
-                        #printImageBox{
-
-                            position:
-                                relative;
-
-                        }
-
-                        #printLegend{
-
-                            position:
-                                absolute;
-
-                            bottom:
-                                2mm;
-
-                            left:
-                                2mm;
-
-                            right:
-                                2mm;
-
-                            width:
-                                auto;
-
-                            max-height:
-                                30mm;
-
-                            overflow:
-                                hidden;
-
-                            background:
-                                rgba(
-                                    255,
-                                    255,
-                                    255,
-                                    .94
-                                );
-
-                            z-index:
-                                5;
-
-                        }
-                      `
-
-                    : ""
             }
 
         }
@@ -6652,182 +4255,583 @@ function updatePrintCSS(){
 
 
 /* =========================================================
-   PRINT LEGEND
+   PRINT LAYOUT
 ========================================================= */
 
-function buildPrintLegend(){
+function buildPrint(){
 
-    const legend =
-        $("printLegend");
+    if(!image)
+        return;
+
+
+    updatePrintCSS();
+
+
+    const paper =
+        paperSizes[
+            $("paper").value
+        ];
+
+
+    const orientation =
+        getOrientation();
+
+
+    let pageWidth =
+        paper[0];
+
+    let pageHeight =
+        paper[1];
 
 
     if(
-        $("legendPosition")
-            .value ===
-        "none"
+        orientation ===
+        "landscape"
     ){
 
-        legend.innerHTML =
-            "";
-
-        return;
+        [pageWidth,pageHeight] =
+            [pageHeight,pageWidth];
 
     }
 
 
-    legend.innerHTML = `
-
-        <h2>
-            LEYENDA · SÍMBOLOS
-        </h2>
-
-        <div class="legend-grid">
-
-            ${
-                patterns
-                    .map(
-                        pattern => `
-
-                            <div
-                                class="legend-item"
-                            >
-
-                                <span
-                                    class="legend-num"
-                                >
-                                    ${pattern.id}
-                                </span>
-
-                                <span
-                                    class="legend-symbol"
-                                >
-                                    ${
-                                        pattern.symbol ||
-                                        "□"
-                                    }
-                                </span>
-
-                                <span>
-                                    ${pattern.name}
-                                </span>
-
-                            </div>
-
-                        `
-                    )
-                    .join("")
-            }
-
-        </div>
-
-    `;
-
-}
+    const margin =
+        Number(
+            $("margin").value
+        );
 
 
-/* =========================================================
-   PRINT CANVAS
-========================================================= */
-
-function buildPrintCanvas(){
-
-    if(
-        !window.pixelCells
-    ){
-        return;
-    }
+    const usableWidth =
+        pageWidth -
+        margin*2;
 
 
-    const {
-        cols
-    } =
-        window.pixelGrid;
+    const usableHeight =
+        pageHeight -
+        margin*2;
 
 
-    const cell =
+    const showTitle =
+        $("showTitle").checked;
+
+
+    const showLegend =
+        $("showLegend").checked;
+
+
+    const legendSide =
+        $("legendPos").value ===
+        "side";
+
+
+    /*
+       ------------------------------------------------------
+       IMPORTANTE
+       ------------------------------------------------------
+
+       Reservamos muy poco espacio
+       para la leyenda.
+
+       La grilla recibe TODO el
+       espacio restante.
+
+       Esto evita que la grilla sea
+       achicada innecesariamente.
+    */
+
+    const titleHeight =
+        showTitle
+            ? 7
+            : 0;
+
+
+    const legendHeight =
+        showLegend &&
+        !legendSide
+            ? 14
+            : 0;
+
+
+    const legendWidth =
+        showLegend &&
+        legendSide
+            ? 36
+            : 0;
+
+
+    const gap =
+        3;
+
+
+    const gridAreaWidth =
+        usableWidth -
+        legendWidth -
+        (
+            legendSide
+                ? gap
+                : 0
+        );
+
+
+    const gridAreaHeight =
+        usableHeight -
+        titleHeight -
+        legendHeight -
+        (
+            !legendSide &&
+            showLegend
+                ? gap
+                : 0
+        );
+
+
+    /*
+       ESCALA MÁXIMA POSIBLE
+
+       Esta es la parte fundamental.
+
+       La escala se obtiene directamente
+       comparando la proporción de la
+       grilla con el área disponible.
+
+       Nunca se usa una escala arbitraria.
+    */
+
+    const cellWidth =
+        gridAreaWidth /
+        cols;
+
+
+    const cellHeight =
+        gridAreaHeight /
+        rows;
+
+
+    const cellSize =
+        Math.min(
+            cellWidth,
+            cellHeight
+        );
+
+
+    const finalGridWidth =
+        cellSize *
+        cols;
+
+
+    const finalGridHeight =
+        cellSize *
+        rows;
+
+
+    /*
+       Sheet
+    */
+
+    const sheet =
+        $("printSheet");
+
+
+    sheet.style.width =
+        usableWidth+"mm";
+
+    sheet.style.height =
+        usableHeight+"mm";
+
+
+    sheet.style.display =
+        "flex";
+
+    sheet.style.flexDirection =
+        "column";
+
+
+    sheet.style.background =
+        "#fff";
+
+
+    sheet.style.overflow =
+        "hidden";
+
+
+    /*
+       TITLE
+    */
+
+    const title =
+        $("printTitle");
+
+
+    title.style.display =
+        showTitle
+            ? "block"
+            : "none";
+
+
+    title.style.height =
+        titleHeight+"mm";
+
+
+    title.style.flex =
+        "0 0 "+titleHeight+"mm";
+
+
+    title.style.textAlign =
+        "center";
+
+
+    title.style.font =
+        "800 9pt Arial";
+
+
+    title.style.letterSpacing =
+        ".05em";
+
+
+    title.style.padding =
+        "0";
+
+
+    title.style.lineHeight =
+        titleHeight+"mm";
+
+
+    title.textContent =
+        `PIXEL HATCH · ${cols} × ${rows}`;
+
+
+    /*
+       BODY
+    */
+
+    const body =
+        $("printBody");
+
+
+    body.style.display =
+        "flex";
+
+
+    body.style.flex =
+        "1";
+
+
+    body.style.minHeight =
+        "0";
+
+
+    body.style.minWidth =
+        "0";
+
+
+    body.style.flexDirection =
+        legendSide
+            ? "row"
+            : "column";
+
+
+    body.style.gap =
+        gap+"mm";
+
+
+    /*
+       CANVAS
+    */
+
+    const canvas =
+        $("printCanvas");
+
+
+    /*
+       Resolución interna alta.
+
+       No depende de la escala CSS.
+    */
+
+    const internalScale =
         Math.max(
             5,
             Math.min(
-                12,
-                Math.floor(
-                    2600 /
-                    cols
+                18,
+                1800 /
+                Math.max(
+                    cols,
+                    rows
                 )
             )
         );
 
 
-    draw(
-        printCanvas,
-        printCtx,
-        cell
+    canvas.width =
+        Math.round(
+            cols*
+            internalScale
+        );
+
+
+    canvas.height =
+        Math.round(
+            rows*
+            internalScale
+        );
+
+
+    canvas.style.width =
+        finalGridWidth+"mm";
+
+
+    canvas.style.height =
+        finalGridHeight+"mm";
+
+
+    canvas.style.display =
+        "block";
+
+
+    canvas.style.alignSelf =
+        "center";
+
+
+    /*
+       Canvas rendering
+    */
+
+    const ctx =
+        canvas.getContext(
+            "2d"
+        );
+
+
+    ctx.fillStyle =
+        "#fff";
+
+
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
     );
 
-}
+
+    for(
+        let row=0;
+        row<rows;
+        row++
+    ){
+
+        for(
+            let column=0;
+            column<cols;
+            column++
+        ){
+
+            const value =
+                getCellValue(
+                    column,
+                    row
+                );
 
 
-/* =========================================================
-   PREPARE PRINT
-========================================================= */
-
-function preparePrint(){
-
-    buildPrintCanvas();
-
-    buildPrintLegend();
+            const id =
+                getPatternLevel(
+                    value
+                );
 
 
-    const paper =
-        getPaper();
+            const g =
+                Number(
+                    $("gap").value
+                );
 
 
-    const landscape =
-        isLandscape();
+            const x =
+                column*
+                internalScale +
+                g/2;
 
 
-    const info = `
+            const y =
+                row*
+                internalScale +
+                g/2;
 
-        ${paper.name}
-        ·
-        ${
-            landscape
-                ? "Horizontal"
-                : "Vertical"
+
+            const size =
+                internalScale-g;
+
+
+            ctx.strokeStyle =
+                "#d4d4d4";
+
+
+            ctx.lineWidth =
+                Math.max(
+                    .4,
+                    internalScale*.012
+                );
+
+
+            ctx.strokeRect(
+                x,
+                y,
+                size,
+                size
+            );
+
+
+            drawPattern(
+                ctx,
+                id,
+                x,
+                y,
+                size,
+                mode==="template"
+            );
+
         }
-        ·
-        ${
-            window.pixelGrid?.cols ||
-            0
-        }
-        ×
-        ${
-            window.pixelGrid?.rows ||
-            0
-        }
-        celdas
 
-    `;
+    }
 
 
-    $("printInfo")
-        .textContent =
-        info;
+    /*
+       LEGEND
+    */
+
+    const legend =
+        $("printLegend");
 
 
-    $("printFooterInfo")
-        .textContent =
-        info;
-
-
-    $("printTitle")
-        .style
-        .display =
-        $("showTitle").checked
+    legend.style.display =
+        showLegend
             ? "flex"
             : "none";
 
 
-    updatePrintCSS();
+    if(legendSide){
+
+        legend.style.width =
+            legendWidth+"mm";
+
+        legend.style.flex =
+            "0 0 "+legendWidth+"mm";
+
+        legend.style.height =
+            "100%";
+
+        legend.style.flexDirection =
+            "column";
+
+        legend.style.justifyContent =
+            "center";
+
+        legend.style.alignItems =
+            "flex-start";
+
+        legend.style.gap =
+            "2mm";
+
+        legend.style.borderLeft =
+            ".25mm solid #999";
+
+        legend.style.paddingLeft =
+            "4mm";
+
+    }
+    else{
+
+        legend.style.width =
+            "100%";
+
+        legend.style.height =
+            legendHeight+"mm";
+
+        legend.style.flex =
+            "0 0 "+legendHeight+"mm";
+
+        legend.style.flexDirection =
+            "row";
+
+        legend.style.alignItems =
+            "center";
+
+        legend.style.justifyContent =
+            "space-around";
+
+        legend.style.gap =
+            "1.5mm";
+
+        legend.style.borderTop =
+            ".25mm solid #999";
+
+        legend.style.padding =
+            "1mm 0 0";
+
+    }
+
+
+    legend.innerHTML =
+        "";
+
+
+    patterns.forEach(
+        pattern=>{
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.style.display =
+                "flex";
+
+
+            item.style.alignItems =
+                "center";
+
+
+            item.style.gap =
+                "1mm";
+
+
+            item.style.whiteSpace =
+                "nowrap";
+
+
+            item.style.font =
+                "5.5pt Arial";
+
+
+            item.innerHTML = `
+
+                <span
+                    style="
+                        width:5mm;
+                        height:5mm;
+                        display:inline-flex;
+                        align-items:center;
+                        justify-content:center;
+                        border:.2mm solid #888;
+                        font-size:8pt;
+                    "
+                >
+                    ${pattern.symbol}
+                </span>
+
+                <span>
+                    ${pattern.id}
+                </span>
+
+            `;
+
+
+            legend.appendChild(
+                item
+            );
+
+        }
+    );
 
 }
 
@@ -6836,75 +4840,120 @@ function preparePrint(){
    PRINT
 ========================================================= */
 
-$("printBtn")
-    .addEventListener(
-        "click",
-        () => {
+$("printBtn").onclick =
+    ()=>{
 
-            if(!source){
+        if(!image){
 
-                alert(
-                    "Carga una imagen primero."
-                );
-
-                return;
-
-            }
-
-
-            if(
-                !window.pixelCells
-            ){
-
-                generate();
-
-            }
-
-
-            preparePrint();
-
-
-            setStatus(
-                "PREPARANDO IMPRESIÓN"
+            alert(
+                "Carga una imagen primero."
             );
 
-
-            setTimeout(
-                () =>
-                    window.print(),
-                80
-            );
+            return;
 
         }
-    );
 
 
-window.addEventListener(
-    "beforeprint",
-    () => {
+        buildPrint();
 
-        if(
-            source &&
-            window.pixelCells
-        ){
 
-            preparePrint();
+        setTimeout(
+            ()=>{
+                window.print();
+            },
+            100
+        );
 
-        }
+    };
+
+
+/* =========================================================
+   FORMAT EVENTS
+========================================================= */
+
+[
+    "paper",
+    "orientation",
+    "margin",
+    "showTitle",
+    "showLegend",
+    "legendPos",
+    "gap"
+]
+.forEach(
+    id=>{
+
+        $(id).addEventListener(
+            "change",
+            updatePrintCSS
+        );
 
     }
 );
 
 
 /* =========================================================
-   INITIALIZE
+   CLEAR
 ========================================================= */
 
-updateOrientationChip();
+$("clearBtn").onclick =
+    ()=>{
+
+        image=null;
+
+        backgroundMask=null;
+
+        masks=[];
+
+        activeMask=-1;
+
+        $("imageInput").value =
+            "";
+
+        $("previewCanvas")
+            .width=1;
+
+        $("previewCanvas")
+            .height=1;
+
+        $("empty").style.display =
+            "flex";
+
+        $("statusText")
+            .textContent =
+            "SIN IMAGEN";
+
+        $("gridMeta")
+            .textContent =
+            "Carga una imagen para comenzar";
+
+        refreshMaskList();
+
+    };
+
+
+/* =========================================================
+   RESIZE
+========================================================= */
+
+window.addEventListener(
+    "resize",
+    ()=>{
+
+        if(activeMask>=0)
+            syncMaskPreview();
+
+    }
+);
+
+
+/* =========================================================
+   INITIAL
+========================================================= */
 
 updatePrintCSS();
 
-})();
+refreshMaskList();
 
 </script>
 
