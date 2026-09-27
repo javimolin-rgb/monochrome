@@ -1,4076 +1,6910 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Pixel Hatching Monochrome</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta name="theme-color" content="#111111">
+<meta name="description" content="PIXEL MONO — Pixel Hatching Studio">
+
+<title>PIXEL MONO — Pixel Hatching Studio</title>
+
+<!-- =========================================================
+     FAVICON PIXEL MONO
+     SVG embebido: no necesita archivo externo
+========================================================= -->
+<link
+rel="icon"
+type="image/svg+xml"
+sizes="any"
+href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%23111111'/%3E%3Cg fill='%23ff3b8d'%3E%3Crect x='5' y='5' width='7' height='7'/%3E%3Crect x='20' y='5' width='7' height='7'/%3E%3Crect x='12.5' y='12.5' width='7' height='7'/%3E%3Crect x='5' y='20' width='7' height='7'/%3E%3Crect x='20' y='20' width='7' height='7'/%3E%3C/g%3E%3C/svg%3E"
+>
 
 <style>
 
+/* =========================================================
+   PIXEL MONO — BRAND SYSTEM
+========================================================= */
+
+:root{
+    --bg:#101010;
+    --panel:#181818;
+    --panel-2:#202020;
+    --panel-3:#282828;
+
+    --line:#383838;
+    --line-light:#4b4b4b;
+
+    --text:#f5f5f5;
+    --muted:#9d9d9d;
+
+    --pink:#ff3b8d;
+    --pink-light:#ff70ad;
+
+    --lime:#c9ff3d;
+
+    --white:#ffffff;
+    --black:#111111;
+
+    --radius:12px;
+    --shadow:0 15px 45px rgba(0,0,0,.30);
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
-box-sizing:border-box
+    box-sizing:border-box;
+}
+
+html,
+body{
+    margin:0;
+    min-height:100%;
+    background:var(--bg);
+    color:var(--text);
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
 }
 
 body{
-margin:0;
-font-family:Inter,Arial,sans-serif;
-background:#f2f2f2;
-color:#171717
+    overflow-x:hidden;
 }
+
+button,
+input,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
 
 .app{
-max-width:1700px;
-margin:auto;
-padding:20px
+    min-height:100vh;
+
+    display:grid;
+
+    grid-template-columns:
+        390px
+        minmax(0,1fr);
 }
 
-.workspace{
-display:grid;
-grid-template-columns:410px minmax(0,1fr);
-gap:18px;
-align-items:start;
-width:100%
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar{
+
+    background:var(--panel);
+
+    border-right:
+        1px solid var(--line);
+
+    padding:18px;
+
+    overflow:auto;
+
+    max-height:100vh;
 }
 
-.left{
-min-width:0
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    margin-bottom:20px;
+
+    padding:
+        3px
+        2px
+        17px;
+
+    border-bottom:
+        1px solid var(--line);
 }
 
-.right{
-min-width:0;
-position:sticky;
-top:14px;
-align-self:start
+
+/* PIXEL LOGO */
+
+.brand-mark{
+
+    width:46px;
+    height:46px;
+
+    flex:none;
+
+    background:var(--pink);
+
+    border-radius:8px;
+
+    padding:6px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    grid-template-rows:
+        repeat(4,1fr);
+
+    gap:3px;
+
+    box-shadow:
+        5px 5px 0 var(--lime);
 }
 
-h1{
-margin:0 0 6px;
-font-size:28px
+.brand-mark i{
+
+    display:block;
+
+    background:#111;
 }
 
-.sub{
-margin:0 0 20px;
-color:#666
+.brand-mark i:nth-child(1),
+.brand-mark i:nth-child(4),
+.brand-mark i:nth-child(6),
+.brand-mark i:nth-child(9),
+.brand-mark i:nth-child(11),
+.brand-mark i:nth-child(16){
+
+    opacity:1;
 }
 
-.panel{
-background:#fff;
-border:1px solid #ddd;
-border-radius:14px;
-padding:18px;
-margin-bottom:16px;
-box-shadow:0 2px 10px #0000000b
+.brand-mark i:nth-child(2),
+.brand-mark i:nth-child(3),
+.brand-mark i:nth-child(5),
+.brand-mark i:nth-child(7),
+.brand-mark i:nth-child(8),
+.brand-mark i:nth-child(10),
+.brand-mark i:nth-child(12),
+.brand-mark i:nth-child(13),
+.brand-mark i:nth-child(14),
+.brand-mark i:nth-child(15){
+
+    opacity:.15;
+}
+
+
+.brand-copy{
+    min-width:0;
+}
+
+.brand-name{
+
+    font-size:21px;
+
+    line-height:1;
+
+    font-weight:950;
+
+    letter-spacing:.08em;
+}
+
+.brand-sub{
+
+    margin-top:6px;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    font-weight:700;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.section{
+
+    background:var(--panel-2);
+
+    border:
+        1px solid var(--line);
+
+    border-radius:
+        var(--radius);
+
+    padding:13px;
+
+    margin-bottom:11px;
+}
+
+.section-title{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-bottom:11px;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    letter-spacing:.11em;
+
+    text-transform:uppercase;
+}
+
+.section-title span:last-child{
+
+    color:var(--pink);
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+label{
+
+    display:block;
+
+    color:#ddd;
+
+    font-size:11px;
+
+    margin:
+        9px
+        0
+        5px;
+}
+
+input[type="range"]{
+
+    width:100%;
+
+    accent-color:var(--pink);
+}
+
+input[type="number"],
+input[type="text"],
+select{
+
+    width:100%;
+
+    background:#111;
+
+    color:white;
+
+    border:
+        1px solid #3d3d3d;
+
+    border-radius:8px;
+
+    padding:
+        8px
+        9px;
+
+    outline:none;
+}
+
+input:focus,
+select:focus{
+
+    border-color:
+        var(--pink);
 }
 
 .row{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-align-items:center
+
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap:8px;
 }
 
-button,.filebtn{
-border:1px solid #bbb;
-background:#fff;
-padding:10px 14px;
-border-radius:9px;
-cursor:pointer;
-font-weight:600
+.value-row{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:8px;
 }
 
-button:hover,.filebtn:hover{
-background:#f4f4f4
+.value{
+
+    min-width:42px;
+
+    color:var(--pink);
+
+    font-size:11px;
+
+    font-weight:850;
+
+    text-align:right;
 }
 
-.primary{
-background:#111;
-color:#fff;
-border-color:#111
+.help{
+
+    margin-top:6px;
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    line-height:1.45;
 }
 
-.auto{
-background:#111;
-color:#fff;
-border-color:#111;
-width:100%;
-padding:13px
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+
+    border:
+        1px solid #444;
+
+    background:#292929;
+
+    color:#fff;
+
+    border-radius:8px;
+
+    padding:
+        9px
+        11px;
+
+    font-size:11px;
+
+    font-weight:750;
+
+    transition:
+        .15s ease;
 }
 
-input[type=file]{
-display:none
+.btn:hover{
+
+    transform:
+        translateY(-1px);
+
+    border-color:#777;
 }
+
+.btn.primary{
+
+    background:
+        var(--pink);
+
+    border-color:
+        var(--pink);
+
+    color:#111;
+}
+
+.btn.lime{
+
+    background:
+        var(--lime);
+
+    border-color:
+        var(--lime);
+
+    color:#111;
+}
+
+.btn.danger{
+
+    background:#3a1e27;
+
+    border-color:#6e3047;
+}
+
+.btn.small{
+
+    padding:
+        7px
+        8px;
+
+    font-size:10px;
+}
+
+.btn-row{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:7px;
+}
+
+
+/* =========================================================
+   DROPZONE
+========================================================= */
 
 .drop{
-border:2px dashed #bbb;
-border-radius:12px;
-padding:22px;
-text-align:center;
-background:#fafafa;
-cursor:pointer
+
+    border:
+        1px dashed #555;
+
+    border-radius:9px;
+
+    padding:15px 10px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    transition:.15s;
 }
 
-.drop.over{
-border-color:#111;
-background:#eee
+.drop.drag{
+
+    border-color:
+        var(--pink);
+
+    background:#291720;
+
+    color:white;
 }
 
-.controls{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:12px
+.drop strong{
+
+    display:block;
+
+    color:white;
+
+    margin-bottom:4px;
 }
 
-.control label{
-display:flex;
-justify-content:space-between;
-font-weight:600;
-font-size:13px;
-margin-bottom:5px
+
+/* =========================================================
+   CHECKBOX
+========================================================= */
+
+.check{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    color:#ddd;
+
+    font-size:11px;
+
+    margin:8px 0;
 }
 
-input[type=range]{
-width:100%
+.check input{
+
+    accent-color:
+        var(--pink);
 }
 
-select,input[type=number]{
-width:100%;
-padding:9px;
-border:1px solid #bbb;
-border-radius:8px;
-background:#fff
-}
 
-.modes button.active{
-background:#111;
-color:#fff
-}
+/* =========================================================
+   10 TONAL LEVELS
+========================================================= */
 
-.palette{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
-gap:8px;
-margin-top:12px
-}
+.tone-grid{
 
-.swatch{
-border:1px solid #ccc;
-border-radius:10px;
-padding:9px;
-background:#fff;
-cursor:pointer;
-display:flex;
-gap:8px;
-align-items:center;
-text-align:left
-}
+    display:grid;
 
-.swatch.off{
-opacity:.38
-}
-
-.swatch .mini{
-width:42px;
-height:42px;
-border:1px solid #aaa;
-background-color:#fff;
-background-image:var(--pattern)
-}
-
-.swatch strong{
-font-size:12px;
-display:block
-}
-
-.swatch span{
-font-size:11px;
-color:#666
-}
-
-.preview{
-background:#d8d8d8;
-border-radius:12px;
-padding:12px;
-display:flex;
-justify-content:center;
-align-items:center;
-min-height:300px;
-width:100%;
-overflow:hidden
-}
-
-.preview canvas{
-display:block;
-background:#fff;
-max-width:100%;
-max-height:calc(100vh - 100px);
-width:auto;
-height:auto;
-object-fit:contain;
-box-shadow:0 3px 15px #0002
-}
-
-.status{
-font-size:13px;
-color:#666
-}
-
-.small{
-font-size:12px;
-color:#666
-}
-
-.info{
-background:#f7f7f7;
-border-radius:9px;
-padding:10px 12px;
-font-size:12px;
-color:#555;
-line-height:1.45
-}
-
-/* =================================
-   10 ZONAS TONALES
-================================= */
-
-.tones{
-display:flex;
-flex-direction:column;
-gap:7px;
-margin-top:12px
+    gap:5px;
 }
 
 .tone-row{
-display:grid;
-grid-template-columns:115px 1fr 1fr;
-gap:8px;
-align-items:center;
-padding:8px;
-border:1px solid #e0e0e0;
-border-radius:8px;
-background:#fafafa
+
+    display:grid;
+
+    grid-template-columns:
+        105px
+        1fr
+        34px;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:4px 0;
 }
 
-.tone-name{
-font-size:11px;
-font-weight:700
+.tone-row span{
+
+    color:#bbb;
+
+    font-size:9px;
 }
 
-.tone-control{
-min-width:0
+.tone-val{
+
+    color:var(--pink)!important;
+
+    text-align:right;
 }
 
-.tone-control label{
-display:flex;
-justify-content:space-between;
-font-size:10px;
-color:#666;
-margin-bottom:2px
-}
 
-.tone-control input{
-margin:0
-}
-
-/* =================================
-   MASCARAS
-================================= */
-
-.mask-editor{
-position:relative;
-width:100%;
-background:#ddd;
-border:1px solid #ccc;
-border-radius:10px;
-overflow:hidden;
-margin-top:12px;
-cursor:crosshair
-}
-
-.mask-editor canvas{
-display:block;
-width:100%;
-height:auto
-}
-
-.mask-overlay{
-position:absolute;
-inset:0;
-pointer-events:none
-}
-
-.mask-box{
-position:absolute;
-border:2px solid #111;
-background:#1112;
-pointer-events:auto;
-cursor:pointer
-}
-
-.mask-box.selected{
-border:3px solid #ff0094;
-background:#ff009420
-}
-
-.mask-box.ellipse{
-border-radius:50%
-}
+/* =========================================================
+   MASKS
+========================================================= */
 
 .mask-list{
-display:flex;
-flex-direction:column;
-gap:7px;
-margin-top:10px
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:5px;
+
+    margin-bottom:8px;
 }
 
 .mask-item{
-border:1px solid #ddd;
-border-radius:8px;
-padding:8px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:8px;
-background:#fafafa;
-cursor:pointer
+
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        34px;
+
+    gap:5px;
 }
 
-.mask-item.selected{
-border-color:#111;
-background:#f0f0f0
+.mask-select{
+
+    text-align:left;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    text-overflow:ellipsis;
 }
 
-.mask-actions{
-display:flex;
-gap:5px
+.mask-select.active{
+
+    border-color:
+        var(--pink);
+
+    background:
+        #321b27;
 }
 
-.mask-actions button{
-padding:5px 8px;
-font-size:11px
+.mask-status{
+
+    display:inline-block;
+
+    width:7px;
+    height:7px;
+
+    margin-right:5px;
+
+    border-radius:50%;
+
+    background:
+        var(--lime);
 }
 
-.mask-settings{
-margin-top:12px;
-padding:12px;
-border:1px solid #ddd;
-border-radius:10px;
-background:#fafafa
+.mask-status.off{
+
+    background:#555;
 }
 
-/* =================================
-   SEPARADOR
-================================= */
 
-.separator-preview{
-margin-top:12px;
-border:1px solid #ddd;
-border-radius:9px;
-overflow:hidden;
-background:#eee
+/* =========================================================
+   PATTERNS
+========================================================= */
+
+.patterns{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:6px;
 }
 
-.separator-preview canvas{
-display:block;
-width:100%;
-max-height:180px;
-object-fit:contain
+.pattern{
+
+    min-height:42px;
+
+    border:
+        1px solid #414141;
+
+    border-radius:7px;
+
+    background:#111;
+
+    color:white;
+
+    padding:4px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:1px;
 }
 
-.hidden{
-display:none
+.pattern.active{
+
+    border-color:
+        var(--pink);
+
+    box-shadow:
+        inset 0 0 0 1px var(--pink);
 }
 
-/* =================================
-   LEYENDA
-================================= */
+.pattern .num{
 
-.legend{
-margin-top:12px;
-padding:10px;
-border:1px solid #ddd;
-border-radius:9px;
-background:#fff;
-display:grid;
-grid-template-columns:repeat(6,1fr);
-gap:5px
+    color:var(--pink);
+
+    font-size:8px;
+
+    font-weight:900;
 }
 
-.legend-item{
-font-size:10px;
-display:flex;
-align-items:center;
-gap:5px;
-white-space:nowrap
+.pattern .symbol{
+
+    font-size:16px;
+
+    line-height:1;
 }
 
-.legend-symbol{
-width:24px;
-height:24px;
-border:1px solid #aaa;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:12px;
-font-weight:700;
-background:#fff
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+
+    min-width:0;
+
+    padding:18px;
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        ),
+        #111;
+
+    background-size:
+        24px 24px;
 }
 
-/* =================================
-   HOJA DE IMPRESION
-================================= */
 
-.print-sheet{
-display:none
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.topbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:12px;
 }
 
-.print-canvas-wrap{
-display:flex;
-justify-content:center;
-align-items:center;
-width:100%
+.topbar-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
 }
 
-.print-sheet canvas{
-max-width:100%;
-max-height:245mm;
-object-fit:contain
+.status{
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    font-weight:800;
+
+    letter-spacing:.09em;
+
+    text-transform:uppercase;
 }
 
-.print-legend{
-display:grid;
-grid-template-columns:repeat(6,1fr);
-gap:4px;
-margin-top:4mm;
-font-size:8pt
+.status b{
+
+    color:var(--lime);
 }
 
-.print-legend-item{
-display:flex;
-align-items:center;
-gap:4px
+.top-actions{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:7px;
 }
 
-.print-legend-symbol{
-width:20px;
-height:20px;
-border:1px solid #999;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:bold;
-font-size:9px
+
+/* =========================================================
+   ORIENTATION CHIP
+========================================================= */
+
+.orientation-chip{
+
+    border:
+        1px solid #444;
+
+    background:#222;
+
+    color:#ccc;
+
+    border-radius:999px;
+
+    padding:
+        5px
+        9px;
+
+    font-size:9px;
+
+    font-weight:800;
+
+    text-transform:uppercase;
 }
 
-/* =================================
-   RESPONSIVE
-================================= */
+.orientation-chip.landscape{
 
-@media(max-width:1000px){
+    color:var(--lime);
 
-.workspace{
-grid-template-columns:1fr
+    border-color:
+        var(--lime);
 }
 
-.right{
-position:static
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+.preview-shell{
+
+    height:
+        calc(100vh - 80px);
+
+    min-height:400px;
+
+    background:#252525;
+
+    border:
+        1px solid #383838;
+
+    border-radius:14px;
+
+    box-shadow:
+        var(--shadow);
+
+    overflow:hidden;
+
+    position:relative;
 }
 
-.preview canvas{
-max-height:none
+.preview-head{
+
+    height:45px;
+
+    padding:
+        0 12px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#191919;
+
+    border-bottom:
+        1px solid #383838;
 }
 
+.preview-title{
+
+    font-size:10px;
+
+    font-weight:850;
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
 }
 
-@media(max-width:600px){
+.preview-meta{
 
-.legend{
-grid-template-columns:repeat(3,1fr)
+    color:var(--muted);
+
+    font-size:10px;
 }
 
-.tone-row{
-grid-template-columns:90px 1fr 1fr
+.preview-area{
+
+    height:
+        calc(100% - 45px);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:12px;
+
+    position:relative;
 }
 
+#canvasWrap{
+
+    max-width:100%;
+
+    max-height:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
 }
 
-/* =================================
-   IMPRESION
-================================= */
+#previewCanvas{
+
+    display:block;
+
+    max-width:100%;
+
+    max-height:100%;
+
+    width:auto;
+
+    height:auto;
+
+    background:white;
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.35);
+}
+
+
+/* =========================================================
+   MASK EDITOR
+========================================================= */
+
+#maskEditorWrap{
+
+    display:none;
+
+    position:relative;
+
+    max-width:100%;
+
+    max-height:100%;
+
+    background:white;
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.35);
+}
+
+#maskBase,
+#maskOverlay{
+
+    display:block;
+
+    max-width:100%;
+
+    max-height:100%;
+
+    width:auto;
+
+    height:auto;
+}
+
+#maskOverlay{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+
+    height:100%;
+
+    cursor:crosshair;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty{
+
+    max-width:420px;
+
+    text-align:center;
+
+    color:#777;
+}
+
+.empty-mark{
+
+    margin-bottom:8px;
+
+    color:#555;
+
+    font-size:42px;
+}
+
+.empty strong{
+
+    display:block;
+
+    margin-bottom:4px;
+
+    color:#bbb;
+
+    font-size:14px;
+}
+
+.empty span{
+
+    font-size:11px;
+
+    line-height:1.5;
+}
+
+
+/* =========================================================
+   PRINT SHEET
+========================================================= */
+
+.print-only{
+
+    display:none;
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
 
 @media print{
 
-body{
-background:#fff;
-margin:0
+    html,
+    body{
+
+        background:white!important;
+    }
+
+    body > *:not(#printSheet){
+
+        display:none!important;
+    }
+
+    #printSheet{
+
+        display:flex!important;
+
+        flex-direction:column;
+
+        color:#111;
+
+        background:white;
+
+        overflow:hidden;
+
+        break-inside:avoid;
+
+        page-break-inside:avoid;
+    }
+
+    .print-title{
+
+        display:flex;
+
+        justify-content:space-between;
+
+        align-items:flex-end;
+
+        gap:10px;
+
+        flex:
+            0 0 auto;
+
+        padding-bottom:4mm;
+    }
+
+    .print-title h1{
+
+        margin:0;
+
+        font-size:16pt;
+
+        line-height:1;
+
+        font-weight:950;
+
+        letter-spacing:.06em;
+    }
+
+    .print-sub{
+
+        color:#555;
+
+        font-size:7pt;
+
+        letter-spacing:.08em;
+
+        text-transform:uppercase;
+    }
+
+    #printBody{
+
+        display:flex;
+
+        flex:
+            1 1 auto;
+
+        min-height:0;
+
+        gap:5mm;
+
+        overflow:hidden;
+    }
+
+    #printImageBox{
+
+        min-width:0;
+
+        min-height:0;
+
+        flex:
+            1 1 auto;
+
+        display:flex;
+
+        align-items:center;
+
+        justify-content:center;
+
+        overflow:hidden;
+
+        border:
+            1px solid #ddd;
+    }
+
+    #printCanvas{
+
+        display:block;
+
+        max-width:100%;
+
+        max-height:100%;
+
+        width:auto;
+
+        height:auto;
+    }
+
+    #printLegend{
+
+        flex:
+            0 0 42mm;
+
+        min-width:0;
+
+        overflow:hidden;
+
+        padding:3mm;
+
+        background:white;
+
+        border:
+            1px solid #ddd;
+    }
+
+    #printLegend h2{
+
+        margin:
+            0
+            0
+            2mm;
+
+        font-size:8pt;
+
+        letter-spacing:.08em;
+
+        text-transform:uppercase;
+    }
+
+    .legend-grid{
+
+        display:grid;
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+        gap:1.5mm;
+    }
+
+    .legend-item{
+
+        display:flex;
+
+        align-items:center;
+
+        gap:2mm;
+
+        min-width:0;
+
+        font-size:6.5pt;
+    }
+
+    .legend-num{
+
+        width:6mm;
+        height:6mm;
+
+        flex:none;
+
+        display:flex;
+
+        align-items:center;
+
+        justify-content:center;
+
+        border:
+            1px solid #aaa;
+
+        font-weight:800;
+    }
+
+    .legend-symbol{
+
+        width:6mm;
+
+        flex:none;
+
+        text-align:center;
+
+        font-size:10pt;
+    }
+
+    #printFooter{
+
+        flex:
+            0 0 auto;
+
+        display:flex;
+
+        justify-content:space-between;
+
+        padding-top:2mm;
+
+        color:#666;
+
+        font-size:6pt;
+    }
 }
 
-.app{
-display:none!important
-}
 
-.print-sheet{
-display:block!important;
-width:100%;
-height:100%;
-padding:0
-}
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
-.print-sheet canvas{
-max-width:100%;
-max-height:245mm
-}
+@media(max-width:950px){
 
+    .app{
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .sidebar{
+
+        max-height:none;
+
+        border-right:0;
+
+        border-bottom:
+            1px solid var(--line);
+    }
+
+    .preview-shell{
+
+        height:70vh;
+    }
 }
 
 </style>
 </head>
 
+
 <body>
+
+
+<!-- =========================================================
+     APPLICATION
+========================================================= -->
 
 <div class="app">
 
-<div class="workspace">
 
 <!-- =========================================================
-     PANEL IZQUIERDO
+     SIDEBAR
 ========================================================= -->
 
-<div class="left no-print">
+<aside class="sidebar">
 
-<h1>Pixel Hatching Monochrome</h1>
 
-<p class="sub">
-Convierte imágenes en una plantilla de cuadrados numerados o en una
-versión final de achurado monocromo.
-</p>
+<!-- BRAND -->
 
-<!-- CARGA -->
+<div class="brand">
 
-<div class="panel">
+    <div class="brand-mark">
 
-<div id="drop" class="drop">
+        <i></i><i></i><i></i><i></i>
+        <i></i><i></i><i></i><i></i>
+        <i></i><i></i><i></i><i></i>
+        <i></i><i></i><i></i><i></i>
 
-<b>Pega una foto aquí con ⌘V / Ctrl+V</b><br>
+    </div>
 
-<span class="small">
-También puedes arrastrarla o seleccionar un archivo.
-</span>
+    <div class="brand-copy">
 
-<br><br>
+        <div class="brand-name">
+            PIXEL MONO
+        </div>
 
-<label class="filebtn">
+        <div class="brand-sub">
+            Pixel Hatching Studio
+        </div>
 
-Seleccionar foto
-
-<input id="file" type="file" accept="image/*">
-
-</label>
-
-</div>
-
-<div class="row" style="margin-top:12px">
-
-<button id="generate" class="primary">
-Generar
-</button>
-
-<button id="print">
-Imprimir / Guardar PDF
-</button>
-
-<button id="clear">
-Limpiar
-</button>
-
-<span id="status" class="status">
-Sin imagen.
-</span>
-
-</div>
+    </div>
 
 </div>
 
 
-<!-- AJUSTES GENERALES -->
+<!-- =========================================================
+     01 IMAGE
+========================================================= -->
 
-<div class="panel">
+<div class="section">
 
-<div class="row modes">
+    <div class="section-title">
+        <span>01 · Imagen</span>
+        <span>INPUT</span>
+    </div>
 
-<button data-mode="template" class="active">
-Plantilla
-</button>
+    <div id="drop" class="drop">
 
-<button data-mode="final">
-Vista previa final
-</button>
+        <strong>
+            Suelta, pega o selecciona una imagen
+        </strong>
+
+        JPG · PNG · WEBP · GIF
+
+    </div>
+
+    <input
+        id="file"
+        type="file"
+        accept="image/*"
+        style="display:none"
+    >
+
+    <div
+        class="btn-row"
+        style="margin-top:8px"
+    >
+
+        <button
+            class="btn primary"
+            id="chooseBtn"
+        >
+            Cargar imagen
+        </button>
+
+        <button
+            class="btn"
+            id="clearBtn"
+        >
+            Limpiar
+        </button>
+
+    </div>
 
 </div>
 
-<div style="margin-top:14px">
 
-<button id="autoAdjust" class="auto">
-⚡ Ajustes automáticos
-</button>
+<!-- =========================================================
+     02 GRID
+========================================================= -->
 
-<div class="info" style="margin-top:9px">
-Analiza la imagen y busca una combinación tonal que conserve
-volumen, contraste y lectura después de convertirla a símbolos.
+<div class="section">
+
+    <div class="section-title">
+        <span>02 · Retícula</span>
+        <span>GRID</span>
+    </div>
+
+    <label>
+        Columnas
+    </label>
+
+    <div class="value-row">
+
+        <input
+            id="cols"
+            type="range"
+            min="20"
+            max="240"
+            value="70"
+        >
+
+        <span
+            class="value"
+            id="colsVal"
+        >
+            70
+        </span>
+
+    </div>
+
+    <div class="help">
+
+        Las filas se calculan automáticamente
+        para conservar la proporción de la imagen.
+
+    </div>
+
+
+    <label>
+        Modo
+    </label>
+
+    <select id="mode">
+
+        <option value="template">
+            Plantilla numerada
+        </option>
+
+        <option value="final">
+            Vista previa final
+        </option>
+
+    </select>
+
 </div>
 
+
+<!-- =========================================================
+     03 GLOBAL
+========================================================= -->
+
+<div class="section">
+
+    <div class="section-title">
+        <span>03 · Ajuste global</span>
+        <span>BASE</span>
+    </div>
+
+
+    <label>
+        Contraste
+    </label>
+
+    <div class="value-row">
+
+        <input
+            id="contrast"
+            type="range"
+            min="0.1"
+            max="5"
+            step="0.05"
+            value="1.35"
+        >
+
+        <span
+            class="value"
+            id="contrastVal"
+        >
+            1.35
+        </span>
+
+    </div>
+
+
+    <label>
+        Profundidad de negros
+    </label>
+
+    <div class="value-row">
+
+        <input
+            id="black"
+            type="range"
+            min="0"
+            max="100"
+            value="18"
+        >
+
+        <span
+            class="value"
+            id="blackVal"
+        >
+            18
+        </span>
+
+    </div>
+
+
+    <label>
+        Detalle
+    </label>
+
+    <div class="value-row">
+
+        <input
+            id="detail"
+            type="range"
+            min="0"
+            max="100"
+            value="55"
+        >
+
+        <span
+            class="value"
+            id="detailVal"
+        >
+            55
+        </span>
+
+    </div>
+
+
+    <label>
+        Curva
+    </label>
+
+    <div class="value-row">
+
+        <input
+            id="curve"
+            type="range"
+            min="-100"
+            max="100"
+            value="0"
+        >
+
+        <span
+            class="value"
+            id="curveVal"
+        >
+            0
+        </span>
+
+    </div>
+
+
+    <div
+        class="btn-row"
+        style="margin-top:9px"
+    >
+
+        <button
+            class="btn lime"
+            id="autoBtn"
+        >
+            ✦ Ajustes automáticos
+        </button>
+
+    </div>
+
 </div>
 
-<div class="controls" style="margin-top:14px">
 
-<div class="control">
+<!-- =========================================================
+     04 TEN LEVELS
+========================================================= -->
 
-<label>
-Columnas
-<span id="colsVal">150</span>
-</label>
+<div class="section">
 
-<input
-id="cols"
-type="range"
-min="40"
-max="240"
-value="150"
+    <div class="section-title">
+
+        <span>
+            04 · Mapa tonal
+        </span>
+
+        <span>
+            10 PUNTOS
+        </span>
+
+    </div>
+
+    <div class="help">
+
+        Ajusta diez zonas tonales independientes.
+        Sube un punto para aclararlo y bájalo para oscurecerlo.
+        Movimientos opuestos entre puntos vecinos generan
+        contrastes locales.
+
+    </div>
+
+    <div
+        id="toneControls"
+        class="tone-grid"
+    ></div>
+
+    <button
+        class="btn small"
+        id="resetTone"
+        style="margin-top:8px"
+    >
+        Restablecer 10 niveles
+    </button>
+
+</div>
+
+
+<!-- =========================================================
+     05 BACKGROUND
+========================================================= -->
+
+<div class="section">
+
+    <div class="section-title">
+
+        <span>
+            05 · Separador de fondo
+        </span>
+
+        <span>
+            BG
+        </span>
+
+    </div>
+
+
+    <label class="check">
+
+        <input
+            id="bgEnabled"
+            type="checkbox"
+        >
+
+        Activar separador de fondo
+
+    </label>
+
+
+    <label>
+        Fuerza
+    </label>
+
+    <div class="value-row">
+
+        <input
+            id="bgStrength"
+            type="range"
+            min="0"
+            max="100"
+            value="60"
+        >
+
+        <span
+            class="value"
+            id="bgStrengthVal"
+        >
+            60
+        </span>
+
+    </div>
+
+
+    <label>
+        Modo de fondo
+    </label>
+
+    <select id="bgMode">
+
+        <option value="auto">
+            Automático
+        </option>
+
+        <option value="light">
+            Forzar fondo claro
+        </option>
+
+        <option value="dark">
+            Forzar fondo oscuro
+        </option>
+
+        <option value="neutral">
+            Neutralizar fondo
+        </option>
+
+    </select>
+
+
+    <label>
+        Contraste del objeto
+    </label>
+
+    <div class="value-row">
+
+        <input
+            id="objectContrast"
+            type="range"
+            min="0"
+            max="100"
+            value="45"
+        >
+
+        <span
+            class="value"
+            id="objectContrastVal"
+        >
+            45
+        </span>
+
+    </div>
+
+
+    <div
+        class="btn-row"
+        style="margin-top:8px"
+    >
+
+        <button
+            class="btn small"
+            id="detectBg"
+        >
+            Detectar fondo
+        </button>
+
+        <button
+            class="btn small"
+            id="applyBg"
+        >
+            Aplicar
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     06 MASKS
+========================================================= -->
+
+<div class="section">
+
+    <div class="section-title">
+
+        <span>
+            06 · Máscaras
+        </span>
+
+        <span>
+            LOCAL
+        </span>
+
+    </div>
+
+
+    <div class="help">
+
+        Crea zonas independientes y píntalas
+        directamente sobre la previsualización.
+        Cada máscara puede tener su propio brillo
+        y contraste.
+
+    </div>
+
+
+    <div
+        id="maskList"
+        class="mask-list"
+        style="margin-top:8px"
+    ></div>
+
+
+    <div class="btn-row">
+
+        <button
+            class="btn primary small"
+            id="newMask"
+        >
+            + Nueva máscara
+        </button>
+
+        <button
+            class="btn small"
+            id="maskEditBtn"
+        >
+            Editar máscaras
+        </button>
+
+    </div>
+
+
+    <label>
+        Brillo de máscara
+    </label>
+
+    <div class="value-row">
+
+        <input
+            id="maskBrightness"
+            type="range"
+            min="-100"
+            max="100"
+            value="0"
+        >
+
+        <span
+            class="value"
+            id="maskBrightnessVal"
+        >
+            0
+        </span>
+
+    </div>
+
+
+    <label>
+        Contraste de máscara
+    </label>
+
+    <div class="value-row">
+
+        <input
+            id="maskContrast"
+            type="range"
+            min="-100"
+            max="100"
+            value="0"
+        >
+
+        <span
+            class="value"
+            id="maskContrastVal"
+        >
+            0
+        </span>
+
+    </div>
+
+
+    <label>
+        Tamaño del pincel
+    </label>
+
+    <div class="value-row">
+
+        <input
+            id="brushSize"
+            type="range"
+            min="5"
+            max="180"
+            value="45"
+        >
+
+        <span
+            class="value"
+            id="brushSizeVal"
+        >
+            45
+        </span>
+
+    </div>
+
+
+    <label>
+        Modo de pincel
+    </label>
+
+    <select id="brushMode">
+
+        <option value="paint">
+            Pintar máscara
+        </option>
+
+        <option value="erase">
+            Borrar máscara
+        </option>
+
+    </select>
+
+
+    <div
+        class="btn-row"
+        style="margin-top:8px"
+    >
+
+        <button
+            class="btn small"
+            id="clearMask"
+        >
+            Limpiar máscara
+        </button>
+
+        <button
+            class="btn danger small"
+            id="deleteMask"
+        >
+            Eliminar máscara
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     07 PATTERNS
+========================================================= -->
+
+<div class="section">
+
+    <div class="section-title">
+
+        <span>
+            07 · Patrones
+        </span>
+
+        <span>
+            12
+        </span>
+
+    </div>
+
+
+    <div
+        id="patterns"
+        class="patterns"
+    ></div>
+
+
+    <div class="help">
+
+        Los números permanecen fijos para que
+        la leyenda impresa siempre coincida
+        con la plantilla.
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     08 PRINT
+========================================================= -->
+
+<div class="section">
+
+    <div class="section-title">
+
+        <span>
+            08 · Formato de salida
+        </span>
+
+        <span>
+            PRINT
+        </span>
+
+    </div>
+
+
+    <label>
+        Formato de hoja
+    </label>
+
+    <select id="paper">
+
+        <option
+            value="letter"
+            selected
+        >
+            Carta · 21,6 × 27,9 cm
+        </option>
+
+        <option value="a4">
+            A4 · 21 × 29,7 cm
+        </option>
+
+        <option value="a3">
+            A3 · 29,7 × 42 cm
+        </option>
+
+        <option value="a5">
+            A5 · 14,8 × 21 cm
+        </option>
+
+        <option value="legal">
+            Legal · 21,6 × 35,6 cm
+        </option>
+
+        <option value="oficio">
+            Oficio Chile · 21,6 × 33 cm
+        </option>
+
+    </select>
+
+
+    <label>
+        Orientación
+    </label>
+
+    <select id="orientation">
+
+        <option
+            value="auto"
+            selected
+        >
+            Automática según imagen
+        </option>
+
+        <option value="portrait">
+            Vertical
+        </option>
+
+        <option value="landscape">
+            Horizontal
+        </option>
+
+    </select>
+
+
+    <div class="row">
+
+        <div>
+
+            <label>
+                Márgenes
+            </label>
+
+            <select id="margin">
+
+                <option value="5">
+                    5 mm
+                </option>
+
+                <option value="8">
+                    8 mm
+                </option>
+
+                <option
+                    value="10"
+                    selected
+                >
+                    10 mm
+                </option>
+
+                <option value="12">
+                    12 mm
+                </option>
+
+                <option value="15">
+                    15 mm
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div>
+
+            <label>
+                Escala
+            </label>
+
+            <select id="printScale">
+
+                <option
+                    value="auto"
+                    selected
+                >
+                    Máxima posible
+                </option>
+
+                <option value="95">
+                    95%
+                </option>
+
+                <option value="90">
+                    90%
+                </option>
+
+                <option value="80">
+                    80%
+                </option>
+
+                <option value="70">
+                    70%
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <label>
+        Ubicación de leyenda
+    </label>
+
+    <select id="legendPosition">
+
+        <option
+            value="side"
+            selected
+        >
+            Lateral
+        </option>
+
+        <option value="bottom">
+            Abajo
+        </option>
+
+        <option value="inside">
+            Dentro de la hoja
+        </option>
+
+        <option value="none">
+            Sin leyenda
+        </option>
+
+    </select>
+
+
+    <label class="check">
+
+        <input
+            id="showTitle"
+            type="checkbox"
+            checked
+        >
+
+        Mostrar nombre y datos
+
+    </label>
+
+
+    <label class="check">
+
+        <input
+            id="showBorder"
+            type="checkbox"
+            checked
+        >
+
+        Mostrar borde de área
+
+    </label>
+
+
+    <div
+        class="btn-row"
+        style="margin-top:9px"
+    >
+
+        <button
+            class="btn primary"
+            id="printBtn"
+        >
+            ▣ Imprimir / guardar PDF
+        </button>
+
+    </div>
+
+</div>
+
+
+</aside>
+
+
+<!-- =========================================================
+     MAIN PREVIEW
+========================================================= -->
+
+<main class="main">
+
+
+    <div class="topbar">
+
+        <div class="topbar-left">
+
+            <span class="status">
+
+                PIXEL MONO /
+
+                <b id="status">
+                    LISTO
+                </b>
+
+            </span>
+
+
+            <span
+                id="orientationChip"
+                class="orientation-chip"
+            >
+                Carta · vertical
+            </span>
+
+        </div>
+
+
+        <div class="top-actions">
+
+            <button
+                class="btn small"
+                id="fitBtn"
+            >
+                Ajustar a pantalla
+            </button>
+
+
+            <button
+                class="btn small"
+                id="previewModeBtn"
+            >
+                Vista final
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="preview-shell">
+
+
+        <div class="preview-head">
+
+            <div
+                class="preview-title"
+                id="previewTitle"
+            >
+                Previsualización completa
+            </div>
+
+            <div
+                class="preview-meta"
+                id="previewMeta"
+            >
+                Carga una imagen para comenzar
+            </div>
+
+        </div>
+
+
+        <div class="preview-area">
+
+
+            <div id="canvasWrap">
+
+                <canvas
+                    id="previewCanvas"
+                ></canvas>
+
+            </div>
+
+
+            <div id="maskEditorWrap">
+
+                <canvas
+                    id="maskBase"
+                ></canvas>
+
+                <canvas
+                    id="maskOverlay"
+                ></canvas>
+
+            </div>
+
+
+            <div
+                id="empty"
+                class="empty"
+            >
+
+                <div class="empty-mark">
+                    ▦
+                </div>
+
+                <strong>
+                    Tu imagen aparecerá aquí
+                </strong>
+
+                <span>
+
+                    PIXEL MONO convierte fotografías
+                    e ilustraciones en una plantilla
+                    monocroma basada en retícula
+                    y patrones.
+
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</main>
+
+</div>
+
+
+<!-- =========================================================
+     PRINT SHEET
+========================================================= -->
+
+<div
+    id="printSheet"
+    class="print-only"
 >
 
-</div>
 
-<div class="control">
+    <div
+        class="print-title"
+        id="printTitle"
+    >
 
-<label>
-Filas automáticas
-<span id="rowsVal">—</span>
-</label>
+        <div>
 
-<div class="info">
-Se calculan automáticamente según la proporción de la imagen.
-</div>
+            <h1>
+                PIXEL MONO
+            </h1>
 
-</div>
+            <div class="print-sub">
 
-</div>
+                Pixel Hatching Studio
+                · Plantilla monocroma
 
-</div>
+            </div>
 
-
-<!-- =========================================================
-     10 NIVELES TONALES
-========================================================= -->
-
-<div class="panel">
-
-<b>10 niveles de luces y sombras</b>
-
-<div class="info" style="margin-top:9px">
-
-Cada punto representa una zona tonal independiente.
-Puedes controlar el <b>brillo</b> y el <b>contraste</b> de cada nivel.
-Los cambios se interpolan entre los 10 puntos.
-
-</div>
-
-<div id="toneControls" class="tones"></div>
-
-<div class="row" style="margin-top:10px">
-
-<button id="resetTones">
-Restablecer tonos
-</button>
-
-<button id="invertTones">
-Invertir tonos
-</button>
-
-</div>
-
-</div>
+        </div>
 
 
-<!-- =========================================================
-     MASCARAS
-========================================================= -->
+        <div
+            class="print-sub"
+            id="printInfo"
+        ></div>
 
-<div class="panel">
+    </div>
 
-<div class="row" style="justify-content:space-between">
 
-<b>Máscaras de ajuste local</b>
+    <div id="printBody">
 
-<button id="addMask">
-＋ Nueva máscara
-</button>
 
-</div>
+        <div id="printImageBox">
 
-<div class="info" style="margin-top:9px">
+            <canvas
+                id="printCanvas"
+            ></canvas>
 
-Crea una zona sobre la imagen y aplica ajustes de brillo y contraste
-solo dentro de ella. Puedes crear varias máscaras independientes.
+        </div>
 
-</div>
 
-<div class="mask-editor">
+        <div id="printLegend"></div>
 
-<canvas id="maskCanvas"></canvas>
 
-<div id="maskOverlay" class="mask-overlay"></div>
+    </div>
 
-</div>
 
-<div class="small" style="margin-top:7px">
+    <div id="printFooter">
 
-Arrastra sobre la imagen para crear una máscara. Haz clic sobre una
-máscara existente para editarla.
+        <span>
+            PIXEL MONO
+        </span>
 
-</div>
+        <span
+            id="printFooterInfo"
+        ></span>
 
-<div id="maskList" class="mask-list"></div>
+    </div>
 
-<div id="maskSettings" class="mask-settings hidden">
-
-<b id="maskTitle">
-Máscara seleccionada
-</b>
-
-<div class="controls" style="margin-top:10px">
-
-<div class="control">
-
-<label>
-Brillo
-<span id="maskBrightnessVal">0</span>
-</label>
-
-<input
-id="maskBrightness"
-type="range"
-min="-100"
-max="100"
-value="0"
->
-
-</div>
-
-<div class="control">
-
-<label>
-Contraste
-<span id="maskContrastVal">1.00×</span>
-</label>
-
-<input
-id="maskContrast"
-type="range"
-min="0.1"
-max="4"
-step="0.05"
-value="1"
->
-
-</div>
-
-<div class="control">
-
-<label>
-Forma
-</label>
-
-<select id="maskShape">
-
-<option value="rect">
-Rectángulo
-</option>
-
-<option value="ellipse">
-Elipse
-</option>
-
-</select>
-
-</div>
-
-</div>
-
-<div class="row" style="margin-top:10px">
-
-<button id="duplicateMask">
-Duplicar
-</button>
-
-<button id="deleteMask">
-Eliminar máscara
-</button>
-
-</div>
-
-</div>
 
 </div>
 
 
-<!-- =========================================================
-     SEPARADOR
-========================================================= -->
-
-<div class="panel">
-
-<div class="row" style="justify-content:space-between">
-
-<b>Separador del fondo</b>
-
-<label style="display:flex;align-items:center;gap:7px;font-size:13px">
-
-<input id="separatorEnabled" type="checkbox">
-
-Activar
-
-</label>
-
-</div>
-
-<div class="info" style="margin-top:10px">
-
-Detecta automáticamente zonas conectadas al borde que presentan
-características similares. Útil para separar cielo, paredes,
-fondos lisos y otros fondos del objeto principal.
-
-</div>
-
-<div class="controls" style="margin-top:14px">
-
-<div class="control">
-
-<label>
-Intensidad
-<span id="separatorStrengthVal">60</span>
-</label>
-
-<input
-id="separatorStrength"
-type="range"
-min="0"
-max="100"
-value="60"
->
-
-</div>
-
-<div class="control">
-
-<label>
-Fondo
-</label>
-
-<select id="backgroundMode">
-
-<option value="automatic">
-Automático
-</option>
-
-<option value="light">
-Aclarar
-</option>
-
-<option value="dark">
-Oscurecer
-</option>
-
-<option value="neutral">
-Neutralizar
-</option>
-
-</select>
-
-</div>
-
-<div class="control">
-
-<label>
-Contraste del objeto
-<span id="objectContrastVal">35</span>
-</label>
-
-<input
-id="objectContrast"
-type="range"
-min="0"
-max="100"
-value="35"
->
-
-</div>
-
-</div>
-
-<div class="row" style="margin-top:12px">
-
-<button id="detectBackground">
-Detectar fondo
-</button>
-
-<button id="applyBackground">
-Aplicar separación
-</button>
-
-</div>
-
-<div id="separatorPreview" class="separator-preview hidden"></div>
-
-</div>
-
-
-<!-- =========================================================
-     PATRONES
-========================================================= -->
-
-<div class="panel">
-
-<b>
-Patrones disponibles
-</b>
-
-<div class="row" style="margin-top:10px">
-
-<button id="all">
-Todos
-</button>
-
-<button id="basic">
-Solo básicos
-</button>
-
-<button id="none">
-Limpiar selección
-</button>
-
-<span id="count" class="status"></span>
-
-</div>
-
-<div id="palette" class="palette"></div>
-
-<p class="small">
-
-Cada número representa siempre un único símbolo.
-El resultado se construye combinando miles de cuadrados.
-
-</p>
-
-</div>
-
-</div>
-
-
-<!-- =========================================================
-     PREVIEW DERECHA
-========================================================= -->
-
-<div class="right">
-
-<div class="panel preview-panel">
-
-<div id="preview" class="preview">
-
-<span class="status">
-Carga una foto y presiona Generar.
-</span>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-
-<!-- =========================================================
-     HOJA DE IMPRESION
-========================================================= -->
-
-<div id="printSheet" class="print-sheet">
-
-<div class="print-canvas-wrap">
-
-<canvas id="printCanvas"></canvas>
-
-</div>
-
-<div id="printLegend" class="print-legend"></div>
-
-</div>
+<style id="dynamicPrintStyle"></style>
 
 
 <script>
 
+(() => {
+
+"use strict";
+
+
 /* =========================================================
-   PATRONES
+   HELPERS
 ========================================================= */
 
-const patterns=[
+const $ = id =>
+    document.getElementById(id);
 
-{id:"white",name:"1 · Vacío",short:"",type:"empty",density:0,basic:true},
+const clamp = (
+    value,
+    min = 0,
+    max = 1
+) =>
+    Math.max(
+        min,
+        Math.min(
+            max,
+            value
+        )
+    );
 
-{id:"dot",name:"2 · Punto",short:"·",type:"dot",density:.13,basic:true},
 
-{id:"h",name:"3 · Línea horizontal",short:"—",type:"h",density:.25,basic:true},
+/* =========================================================
+   PATTERNS
+========================================================= */
 
-{id:"v",name:"4 · Línea vertical",short:"|",type:"v",density:.37,basic:true},
+const patterns = [
 
-{id:"diag",name:"5 · Diagonal /",short:"/",type:"diag",density:.49,basic:true},
+    {
+        id:1,
+        name:"Vacío",
+        symbol:"",
+        type:"empty"
+    },
 
-{id:"back",name:"6 · Diagonal \\",short:"\\",type:"back",density:.58,basic:true},
+    {
+        id:2,
+        name:"Punto",
+        symbol:"·",
+        type:"dot"
+    },
 
-{id:"plus",name:"7 · Cruz +",short:"+",type:"plus",density:.67,basic:true},
+    {
+        id:3,
+        name:"Horizontal",
+        symbol:"—",
+        type:"h"
+    },
 
-{id:"x",name:"8 · Cruz ×",short:"×",type:"x",density:.75,basic:true},
+    {
+        id:4,
+        name:"Vertical",
+        symbol:"|",
+        type:"v"
+    },
 
-{id:"h2",name:"9 · Doble horizontal",short:"=",type:"h2",density:.82,basic:true},
+    {
+        id:5,
+        name:"Diagonal /",
+        symbol:"/",
+        type:"d1"
+    },
 
-{id:"v2",name:"10 · Doble vertical",short:"‖",type:"v2",density:.87,basic:true},
+    {
+        id:6,
+        name:"Diagonal \\",
+        symbol:"\\",
+        type:"d2"
+    },
 
-{id:"star",name:"11 · Cuatro líneas",short:"✣",type:"star",density:.91,basic:true},
+    {
+        id:7,
+        name:"Cruz",
+        symbol:"+",
+        type:"plus"
+    },
 
-{id:"solid",name:"12 · Bloque sólido",short:"■",type:"solid",density:1,basic:true}
+    {
+        id:8,
+        name:"X",
+        symbol:"×",
+        type:"x"
+    },
+
+    {
+        id:9,
+        name:"Doble horizontal",
+        symbol:"=",
+        type:"dh"
+    },
+
+    {
+        id:10,
+        name:"Doble vertical",
+        symbol:"‖",
+        type:"dv"
+    },
+
+    {
+        id:11,
+        name:"Estrella",
+        symbol:"✣",
+        type:"star"
+    },
+
+    {
+        id:12,
+        name:"Sólido",
+        symbol:"■",
+        type:"solid"
+    }
 
 ];
 
 
-let active=new Set(patterns.map(p=>p.id));
+const toneNames = [
 
-let source=null;
+    "1 · Negro profundo",
+    "2 · Sombra",
+    "3 · Sombra media",
+    "4 · Medio oscuro",
+    "5 · Medio",
+    "6 · Medio claro",
+    "7 · Luz",
+    "8 · Luz alta",
+    "9 · Blanco suave",
+    "10 · Blanco"
 
-let processedSource=null;
-
-let mode="template";
-
-let cells=[];
-
-let backgroundMask=null;
-
-
-/* =========================================================
-   10 PUNTOS TONALES
-========================================================= */
-
-const toneDefaults=[
-{brightness:0,contrast:1},
-{brightness:0,contrast:1},
-{brightness:0,contrast:1},
-{brightness:0,contrast:1},
-{brightness:0,contrast:1},
-{brightness:0,contrast:1},
-{brightness:0,contrast:1},
-{brightness:0,contrast:1},
-{brightness:0,contrast:1},
-{brightness:0,contrast:1}
-];
-
-let tonePoints=toneDefaults.map(x=>({...x}));
-
-
-/* =========================================================
-   MASCARAS
-========================================================= */
-
-let masks=[];
-
-let selectedMask=-1;
-
-let drawingMask=false;
-
-let maskStart=null;
-
-
-/* =========================================================
-   UTIL
-========================================================= */
-
-const $=id=>document.getElementById(id);
-
-const palette=$("palette");
-
-const toneNames=[
-"1 · Sombras profundas",
-"2 · Sombras",
-"3 · Oscuros",
-"4 · Medios oscuros",
-"5 · Medios",
-"6 · Medios claros",
-"7 · Claros",
-"8 · Luces",
-"9 · Luces altas",
-"10 · Blanco / máximo"
 ];
 
 
-/* =========================================================
-   PATRONES CSS
-========================================================= */
+const paperSizes = {
 
-function makePatternCSS(p){
+    letter:{
+        name:"Carta",
+        w:216,
+        h:279.4,
+        css:"letter"
+    },
 
-if(p.type==="empty")
-return "none";
+    a4:{
+        name:"A4",
+        w:210,
+        h:297,
+        css:"A4"
+    },
 
-if(p.type==="solid")
-return "linear-gradient(#111,#111)";
+    a3:{
+        name:"A3",
+        w:297,
+        h:420,
+        css:"A3"
+    },
 
-if(p.type==="dot")
-return "radial-gradient(circle,#111 0 1.2px,transparent 1.4px)";
+    a5:{
+        name:"A5",
+        w:148,
+        h:210,
+        css:"A5"
+    },
 
-if(p.type==="h")
-return "linear-gradient(0deg,transparent 0 45%,#111 45% 55%,transparent 55%)";
+    legal:{
+        name:"Legal",
+        w:215.9,
+        h:355.6,
+        css:"legal"
+    },
 
-if(p.type==="v")
-return "linear-gradient(90deg,transparent 0 45%,#111 45% 55%,transparent 55%)";
-
-if(p.type==="diag")
-return "linear-gradient(45deg,transparent 0 46%,#111 46% 54%,transparent 54%)";
-
-if(p.type==="back")
-return "linear-gradient(-45deg,transparent 0 46%,#111 46% 54%,transparent 54%)";
-
-if(p.type==="plus")
-return "linear-gradient(0deg,transparent 0 44%,#111 44% 56%,transparent 56%),linear-gradient(90deg,transparent 0 44%,#111 44% 56%,transparent 56%)";
-
-if(p.type==="x")
-return "linear-gradient(45deg,transparent 0 44%,#111 44% 56%,transparent 56%),linear-gradient(-45deg,transparent 0 44%,#111 44% 56%,transparent 56%)";
-
-if(p.type==="h2")
-return "linear-gradient(0deg,transparent 0 25%,#111 25% 33%,transparent 33% 66%,#111 66% 74%,transparent 74%)";
-
-if(p.type==="v2")
-return "linear-gradient(90deg,transparent 0 25%,#111 25% 33%,transparent 33% 66%,#111 66% 74%,transparent 74%)";
-
-if(p.type==="star")
-return "linear-gradient(0deg,transparent 0 42%,#111 42% 58%,transparent 58%),linear-gradient(90deg,transparent 0 42%,#111 42% 58%,transparent 58%),linear-gradient(45deg,transparent 0 45%,#111 45% 55%,transparent 55%),linear-gradient(-45deg,transparent 0 45%,#111 45% 55%,transparent 55%)";
-
-return "none";
-
-}
-
-
-function renderPalette(){
-
-palette.innerHTML="";
-
-patterns.forEach(p=>{
-
-const b=document.createElement("button");
-
-b.className=
-"swatch"+
-(active.has(p.id)?"":" off");
-
-b.innerHTML=`
-<span class="mini" style="--pattern:${makePatternCSS(p)}"></span>
-<span>
-<strong>${p.name}</strong>
-<span>símbolo ${patterns.indexOf(p)+1}</span>
-</span>
-`;
-
-b.onclick=()=>{
-
-active.has(p.id)
-?active.delete(p.id)
-:active.add(p.id);
-
-renderPalette();
-
-regenerateIfPossible();
-
-};
-
-palette.appendChild(b);
-
-});
-
-$("count").textContent=
-`${active.size} de ${patterns.length} patrones activos`;
-
-}
-
-renderPalette();
-
-
-$("all").onclick=()=>{
-
-active=new Set(patterns.map(p=>p.id));
-
-renderPalette();
-
-regenerateIfPossible();
+    oficio:{
+        name:"Oficio Chile",
+        w:216,
+        h:330,
+        css:"216mm 330mm"
+    }
 
 };
 
 
-$("basic").onclick=()=>{
+/* =========================================================
+   STATE
+========================================================= */
 
-active=new Set(
-patterns.filter(p=>p.basic).map(p=>p.id)
+let source = null;
+
+let sourceCanvas =
+    document.createElement("canvas");
+
+let processedCanvas = null;
+
+let bgMask = null;
+
+let bgDetected = false;
+
+let masks = [];
+
+let activeMask = -1;
+
+let maskW = 0;
+
+let maskH = 0;
+
+let drawingMask = false;
+
+let toneOffsets =
+    Array(10).fill(0);
+
+let activePatterns =
+    patterns.map(
+        p => p.id
+    );
+
+
+/* =========================================================
+   CANVAS
+========================================================= */
+
+const previewCanvas =
+    $("previewCanvas");
+
+const pctx =
+    previewCanvas.getContext("2d");
+
+const printCanvas =
+    $("printCanvas");
+
+const printCtx =
+    printCanvas.getContext("2d");
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function setStatus(text){
+
+    $("status").textContent =
+        text.toUpperCase();
+
+}
+
+
+/* =========================================================
+   RANGE DISPLAY
+========================================================= */
+
+function updateRange(
+    id,
+    outputId,
+    format = value => value
+){
+
+    const input =
+        $(id);
+
+    const output =
+        $(outputId);
+
+    const update = () => {
+
+        output.textContent =
+            format(input.value);
+
+    };
+
+    input.addEventListener(
+        "input",
+        () => {
+
+            update();
+
+            if(source){
+                generate();
+            }
+
+        }
+    );
+
+    update();
+
+}
+
+
+/* =========================================================
+   RANGE INITIALIZATION
+========================================================= */
+
+updateRange(
+    "cols",
+    "colsVal"
 );
 
-renderPalette();
-
-regenerateIfPossible();
-
-};
-
-
-$("none").onclick=()=>{
-
-active.clear();
-
-renderPalette();
-
-};
-
-
-/* =========================================================
-   10 CONTROLES TONALES
-========================================================= */
-
-function renderToneControls(){
-
-const container=$("toneControls");
-
-container.innerHTML="";
-
-tonePoints.forEach((point,i)=>{
-
-const row=document.createElement("div");
-
-row.className="tone-row";
-
-row.innerHTML=`
-
-<div class="tone-name">
-${toneNames[i]}
-</div>
-
-<div class="tone-control">
-
-<label>
-Brillo
-<span id="tb${i}">${point.brightness}</span>
-</label>
-
-<input
-type="range"
-min="-100"
-max="100"
-value="${point.brightness}"
-data-tone="${i}"
-data-type="brightness"
->
-
-</div>
-
-<div class="tone-control">
-
-<label>
-Contraste
-<span id="tc${i}">${point.contrast.toFixed(2)}×</span>
-</label>
-
-<input
-type="range"
-min="0.1"
-max="4"
-step="0.05"
-value="${point.contrast}"
-data-tone="${i}"
-data-type="contrast"
->
-
-</div>
-`;
-
-container.appendChild(row);
-
-});
-
-container
-.querySelectorAll("input")
-.forEach(input=>{
-
-input.addEventListener("input",()=>{
-
-const i=Number(input.dataset.tone);
-
-if(input.dataset.type==="brightness"){
-
-tonePoints[i].brightness=
-Number(input.value);
-
-$("tb"+i).textContent=
-input.value;
-
-}else{
-
-tonePoints[i].contrast=
-Number(input.value);
-
-$("tc"+i).textContent=
-Number(input.value).toFixed(2)+"×";
-
-}
-
-regenerateIfPossible();
-
-});
-
-});
-
-}
-
-renderToneControls();
-
-
-$("resetTones").onclick=()=>{
-
-tonePoints=
-toneDefaults.map(x=>({...x}));
-
-renderToneControls();
-
-regenerateIfPossible();
-
-};
-
-
-$("invertTones").onclick=()=>{
-
-tonePoints=
-tonePoints.map(p=>({
-
-brightness:-p.brightness,
-
-contrast:p.contrast
-
-}));
-
-renderToneControls();
-
-regenerateIfPossible();
-
-};
-
-
-/* =========================================================
-   COLUMNAS
-========================================================= */
-
-$("cols").addEventListener("input",()=>{
-
-$("colsVal").textContent=
-$("cols").value;
-
-updateRows();
-
-regenerateIfPossible();
-
-});
-
-
-function calculateRows(){
-
-if(!source)
-return null;
-
-const cols=
-Number($("cols").value);
-
-return Math.max(
-1,
-Math.round(
-cols*source.height/source.width
-)
+updateRange(
+    "contrast",
+    "contrastVal",
+    v => (+v).toFixed(2)
 );
 
-}
+updateRange(
+    "black",
+    "blackVal"
+);
 
+updateRange(
+    "detail",
+    "detailVal"
+);
 
-function updateRows(){
+updateRange(
+    "curve",
+    "curveVal"
+);
 
-if(!source){
+updateRange(
+    "bgStrength",
+    "bgStrengthVal"
+);
 
-$("rowsVal").textContent="—";
+updateRange(
+    "objectContrast",
+    "objectContrastVal"
+);
 
-return;
+updateRange(
+    "maskBrightness",
+    "maskBrightnessVal"
+);
 
-}
+updateRange(
+    "maskContrast",
+    "maskContrastVal"
+);
 
-$("rowsVal").textContent=
-calculateRows();
-
-}
+updateRange(
+    "brushSize",
+    "brushSizeVal"
+);
 
 
 /* =========================================================
-   CARGA
+   10 TONAL CONTROLS
+========================================================= */
+
+const toneControls =
+    $("toneControls");
+
+toneNames.forEach(
+    (name,index) => {
+
+        const row =
+            document.createElement("div");
+
+        row.className =
+            "tone-row";
+
+        row.innerHTML = `
+
+            <span>
+                ${name}
+            </span>
+
+            <input
+                type="range"
+                min="-100"
+                max="100"
+                value="0"
+                data-tone="${index}"
+            >
+
+            <span
+                class="tone-val"
+                id="toneVal${index}"
+            >
+                0
+            </span>
+
+        `;
+
+        toneControls.appendChild(
+            row
+        );
+
+        const input =
+            row.querySelector("input");
+
+        input.addEventListener(
+            "input",
+            () => {
+
+                toneOffsets[index] =
+                    +input.value;
+
+                $("toneVal" + index)
+                    .textContent =
+                    input.value;
+
+                if(source){
+                    generate();
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   RESET TONAL
+========================================================= */
+
+$("resetTone")
+    .addEventListener(
+        "click",
+        () => {
+
+            toneOffsets.fill(0);
+
+            document
+                .querySelectorAll(
+                    "[data-tone]"
+                )
+                .forEach(
+                    (input,index) => {
+
+                        input.value = 0;
+
+                        $("toneVal" + index)
+                            .textContent =
+                            "0";
+
+                    }
+                );
+
+            if(source){
+                generate();
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   PATTERN PALETTE
+========================================================= */
+
+function renderPatterns(){
+
+    const wrap =
+        $("patterns");
+
+    wrap.innerHTML = "";
+
+    patterns.forEach(
+        pattern => {
+
+            const button =
+                document.createElement("button");
+
+            button.className =
+                "pattern" +
+                (
+                    activePatterns.includes(
+                        pattern.id
+                    )
+                        ? " active"
+                        : ""
+                );
+
+            button.innerHTML = `
+
+                <span class="num">
+                    ${pattern.id}
+                </span>
+
+                <span class="symbol">
+                    ${pattern.symbol || "·"}
+                </span>
+
+            `;
+
+            button.title =
+                pattern.name;
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    if(
+                        activePatterns
+                            .includes(
+                                pattern.id
+                            )
+                    ){
+
+                        if(
+                            activePatterns.length > 1
+                        ){
+
+                            activePatterns =
+                                activePatterns
+                                    .filter(
+                                        id =>
+                                            id !==
+                                            pattern.id
+                                    );
+
+                        }
+
+                    }
+                    else{
+
+                        activePatterns.push(
+                            pattern.id
+                        );
+
+                    }
+
+                    renderPatterns();
+
+                    if(source){
+                        generate();
+                    }
+
+                }
+            );
+
+            wrap.appendChild(
+                button
+            );
+
+        }
+    );
+
+}
+
+renderPatterns();
+
+
+/* =========================================================
+   LOAD IMAGE
+========================================================= */
+
+$("chooseBtn")
+    .addEventListener(
+        "click",
+        () =>
+            $("file").click()
+    );
+
+
+$("file")
+    .addEventListener(
+        "change",
+        event => {
+
+            const file =
+                event.target.files[0];
+
+            if(file){
+                loadFile(file);
+            }
+
+        }
+    );
+
+
+$("drop")
+    .addEventListener(
+        "dragover",
+        event => {
+
+            event.preventDefault();
+
+            $("drop")
+                .classList
+                .add("drag");
+
+        }
+    );
+
+
+$("drop")
+    .addEventListener(
+        "dragleave",
+        () => {
+
+            $("drop")
+                .classList
+                .remove("drag");
+
+        }
+    );
+
+
+$("drop")
+    .addEventListener(
+        "drop",
+        event => {
+
+            event.preventDefault();
+
+            $("drop")
+                .classList
+                .remove("drag");
+
+            const file =
+                event.dataTransfer.files[0];
+
+            if(file){
+                loadFile(file);
+            }
+
+        }
+    );
+
+
+document.addEventListener(
+    "paste",
+    event => {
+
+        const items =
+            [
+                ...(event.clipboardData?.items || [])
+            ];
+
+        const image =
+            items.find(
+                item =>
+                    item.type
+                        .startsWith(
+                            "image/"
+                        )
+            );
+
+        if(image){
+
+            const blob =
+                image.getAsFile();
+
+            if(blob){
+                loadFile(blob);
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   LOAD
 ========================================================= */
 
 function loadFile(file){
 
-if(!file || !file.type.startsWith("image/"))
-return;
+    const image =
+        new Image();
 
-const img=new Image();
+    image.onload = () => {
 
-img.onload=()=>{
+        source =
+            image;
 
-source=img;
+        sourceCanvas.width =
+            image.naturalWidth;
 
-processedSource=null;
+        sourceCanvas.height =
+            image.naturalHeight;
 
-backgroundMask=null;
+        sourceCanvas
+            .getContext("2d")
+            .drawImage(
+                image,
+                0,
+                0
+            );
 
-masks=[];
+        processedCanvas =
+            null;
 
-selectedMask=-1;
+        bgMask = null;
 
-$("status").textContent=
-`Foto cargada: ${img.width} × ${img.height}`;
+        bgDetected = false;
 
-updateRows();
+        masks = [];
 
-updateMaskEditor();
+        activeMask = -1;
 
-generate();
+        createMaskDimensions();
 
-};
+        renderMaskList();
 
-img.src=URL.createObjectURL(file);
+        exitMaskEditor();
 
-}
+        $("empty").style.display =
+            "none";
 
+        $("canvasWrap").style.display =
+            "flex";
 
-$("file").onchange=e=>
-loadFile(e.target.files[0]);
+        $("previewMeta").textContent =
+            `${image.naturalWidth} × ${image.naturalHeight}px`;
 
+        setStatus(
+            "IMAGEN CARGADA"
+        );
 
-const drop=$("drop");
+        updateOrientationChip();
 
+        generate();
 
-drop.addEventListener(
-"dragover",
-e=>{
-e.preventDefault();
-drop.classList.add("over");
-}
-);
+        updatePrintCSS();
 
+    };
 
-drop.addEventListener(
-"dragleave",
-()=>{
-drop.classList.remove("over");
-}
-);
+    image.onerror = () => {
 
+        alert(
+            "No fue posible cargar la imagen."
+        );
 
-drop.addEventListener(
-"drop",
-e=>{
+    };
 
-e.preventDefault();
-
-drop.classList.remove("over");
-
-loadFile(e.dataTransfer.files[0]);
-
-}
-);
-
-
-document.addEventListener(
-"paste",
-e=>{
-
-const items=[
-...(e.clipboardData?.items||[])
-];
-
-const it=
-items.find(
-x=>x.type.startsWith("image/")
-);
-
-if(it){
-
-loadFile(it.getAsFile());
-
-e.preventDefault();
+    image.src =
+        URL.createObjectURL(file);
 
 }
-
-}
-);
 
 
 /* =========================================================
-   TONO CON 10 PUNTOS
+   CLEAR
 ========================================================= */
 
-function applyTonePoint(value,point){
+$("clearBtn")
+    .addEventListener(
+        "click",
+        () => {
 
-let x=value;
+            source = null;
 
-x=.5+
-(x-.5)*point.contrast;
+            processedCanvas = null;
 
-x+=point.brightness/200;
+            bgMask = null;
 
-return Math.max(
-0,
-Math.min(1,x)
-);
+            masks = [];
+
+            activeMask = -1;
+
+            previewCanvas.width = 1;
+
+            previewCanvas.height = 1;
+
+            $("empty").style.display =
+                "block";
+
+            $("canvasWrap").style.display =
+                "none";
+
+            $("maskEditorWrap").style.display =
+                "none";
+
+            $("previewMeta").textContent =
+                "Carga una imagen para comenzar";
+
+            setStatus("LISTO");
+
+            updateOrientationChip();
+
+        }
+    );
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+function getRows(){
+
+    if(!source){
+        return 1;
+    }
+
+    const columns =
+        +$("cols").value;
+
+    return Math.max(
+        1,
+        Math.round(
+            columns *
+            (
+                source.naturalHeight /
+                source.naturalWidth
+            )
+        )
+    );
 
 }
 
 
-function tonal(gray){
+/* =========================================================
+   GLOBAL TONE
+========================================================= */
 
-/*
-   Invertimos luminosidad porque:
-   blanco = patrón vacío
-   negro = patrón denso
-*/
+function applyGlobalTone(value){
 
-let x=
-1-gray/255;
+    const contrast =
+        +$("contrast").value;
 
+    const black =
+        +$("black").value / 100;
 
-/*
-   Curva base.
-*/
+    const detail =
+        +$("detail").value / 100;
 
-const positions=
-tonePoints.map((_,i)=>
-i/(tonePoints.length-1)
-);
+    const curve =
+        +$("curve").value / 100;
 
 
-/*
-   Calculamos el resultado de cada
-   uno de los 10 puntos.
-*/
-
-const values=
-tonePoints.map((p,i)=>
-applyTonePoint(
-positions[i],
-p
-)
-);
+    value =
+        .5 +
+        (
+            value -
+            .5
+        ) *
+        contrast;
 
 
-/*
-   Encontramos el segmento tonal.
-*/
+    value =
+        clamp(value);
 
-let segment=0;
 
-while(
-segment<positions.length-2 &&
-x>positions[segment+1]
+    if(value < .5){
+
+        value *=
+            1 -
+            black *
+            .65;
+
+    }
+
+
+    const detailShift =
+        (
+            detail -
+            .5
+        ) *
+        1.5;
+
+
+    if(detailShift > 0){
+
+        value =
+            .5 +
+            (
+                value -
+                .5
+            ) *
+            (
+                1 +
+                detailShift *
+                .45
+            );
+
+    }
+    else{
+
+        value =
+            .5 +
+            (
+                value -
+                .5
+            ) *
+            (
+                1 +
+                detailShift *
+                .35
+            );
+
+    }
+
+
+    if(curve !== 0){
+
+        value =
+            clamp(
+                value +
+                curve *
+                .8 *
+                (
+                    value -
+                    .5
+                ) *
+                (
+                    1 -
+                    Math.abs(
+                        value -
+                        .5
+                    ) *
+                    1.5
+                )
+            );
+
+    }
+
+
+    return clamp(value);
+
+}
+
+
+/* =========================================================
+   TEN POINT CURVE
+========================================================= */
+
+function tenPointTone(value){
+
+    const position =
+        value * 9;
+
+    const index =
+        Math.min(
+            8,
+            Math.floor(position)
+        );
+
+    const fraction =
+        position -
+        index;
+
+
+    const pointA =
+        clamp(
+            (
+                index / 9
+            ) +
+            (
+                toneOffsets[index] /
+                100
+            ) *
+            .38
+        );
+
+
+    const pointB =
+        clamp(
+            (
+                (index + 1) /
+                9
+            ) +
+            (
+                toneOffsets[index + 1] /
+                100
+            ) *
+            .38
+        );
+
+
+    return clamp(
+        pointA +
+        (
+            pointB -
+            pointA
+        ) *
+        fraction
+    );
+
+}
+
+
+/* =========================================================
+   MASK APPLICATION
+========================================================= */
+
+function maskTone(
+    value,
+    normalizedX,
+    normalizedY
 ){
 
-segment++;
+    for(
+        const mask
+        of masks
+    ){
 
-}
-
-
-const a=positions[segment];
-
-const b=positions[segment+1];
-
-const va=values[segment];
-
-const vb=values[segment+1];
-
-let t=
-(b-a)===0
-?0
-:(x-a)/(b-a);
+        if(
+            !mask.enabled ||
+            !mask.data
+        ){
+            continue;
+        }
 
 
-t=Math.max(0,Math.min(1,t));
+        const x =
+            Math.max(
+                0,
+                Math.min(
+                    maskW - 1,
+                    Math.round(
+                        normalizedX *
+                        (
+                            maskW - 1
+                        )
+                    )
+                )
+            );
 
-x=
-va+
-(vb-va)*t;
+
+        const y =
+            Math.max(
+                0,
+                Math.min(
+                    maskH - 1,
+                    Math.round(
+                        normalizedY *
+                        (
+                            maskH - 1
+                        )
+                    )
+                )
+            );
 
 
-return Math.max(
-0,
-Math.min(1,x)
-);
+        const alpha =
+            mask.data[
+                (
+                    y *
+                    maskW +
+                    x
+                ) *
+                4 +
+                3
+            ] /
+            255;
+
+
+        if(alpha <= 0){
+            continue;
+        }
+
+
+        const brightness =
+            (
+                mask.brightness /
+                100
+            ) *
+            .42;
+
+
+        const contrast =
+            1 +
+            (
+                mask.contrast /
+                100
+            ) *
+            1.7;
+
+
+        let local =
+            .5 +
+            (
+                value -
+                .5
+            ) *
+            contrast +
+            brightness;
+
+
+        local =
+            clamp(local);
+
+
+        value =
+            value +
+            (
+                local -
+                value
+            ) *
+            alpha;
+
+    }
+
+
+    return clamp(value);
 
 }
 
 
 /* =========================================================
-   MASCARAS
+   BACKGROUND PREPROCESS
 ========================================================= */
 
-function updateMaskEditor(){
+function prepareProcessed(){
 
-const canvas=$("maskCanvas");
+    if(!source){
+        return;
+    }
 
-const ctx=canvas.getContext("2d");
 
-if(!source){
+    processedCanvas =
+        document.createElement(
+            "canvas"
+        );
 
-canvas.width=300;
-canvas.height=200;
 
-ctx.fillStyle="#eee";
-ctx.fillRect(0,0,300,200);
+    processedCanvas.width =
+        source.naturalWidth;
 
-renderMaskBoxes();
+    processedCanvas.height =
+        source.naturalHeight;
 
-return;
+
+    const context =
+        processedCanvas
+            .getContext("2d");
+
+
+    context.drawImage(
+        sourceCanvas,
+        0,
+        0
+    );
+
+
+    if(
+        $("bgEnabled").checked &&
+        bgDetected &&
+        bgMask
+    ){
+
+        const image =
+            context.getImageData(
+                0,
+                0,
+                processedCanvas.width,
+                processedCanvas.height
+            );
+
+        const data =
+            image.data;
+
+
+        const strength =
+            +$("bgStrength").value /
+            100;
+
+
+        const objectContrast =
+            +$("objectContrast").value /
+            100;
+
+
+        const mode =
+            $("bgMode").value;
+
+
+        for(
+            let i = 0, p = 0;
+            i < data.length;
+            i += 4, p++
+        ){
+
+            const alpha =
+                bgMask[p] /
+                255;
+
+
+            if(alpha <= 0){
+                continue;
+            }
+
+
+            let gray =
+                (
+                    .299 * data[i] +
+                    .587 * data[i + 1] +
+                    .114 * data[i + 2]
+                ) /
+                255;
+
+
+            let target =
+                gray;
+
+
+            if(
+                mode === "light" ||
+                (
+                    mode === "auto" &&
+                    gray > .5
+                )
+            ){
+
+                target =
+                    clamp(
+                        gray +
+                        .28 *
+                        strength
+                    );
+
+            }
+
+
+            if(
+                mode === "dark" ||
+                (
+                    mode === "auto" &&
+                    gray <= .5
+                )
+            ){
+
+                target =
+                    clamp(
+                        gray -
+                        .28 *
+                        strength
+                    );
+
+            }
+
+
+            if(
+                mode === "neutral"
+            ){
+
+                target =
+                    .5 +
+                    (
+                        gray -
+                        .5
+                    ) *
+                    (
+                        1 -
+                        strength *
+                        .85
+                    );
+
+            }
+
+
+            gray =
+                gray +
+                (
+                    target -
+                    gray
+                ) *
+                alpha;
+
+
+            gray =
+                .5 +
+                (
+                    gray -
+                    .5
+                ) *
+                (
+                    1 +
+                    objectContrast *
+                    1.8
+                );
+
+
+            data[i] =
+                data[i + 1] =
+                data[i + 2] =
+                Math.round(
+                    clamp(gray) *
+                    255
+                );
+
+        }
+
+
+        context.putImageData(
+            image,
+            0,
+            0
+        );
+
+    }
 
 }
-
-const maxWidth=390;
-
-const scale=
-Math.min(
-1,
-maxWidth/source.width
-);
-
-canvas.width=
-Math.round(source.width*scale);
-
-canvas.height=
-Math.round(source.height*scale);
-
-ctx.clearRect(
-0,
-0,
-canvas.width,
-canvas.height
-);
-
-ctx.drawImage(
-source,
-0,
-0,
-canvas.width,
-canvas.height
-);
-
-renderMaskBoxes();
-
-}
-
-
-function renderMaskBoxes(){
-
-const overlay=$("maskOverlay");
-
-overlay.innerHTML="";
-
-masks.forEach((mask,i)=>{
-
-const box=document.createElement("div");
-
-box.className=
-"mask-box"+
-(i===selectedMask?" selected":"")+
-(mask.shape==="ellipse"?" ellipse":"");
-
-box.style.left=
-(mask.x*100)+"%";
-
-box.style.top=
-(mask.y*100)+"%";
-
-box.style.width=
-(mask.w*100)+"%";
-
-box.style.height=
-(mask.h*100)+"%";
-
-box.onclick=e=>{
-
-e.stopPropagation();
-
-selectedMask=i;
-
-renderMaskBoxes();
-
-showMaskSettings();
-
-};
-
-overlay.appendChild(box);
-
-});
-
-renderMaskList();
-
-}
-
-
-function renderMaskList(){
-
-const list=$("maskList");
-
-list.innerHTML="";
-
-masks.forEach((mask,i)=>{
-
-const item=document.createElement("div");
-
-item.className=
-"mask-item"+
-(i===selectedMask?" selected":"");
-
-item.innerHTML=`
-
-<span>
-<b>Máscara ${i+1}</b><br>
-<span class="small">
-${mask.shape==="ellipse"?"Elipse":"Rectángulo"}
-· brillo ${mask.brightness}
-· contraste ${mask.contrast.toFixed(2)}×
-</span>
-</span>
-
-<span class="mask-actions">
-
-<button data-select="${i}">
-Editar
-</button>
-
-<button data-delete="${i}">
-×
-</button>
-
-</span>
-`;
-
-item.onclick=()=>{
-
-selectedMask=i;
-
-renderMaskBoxes();
-
-showMaskSettings();
-
-};
-
-list.appendChild(item);
-
-});
-
-}
-
-
-function showMaskSettings(){
-
-const panel=$("maskSettings");
-
-if(selectedMask<0 || !masks[selectedMask]){
-
-panel.classList.add("hidden");
-
-return;
-
-}
-
-panel.classList.remove("hidden");
-
-const mask=masks[selectedMask];
-
-$("maskTitle").textContent=
-`Máscara ${selectedMask+1}`;
-
-$("maskBrightness").value=
-mask.brightness;
-
-$("maskBrightnessVal").textContent=
-mask.brightness;
-
-$("maskContrast").value=
-mask.contrast;
-
-$("maskContrastVal").textContent=
-mask.contrast.toFixed(2)+"×";
-
-$("maskShape").value=
-mask.shape;
-
-}
-
-
-$("addMask").onclick=()=>{
-
-if(!source){
-
-alert("Primero carga una imagen.");
-
-return;
-
-}
-
-const size=.28;
-
-const mask={
-
-x:.36,
-
-y:.36,
-
-w:size,
-
-h:size,
-
-shape:"rect",
-
-brightness:0,
-
-contrast:1
-
-};
-
-masks.push(mask);
-
-selectedMask=
-masks.length-1;
-
-renderMaskBoxes();
-
-showMaskSettings();
-
-regenerateIfPossible();
-
-};
 
 
 /* =========================================================
-   CREAR MASCARA ARRASTRANDO
+   GENERATE
 ========================================================= */
 
-const maskCanvas=$("maskCanvas");
+function generate(){
 
-maskCanvas.addEventListener(
-"pointerdown",
-e=>{
+    if(!source){
+        return;
+    }
 
-if(!source)
-return;
 
-const rect=
-maskCanvas.getBoundingClientRect();
+    setStatus(
+        "PROCESANDO"
+    );
 
-maskStart={
 
-x:(e.clientX-rect.left)/rect.width,
+    prepareProcessed();
 
-y:(e.clientY-rect.top)/rect.height
 
-};
+    const columns =
+        +$("cols").value;
 
-drawingMask=true;
+    const rows =
+        getRows();
 
-maskCanvas.setPointerCapture(e.pointerId);
+
+    const context =
+        processedCanvas
+            .getContext(
+                "2d",
+                {
+                    willReadFrequently:true
+                }
+            );
+
+
+    const cellW =
+        processedCanvas.width /
+        columns;
+
+
+    const cellH =
+        processedCanvas.height /
+        rows;
+
+
+    const sourcePixels =
+        context.getImageData(
+            0,
+            0,
+            processedCanvas.width,
+            processedCanvas.height
+        );
+
+
+    const data =
+        sourcePixels.data;
+
+
+    const width =
+        processedCanvas.width;
+
+    const height =
+        processedCanvas.height;
+
+
+    const cells =
+        new Array(
+            columns *
+            rows
+        );
+
+
+    for(
+        let y = 0;
+        y < rows;
+        y++
+    ){
+
+        for(
+            let x = 0;
+            x < columns;
+            x++
+        ){
+
+            const centerX =
+                (
+                    x +
+                    .5
+                ) *
+                cellW;
+
+
+            const centerY =
+                (
+                    y +
+                    .5
+                ) *
+                cellH;
+
+
+            const samples = [
+
+                [
+                    centerX,
+                    centerY
+                ],
+
+                [
+                    centerX -
+                    cellW * .25,
+                    centerY
+                ],
+
+                [
+                    centerX +
+                    cellW * .25,
+                    centerY
+                ]
+
+            ];
+
+
+            let gray = 0;
+
+
+            for(
+                const [
+                    sampleX,
+                    sampleY
+                ]
+                of samples
+            ){
+
+                const px =
+                    Math.max(
+                        0,
+                        Math.min(
+                            width - 1,
+                            Math.round(
+                                sampleX
+                            )
+                        )
+                    );
+
+
+                const py =
+                    Math.max(
+                        0,
+                        Math.min(
+                            height - 1,
+                            Math.round(
+                                sampleY
+                            )
+                        )
+                    );
+
+
+                const position =
+                    (
+                        py *
+                        width +
+                        px
+                    ) *
+                    4;
+
+
+                gray +=
+                    (
+                        .299 *
+                        data[position] +
+
+                        .587 *
+                        data[position + 1] +
+
+                        .114 *
+                        data[position + 2]
+                    ) /
+                    255;
+
+            }
+
+
+            gray /=
+                samples.length;
+
+
+            gray =
+                maskTone(
+                    gray,
+                    centerX /
+                        width,
+                    centerY /
+                        height
+                );
+
+
+            gray =
+                applyGlobalTone(
+                    gray
+                );
+
+
+            gray =
+                tenPointTone(
+                    gray
+                );
+
+
+            cells[
+                y *
+                columns +
+                x
+            ] =
+                gray;
+
+        }
+
+    }
+
+
+    window.pixelCells =
+        cells;
+
+    window.pixelGrid = {
+        cols:columns,
+        rows:rows
+    };
+
+
+    draw();
+
+
+    setStatus(
+        "LISTO"
+    );
+
+
+    updateOrientationChip();
+
+    updatePrintCSS();
 
 }
-);
-
-
-maskCanvas.addEventListener(
-"pointerup",
-e=>{
-
-if(!drawingMask || !maskStart)
-return;
-
-const rect=
-maskCanvas.getBoundingClientRect();
-
-const endX=
-(e.clientX-rect.left)/rect.width;
-
-const endY=
-(e.clientY-rect.top)/rect.height;
-
-
-let x=Math.min(
-maskStart.x,
-endX
-);
-
-let y=Math.min(
-maskStart.y,
-endY
-);
-
-let w=Math.abs(
-endX-maskStart.x
-);
-
-let h=Math.abs(
-endY-maskStart.y
-);
-
-
-if(w<.03)
-w=.12;
-
-if(h<.03)
-h=.12;
-
-
-x=Math.max(0,Math.min(1-w,x));
-
-y=Math.max(0,Math.min(1-h,y));
-
-masks.push({
-
-x,
-y,
-w,
-h,
-
-shape:"rect",
-
-brightness:0,
-
-contrast:1
-
-});
-
-selectedMask=
-masks.length-1;
-
-drawingMask=false;
-
-maskStart=null;
-
-renderMaskBoxes();
-
-showMaskSettings();
-
-regenerateIfPossible();
-
-}
-);
 
 
 /* =========================================================
-   CONTROLES DE MASCARA
+   CHOOSE PATTERN
 ========================================================= */
 
-$("maskBrightness").addEventListener(
-"input",
-()=>{
+function choosePattern(
+    gray
+){
 
-if(selectedMask<0)
-return;
-
-const value=
-Number($("maskBrightness").value);
-
-masks[selectedMask].brightness=
-value;
-
-$("maskBrightnessVal").textContent=
-value;
-
-renderMaskBoxes();
-
-regenerateIfPossible();
-
-}
-);
+    const active =
+        activePatterns
+            .slice()
+            .sort(
+                (a,b) =>
+                    a - b
+            );
 
 
-$("maskContrast").addEventListener(
-"input",
-()=>{
+    if(
+        active.length === 1
+    ){
 
-if(selectedMask<0)
-return;
+        return active[0];
 
-const value=
-Number($("maskContrast").value);
+    }
 
-masks[selectedMask].contrast=
-value;
 
-$("maskContrastVal").textContent=
-value.toFixed(2)+"×";
+    const index =
+        Math.min(
+            active.length - 1,
+            Math.floor(
+                (
+                    1 -
+                    gray
+                ) *
+                active.length
+            )
+        );
 
-renderMaskBoxes();
 
-regenerateIfPossible();
+    return active[index];
 
 }
-);
-
-
-$("maskShape").addEventListener(
-"change",
-()=>{
-
-if(selectedMask<0)
-return;
-
-masks[selectedMask].shape=
-$("maskShape").value;
-
-renderMaskBoxes();
-
-regenerateIfPossible();
-
-}
-);
-
-
-$("deleteMask").onclick=()=>{
-
-if(selectedMask<0)
-return;
-
-masks.splice(
-selectedMask,
-1
-);
-
-selectedMask=
-Math.min(
-selectedMask,
-masks.length-1
-);
-
-renderMaskBoxes();
-
-showMaskSettings();
-
-regenerateIfPossible();
-
-};
-
-
-$("duplicateMask").onclick=()=>{
-
-if(selectedMask<0)
-return;
-
-const copy={
-...masks[selectedMask],
-x:Math.min(
-.9,
-masks[selectedMask].x+.03
-),
-y:Math.min(
-.9,
-masks[selectedMask].y+.03
-)
-};
-
-masks.push(copy);
-
-selectedMask=
-masks.length-1;
-
-renderMaskBoxes();
-
-showMaskSettings();
-
-regenerateIfPossible();
-
-};
 
 
 /* =========================================================
-   APLICAR MASCARAS
+   DRAW PATTERN
 ========================================================= */
 
-function applyMasks(gray,x,y,w,h){
+function drawPattern(
+    context,
+    x,
+    y,
+    width,
+    height,
+    type
+){
 
-if(!masks.length)
-return gray;
+    context.strokeStyle =
+        "#111";
 
-let value=gray;
+    context.fillStyle =
+        "#111";
 
-masks.forEach(mask=>{
-
-const centerX=
-mask.x+
-mask.w/2;
-
-const centerY=
-mask.y+
-mask.h/2;
-
-let inside=false;
-
-if(mask.shape==="ellipse"){
-
-const dx=
-(x-centerX)/(mask.w/2);
-
-const dy=
-(y-centerY)/(mask.h/2);
-
-inside=
-dx*dx+
-dy*dy<=1;
-
-}else{
-
-inside=
-x>=mask.x &&
-x<=mask.x+mask.w &&
-y>=mask.y &&
-y<=mask.y+mask.h;
-
-}
+    context.lineWidth =
+        Math.max(
+            1,
+            width * .06
+        );
 
 
-if(!inside)
-return;
+    switch(type){
+
+        case "empty":
+            break;
 
 
-/*
-   Suavizado de borde de máscara.
-*/
+        case "dot":
 
-const edgeX=
-Math.min(
-x-mask.x,
-mask.x+mask.w-x
-)/Math.max(.0001,Math.min(mask.w,mask.h));
+            context.beginPath();
 
-const edgeY=
-Math.min(
-y-mask.y,
-mask.y+mask.h-y
-)/Math.max(.0001,Math.min(mask.w,mask.h));
+            context.arc(
+                x + width / 2,
+                y + height / 2,
+                Math.max(
+                    1,
+                    width * .11
+                ),
+                0,
+                Math.PI * 2
+            );
 
-const edge=
-Math.min(edgeX,edgeY);
+            context.fill();
 
-const feather=
-Math.min(1,edge/.08);
+            break;
 
-let local=
-.5+
-(value-.5)*mask.contrast;
 
-local+=mask.brightness/200;
+        case "h":
 
-local=
-Math.max(
-0,
-Math.min(1,local)
-);
+            context.beginPath();
 
-value=
-value+
-(local-value)*feather;
+            context.moveTo(
+                x + width * .08,
+                y + height / 2
+            );
 
-});
+            context.lineTo(
+                x + width * .92,
+                y + height / 2
+            );
 
-return Math.max(
-0,
-Math.min(1,value)
-);
+            context.stroke();
+
+            break;
+
+
+        case "v":
+
+            context.beginPath();
+
+            context.moveTo(
+                x + width / 2,
+                y + height * .08
+            );
+
+            context.lineTo(
+                x + width / 2,
+                y + height * .92
+            );
+
+            context.stroke();
+
+            break;
+
+
+        case "d1":
+
+            context.beginPath();
+
+            context.moveTo(
+                x + width * .08,
+                y + height * .92
+            );
+
+            context.lineTo(
+                x + width * .92,
+                y + height * .08
+            );
+
+            context.stroke();
+
+            break;
+
+
+        case "d2":
+
+            context.beginPath();
+
+            context.moveTo(
+                x + width * .08,
+                y + height * .08
+            );
+
+            context.lineTo(
+                x + width * .92,
+                y + height * .92
+            );
+
+            context.stroke();
+
+            break;
+
+
+        case "plus":
+
+            context.beginPath();
+
+            context.moveTo(
+                x + width * .15,
+                y + height / 2
+            );
+
+            context.lineTo(
+                x + width * .85,
+                y + height / 2
+            );
+
+            context.moveTo(
+                x + width / 2,
+                y + height * .15
+            );
+
+            context.lineTo(
+                x + width / 2,
+                y + height * .85
+            );
+
+            context.stroke();
+
+            break;
+
+
+        case "x":
+
+            context.beginPath();
+
+            context.moveTo(
+                x + width * .15,
+                y + height * .15
+            );
+
+            context.lineTo(
+                x + width * .85,
+                y + height * .85
+            );
+
+            context.moveTo(
+                x + width * .85,
+                y + height * .15
+            );
+
+            context.lineTo(
+                x + width * .15,
+                y + height * .85
+            );
+
+            context.stroke();
+
+            break;
+
+
+        case "dh":
+
+            context.beginPath();
+
+            context.moveTo(
+                x + width * .08,
+                y + height * .34
+            );
+
+            context.lineTo(
+                x + width * .92,
+                y + height * .34
+            );
+
+            context.moveTo(
+                x + width * .08,
+                y + height * .66
+            );
+
+            context.lineTo(
+                x + width * .92,
+                y + height * .66
+            );
+
+            context.stroke();
+
+            break;
+
+
+        case "dv":
+
+            context.beginPath();
+
+            context.moveTo(
+                x + width * .34,
+                y + height * .08
+            );
+
+            context.lineTo(
+                x + width * .34,
+                y + height * .92
+            );
+
+            context.moveTo(
+                x + width * .66,
+                y + height * .08
+            );
+
+            context.lineTo(
+                x + width * .66,
+                y + height * .92
+            );
+
+            context.stroke();
+
+            break;
+
+
+        case "star":
+
+            context.beginPath();
+
+            context.moveTo(
+                x + width * .15,
+                y + height / 2
+            );
+
+            context.lineTo(
+                x + width * .85,
+                y + height / 2
+            );
+
+            context.moveTo(
+                x + width / 2,
+                y + height * .15
+            );
+
+            context.lineTo(
+                x + width / 2,
+                y + height * .85
+            );
+
+            context.moveTo(
+                x + width * .2,
+                y + height * .2
+            );
+
+            context.lineTo(
+                x + width * .8,
+                y + height * .8
+            );
+
+            context.moveTo(
+                x + width * .8,
+                y + height * .2
+            );
+
+            context.lineTo(
+                x + width * .2,
+                y + height * .8
+            );
+
+            context.stroke();
+
+            break;
+
+
+        case "solid":
+
+            context.fillRect(
+                x,
+                y,
+                width,
+                height
+            );
+
+            break;
+
+    }
 
 }
 
 
 /* =========================================================
-   SEPARADOR DE FONDO
+   DRAW MAIN PREVIEW
+========================================================= */
+
+function draw(
+    targetCanvas = previewCanvas,
+    targetContext = pctx,
+    customCell = null
+){
+
+    if(
+        !window.pixelCells
+    ){
+        return;
+    }
+
+
+    const {
+        cols,
+        rows
+    } =
+        window.pixelGrid;
+
+
+    const cell =
+        customCell ||
+        Math.max(
+            5,
+            Math.min(
+                10,
+                Math.floor(
+                    1800 /
+                    cols
+                )
+            )
+        );
+
+
+    targetCanvas.width =
+        cols *
+        cell;
+
+    targetCanvas.height =
+        rows *
+        cell;
+
+
+    targetContext.fillStyle =
+        "#fff";
+
+    targetContext.fillRect(
+        0,
+        0,
+        targetCanvas.width,
+        targetCanvas.height
+    );
+
+
+    const mode =
+        $("mode").value;
+
+
+    if(
+        mode === "template"
+    ){
+
+        targetContext.textAlign =
+            "center";
+
+        targetContext.textBaseline =
+            "middle";
+
+        targetContext.font =
+            `800 ${Math.max(
+                5,
+                Math.floor(
+                    cell * .48
+                )
+            )}px Arial`;
+
+    }
+
+
+    for(
+        let y = 0;
+        y < rows;
+        y++
+    ){
+
+        for(
+            let x = 0;
+            x < cols;
+            x++
+        ){
+
+            const gray =
+                window.pixelCells[
+                    y * cols +
+                    x
+                ];
+
+
+            const patternId =
+                choosePattern(
+                    gray
+                );
+
+
+            const pattern =
+                patterns.find(
+                    item =>
+                        item.id ===
+                        patternId
+                );
+
+
+            const px =
+                x *
+                cell;
+
+            const py =
+                y *
+                cell;
+
+
+            if(
+                mode === "template"
+            ){
+
+                targetContext.strokeStyle =
+                    "#d0d0d0";
+
+                targetContext.lineWidth =
+                    Math.max(
+                        .5,
+                        cell * .045
+                    );
+
+                targetContext.strokeRect(
+                    px + .2,
+                    py + .2,
+                    cell - .4,
+                    cell - .4
+                );
+
+
+                targetContext.fillStyle =
+                    "#111";
+
+
+                targetContext.fillText(
+                    String(patternId),
+                    px + cell / 2,
+                    py + cell / 2
+                );
+
+            }
+            else{
+
+                drawPattern(
+                    targetContext,
+                    px,
+                    py,
+                    cell,
+                    cell,
+                    pattern.type
+                );
+
+            }
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   MODE
+========================================================= */
+
+$("mode")
+    .addEventListener(
+        "change",
+        () => {
+
+            if(source){
+                generate();
+            }
+
+        }
+    );
+
+
+$("previewModeBtn")
+    .addEventListener(
+        "click",
+        () => {
+
+            $("mode").value =
+                $("mode").value ===
+                "final"
+                    ? "template"
+                    : "final";
+
+            if(source){
+                generate();
+            }
+
+        }
+    );
+
+
+$("fitBtn")
+    .addEventListener(
+        "click",
+        () => {
+
+            $("previewCanvas")
+                .style
+                .maxWidth =
+                "100%";
+
+            $("previewCanvas")
+                .style
+                .maxHeight =
+                "100%";
+
+        }
+    );
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+$("detectBg")
+    .addEventListener(
+        "click",
+        () => {
+
+            if(!source){
+                return;
+            }
+
+            detectBackground();
+
+        }
+    );
+
+
+$("applyBg")
+    .addEventListener(
+        "click",
+        () => {
+
+            if(!source){
+                return;
+            }
+
+            $("bgEnabled")
+                .checked = true;
+
+            if(!bgDetected){
+                detectBackground();
+            }
+
+            generate();
+
+        }
+    );
+
+
+$("bgEnabled")
+    .addEventListener(
+        "change",
+        () => {
+
+            if(source){
+                generate();
+            }
+
+        }
+    );
+
+
+$("bgMode")
+    .addEventListener(
+        "change",
+        () => {
+
+            if(source){
+                generate();
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   BACKGROUND DETECTION
 ========================================================= */
 
 function detectBackground(){
 
-if(!source)
-return null;
+    const width =
+        source.naturalWidth;
 
-const maxSize=320;
+    const height =
+        source.naturalHeight;
 
-const scale=
-Math.min(
-1,
-maxSize/
-Math.max(
-source.width,
-source.height
-)
-);
 
-const w=
-Math.max(
-1,
-Math.round(source.width*scale)
-);
+    const small =
+        Math.min(
+            180,
+            width,
+            height
+        );
+
+
+    const ratio =
+        Math.min(
+            1,
+            small /
+            Math.max(
+                width,
+                height
+            )
+        );
+
+
+    const smallWidth =
+        Math.max(
+            30,
+            Math.round(
+                width *
+                ratio
+            )
+        );
+
+
+    const smallHeight =
+        Math.max(
+            30,
+            Math.round(
+                height *
+                ratio
+            )
+        );
+
+
+    const canvas =
+        document.createElement(
+            "canvas"
+        );
+
+
+    canvas.width =
+        smallWidth;
+
+    canvas.height =
+        smallHeight;
+
+
+    const context =
+        canvas.getContext(
+            "2d",
+            {
+                willReadFrequently:true
+            }
+        );
+
+
+    context.drawImage(
+        sourceCanvas,
+        0,
+        0,
+        smallWidth,
+        smallHeight
+    );
+
+
+    const image =
+        context.getImageData(
+            0,
+            0,
+            smallWidth,
+            smallHeight
+        );
+
+
+    const data =
+        image.data;
+
+
+    const samples = [];
+
+
+    for(
+        let y = 0;
+        y < smallHeight;
+        y++
+    ){
+
+        for(
+            let x = 0;
+            x < smallWidth;
+            x++
+        ){
+
+            if(
+                x <
+                    Math.max(
+                        2,
+                        smallWidth * .035
+                    )
+                ||
+                x >
+                    smallWidth -
+                    Math.max(
+                        2,
+                        smallWidth * .035
+                    )
+                ||
+                y <
+                    Math.max(
+                        2,
+                        smallHeight * .035
+                    )
+                ||
+                y >
+                    smallHeight -
+                    Math.max(
+                        2,
+                        smallHeight * .035
+                    )
+            ){
 
-const h=
-Math.max(
-1,
-Math.round(source.height*scale)
-);
+                const position =
+                    (
+                        y *
+                        smallWidth +
+                        x
+                    ) *
+                    4;
 
-const c=
-document.createElement("canvas");
+
+                samples.push(
+                    (
+                        .299 *
+                        data[position] +
+
+                        .587 *
+                        data[position + 1] +
+
+                        .114 *
+                        data[position + 2]
+                    ) /
+                    255
+                );
 
-c.width=w;
-c.height=h;
+            }
 
-const ctx=
-c.getContext("2d",{
-willReadFrequently:true
-});
+        }
 
-ctx.drawImage(
-source,
-0,
-0,
-w,
-h
-);
+    }
 
-const data=
-ctx.getImageData(
-0,
-0,
-w,
-h
-).data;
 
+    const average =
+        samples.reduce(
+            (
+                total,
+                value
+            ) =>
+                total + value,
+            0
+        ) /
+        samples.length;
 
-/* promedio de bordes */
 
-let br=0;
-let bg=0;
-let bb=0;
-let count=0;
+    const threshold =
+        .18;
 
-function sample(x,y){
 
-const i=
-(y*w+x)*4;
+    const maskSmall =
+        new Uint8Array(
+            smallWidth *
+            smallHeight
+        );
 
-br+=data[i];
-bg+=data[i+1];
-bb+=data[i+2];
 
-count++;
+    const queue = [];
 
-}
+    const seen =
+        new Uint8Array(
+            smallWidth *
+            smallHeight
+        );
 
 
-for(let x=0;x<w;x++){
+    function seed(
+        x,
+        y
+    ){
 
-sample(x,0);
-sample(x,h-1);
+        const index =
+            y *
+            smallWidth +
+            x;
 
-}
 
-for(let y=1;y<h-1;y++){
+        if(!seen[index]){
 
-sample(0,y);
-sample(w-1,y);
+            seen[index] = 1;
 
-}
+            queue.push(index);
 
-br/=count;
-bg/=count;
-bb/=count;
+        }
 
+    }
 
-const mask=
-new Uint8Array(w*h);
 
-const strength=
-Number($("separatorStrength").value);
+    for(
+        let x = 0;
+        x < smallWidth;
+        x++
+    ){
 
-const threshold=
-55-
-strength*.32;
+        seed(x,0);
 
-const queue=[];
+        seed(
+            x,
+            smallHeight - 1
+        );
 
+    }
 
-function push(x,y){
 
-if(
-x<0||
-x>=w||
-y<0||
-y>=h
-)
-return;
+    for(
+        let y = 0;
+        y < smallHeight;
+        y++
+    ){
 
-const index=
-y*w+x;
+        seed(
+            0,
+            y
+        );
 
-if(mask[index])
-return;
+        seed(
+            smallWidth - 1,
+            y
+        );
 
-const i=index*4;
+    }
 
-const dr=
-data[i]-br;
 
-const dg=
-data[i+1]-bg;
+    let queueIndex = 0;
 
-const db=
-data[i+2]-bb;
 
-const distance=
-Math.sqrt(
-dr*dr+
-dg*dg+
-db*db
-);
+    while(
+        queueIndex <
+        queue.length
+    ){
 
-if(distance<=threshold){
+        const index =
+            queue[
+                queueIndex++
+            ];
 
-mask[index]=1;
 
-queue.push(index);
+        const x =
+            index %
+            smallWidth;
 
-}
 
-}
+        const y =
+            Math.floor(
+                index /
+                smallWidth
+            );
 
 
-for(let x=0;x<w;x++){
+        const position =
+            index *
+            4;
 
-push(x,0);
-push(x,h-1);
 
-}
+        const gray =
+            (
+                .299 *
+                data[position] +
 
-for(let y=0;y<h;y++){
+                .587 *
+                data[position + 1] +
 
-push(0,y);
-push(w-1,y);
+                .114 *
+                data[position + 2]
+            ) /
+            255;
 
-}
 
+        if(
+            Math.abs(
+                gray -
+                average
+            ) >
+            threshold
+        ){
+            continue;
+        }
 
-let pos=0;
 
-while(pos<queue.length){
+        maskSmall[index] =
+            255;
 
-const index=
-queue[pos++];
 
-const x=index%w;
+        const neighbours = [
 
-const y=
-Math.floor(index/w);
+            [x + 1,y],
+            [x - 1,y],
+            [x,y + 1],
+            [x,y - 1]
 
-push(x+1,y);
-push(x-1,y);
-push(x,y+1);
-push(x,y-1);
+        ];
 
-}
 
+        for(
+            const [
+                nextX,
+                nextY
+            ]
+            of neighbours
+        ){
 
-backgroundMask={
-mask,
-w,
-h
-};
+            if(
+                nextX >= 0 &&
+                nextX < smallWidth &&
+                nextY >= 0 &&
+                nextY < smallHeight
+            ){
 
-return backgroundMask;
+                const nextIndex =
+                    nextY *
+                    smallWidth +
+                    nextX;
 
-}
 
+                if(
+                    !seen[nextIndex]
+                ){
 
-/* =========================================================
-   SEPARACION DE FONDO
-========================================================= */
+                    seen[nextIndex] =
+                        1;
 
-function applyBackgroundSeparation(){
+                    queue.push(
+                        nextIndex
+                    );
 
-if(!source)
-return null;
+                }
 
-if(!backgroundMask)
-detectBackground();
+            }
 
-if(!backgroundMask)
-return null;
+        }
 
-const w=source.width;
+    }
 
-const h=source.height;
 
-const c=
-document.createElement("canvas");
+    bgMask =
+        new Uint8Array(
+            width *
+            height
+        );
 
-c.width=w;
-c.height=h;
 
-const ctx=
-c.getContext("2d",{
-willReadFrequently:true
-});
+    for(
+        let y = 0;
+        y < height;
+        y++
+    ){
 
-ctx.drawImage(
-source,
-0,
-0,
-w,
-h
-);
+        const smallY =
+            Math.min(
+                smallHeight - 1,
+                Math.floor(
+                    y /
+                    height *
+                    smallHeight
+                )
+            );
 
-const image=
-ctx.getImageData(
-0,
-0,
-w,
-h
-);
 
-const data=image.data;
+        for(
+            let x = 0;
+            x < width;
+            x++
+        ){
 
-const mask=
-backgroundMask.mask;
+            const smallX =
+                Math.min(
+                    smallWidth - 1,
+                    Math.floor(
+                        x /
+                        width *
+                        smallWidth
+                    )
+                );
 
-const mw=
-backgroundMask.w;
 
-const mh=
-backgroundMask.h;
+            bgMask[
+                y *
+                width +
+                x
+            ] =
+                maskSmall[
+                    smallY *
+                    smallWidth +
+                    smallX
+                ];
 
-const strength=
-Number($("separatorStrength").value)/100;
+        }
 
-const objectContrast=
-Number($("objectContrast").value)/100;
+    }
 
-const bgMode=
-$("backgroundMode").value;
 
+    bgDetected =
+        true;
 
-for(let y=0;y<h;y++){
 
-for(let x=0;x<w;x++){
+    setStatus(
+        "FONDO DETECTADO"
+    );
 
-const mx=
-Math.min(
-mw-1,
-Math.floor(x/w*mw)
-);
 
-const my=
-Math.min(
-mh-1,
-Math.floor(y/h*mh)
-);
-
-const isBg=
-mask[my*mw+mx]>0;
-
-const i=
-(y*w+x)*4;
-
-let r=data[i];
-let g=data[i+1];
-let b=data[i+2];
-
-
-if(isBg){
-
-let gray=
-.299*r+
-.587*g+
-.114*b;
-
-if(bgMode==="light"){
-
-gray+=
-(255-gray)*
-strength*
-.75;
-
-}
-
-else if(bgMode==="dark"){
-
-gray*=
-1-strength*.65;
-
-}
-
-else if(bgMode==="neutral"){
-
-gray=
-128+
-(gray-128)*
-(1-strength*.75);
-
-}
-
-else{
-
-gray=
-128+
-(gray-128)*
-(1-strength*.45);
-
-}
-
-r=g=b=gray;
-
-}else{
-
-const gray=
-.299*r+
-.587*g+
-.114*b;
-
-let value=
-128+
-(gray-128)*
-(1+objectContrast*.9);
-
-value=
-Math.max(
-0,
-Math.min(
-255,
-value
-)
-);
-
-r=g=b=value;
-
-}
-
-
-data[i]=r;
-data[i+1]=g;
-data[i+2]=b;
-
-}
-
-}
-
-
-ctx.putImageData(
-image,
-0,
-0
-);
-
-processedSource=c;
-
-return c;
-
-}
-
-
-/* =========================================================
-   PREVIEW SEPARADOR
-========================================================= */
-
-function showSeparatorPreview(){
-
-if(!source)
-return;
-
-if(!backgroundMask)
-detectBackground();
-
-const c=
-applyBackgroundSeparation();
-
-if(!c)
-return;
-
-const preview=
-$("separatorPreview");
-
-preview.classList.remove("hidden");
-
-preview.innerHTML="";
-
-const canvas=
-document.createElement("canvas");
-
-canvas.width=c.width;
-
-canvas.height=c.height;
-
-canvas.getContext("2d")
-.drawImage(c,0,0);
-
-preview.appendChild(canvas);
-
-}
-
-
-/* =========================================================
-   GENERACION
-========================================================= */
-
-function regenerateIfPossible(){
-
-if(source)
-generate();
-
-}
-
-
-function generate(){
-
-if(!source){
-
-alert("Primero carga o pega una foto.");
-
-return;
-
-}
-
-if(active.size<1){
-
-alert("Selecciona al menos un patrón.");
-
-return;
-
-}
-
-const cols=
-Number($("cols").value);
-
-const rows=
-calculateRows();
-
-$("rowsVal").textContent=
-rows;
-
-
-/*
-   Fuente.
-*/
-
-let imgSource=source;
-
-if($("separatorEnabled").checked){
-
-imgSource=
-applyBackgroundSeparation() ||
-source;
-
-}else{
-
-processedSource=null;
-
-}
-
-
-/*
-   Canvas de muestreo.
-*/
-
-const c=
-document.createElement("canvas");
-
-c.width=cols;
-
-c.height=rows;
-
-const ctx=
-c.getContext("2d",{
-willReadFrequently:true
-});
-
-ctx.imageSmoothingEnabled=true;
-
-ctx.drawImage(
-imgSource,
-0,
-0,
-cols,
-rows
-);
-
-const data=
-ctx.getImageData(
-0,
-0,
-cols,
-rows
-).data;
-
-
-const arr=
-patterns
-.filter(p=>active.has(p.id))
-.sort(
-(a,b)=>a.density-b.density
-);
-
-
-cells=[];
-
-
-for(let y=0;y<rows;y++){
-
-for(let x=0;x<cols;x++){
-
-const i=
-(y*cols+x)*4;
-
-let gray=
-(
-.299*data[i]+
-.587*data[i+1]+
-.114*data[i+2]
-);
-
-
-/*
-   Convertimos a luminosidad normalizada.
-*/
-
-let light=
-gray/255;
-
-
-/*
-   Aplicamos las 10 zonas tonales.
-*/
-
-light=
-1-tonal(gray);
-
-
-/*
-   Aplicamos las máscaras DESPUÉS
-   del ajuste tonal global.
-*/
-
-light=
-applyMasks(
-light,
-x/Math.max(1,cols-1),
-y/Math.max(1,rows-1),
-cols,
-rows
-);
-
-
-let idx=
-Math.round(
-light*(arr.length-1)
-);
-
-idx=
-Math.max(
-0,
-Math.min(
-arr.length-1,
-idx
-)
-);
-
-
-cells.push({
-
-x,
-y,
-
-p:arr[idx],
-
-tone:light
-
-});
-
-}
-
-
-draw();
-
-updatePrintSheet();
-
-$("status").textContent=
-`Generado: ${cols} × ${rows} = ${(cols*rows).toLocaleString("es-CL")} cuadrados`;
+    generate();
 
 }
 
 
 /* =========================================================
-   DIBUJO
+   MASK DIMENSIONS
 ========================================================= */
 
-function draw(){
+function createMaskDimensions(){
 
-if(!cells.length)
-return;
-
-const cols=
-Number($("cols").value);
-
-const rows=
-calculateRows();
+    if(!source){
+        return;
+    }
 
 
-/*
-   Tamaño adaptativo.
-   Se genera una resolución razonable para
-   que la vista previa pueda mostrarla completa.
-*/
-
-const maxPreviewWidth=1500;
-
-const maxPreviewHeight=1100;
-
-const scale=
-Math.min(
-maxPreviewWidth/cols,
-maxPreviewHeight/rows
-);
-
-const cell=
-Math.max(
-1,
-Math.floor(scale)
-);
+    const max =
+        1000;
 
 
-const canvas=
-document.createElement("canvas");
-
-canvas.width=
-cols*cell;
-
-canvas.height=
-rows*cell;
-
-
-const ctx=
-canvas.getContext("2d");
-
-ctx.fillStyle="#fff";
-
-ctx.fillRect(
-0,
-0,
-canvas.width,
-canvas.height
-);
+    const scale =
+        Math.min(
+            1,
+            max /
+            Math.max(
+                source.naturalWidth,
+                source.naturalHeight
+            )
+        );
 
 
-cells.forEach(c=>{
-
-const x=
-c.x*cell;
-
-const y=
-c.y*cell;
-
-
-if(mode==="template"){
-
-ctx.strokeStyle="#d5d5d5";
-
-ctx.lineWidth=
-Math.max(
-.35,
-cell*.04
-);
-
-ctx.strokeRect(
-x,
-y,
-cell,
-cell
-);
-
-ctx.fillStyle="#111";
-
-ctx.font=
-`${Math.max(
-5,
-cell*.62
-)}px Arial`;
-
-ctx.textAlign="center";
-
-ctx.textBaseline="middle";
-
-ctx.fillText(
-patterns.findIndex(
-p=>p.id===c.p.id
-)+1,
-x+cell/2,
-y+cell/2
-);
-
-}else{
-
-drawPattern(
-ctx,
-c.p,
-x,
-y,
-cell
-);
-
-}
-
-});
+    maskW =
+        Math.max(
+            1,
+            Math.round(
+                source.naturalWidth *
+                scale
+            )
+        );
 
 
-$("preview").innerHTML="";
-
-$("preview").appendChild(canvas);
-
-
-/*
-   Actualiza orientación.
-*/
-
-updateOrientation();
+    maskH =
+        Math.max(
+            1,
+            Math.round(
+                source.naturalHeight *
+                scale
+            )
+        );
 
 }
 
 
 /* =========================================================
-   PATRONES
+   CREATE MASK
 ========================================================= */
 
-function drawPattern(ctx,p,x,y,s){
+function makeMask(){
 
-ctx.save();
+    const canvas =
+        document.createElement(
+            "canvas"
+        );
 
-ctx.beginPath();
 
-ctx.rect(x,y,s,s);
+    canvas.width =
+        maskW;
 
-ctx.clip();
+    canvas.height =
+        maskH;
 
-ctx.strokeStyle="#111";
 
-ctx.fillStyle="#111";
+    return {
 
-ctx.lineWidth=
-Math.max(
-.7,
-s*.10
-);
+        name:
+            `Máscara ${masks.length + 1}`,
 
-const m=s*.18;
+        canvas,
 
+        data:
+            new Uint8ClampedArray(
+                maskW *
+                maskH *
+                4
+            ),
 
-if(p.type==="empty"){
+        brightness:0,
 
-ctx.restore();
+        contrast:0,
 
-return;
+        enabled:true
 
-}
-
-
-if(p.type==="solid"){
-
-ctx.fillRect(
-x,
-y,
-s,
-s
-);
-
-ctx.restore();
-
-return;
-
-}
-
-
-if(p.type==="dot"){
-
-ctx.beginPath();
-
-ctx.arc(
-x+s/2,
-y+s/2,
-Math.max(
-.7,
-s*.10
-),
-0,
-Math.PI*2
-);
-
-ctx.fill();
-
-}
-
-
-else if(p.type==="h"){
-
-ctx.beginPath();
-
-ctx.moveTo(
-x+m,
-y+s/2
-);
-
-ctx.lineTo(
-x+s-m,
-y+s/2
-);
-
-ctx.stroke();
-
-}
-
-
-else if(p.type==="v"){
-
-ctx.beginPath();
-
-ctx.moveTo(
-x+s/2,
-y+m
-);
-
-ctx.lineTo(
-x+s/2,
-y+s-m
-);
-
-ctx.stroke();
-
-}
-
-
-else if(p.type==="diag"){
-
-ctx.beginPath();
-
-ctx.moveTo(
-x+m,
-y+s-m
-);
-
-ctx.lineTo(
-x+s-m,
-y+m
-);
-
-ctx.stroke();
-
-}
-
-
-else if(p.type==="back"){
-
-ctx.beginPath();
-
-ctx.moveTo(
-x+m,
-y+m
-);
-
-ctx.lineTo(
-x+s-m,
-y+s-m
-);
-
-ctx.stroke();
-
-}
-
-
-else if(p.type==="plus"){
-
-ctx.beginPath();
-
-ctx.moveTo(
-x+s/2,
-y+m
-);
-
-ctx.lineTo(
-x+s/2,
-y+s-m
-);
-
-ctx.moveTo(
-x+m,
-y+s/2
-);
-
-ctx.lineTo(
-x+s-m,
-y+s/2
-);
-
-ctx.stroke();
-
-}
-
-
-else if(p.type==="x"){
-
-ctx.beginPath();
-
-ctx.moveTo(
-x+m,
-y+m
-);
-
-ctx.lineTo(
-x+s-m,
-y+s-m
-);
-
-ctx.moveTo(
-x+s-m,
-y+m
-);
-
-ctx.lineTo(
-x+m,
-y+s-m
-);
-
-ctx.stroke();
-
-}
-
-
-else if(p.type==="h2"){
-
-ctx.beginPath();
-
-ctx.moveTo(
-x+m,
-y+s*.38
-);
-
-ctx.lineTo(
-x+s-m,
-y+s*.38
-);
-
-ctx.moveTo(
-x+m,
-y+s*.62
-);
-
-ctx.lineTo(
-x+s-m,
-y+s*.62
-);
-
-ctx.stroke();
-
-}
-
-
-else if(p.type==="v2"){
-
-ctx.beginPath();
-
-ctx.moveTo(
-x+s*.38,
-y+m
-);
-
-ctx.lineTo(
-x+s*.38,
-y+s-m
-);
-
-ctx.moveTo(
-x+s*.62,
-y+m
-);
-
-ctx.lineTo(
-x+s*.62,
-y+s-m
-);
-
-ctx.stroke();
-
-}
-
-
-else if(p.type==="star"){
-
-ctx.beginPath();
-
-ctx.moveTo(
-x+s/2,
-y+m
-);
-
-ctx.lineTo(
-x+s/2,
-y+s-m
-);
-
-ctx.moveTo(
-x+m,
-y+s/2
-);
-
-ctx.lineTo(
-x+s-m,
-y+s/2
-);
-
-ctx.moveTo(
-x+m,
-y+m
-);
-
-ctx.lineTo(
-x+s-m,
-y+s-m
-);
-
-ctx.moveTo(
-x+s-m,
-y+m
-);
-
-ctx.lineTo(
-x+m,
-y+s-m
-);
-
-ctx.stroke();
-
-}
-
-
-ctx.restore();
+    };
 
 }
 
 
 /* =========================================================
-   AJUSTES AUTOMATICOS
+   REFRESH MASK DATA
 ========================================================= */
 
-function evaluateSettings(){
-
-if(!source)
-return;
-
-
-const candidates=[];
-
-const contrasts=[
-.75,
-1,
-1.25,
-1.5,
-1.8,
-2.2
-];
-
-const blacks=[
-0,
-15,
-30,
-45,
-60
-];
-
-const details=[
-20,
-40,
-60,
-75,
-90
-];
-
-const curves=[
-"photo",
-"balanced",
-"graphic",
-"shadow"
-];
-
-
-for(const contrast of contrasts){
-
-for(const black of blacks){
-
-for(const detail of details){
-
-for(const curve of curves){
-
-candidates.push({
-contrast,
-black,
-detail,
-curve
-});
-
-}
-
-}
-
-}
-
-}
-
-
-const maxSize=180;
-
-const scale=
-Math.min(
-1,
-maxSize/
-Math.max(
-source.width,
-source.height
-)
-);
-
-const w=
-Math.max(
-20,
-Math.round(source.width*scale)
-);
-
-const h=
-Math.max(
-20,
-Math.round(source.height*scale)
-);
-
-
-const c=
-document.createElement("canvas");
-
-c.width=w;
-
-c.height=h;
-
-const ctx=
-c.getContext("2d",{
-willReadFrequently:true
-});
-
-ctx.drawImage(
-source,
-0,
-0,
-w,
-h
-);
-
-const data=
-ctx.getImageData(
-0,
-0,
-w,
-h
-).data;
-
-
-function oldTonal(gray,settings){
-
-let x=
-1-gray/255;
-
-x=
-.5+
-(x-.5)*
-settings.contrast;
-
-x=
-Math.max(
-0,
-Math.min(1,x)
-);
-
-x=
-Math.pow(
-x,
-1-Math.min(
-.8,
-settings.black/100*.8
-)
-);
-
-const d=
-settings.detail/100;
-
-x=
-Math.max(
-0,
-Math.min(
-1,
-(x-.5)*(1+d*.5)+.5
-)
-);
-
-if(settings.curve==="photo")
-x=Math.pow(x,1.15);
-
-if(settings.curve==="graphic")
-x=Math.pow(x,.78);
-
-if(settings.curve==="shadow")
-x=Math.pow(x,.62);
-
-return x;
-
-}
-
-
-function score(settings){
-
-const bins=
-new Array(12).fill(0);
-
-let mean=0;
-
-let edges=0;
-
-
-for(let y=0;y<h;y++){
-
-for(let x=0;x<w;x++){
-
-const i=
-(y*w+x)*4;
-
-const gray=
-.299*data[i]+
-.587*data[i+1]+
-.114*data[i+2];
-
-const v=
-oldTonal(gray,settings);
-
-const bin=
-Math.min(
-11,
-Math.floor(v*12)
-);
-
-bins[bin]++;
-
-mean+=v;
-
-
-if(x>0){
-
-const pi=
-(y*w+x-1)*4;
-
-const pg=
-.299*data[pi]+
-.587*data[pi+1]+
-.114*data[pi+2];
-
-edges+=
-Math.abs(gray-pg)/255;
-
-}
-
-if(y>0){
-
-const pi=
-((y-1)*w+x)*4;
-
-const pg=
-.299*data[pi]+
-.587*data[pi+1]+
-.114*data[pi+2];
-
-edges+=
-Math.abs(gray-pg)/255;
-
-}
-
-}
-
-}
-
-
-mean/=
-w*h;
-
-
-let variance=0;
-
-for(const n of bins){
-
-const p=n/(w*h);
-
-variance+=
-p*
-Math.pow(
-n>0?
-Math.log(1+p*11):
-0,
-2
-);
-
-}
-
-
-const balance=
-1-
-Math.abs(mean-.5)*1.6;
-
-const edgeScore=
-Math.min(
-1,
-edges/(w*h)*5
-);
-
-const tonalSpread=
-bins.filter(
-n=>n>w*h*.015
-).length/12;
-
-
-return
-balance*.28+
-edgeScore*.27+
-tonalSpread*.30+
-variance*.15;
-
-}
-
-
-let best=null;
-
-let bestScore=-Infinity;
-
-
-for(const candidate of candidates){
-
-const s=score(candidate);
-
-if(s>bestScore){
-
-bestScore=s;
-
-best=candidate;
-
-}
-
-}
-
-
-if(best){
-
-/*
-   En lugar de tener solamente un ajuste global,
-   distribuimos el resultado sobre los 10 puntos.
-*/
-
-const baseContrast=
-best.contrast;
-
-const baseBlack=
-best.black;
-
-const detail=
-best.detail;
-
-
-/*
-   Construcción progresiva:
-   sombras ligeramente más contrastadas,
-   medios equilibrados,
-   luces más suaves.
-*/
-
-tonePoints=[
-{
-brightness:-baseBlack*.18,
-contrast:baseContrast*1.05
-},
-{
-brightness:-baseBlack*.12,
-contrast:baseContrast*1.08
-},
-{
-brightness:-baseBlack*.08,
-contrast:baseContrast*1.10
-},
-{
-brightness:-baseBlack*.04,
-contrast:baseContrast*1.06
-},
-{
-brightness:0,
-contrast:baseContrast
-},
-{
-brightness:detail*.03,
-contrast:baseContrast*.98
-},
-{
-brightness:detail*.05,
-contrast:baseContrast*.95
-},
-{
-brightness:detail*.08,
-contrast:baseContrast*.92
-},
-{
-brightness:detail*.10,
-contrast:baseContrast*.88
-},
-{
-brightness:detail*.12,
-contrast:baseContrast*.82
-}
-];
-
-tonePoints=
-tonePoints.map(p=>({
-
-brightness:Math.max(
--100,
-Math.min(
-100,
-p.brightness
-)
-),
-
-contrast:Math.max(
-.1,
-Math.min(
-4,
-p.contrast
-)
-
-}));
-
-
-renderToneControls();
-
-regenerateIfPossible();
-
-
-$("status").textContent=
-`Ajustes automáticos aplicados · 10 zonas tonales optimizadas`;
-
-}
-
-}
-
-
-$("autoAdjust").onclick=()=>{
-
-if(!source){
-
-alert("Primero carga una foto.");
-
-return;
-
-}
-
-$("status").textContent=
-"Analizando combinaciones tonales…";
-
-setTimeout(
-evaluateSettings,
-30
-);
-
-};
-
-
-/* =========================================================
-   SEPARADOR
-========================================================= */
-
-$("separatorEnabled").addEventListener(
-"change",
-regenerateIfPossible
-);
-
-
-$("separatorStrength").addEventListener(
-"input",
-()=>{
-
-$("separatorStrengthVal").textContent=
-$("separatorStrength").value;
-
-regenerateIfPossible();
-
-}
-);
-
-
-$("objectContrast").addEventListener(
-"input",
-()=>{
-
-$("objectContrastVal").textContent=
-$("objectContrast").value;
-
-regenerateIfPossible();
-
-}
-);
-
-
-$("backgroundMode").addEventListener(
-"change",
-regenerateIfPossible
-);
-
-
-$("detectBackground").onclick=()=>{
-
-if(!source){
-
-alert("Primero carga una foto.");
-
-return;
-
-}
-
-detectBackground();
-
-showSeparatorPreview();
-
-$("status").textContent=
-"Fondo detectado.";
-
-};
-
-
-$("applyBackground").onclick=()=>{
-
-if(!source){
-
-alert("Primero carga una foto.");
-
-return;
-
-}
-
-$("separatorEnabled").checked=true;
-
-detectBackground();
-
-showSeparatorPreview();
-
-generate();
-
-$("status").textContent=
-"Separación de fondo aplicada.";
-
-};
-
-
-/* =========================================================
-   MODOS
-========================================================= */
-
-document
-.querySelectorAll(".modes button")
-.forEach(b=>{
-
-b.onclick=()=>{
-
-document
-.querySelectorAll(".modes button")
-.forEach(x=>
-x.classList.remove("active")
-);
-
-b.classList.add("active");
-
-mode=
-b.dataset.mode;
-
-if(cells.length)
-draw();
-else
-regenerateIfPossible();
-
-};
-
-});
-
-
-/* =========================================================
-   ORIENTACION AUTOMATICA
-========================================================= */
-
-function updateOrientation(){
-
-if(!source)
-return;
-
-const landscape=
-source.width>source.height;
-
-document.body.dataset.orientation=
-landscape?
-"landscape":
-"portrait";
+function refreshMaskData(mask){
+
+    mask.data =
+        mask.canvas
+            .getContext(
+                "2d",
+                {
+                    willReadFrequently:true
+                }
+            )
+            .getImageData(
+                0,
+                0,
+                maskW,
+                maskH
+            )
+            .data;
 
 }
 
 
 /* =========================================================
-   LEYENDA
+   MASK LIST
 ========================================================= */
 
-function createLegend(){
+function renderMaskList(){
 
-const legend=$("printLegend");
+    const list =
+        $("maskList");
 
-legend.innerHTML="";
+    list.innerHTML = "";
 
-patterns.forEach((p,i)=>{
 
-const item=
-document.createElement("div");
+    if(
+        !masks.length
+    ){
 
-item.className=
-"print-legend-item";
+        list.innerHTML = `
 
-item.innerHTML=`
+            <div class="help">
 
-<span class="print-legend-symbol">
-${i+1}
-</span>
+                No hay máscaras.
+                Crea una para trabajar por zonas.
 
-<span>
-${p.name.replace(
-/^[0-9]+\s·\s/,
-""
-)}
-</span>
+            </div>
 
-`;
+        `;
 
-legend.appendChild(item);
+        return;
 
-});
+    }
+
+
+    masks.forEach(
+        (mask,index) => {
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+
+            row.className =
+                "mask-item";
+
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.className =
+                "btn mask-select" +
+                (
+                    index === activeMask
+                        ? " active"
+                        : ""
+                );
+
+
+            button.innerHTML = `
+
+                <span
+                    class="mask-status ${
+                        mask.enabled
+                            ? ""
+                            : "off"
+                    }"
+                ></span>
+
+                ${mask.name}
+
+            `;
+
+
+            button.onclick =
+                () => {
+
+                    activeMask =
+                        index;
+
+
+                    $("maskBrightness")
+                        .value =
+                        mask.brightness;
+
+
+                    $("maskContrast")
+                        .value =
+                        mask.contrast;
+
+
+                    $("maskBrightnessVal")
+                        .textContent =
+                        mask.brightness;
+
+
+                    $("maskContrastVal")
+                        .textContent =
+                        mask.contrast;
+
+
+                    renderMaskList();
+
+
+                    if(
+                        $("maskEditorWrap")
+                            .style
+                            .display !==
+                        "none"
+                    ){
+
+                        renderMaskEditor();
+
+                    }
+
+                };
+
+
+            const deleteButton =
+                document.createElement(
+                    "button"
+                );
+
+
+            deleteButton.className =
+                "btn mask-delete";
+
+
+            deleteButton.textContent =
+                "×";
+
+
+            deleteButton.onclick =
+                () =>
+                    deleteMask(
+                        index
+                    );
+
+
+            row.appendChild(
+                button
+            );
+
+
+            row.appendChild(
+                deleteButton
+            );
+
+
+            list.appendChild(
+                row
+            );
+
+        }
+    );
 
 }
 
 
 /* =========================================================
-   PREPARAR IMPRESION
+   DELETE MASK
 ========================================================= */
 
-function updatePrintSheet(){
+function deleteMask(index){
 
-if(!cells.length)
-return;
+    masks.splice(
+        index,
+        1
+    );
 
-const sourceCanvas=
-$("preview").querySelector("canvas");
 
-if(!sourceCanvas)
-return;
+    activeMask =
+        Math.min(
+            activeMask,
+            masks.length - 1
+        );
 
-const printCanvas=
-$("printCanvas");
 
-printCanvas.width=
-sourceCanvas.width;
+    renderMaskList();
 
-printCanvas.height=
-sourceCanvas.height;
 
-const ctx=
-printCanvas.getContext("2d");
+    if(
+        activeMask >= 0
+    ){
 
-ctx.clearRect(
-0,
-0,
-printCanvas.width,
-printCanvas.height
-);
+        $("maskBrightness")
+            .value =
+            masks[
+                activeMask
+            ].brightness;
 
-ctx.drawImage(
-sourceCanvas,
-0,
-0
-);
 
-createLegend();
+        $("maskContrast")
+            .value =
+            masks[
+                activeMask
+            ].contrast;
 
-updateOrientation();
+    }
+
+
+    if(source){
+        generate();
+    }
+
+
+    if(
+        $("maskEditorWrap")
+            .style
+            .display !==
+        "none"
+    ){
+
+        renderMaskEditor();
+
+    }
 
 }
 
 
 /* =========================================================
-   PRINT DINAMICO A4
+   NEW MASK
 ========================================================= */
+
+$("newMask")
+    .addEventListener(
+        "click",
+        () => {
+
+            if(!source){
+
+                alert(
+                    "Carga una imagen primero."
+                );
+
+                return;
+
+            }
+
+
+            masks.push(
+                makeMask()
+            );
+
+
+            activeMask =
+                masks.length - 1;
+
+
+            renderMaskList();
+
+
+            $("maskBrightness")
+                .value =
+                0;
+
+
+            $("maskContrast")
+                .value =
+                0;
+
+
+            $("maskBrightnessVal")
+                .textContent =
+                0;
+
+
+            $("maskContrastVal")
+                .textContent =
+                0;
+
+
+            enterMaskEditor();
+
+        }
+    );
+
+
+/* =========================================================
+   DELETE CURRENT MASK
+========================================================= */
+
+$("deleteMask")
+    .addEventListener(
+        "click",
+        () => {
+
+            if(
+                activeMask >= 0
+            ){
+
+                deleteMask(
+                    activeMask
+                );
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   CLEAR MASK
+========================================================= */
+
+$("clearMask")
+    .addEventListener(
+        "click",
+        () => {
+
+            if(
+                activeMask < 0
+            ){
+                return;
+            }
+
+
+            const context =
+                masks[
+                    activeMask
+                ]
+                .canvas
+                .getContext(
+                    "2d"
+                );
+
+
+            context.clearRect(
+                0,
+                0,
+                maskW,
+                maskH
+            );
+
+
+            refreshMaskData(
+                masks[
+                    activeMask
+                ]
+            );
+
+
+            renderMaskEditor();
+
+            generate();
+
+        }
+    );
+
+
+/* =========================================================
+   MASK PARAMETERS
+========================================================= */
+
+$("maskBrightness")
+    .addEventListener(
+        "input",
+        () => {
+
+            if(
+                activeMask < 0
+            ){
+                return;
+            }
+
+
+            masks[
+                activeMask
+            ].brightness =
+                +$("maskBrightness")
+                    .value;
+
+
+            $("maskBrightnessVal")
+                .textContent =
+                masks[
+                    activeMask
+                ].brightness;
+
+
+            if(source){
+                generate();
+            }
+
+        }
+    );
+
+
+$("maskContrast")
+    .addEventListener(
+        "input",
+        () => {
+
+            if(
+                activeMask < 0
+            ){
+                return;
+            }
+
+
+            masks[
+                activeMask
+            ].contrast =
+                +$("maskContrast")
+                    .value;
+
+
+            $("maskContrastVal")
+                .textContent =
+                masks[
+                    activeMask
+                ].contrast;
+
+
+            if(source){
+                generate();
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   MASK EDITOR
+========================================================= */
+
+$("maskEditBtn")
+    .addEventListener(
+        "click",
+        () => {
+
+            if(
+                $("maskEditorWrap")
+                    .style
+                    .display ===
+                "none"
+            ){
+
+                enterMaskEditor();
+
+            }
+            else{
+
+                exitMaskEditor();
+
+            }
+
+        }
+    );
+
+
+function enterMaskEditor(){
+
+    if(!source){
+
+        alert(
+            "Carga una imagen primero."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        activeMask < 0
+    ){
+
+        masks.push(
+            makeMask()
+        );
+
+        activeMask = 0;
+
+        renderMaskList();
+
+    }
+
+
+    $("canvasWrap")
+        .style
+        .display =
+        "none";
+
+
+    $("empty")
+        .style
+        .display =
+        "none";
+
+
+    $("maskEditorWrap")
+        .style
+        .display =
+        "flex";
+
+
+    $("maskEditBtn")
+        .textContent =
+        "Cerrar edición";
+
+
+    renderMaskEditor();
+
+}
+
+
+function exitMaskEditor(){
+
+    $("maskEditorWrap")
+        .style
+        .display =
+        "none";
+
+
+    $("canvasWrap")
+        .style
+        .display =
+        source
+            ? "flex"
+            : "none";
+
+
+    $("maskEditBtn")
+        .textContent =
+        "Editar máscaras";
+
+}
+
+
+/* =========================================================
+   RENDER MASK EDITOR
+========================================================= */
+
+function renderMaskEditor(){
+
+    if(
+        !source ||
+        activeMask < 0
+    ){
+        return;
+    }
+
+
+    const base =
+        $("maskBase");
+
+    const overlay =
+        $("maskOverlay");
+
+
+    base.width =
+        maskW;
+
+    base.height =
+        maskH;
+
+
+    overlay.width =
+        maskW;
+
+    overlay.height =
+        maskH;
+
+
+    const baseContext =
+        base.getContext("2d");
+
+
+    baseContext.clearRect(
+        0,
+        0,
+        maskW,
+        maskH
+    );
+
+
+    baseContext.drawImage(
+        sourceCanvas,
+        0,
+        0,
+        maskW,
+        maskH
+    );
+
+
+    const overlayContext =
+        overlay.getContext("2d");
+
+
+    overlayContext.clearRect(
+        0,
+        0,
+        maskW,
+        maskH
+    );
+
+
+    overlayContext.drawImage(
+        masks[
+            activeMask
+        ].canvas,
+        0,
+        0
+    );
+
+
+    overlayContext.globalCompositeOperation =
+        "source-in";
+
+
+    overlayContext.fillStyle =
+        "rgba(255,59,141,.34)";
+
+
+    overlayContext.fillRect(
+        0,
+        0,
+        maskW,
+        maskH
+    );
+
+
+    overlayContext.globalCompositeOperation =
+        "source-over";
+
+}
+
+
+/* =========================================================
+   MASK PAINT
+========================================================= */
+
+$("maskOverlay")
+    .addEventListener(
+        "pointerdown",
+        event => {
+
+            if(
+                activeMask < 0
+            ){
+                return;
+            }
+
+
+            drawingMask =
+                true;
+
+
+            $("maskOverlay")
+                .setPointerCapture(
+                    event.pointerId
+                );
+
+
+            paintMask(event);
+
+        }
+    );
+
+
+$("maskOverlay")
+    .addEventListener(
+        "pointermove",
+        event => {
+
+            if(drawingMask){
+
+                paintMask(
+                    event
+                );
+
+            }
+
+        }
+    );
+
+
+$("maskOverlay")
+    .addEventListener(
+        "pointerup",
+        () => {
+
+            drawingMask =
+                false;
+
+
+            if(
+                activeMask >= 0
+            ){
+
+                refreshMaskData(
+                    masks[
+                        activeMask
+                    ]
+                );
+
+            }
+
+
+            generate();
+
+        }
+    );
+
+
+$("maskOverlay")
+    .addEventListener(
+        "pointercancel",
+        () => {
+
+            drawingMask =
+                false;
+
+
+            if(
+                activeMask >= 0
+            ){
+
+                refreshMaskData(
+                    masks[
+                        activeMask
+                    ]
+                );
+
+            }
+
+
+            generate();
+
+        }
+    );
+
+
+function paintMask(event){
+
+    if(
+        activeMask < 0
+    ){
+        return;
+    }
+
+
+    const rect =
+        $("maskOverlay")
+            .getBoundingClientRect();
+
+
+    const x =
+        (
+            event.clientX -
+            rect.left
+        ) *
+        maskW /
+        rect.width;
+
+
+    const y =
+        (
+            event.clientY -
+            rect.top
+        ) *
+        maskH /
+        rect.height;
+
+
+    const brush =
+        +$("brushSize").value *
+        (
+            maskW /
+            Math.max(
+                source.naturalWidth,
+                source.naturalHeight
+            )
+        );
+
+
+    const context =
+        masks[
+            activeMask
+        ]
+        .canvas
+        .getContext(
+            "2d"
+        );
+
+
+    context.save();
+
+
+    context.globalCompositeOperation =
+        $("brushMode").value ===
+        "erase"
+            ? "destination-out"
+            : "source-over";
+
+
+    context.fillStyle =
+        "#fff";
+
+
+    context.beginPath();
+
+
+    context.arc(
+        x,
+        y,
+        Math.max(
+            2,
+            brush
+        ),
+        0,
+        Math.PI * 2
+    );
+
+
+    context.fill();
+
+
+    context.restore();
+
+
+    renderMaskEditor();
+
+}
+
+
+/* =========================================================
+   AUTO ADJUST
+========================================================= */
+
+$("autoBtn")
+    .addEventListener(
+        "click",
+        autoAdjust
+    );
+
+
+function autoAdjust(){
+
+    if(!source){
+
+        alert(
+            "Carga una imagen primero."
+        );
+
+        return;
+
+    }
+
+
+    setStatus(
+        "BUSCANDO AJUSTE"
+    );
+
+
+    const scale =
+        Math.min(
+            1,
+            110 /
+            Math.max(
+                source.naturalWidth,
+                source.naturalHeight
+            )
+        );
+
+
+    const width =
+        Math.max(
+            20,
+            Math.round(
+                source.naturalWidth *
+                scale
+            )
+        );
+
+
+    const height =
+        Math.max(
+            20,
+            Math.round(
+                source.naturalHeight *
+                scale
+            )
+        );
+
+
+    const canvas =
+        document.createElement(
+            "canvas"
+        );
+
+
+    canvas.width =
+        width;
+
+    canvas.height =
+        height;
+
+
+    const context =
+        canvas.getContext(
+            "2d"
+        );
+
+
+    context.drawImage(
+        sourceCanvas,
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    const data =
+        context
+            .getImageData(
+                0,
+                0,
+                width,
+                height
+            )
+            .data;
+
+
+    let mean = 0;
+
+    let variance = 0;
+
+
+    for(
+        let i = 0;
+        i < data.length;
+        i += 4
+    ){
+
+        const gray =
+            (
+                .299 * data[i] +
+                .587 * data[i + 1] +
+                .114 * data[i + 2]
+            ) /
+            255;
+
+
+        mean += gray;
+
+    }
+
+
+    mean /=
+        data.length / 4;
+
+
+    for(
+        let i = 0;
+        i < data.length;
+        i += 4
+    ){
+
+        const gray =
+            (
+                .299 * data[i] +
+                .587 * data[i + 1] +
+                .114 * data[i + 2]
+            ) /
+            255;
+
+
+        variance +=
+            (
+                gray -
+                mean
+            ) *
+            (
+                gray -
+                mean
+            );
+
+    }
+
+
+    variance /=
+        data.length / 4;
+
+
+    const candidates = [];
+
+
+    const contrasts =
+        [
+            1.0,
+            1.25,
+            1.5,
+            1.8,
+            2.2
+        ];
+
+
+    const blacks =
+        [
+            5,
+            15,
+            25,
+            35,
+            45
+        ];
+
+
+    const details =
+        [
+            25,
+            45,
+            65,
+            80
+        ];
+
+
+    const curves =
+        [
+            -25,
+            0,
+            20,
+            40
+        ];
+
+
+    for(
+        const contrast
+        of contrasts
+    ){
+
+        for(
+            const black
+            of blacks
+        ){
+
+            for(
+                const detail
+                of details
+            ){
+
+                for(
+                    const curve
+                    of curves
+                ){
+
+                    let score = 0;
+
+
+                    const spread =
+                        Math.sqrt(
+                            variance
+                        ) *
+                        contrast;
+
+
+                    score +=
+                        Math.min(
+                            1,
+                            spread * 3
+                        );
+
+
+                    score +=
+                        Math.min(
+                            1,
+                            Math.abs(
+                                mean -
+                                .5
+                            ) *
+                            2
+                        );
+
+
+                    score +=
+                        detail /
+                        140;
+
+
+                    score -=
+                        Math.abs(
+                            curve
+                        ) /
+                        180;
+
+
+                    score -=
+                        Math.max(
+                            0,
+                            contrast -
+                            2.1
+                        ) *
+                        .5;
+
+
+                    candidates.push({
+
+                        score,
+
+                        contrast,
+
+                        black,
+
+                        detail,
+
+                        curve
+
+                    });
+
+                }
+
+            }
+
+        }
+
+    }
+
+
+    candidates.sort(
+        (a,b) =>
+            b.score -
+            a.score
+    );
+
+
+    const best =
+        candidates[0];
+
+
+    $("contrast").value =
+        best.contrast;
+
+    $("black").value =
+        best.black;
+
+    $("detail").value =
+        best.detail;
+
+    $("curve").value =
+        best.curve;
+
+
+    $("contrastVal")
+        .textContent =
+        best.contrast.toFixed(2);
+
+    $("blackVal")
+        .textContent =
+        best.black;
+
+    $("detailVal")
+        .textContent =
+        best.detail;
+
+    $("curveVal")
+        .textContent =
+        best.curve;
+
+
+    generate();
+
+
+    setStatus(
+        "AJUSTE AUTOMÁTICO APLICADO"
+    );
+
+}
+
+
+/* =========================================================
+   FORMAT
+========================================================= */
+
+function isLandscape(){
+
+    if(!source){
+        return false;
+    }
+
+
+    const orientation =
+        $("orientation").value;
+
+
+    if(
+        orientation ===
+        "landscape"
+    ){
+
+        return true;
+
+    }
+
+
+    if(
+        orientation ===
+        "portrait"
+    ){
+
+        return false;
+
+    }
+
+
+    return (
+        source.naturalWidth >
+        source.naturalHeight
+    );
+
+}
+
+
+function getPaper(){
+
+    return paperSizes[
+        $("paper").value
+    ];
+
+}
+
+
+function updateOrientationChip(){
+
+    const paper =
+        getPaper();
+
+
+    const landscape =
+        isLandscape();
+
+
+    const chip =
+        $("orientationChip");
+
+
+    chip.textContent =
+        `${paper.name} · ${
+            landscape
+                ? "horizontal"
+                : "vertical"
+        }`;
+
+
+    chip.classList.toggle(
+        "landscape",
+        landscape
+    );
+
+}
+
+
+[
+    "paper",
+    "orientation",
+    "margin",
+    "printScale",
+    "legendPosition",
+    "showTitle",
+    "showBorder"
+].forEach(
+    id => {
+
+        $(id)
+            .addEventListener(
+                "change",
+                () => {
+
+                    updateOrientationChip();
+
+                    updatePrintCSS();
+
+                }
+            );
+
+    }
+);
+
+
+/* =========================================================
+   PRINT CSS
+========================================================= */
+
+function updatePrintCSS(){
+
+    const paper =
+        getPaper();
+
+
+    const landscape =
+        isLandscape();
+
+
+    const margin =
+        +$("margin").value;
+
+
+    const pageWidth =
+        landscape
+            ? paper.h
+            : paper.w;
+
+
+    const pageHeight =
+        landscape
+            ? paper.w
+            : paper.h;
+
+
+    const usableWidth =
+        pageWidth -
+        margin * 2;
+
+
+    const usableHeight =
+        pageHeight -
+        margin * 2;
+
+
+    const titleHeight =
+        $("showTitle").checked
+            ? 15
+            : 0;
+
+
+    const footerHeight =
+        6;
+
+
+    $("printSheet")
+        .style
+        .width =
+        usableWidth +
+        "mm";
+
+
+    $("printSheet")
+        .style
+        .height =
+        (
+            usableHeight -
+            titleHeight -
+            footerHeight
+        ) +
+        "mm";
+
+
+    $("dynamicPrintStyle")
+        .textContent = `
+
+        @media print{
+
+            @page{
+
+                size:
+                    ${paper.css}
+                    ${
+                        landscape
+                            ? "landscape"
+                            : "portrait"
+                    };
+
+                margin:
+                    ${margin}mm;
+
+            }
+
+
+            #printSheet{
+
+                width:
+                    ${usableWidth}mm !important;
+
+                height:
+                    ${
+                        Math.max(
+                            10,
+                            usableHeight -
+                            titleHeight -
+                            footerHeight
+                        )
+                    }mm !important;
+
+            }
+
+
+            #printTitle{
+
+                ${
+                    $("showTitle").checked
+                        ? "display:flex;"
+                        : "display:none;"
+                }
+
+            }
+
+
+            #printImageBox{
+
+                ${
+                    $("showBorder").checked
+                        ? "border:1px solid #ddd;"
+                        : "border:0;"
+                }
+
+            }
+
+
+            #printLegend{
+
+                ${
+                    $("legendPosition").value ===
+                    "none"
+                        ? "display:none;"
+                        : ""
+                }
+
+            }
+
+
+            #printBody{
+
+                ${
+                    $("legendPosition").value ===
+                    "bottom"
+                        ? "flex-direction:column;"
+                        : "flex-direction:row;"
+                }
+
+            }
+
+
+            ${
+                $("legendPosition").value ===
+                "bottom"
+
+                    ? `
+                        #printLegend{
+
+                            flex:
+                                0 0 25mm;
+
+                            width:
+                                100%;
+
+                        }
+                      `
+
+                    : ""
+            }
+
+
+            ${
+                $("legendPosition").value ===
+                "inside"
+
+                    ? `
+                        #printImageBox{
+
+                            position:
+                                relative;
+
+                        }
+
+                        #printLegend{
+
+                            position:
+                                absolute;
+
+                            bottom:
+                                2mm;
+
+                            left:
+                                2mm;
+
+                            right:
+                                2mm;
+
+                            width:
+                                auto;
+
+                            max-height:
+                                30mm;
+
+                            overflow:
+                                hidden;
+
+                            background:
+                                rgba(
+                                    255,
+                                    255,
+                                    255,
+                                    .94
+                                );
+
+                            z-index:
+                                5;
+
+                        }
+                      `
+
+                    : ""
+            }
+
+        }
+
+    `;
+
+}
+
+
+/* =========================================================
+   PRINT LEGEND
+========================================================= */
+
+function buildPrintLegend(){
+
+    const legend =
+        $("printLegend");
+
+
+    if(
+        $("legendPosition")
+            .value ===
+        "none"
+    ){
+
+        legend.innerHTML =
+            "";
+
+        return;
+
+    }
+
+
+    legend.innerHTML = `
+
+        <h2>
+            LEYENDA · SÍMBOLOS
+        </h2>
+
+        <div class="legend-grid">
+
+            ${
+                patterns
+                    .map(
+                        pattern => `
+
+                            <div
+                                class="legend-item"
+                            >
+
+                                <span
+                                    class="legend-num"
+                                >
+                                    ${pattern.id}
+                                </span>
+
+                                <span
+                                    class="legend-symbol"
+                                >
+                                    ${
+                                        pattern.symbol ||
+                                        "□"
+                                    }
+                                </span>
+
+                                <span>
+                                    ${pattern.name}
+                                </span>
+
+                            </div>
+
+                        `
+                    )
+                    .join("")
+            }
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   PRINT CANVAS
+========================================================= */
+
+function buildPrintCanvas(){
+
+    if(
+        !window.pixelCells
+    ){
+        return;
+    }
+
+
+    const {
+        cols
+    } =
+        window.pixelGrid;
+
+
+    const cell =
+        Math.max(
+            5,
+            Math.min(
+                12,
+                Math.floor(
+                    2600 /
+                    cols
+                )
+            )
+        );
+
+
+    draw(
+        printCanvas,
+        printCtx,
+        cell
+    );
+
+}
+
+
+/* =========================================================
+   PREPARE PRINT
+========================================================= */
+
+function preparePrint(){
+
+    buildPrintCanvas();
+
+    buildPrintLegend();
+
+
+    const paper =
+        getPaper();
+
+
+    const landscape =
+        isLandscape();
+
+
+    const info = `
+
+        ${paper.name}
+        ·
+        ${
+            landscape
+                ? "Horizontal"
+                : "Vertical"
+        }
+        ·
+        ${
+            window.pixelGrid?.cols ||
+            0
+        }
+        ×
+        ${
+            window.pixelGrid?.rows ||
+            0
+        }
+        celdas
+
+    `;
+
+
+    $("printInfo")
+        .textContent =
+        info;
+
+
+    $("printFooterInfo")
+        .textContent =
+        info;
+
+
+    $("printTitle")
+        .style
+        .display =
+        $("showTitle").checked
+            ? "flex"
+            : "none";
+
+
+    updatePrintCSS();
+
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+$("printBtn")
+    .addEventListener(
+        "click",
+        () => {
+
+            if(!source){
+
+                alert(
+                    "Carga una imagen primero."
+                );
+
+                return;
+
+            }
+
+
+            if(
+                !window.pixelCells
+            ){
+
+                generate();
+
+            }
+
+
+            preparePrint();
+
+
+            setStatus(
+                "PREPARANDO IMPRESIÓN"
+            );
+
+
+            setTimeout(
+                () =>
+                    window.print(),
+                80
+            );
+
+        }
+    );
+
 
 window.addEventListener(
-"beforeprint",
-()=>{
+    "beforeprint",
+    () => {
 
-updatePrintSheet();
+        if(
+            source &&
+            window.pixelCells
+        ){
 
-const oldStyle=
-document.getElementById(
-"dynamicPrintStyle"
-);
+            preparePrint();
 
-if(oldStyle)
-oldStyle.remove();
+        }
 
-const style=
-document.createElement("style");
-
-style.id=
-"dynamicPrintStyle";
-
-const landscape=
-source &&
-source.width>source.height;
-
-style.textContent=
-landscape
-?
-`@media print{
-@page{
-size:A4 landscape;
-margin:7mm;
-}
-}`
-:
-`@media print{
-@page{
-size:A4 portrait;
-margin:7mm;
-}
-}`;
-
-document.head.appendChild(style);
-
-}
-);
-
-
-$("print").onclick=()=>{
-
-if(!source){
-
-alert("Primero carga una foto.");
-
-return;
-
-}
-
-updatePrintSheet();
-
-setTimeout(
-()=>window.print(),
-50
-);
-
-};
-
-
-/* =========================================================
-   GENERAR
-========================================================= */
-
-$("generate").onclick=
-generate;
-
-
-/* =========================================================
-   LIMPIAR
-========================================================= */
-
-$("clear").onclick=()=>{
-
-source=null;
-
-processedSource=null;
-
-backgroundMask=null;
-
-cells=[];
-
-masks=[];
-
-selectedMask=-1;
-
-$("preview").innerHTML=
-'<span class="status">Carga una foto y presiona Generar.</span>';
-
-$("separatorPreview").innerHTML="";
-
-$("separatorPreview")
-.classList.add("hidden");
-
-$("maskList").innerHTML="";
-
-$("maskSettings")
-.classList.add("hidden");
-
-$("status").textContent=
-"Sin imagen.";
-
-$("rowsVal").textContent=
-"—";
-
-updateMaskEditor();
-
-};
-
-
-/* =========================================================
-   REDIBUJO AL CAMBIAR TAMAÑO
-========================================================= */
-
-window.addEventListener(
-"resize",
-()=>{
-
-if(cells.length)
-draw();
-
-}
+    }
 );
 
 
 /* =========================================================
-   INICIALIZAR
+   INITIALIZE
 ========================================================= */
 
-updateMaskEditor();
+updateOrientationChip();
 
-createLegend();
+updatePrintCSS();
+
+})();
 
 </script>
 
