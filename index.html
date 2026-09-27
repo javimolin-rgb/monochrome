@@ -1,4 +1,3 @@
-```html
 <!doctype html>
 <html lang="es">
 <head>
@@ -7,281 +6,522 @@
 <title>Pixel Hatching Monochrome</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+box-sizing:border-box
+}
 
 body{
-  margin:0;
-  font-family:Inter,Arial,sans-serif;
-  background:#f2f2f2;
-  color:#171717
+margin:0;
+font-family:Inter,Arial,sans-serif;
+background:#f2f2f2;
+color:#171717
 }
 
 .app{
-  max-width:1600px;
-  margin:auto;
-  padding:20px
+max-width:1700px;
+margin:auto;
+padding:20px
 }
 
 .workspace{
-  display:grid;
-  grid-template-columns:390px minmax(0,1fr);
-  gap:18px;
-  align-items:start;
-  width:100%
+display:grid;
+grid-template-columns:410px minmax(0,1fr);
+gap:18px;
+align-items:start;
+width:100%
 }
 
 .left{
-  min-width:0;
-  grid-column:1
+min-width:0
 }
 
 .right{
-  min-width:0;
-  grid-column:2;
-  grid-row:1;
-  position:sticky;
-  top:14px;
-  align-self:start
+min-width:0;
+position:sticky;
+top:14px;
+align-self:start
 }
 
 h1{
-  margin:0 0 6px;
-  font-size:28px
+margin:0 0 6px;
+font-size:28px
 }
 
 .sub{
-  margin:0 0 20px;
-  color:#666
+margin:0 0 20px;
+color:#666
 }
 
 .panel{
-  background:#fff;
-  border:1px solid #ddd;
-  border-radius:14px;
-  padding:18px;
-  margin-bottom:16px;
-  box-shadow:0 2px 10px #0000000b
+background:#fff;
+border:1px solid #ddd;
+border-radius:14px;
+padding:18px;
+margin-bottom:16px;
+box-shadow:0 2px 10px #0000000b
 }
 
 .row{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  align-items:center
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+align-items:center
 }
 
 button,.filebtn{
-  border:1px solid #bbb;
-  background:#fff;
-  padding:10px 14px;
-  border-radius:9px;
-  cursor:pointer;
-  font-weight:600
+border:1px solid #bbb;
+background:#fff;
+padding:10px 14px;
+border-radius:9px;
+cursor:pointer;
+font-weight:600
 }
 
 button:hover,.filebtn:hover{
-  background:#f4f4f4
+background:#f4f4f4
 }
 
 .primary{
-  background:#111;
-  color:#fff;
-  border-color:#111
+background:#111;
+color:#fff;
+border-color:#111
 }
 
 .auto{
-  background:#111;
-  color:#fff;
-  border-color:#111;
-  width:100%;
-  padding:13px
-}
-
-.auto:hover{
-  background:#333
+background:#111;
+color:#fff;
+border-color:#111;
+width:100%;
+padding:13px
 }
 
 input[type=file]{
-  display:none
+display:none
 }
 
 .drop{
-  border:2px dashed #bbb;
-  border-radius:12px;
-  padding:22px;
-  text-align:center;
-  background:#fafafa;
-  cursor:pointer
+border:2px dashed #bbb;
+border-radius:12px;
+padding:22px;
+text-align:center;
+background:#fafafa;
+cursor:pointer
 }
 
 .drop.over{
-  border-color:#111;
-  background:#eee
+border-color:#111;
+background:#eee
 }
 
 .controls{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:14px
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:12px
 }
 
 .control label{
-  display:flex;
-  justify-content:space-between;
-  font-weight:600;
-  font-size:14px
+display:flex;
+justify-content:space-between;
+font-weight:600;
+font-size:13px;
+margin-bottom:5px
 }
 
 input[type=range]{
-  width:100%
+width:100%
 }
 
 select,input[type=number]{
-  width:100%;
-  padding:9px;
-  border:1px solid #bbb;
-  border-radius:8px;
-  background:#fff
+width:100%;
+padding:9px;
+border:1px solid #bbb;
+border-radius:8px;
+background:#fff
 }
 
 .modes button.active{
-  background:#111;
-  color:#fff
+background:#111;
+color:#fff
 }
 
 .palette{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
-  gap:8px;
-  margin-top:12px
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
+gap:8px;
+margin-top:12px
 }
 
 .swatch{
-  border:1px solid #ccc;
-  border-radius:10px;
-  padding:9px;
-  background:#fff;
-  cursor:pointer;
-  display:flex;
-  gap:8px;
-  align-items:center;
-  text-align:left
+border:1px solid #ccc;
+border-radius:10px;
+padding:9px;
+background:#fff;
+cursor:pointer;
+display:flex;
+gap:8px;
+align-items:center;
+text-align:left
 }
 
 .swatch.off{
-  opacity:.38
+opacity:.38
 }
 
 .swatch .mini{
-  width:42px;
-  height:42px;
-  border:1px solid #aaa;
-  background-color:#fff;
-  background-image:var(--pattern)
+width:42px;
+height:42px;
+border:1px solid #aaa;
+background-color:#fff;
+background-image:var(--pattern)
 }
 
 .swatch strong{
-  font-size:12px;
-  display:block
+font-size:12px;
+display:block
 }
 
 .swatch span{
-  font-size:11px;
-  color:#666
+font-size:11px;
+color:#666
 }
 
 .preview{
-  background:#ddd;
-  border-radius:12px;
-  padding:15px;
-  overflow:auto;
-  min-height:240px;
-  text-align:center
+background:#d8d8d8;
+border-radius:12px;
+padding:12px;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:300px;
+width:100%;
+overflow:hidden
 }
 
-canvas{
-  max-width:100%;
-  height:auto;
-  background:#fff
+.preview canvas{
+display:block;
+background:#fff;
+max-width:100%;
+max-height:calc(100vh - 100px);
+width:auto;
+height:auto;
+object-fit:contain;
+box-shadow:0 3px 15px #0002
 }
 
 .status{
-  font-size:13px;
-  color:#666
+font-size:13px;
+color:#666
 }
 
 .small{
-  font-size:12px;
-  color:#666
+font-size:12px;
+color:#666
 }
 
 .info{
-  background:#f7f7f7;
-  border-radius:9px;
-  padding:10px 12px;
-  font-size:12px;
-  color:#555;
-  line-height:1.45
+background:#f7f7f7;
+border-radius:9px;
+padding:10px 12px;
+font-size:12px;
+color:#555;
+line-height:1.45
 }
 
+/* =================================
+   10 ZONAS TONALES
+================================= */
+
+.tones{
+display:flex;
+flex-direction:column;
+gap:7px;
+margin-top:12px
+}
+
+.tone-row{
+display:grid;
+grid-template-columns:115px 1fr 1fr;
+gap:8px;
+align-items:center;
+padding:8px;
+border:1px solid #e0e0e0;
+border-radius:8px;
+background:#fafafa
+}
+
+.tone-name{
+font-size:11px;
+font-weight:700
+}
+
+.tone-control{
+min-width:0
+}
+
+.tone-control label{
+display:flex;
+justify-content:space-between;
+font-size:10px;
+color:#666;
+margin-bottom:2px
+}
+
+.tone-control input{
+margin:0
+}
+
+/* =================================
+   MASCARAS
+================================= */
+
+.mask-editor{
+position:relative;
+width:100%;
+background:#ddd;
+border:1px solid #ccc;
+border-radius:10px;
+overflow:hidden;
+margin-top:12px;
+cursor:crosshair
+}
+
+.mask-editor canvas{
+display:block;
+width:100%;
+height:auto
+}
+
+.mask-overlay{
+position:absolute;
+inset:0;
+pointer-events:none
+}
+
+.mask-box{
+position:absolute;
+border:2px solid #111;
+background:#1112;
+pointer-events:auto;
+cursor:pointer
+}
+
+.mask-box.selected{
+border:3px solid #ff0094;
+background:#ff009420
+}
+
+.mask-box.ellipse{
+border-radius:50%
+}
+
+.mask-list{
+display:flex;
+flex-direction:column;
+gap:7px;
+margin-top:10px
+}
+
+.mask-item{
+border:1px solid #ddd;
+border-radius:8px;
+padding:8px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:8px;
+background:#fafafa;
+cursor:pointer
+}
+
+.mask-item.selected{
+border-color:#111;
+background:#f0f0f0
+}
+
+.mask-actions{
+display:flex;
+gap:5px
+}
+
+.mask-actions button{
+padding:5px 8px;
+font-size:11px
+}
+
+.mask-settings{
+margin-top:12px;
+padding:12px;
+border:1px solid #ddd;
+border-radius:10px;
+background:#fafafa
+}
+
+/* =================================
+   SEPARADOR
+================================= */
+
 .separator-preview{
-  margin-top:12px;
-  border:1px solid #ddd;
-  border-radius:9px;
-  overflow:hidden;
-  background:#eee
+margin-top:12px;
+border:1px solid #ddd;
+border-radius:9px;
+overflow:hidden;
+background:#eee
 }
 
 .separator-preview canvas{
-  display:block;
-  width:100%;
-  max-height:180px;
-  object-fit:contain
+display:block;
+width:100%;
+max-height:180px;
+object-fit:contain
 }
 
 .hidden{
-  display:none
+display:none
 }
 
-@media(max-width:900px){
-  .workspace{
-    grid-template-columns:1fr
-  }
+/* =================================
+   LEYENDA
+================================= */
 
-  .right{
-    position:static
-  }
+.legend{
+margin-top:12px;
+padding:10px;
+border:1px solid #ddd;
+border-radius:9px;
+background:#fff;
+display:grid;
+grid-template-columns:repeat(6,1fr);
+gap:5px
 }
+
+.legend-item{
+font-size:10px;
+display:flex;
+align-items:center;
+gap:5px;
+white-space:nowrap
+}
+
+.legend-symbol{
+width:24px;
+height:24px;
+border:1px solid #aaa;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:12px;
+font-weight:700;
+background:#fff
+}
+
+/* =================================
+   HOJA DE IMPRESION
+================================= */
+
+.print-sheet{
+display:none
+}
+
+.print-canvas-wrap{
+display:flex;
+justify-content:center;
+align-items:center;
+width:100%
+}
+
+.print-sheet canvas{
+max-width:100%;
+max-height:245mm;
+object-fit:contain
+}
+
+.print-legend{
+display:grid;
+grid-template-columns:repeat(6,1fr);
+gap:4px;
+margin-top:4mm;
+font-size:8pt
+}
+
+.print-legend-item{
+display:flex;
+align-items:center;
+gap:4px
+}
+
+.print-legend-symbol{
+width:20px;
+height:20px;
+border:1px solid #999;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+font-size:9px
+}
+
+/* =================================
+   RESPONSIVE
+================================= */
+
+@media(max-width:1000px){
+
+.workspace{
+grid-template-columns:1fr
+}
+
+.right{
+position:static
+}
+
+.preview canvas{
+max-height:none
+}
+
+}
+
+@media(max-width:600px){
+
+.legend{
+grid-template-columns:repeat(3,1fr)
+}
+
+.tone-row{
+grid-template-columns:90px 1fr 1fr
+}
+
+}
+
+/* =================================
+   IMPRESION
+================================= */
 
 @media print{
-  body{
-    background:#fff
-  }
 
-  .app{
-    padding:0;
-    max-width:none
-  }
-
-  .no-print{
-    display:none!important
-  }
-
-  .panel.preview-panel{
-    border:0;
-    box-shadow:none;
-    padding:0
-  }
-
-  .preview{
-    padding:0;
-    background:#fff
-  }
-
-  canvas{
-    max-width:none
-  }
+body{
+background:#fff;
+margin:0
 }
+
+.app{
+display:none!important
+}
+
+.print-sheet{
+display:block!important;
+width:100%;
+height:100%;
+padding:0
+}
+
+.print-sheet canvas{
+max-width:100%;
+max-height:245mm
+}
+
+}
+
 </style>
 </head>
 
@@ -291,27 +531,39 @@ canvas{
 
 <div class="workspace">
 
+<!-- =========================================================
+     PANEL IZQUIERDO
+========================================================= -->
+
 <div class="left no-print">
 
 <h1>Pixel Hatching Monochrome</h1>
 
 <p class="sub">
-Ajusta la imagen en tiempo real. Cada número representa un símbolo de achurado, nunca un color.
+Convierte imágenes en una plantilla de cuadrados numerados o en una
+versión final de achurado monocromo.
 </p>
 
 <!-- CARGA -->
+
 <div class="panel">
 
 <div id="drop" class="drop">
+
 <b>Pega una foto aquí con ⌘V / Ctrl+V</b><br>
+
 <span class="small">
 También puedes arrastrarla o seleccionar un archivo.
 </span>
+
 <br><br>
 
 <label class="filebtn">
+
 Seleccionar foto
+
 <input id="file" type="file" accept="image/*">
+
 </label>
 
 </div>
@@ -339,7 +591,8 @@ Sin imagen.
 </div>
 
 
-<!-- AJUSTES -->
+<!-- AJUSTES GENERALES -->
+
 <div class="panel">
 
 <div class="row modes">
@@ -354,7 +607,6 @@ Vista previa final
 
 </div>
 
-
 <div style="margin-top:14px">
 
 <button id="autoAdjust" class="auto">
@@ -362,17 +614,14 @@ Vista previa final
 </button>
 
 <div class="info" style="margin-top:9px">
-El sistema analiza la imagen y busca automáticamente una combinación de
-contraste, profundidad de negros, detalle y curva tonal que conserve
-volumen y lectura después de convertirla a achurado.
+Analiza la imagen y busca una combinación tonal que conserve
+volumen, contraste y lectura después de convertirla a símbolos.
 </div>
 
 </div>
-
 
 <div class="controls" style="margin-top:14px">
 
-<!-- SOLO COLUMNAS -->
 <div class="control">
 
 <label>
@@ -390,8 +639,6 @@ value="150"
 
 </div>
 
-
-<!-- FILAS AUTOMATICAS -->
 <div class="control">
 
 <label>
@@ -400,89 +647,146 @@ Filas automáticas
 </label>
 
 <div class="info">
-Calculadas automáticamente según la proporción original de la imagen.
+Se calculan automáticamente según la proporción de la imagen.
 </div>
 
 </div>
 
+</div>
+
+</div>
+
+
+<!-- =========================================================
+     10 NIVELES TONALES
+========================================================= -->
+
+<div class="panel">
+
+<b>10 niveles de luces y sombras</b>
+
+<div class="info" style="margin-top:9px">
+
+Cada punto representa una zona tonal independiente.
+Puedes controlar el <b>brillo</b> y el <b>contraste</b> de cada nivel.
+Los cambios se interpolan entre los 10 puntos.
+
+</div>
+
+<div id="toneControls" class="tones"></div>
+
+<div class="row" style="margin-top:10px">
+
+<button id="resetTones">
+Restablecer tonos
+</button>
+
+<button id="invertTones">
+Invertir tonos
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+     MASCARAS
+========================================================= -->
+
+<div class="panel">
+
+<div class="row" style="justify-content:space-between">
+
+<b>Máscaras de ajuste local</b>
+
+<button id="addMask">
+＋ Nueva máscara
+</button>
+
+</div>
+
+<div class="info" style="margin-top:9px">
+
+Crea una zona sobre la imagen y aplica ajustes de brillo y contraste
+solo dentro de ella. Puedes crear varias máscaras independientes.
+
+</div>
+
+<div class="mask-editor">
+
+<canvas id="maskCanvas"></canvas>
+
+<div id="maskOverlay" class="mask-overlay"></div>
+
+</div>
+
+<div class="small" style="margin-top:7px">
+
+Arrastra sobre la imagen para crear una máscara. Haz clic sobre una
+máscara existente para editarla.
+
+</div>
+
+<div id="maskList" class="mask-list"></div>
+
+<div id="maskSettings" class="mask-settings hidden">
+
+<b id="maskTitle">
+Máscara seleccionada
+</b>
+
+<div class="controls" style="margin-top:10px">
 
 <div class="control">
 
 <label>
-Contraste
-<span id="contrastVal">1.00×</span>
+Brillo
+<span id="maskBrightnessVal">0</span>
 </label>
 
 <input
-id="contrast"
+id="maskBrightness"
 type="range"
-min="0.1"
-max="5"
-step="0.05"
-value="1"
->
-
-</div>
-
-
-<div class="control">
-
-<label>
-Profundidad de negros
-<span id="blackVal">0</span>
-</label>
-
-<input
-id="black"
-type="range"
-min="0"
+min="-100"
 max="100"
 value="0"
 >
 
 </div>
 
-
 <div class="control">
 
 <label>
-Detalle / microcontraste
-<span id="detailVal">50</span>
+Contraste
+<span id="maskContrastVal">1.00×</span>
 </label>
 
 <input
-id="detail"
+id="maskContrast"
 type="range"
-min="0"
-max="100"
-value="50"
+min="0.1"
+max="4"
+step="0.05"
+value="1"
 >
 
 </div>
 
-
 <div class="control">
 
 <label>
-Curva tonal
+Forma
 </label>
 
-<select id="curve">
+<select id="maskShape">
 
-<option value="photo">
-Fotográfica
+<option value="rect">
+Rectángulo
 </option>
 
-<option value="balanced" selected>
-Balanceada
-</option>
-
-<option value="graphic">
-Gráfica
-</option>
-
-<option value="shadow">
-Sombras fuertes
+<option value="ellipse">
+Elipse
 </option>
 
 </select>
@@ -491,10 +795,26 @@ Sombras fuertes
 
 </div>
 
+<div class="row" style="margin-top:10px">
+
+<button id="duplicateMask">
+Duplicar
+</button>
+
+<button id="deleteMask">
+Eliminar máscara
+</button>
+
+</div>
+
+</div>
+
 </div>
 
 
-<!-- SEPARADOR DEL FONDO -->
+<!-- =========================================================
+     SEPARADOR
+========================================================= -->
 
 <div class="panel">
 
@@ -514,13 +834,11 @@ Activar
 
 <div class="info" style="margin-top:10px">
 
-Detecta automáticamente las zonas conectadas al borde de la imagen
-que presentan características similares de color/luminosidad.
-Es útil para separar cielo, paredes, fondos lisos y otros fondos
-del objeto principal.
+Detecta automáticamente zonas conectadas al borde que presentan
+características similares. Útil para separar cielo, paredes,
+fondos lisos y otros fondos del objeto principal.
 
 </div>
-
 
 <div class="controls" style="margin-top:14px">
 
@@ -541,12 +859,10 @@ value="60"
 
 </div>
 
-
 <div class="control">
 
 <label>
 Fondo
-<span id="backgroundValue">Automático</span>
 </label>
 
 <select id="backgroundMode">
@@ -571,7 +887,6 @@ Neutralizar
 
 </div>
 
-
 <div class="control">
 
 <label>
@@ -591,7 +906,6 @@ value="35"
 
 </div>
 
-
 <div class="row" style="margin-top:12px">
 
 <button id="detectBackground">
@@ -604,18 +918,19 @@ Aplicar separación
 
 </div>
 
-
 <div id="separatorPreview" class="separator-preview hidden"></div>
 
 </div>
 
 
-<!-- PATRONES -->
+<!-- =========================================================
+     PATRONES
+========================================================= -->
 
 <div class="panel">
 
 <b>
-Patrones disponibles — selecciona cuáles quieres usar
+Patrones disponibles
 </b>
 
 <div class="row" style="margin-top:10px">
@@ -639,8 +954,10 @@ Limpiar selección
 <div id="palette" class="palette"></div>
 
 <p class="small">
-Cada cuadrado recibe un único símbolo. El realismo se obtiene combinando
-miles de cuadrados y redistribuyendo los tonos entre los símbolos activos.
+
+Cada número representa siempre un único símbolo.
+El resultado se construye combinando miles de cuadrados.
+
 </p>
 
 </div>
@@ -648,7 +965,9 @@ miles de cuadrados y redistribuyendo los tonos entre los símbolos activos.
 </div>
 
 
-<!-- PREVIEW -->
+<!-- =========================================================
+     PREVIEW DERECHA
+========================================================= -->
 
 <div class="right">
 
@@ -670,58 +989,129 @@ Carga una foto y presiona Generar.
 </div>
 
 
+<!-- =========================================================
+     HOJA DE IMPRESION
+========================================================= -->
+
+<div id="printSheet" class="print-sheet">
+
+<div class="print-canvas-wrap">
+
+<canvas id="printCanvas"></canvas>
+
+</div>
+
+<div id="printLegend" class="print-legend"></div>
+
+</div>
+
+
 <script>
 
-const patterns = [
+/* =========================================================
+   PATRONES
+========================================================= */
 
-{id:"white",name:"1 · Vacío",short:"",type:"empty",density:0.00,basic:true},
+const patterns=[
 
-{id:"dot",name:"2 · Punto",short:"·",type:"dot",density:0.13,basic:true},
+{id:"white",name:"1 · Vacío",short:"",type:"empty",density:0,basic:true},
 
-{id:"h",name:"3 · Línea horizontal",short:"—",type:"h",density:0.25,basic:true},
+{id:"dot",name:"2 · Punto",short:"·",type:"dot",density:.13,basic:true},
 
-{id:"v",name:"4 · Línea vertical",short:"|",type:"v",density:0.37,basic:true},
+{id:"h",name:"3 · Línea horizontal",short:"—",type:"h",density:.25,basic:true},
 
-{id:"diag",name:"5 · Diagonal /",short:"/",type:"diag",density:0.49,basic:true},
+{id:"v",name:"4 · Línea vertical",short:"|",type:"v",density:.37,basic:true},
 
-{id:"back",name:"6 · Diagonal \\",short:"\\",type:"back",density:0.58,basic:true},
+{id:"diag",name:"5 · Diagonal /",short:"/",type:"diag",density:.49,basic:true},
 
-{id:"plus",name:"7 · Cruz +",short:"+",type:"plus",density:0.67,basic:true},
+{id:"back",name:"6 · Diagonal \\",short:"\\",type:"back",density:.58,basic:true},
 
-{id:"x",name:"8 · Cruz ×",short:"×",type:"x",density:0.75,basic:true},
+{id:"plus",name:"7 · Cruz +",short:"+",type:"plus",density:.67,basic:true},
 
-{id:"h2",name:"9 · Doble horizontal",short:"=",type:"h2",density:0.82,basic:true},
+{id:"x",name:"8 · Cruz ×",short:"×",type:"x",density:.75,basic:true},
 
-{id:"v2",name:"10 · Doble vertical",short:"‖",type:"v2",density:0.87,basic:true},
+{id:"h2",name:"9 · Doble horizontal",short:"=",type:"h2",density:.82,basic:true},
 
-{id:"star",name:"11 · Cuatro líneas",short:"✣",type:"star",density:0.91,basic:true},
+{id:"v2",name:"10 · Doble vertical",short:"‖",type:"v2",density:.87,basic:true},
+
+{id:"star",name:"11 · Cuatro líneas",short:"✣",type:"star",density:.91,basic:true},
 
 {id:"solid",name:"12 · Bloque sólido",short:"■",type:"solid",density:1,basic:true}
 
 ];
 
 
-let active = new Set(patterns.map(p=>p.id));
+let active=new Set(patterns.map(p=>p.id));
 
-let source = null;
+let source=null;
 
-let processedSource = null;
+let processedSource=null;
 
-let mode = "template";
+let mode="template";
 
-let cells = [];
+let cells=[];
 
-let backgroundMask = null;
-
-
-const $ = id => document.getElementById(id);
-
-const palette = $("palette");
+let backgroundMask=null;
 
 
-/* ================================
-   PATRONES
-================================ */
+/* =========================================================
+   10 PUNTOS TONALES
+========================================================= */
+
+const toneDefaults=[
+{brightness:0,contrast:1},
+{brightness:0,contrast:1},
+{brightness:0,contrast:1},
+{brightness:0,contrast:1},
+{brightness:0,contrast:1},
+{brightness:0,contrast:1},
+{brightness:0,contrast:1},
+{brightness:0,contrast:1},
+{brightness:0,contrast:1},
+{brightness:0,contrast:1}
+];
+
+let tonePoints=toneDefaults.map(x=>({...x}));
+
+
+/* =========================================================
+   MASCARAS
+========================================================= */
+
+let masks=[];
+
+let selectedMask=-1;
+
+let drawingMask=false;
+
+let maskStart=null;
+
+
+/* =========================================================
+   UTIL
+========================================================= */
+
+const $=id=>document.getElementById(id);
+
+const palette=$("palette");
+
+const toneNames=[
+"1 · Sombras profundas",
+"2 · Sombras",
+"3 · Oscuros",
+"4 · Medios oscuros",
+"5 · Medios",
+"6 · Medios claros",
+"7 · Claros",
+"8 · Luces",
+"9 · Luces altas",
+"10 · Blanco / máximo"
+];
+
+
+/* =========================================================
+   PATRONES CSS
+========================================================= */
 
 function makePatternCSS(p){
 
@@ -774,13 +1164,15 @@ patterns.forEach(p=>{
 
 const b=document.createElement("button");
 
-b.className="swatch"+(active.has(p.id)?"":" off");
+b.className=
+"swatch"+
+(active.has(p.id)?"":" off");
 
 b.innerHTML=`
 <span class="mini" style="--pattern:${makePatternCSS(p)}"></span>
 <span>
 <strong>${p.name}</strong>
-<span>${p.basic?"fácil de replicar":"más complejo"}</span>
+<span>símbolo ${patterns.indexOf(p)+1}</span>
 </span>
 `;
 
@@ -841,82 +1233,166 @@ renderPalette();
 };
 
 
-/* ================================
-   CONTROLES
-================================ */
+/* =========================================================
+   10 CONTROLES TONALES
+========================================================= */
+
+function renderToneControls(){
+
+const container=$("toneControls");
+
+container.innerHTML="";
+
+tonePoints.forEach((point,i)=>{
+
+const row=document.createElement("div");
+
+row.className="tone-row";
+
+row.innerHTML=`
+
+<div class="tone-name">
+${toneNames[i]}
+</div>
+
+<div class="tone-control">
+
+<label>
+Brillo
+<span id="tb${i}">${point.brightness}</span>
+</label>
+
+<input
+type="range"
+min="-100"
+max="100"
+value="${point.brightness}"
+data-tone="${i}"
+data-type="brightness"
+>
+
+</div>
+
+<div class="tone-control">
+
+<label>
+Contraste
+<span id="tc${i}">${point.contrast.toFixed(2)}×</span>
+</label>
+
+<input
+type="range"
+min="0.1"
+max="4"
+step="0.05"
+value="${point.contrast}"
+data-tone="${i}"
+data-type="contrast"
+>
+
+</div>
+`;
+
+container.appendChild(row);
+
+});
+
+container
+.querySelectorAll("input")
+.forEach(input=>{
+
+input.addEventListener("input",()=>{
+
+const i=Number(input.dataset.tone);
+
+if(input.dataset.type==="brightness"){
+
+tonePoints[i].brightness=
+Number(input.value);
+
+$("tb"+i).textContent=
+input.value;
+
+}else{
+
+tonePoints[i].contrast=
+Number(input.value);
+
+$("tc"+i).textContent=
+Number(input.value).toFixed(2)+"×";
+
+}
+
+regenerateIfPossible();
+
+});
+
+});
+
+}
+
+renderToneControls();
+
+
+$("resetTones").onclick=()=>{
+
+tonePoints=
+toneDefaults.map(x=>({...x}));
+
+renderToneControls();
+
+regenerateIfPossible();
+
+};
+
+
+$("invertTones").onclick=()=>{
+
+tonePoints=
+tonePoints.map(p=>({
+
+brightness:-p.brightness,
+
+contrast:p.contrast
+
+}));
+
+renderToneControls();
+
+regenerateIfPossible();
+
+};
+
+
+/* =========================================================
+   COLUMNAS
+========================================================= */
 
 $("cols").addEventListener("input",()=>{
 
+$("colsVal").textContent=
+$("cols").value;
+
 updateRows();
 
-$("colsVal").textContent=$("cols").value;
-
 regenerateIfPossible();
 
 });
 
-
-["contrast","black","detail","separatorStrength","objectContrast"].forEach(id=>{
-
-$(id).addEventListener("input",()=>{
-
-const v=$(id).value;
-
-if(id==="contrast")
-$("contrastVal").textContent=
-`${Number(v).toFixed(2)}×`;
-
-if(id==="black")
-$("blackVal").textContent=v;
-
-if(id==="detail")
-$("detailVal").textContent=v;
-
-if(id==="separatorStrength")
-$("separatorStrengthVal").textContent=v;
-
-if(id==="objectContrast")
-$("objectContrastVal").textContent=v;
-
-regenerateIfPossible();
-
-});
-
-});
-
-
-$("curve").addEventListener(
-"change",
-regenerateIfPossible
-);
-
-
-$("separatorEnabled").addEventListener(
-"change",
-regenerateIfPossible
-);
-
-
-$("backgroundMode").addEventListener(
-"change",
-regenerateIfPossible
-);
-
-
-/* ================================
-   FILAS AUTOMATICAS
-================================ */
 
 function calculateRows(){
 
 if(!source)
 return null;
 
-const cols=Number($("cols").value);
+const cols=
+Number($("cols").value);
 
 return Math.max(
 1,
-Math.round(cols*source.height/source.width)
+Math.round(
+cols*source.height/source.width
+)
 );
 
 }
@@ -938,9 +1414,9 @@ calculateRows();
 }
 
 
-/* ================================
+/* =========================================================
    CARGA
-================================ */
+========================================================= */
 
 function loadFile(file){
 
@@ -957,10 +1433,16 @@ processedSource=null;
 
 backgroundMask=null;
 
+masks=[];
+
+selectedMask=-1;
+
 $("status").textContent=
 `Foto cargada: ${img.width} × ${img.height}`;
 
 updateRows();
+
+updateMaskEditor();
 
 generate();
 
@@ -1034,53 +1516,18 @@ e.preventDefault();
 );
 
 
-/* ================================
-   TONAL
-================================ */
+/* =========================================================
+   TONO CON 10 PUNTOS
+========================================================= */
 
-function tonal(gray){
+function applyTonePoint(value,point){
 
-let x=1-gray/255;
+let x=value;
 
-const contrast=
-Number($("contrast").value);
+x=.5+
+(x-.5)*point.contrast;
 
-x=.5+(x-.5)*contrast;
-
-x=Math.max(0,Math.min(1,x));
-
-
-const black=
-Number($("black").value)/100;
-
-x=Math.pow(
-x,
-1-Math.min(.8,black*.8)
-);
-
-
-const detail=
-Number($("detail").value)/100;
-
-x=Math.max(
-0,
-Math.min(
-1,
-(x-.5)*(1+detail*.5)+.5
-)
-);
-
-
-const curve=$("curve").value;
-
-if(curve==="photo")
-x=Math.pow(x,1.15);
-
-if(curve==="graphic")
-x=Math.pow(x,.78);
-
-if(curve==="shadow")
-x=Math.pow(x,.62);
+x+=point.brightness/200;
 
 return Math.max(
 0,
@@ -1090,62 +1537,736 @@ Math.min(1,x)
 }
 
 
-/* ================================
-   SEPARADOR DE FONDO
-================================ */
+function tonal(gray){
 
 /*
-   La detección parte desde los bordes.
-   Las zonas visualmente similares al borde
-   se consideran candidatas a fondo.
+   Invertimos luminosidad porque:
+   blanco = patrón vacío
+   negro = patrón denso
 */
+
+let x=
+1-gray/255;
+
+
+/*
+   Curva base.
+*/
+
+const positions=
+tonePoints.map((_,i)=>
+i/(tonePoints.length-1)
+);
+
+
+/*
+   Calculamos el resultado de cada
+   uno de los 10 puntos.
+*/
+
+const values=
+tonePoints.map((p,i)=>
+applyTonePoint(
+positions[i],
+p
+)
+);
+
+
+/*
+   Encontramos el segmento tonal.
+*/
+
+let segment=0;
+
+while(
+segment<positions.length-2 &&
+x>positions[segment+1]
+){
+
+segment++;
+
+}
+
+
+const a=positions[segment];
+
+const b=positions[segment+1];
+
+const va=values[segment];
+
+const vb=values[segment+1];
+
+let t=
+(b-a)===0
+?0
+:(x-a)/(b-a);
+
+
+t=Math.max(0,Math.min(1,t));
+
+x=
+va+
+(vb-va)*t;
+
+
+return Math.max(
+0,
+Math.min(1,x)
+);
+
+}
+
+
+/* =========================================================
+   MASCARAS
+========================================================= */
+
+function updateMaskEditor(){
+
+const canvas=$("maskCanvas");
+
+const ctx=canvas.getContext("2d");
+
+if(!source){
+
+canvas.width=300;
+canvas.height=200;
+
+ctx.fillStyle="#eee";
+ctx.fillRect(0,0,300,200);
+
+renderMaskBoxes();
+
+return;
+
+}
+
+const maxWidth=390;
+
+const scale=
+Math.min(
+1,
+maxWidth/source.width
+);
+
+canvas.width=
+Math.round(source.width*scale);
+
+canvas.height=
+Math.round(source.height*scale);
+
+ctx.clearRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+ctx.drawImage(
+source,
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+renderMaskBoxes();
+
+}
+
+
+function renderMaskBoxes(){
+
+const overlay=$("maskOverlay");
+
+overlay.innerHTML="";
+
+masks.forEach((mask,i)=>{
+
+const box=document.createElement("div");
+
+box.className=
+"mask-box"+
+(i===selectedMask?" selected":"")+
+(mask.shape==="ellipse"?" ellipse":"");
+
+box.style.left=
+(mask.x*100)+"%";
+
+box.style.top=
+(mask.y*100)+"%";
+
+box.style.width=
+(mask.w*100)+"%";
+
+box.style.height=
+(mask.h*100)+"%";
+
+box.onclick=e=>{
+
+e.stopPropagation();
+
+selectedMask=i;
+
+renderMaskBoxes();
+
+showMaskSettings();
+
+};
+
+overlay.appendChild(box);
+
+});
+
+renderMaskList();
+
+}
+
+
+function renderMaskList(){
+
+const list=$("maskList");
+
+list.innerHTML="";
+
+masks.forEach((mask,i)=>{
+
+const item=document.createElement("div");
+
+item.className=
+"mask-item"+
+(i===selectedMask?" selected":"");
+
+item.innerHTML=`
+
+<span>
+<b>Máscara ${i+1}</b><br>
+<span class="small">
+${mask.shape==="ellipse"?"Elipse":"Rectángulo"}
+· brillo ${mask.brightness}
+· contraste ${mask.contrast.toFixed(2)}×
+</span>
+</span>
+
+<span class="mask-actions">
+
+<button data-select="${i}">
+Editar
+</button>
+
+<button data-delete="${i}">
+×
+</button>
+
+</span>
+`;
+
+item.onclick=()=>{
+
+selectedMask=i;
+
+renderMaskBoxes();
+
+showMaskSettings();
+
+};
+
+list.appendChild(item);
+
+});
+
+}
+
+
+function showMaskSettings(){
+
+const panel=$("maskSettings");
+
+if(selectedMask<0 || !masks[selectedMask]){
+
+panel.classList.add("hidden");
+
+return;
+
+}
+
+panel.classList.remove("hidden");
+
+const mask=masks[selectedMask];
+
+$("maskTitle").textContent=
+`Máscara ${selectedMask+1}`;
+
+$("maskBrightness").value=
+mask.brightness;
+
+$("maskBrightnessVal").textContent=
+mask.brightness;
+
+$("maskContrast").value=
+mask.contrast;
+
+$("maskContrastVal").textContent=
+mask.contrast.toFixed(2)+"×";
+
+$("maskShape").value=
+mask.shape;
+
+}
+
+
+$("addMask").onclick=()=>{
+
+if(!source){
+
+alert("Primero carga una imagen.");
+
+return;
+
+}
+
+const size=.28;
+
+const mask={
+
+x:.36,
+
+y:.36,
+
+w:size,
+
+h:size,
+
+shape:"rect",
+
+brightness:0,
+
+contrast:1
+
+};
+
+masks.push(mask);
+
+selectedMask=
+masks.length-1;
+
+renderMaskBoxes();
+
+showMaskSettings();
+
+regenerateIfPossible();
+
+};
+
+
+/* =========================================================
+   CREAR MASCARA ARRASTRANDO
+========================================================= */
+
+const maskCanvas=$("maskCanvas");
+
+maskCanvas.addEventListener(
+"pointerdown",
+e=>{
+
+if(!source)
+return;
+
+const rect=
+maskCanvas.getBoundingClientRect();
+
+maskStart={
+
+x:(e.clientX-rect.left)/rect.width,
+
+y:(e.clientY-rect.top)/rect.height
+
+};
+
+drawingMask=true;
+
+maskCanvas.setPointerCapture(e.pointerId);
+
+}
+);
+
+
+maskCanvas.addEventListener(
+"pointerup",
+e=>{
+
+if(!drawingMask || !maskStart)
+return;
+
+const rect=
+maskCanvas.getBoundingClientRect();
+
+const endX=
+(e.clientX-rect.left)/rect.width;
+
+const endY=
+(e.clientY-rect.top)/rect.height;
+
+
+let x=Math.min(
+maskStart.x,
+endX
+);
+
+let y=Math.min(
+maskStart.y,
+endY
+);
+
+let w=Math.abs(
+endX-maskStart.x
+);
+
+let h=Math.abs(
+endY-maskStart.y
+);
+
+
+if(w<.03)
+w=.12;
+
+if(h<.03)
+h=.12;
+
+
+x=Math.max(0,Math.min(1-w,x));
+
+y=Math.max(0,Math.min(1-h,y));
+
+masks.push({
+
+x,
+y,
+w,
+h,
+
+shape:"rect",
+
+brightness:0,
+
+contrast:1
+
+});
+
+selectedMask=
+masks.length-1;
+
+drawingMask=false;
+
+maskStart=null;
+
+renderMaskBoxes();
+
+showMaskSettings();
+
+regenerateIfPossible();
+
+}
+);
+
+
+/* =========================================================
+   CONTROLES DE MASCARA
+========================================================= */
+
+$("maskBrightness").addEventListener(
+"input",
+()=>{
+
+if(selectedMask<0)
+return;
+
+const value=
+Number($("maskBrightness").value);
+
+masks[selectedMask].brightness=
+value;
+
+$("maskBrightnessVal").textContent=
+value;
+
+renderMaskBoxes();
+
+regenerateIfPossible();
+
+}
+);
+
+
+$("maskContrast").addEventListener(
+"input",
+()=>{
+
+if(selectedMask<0)
+return;
+
+const value=
+Number($("maskContrast").value);
+
+masks[selectedMask].contrast=
+value;
+
+$("maskContrastVal").textContent=
+value.toFixed(2)+"×";
+
+renderMaskBoxes();
+
+regenerateIfPossible();
+
+}
+);
+
+
+$("maskShape").addEventListener(
+"change",
+()=>{
+
+if(selectedMask<0)
+return;
+
+masks[selectedMask].shape=
+$("maskShape").value;
+
+renderMaskBoxes();
+
+regenerateIfPossible();
+
+}
+);
+
+
+$("deleteMask").onclick=()=>{
+
+if(selectedMask<0)
+return;
+
+masks.splice(
+selectedMask,
+1
+);
+
+selectedMask=
+Math.min(
+selectedMask,
+masks.length-1
+);
+
+renderMaskBoxes();
+
+showMaskSettings();
+
+regenerateIfPossible();
+
+};
+
+
+$("duplicateMask").onclick=()=>{
+
+if(selectedMask<0)
+return;
+
+const copy={
+...masks[selectedMask],
+x:Math.min(
+.9,
+masks[selectedMask].x+.03
+),
+y:Math.min(
+.9,
+masks[selectedMask].y+.03
+)
+};
+
+masks.push(copy);
+
+selectedMask=
+masks.length-1;
+
+renderMaskBoxes();
+
+showMaskSettings();
+
+regenerateIfPossible();
+
+};
+
+
+/* =========================================================
+   APLICAR MASCARAS
+========================================================= */
+
+function applyMasks(gray,x,y,w,h){
+
+if(!masks.length)
+return gray;
+
+let value=gray;
+
+masks.forEach(mask=>{
+
+const centerX=
+mask.x+
+mask.w/2;
+
+const centerY=
+mask.y+
+mask.h/2;
+
+let inside=false;
+
+if(mask.shape==="ellipse"){
+
+const dx=
+(x-centerX)/(mask.w/2);
+
+const dy=
+(y-centerY)/(mask.h/2);
+
+inside=
+dx*dx+
+dy*dy<=1;
+
+}else{
+
+inside=
+x>=mask.x &&
+x<=mask.x+mask.w &&
+y>=mask.y &&
+y<=mask.y+mask.h;
+
+}
+
+
+if(!inside)
+return;
+
+
+/*
+   Suavizado de borde de máscara.
+*/
+
+const edgeX=
+Math.min(
+x-mask.x,
+mask.x+mask.w-x
+)/Math.max(.0001,Math.min(mask.w,mask.h));
+
+const edgeY=
+Math.min(
+y-mask.y,
+mask.y+mask.h-y
+)/Math.max(.0001,Math.min(mask.w,mask.h));
+
+const edge=
+Math.min(edgeX,edgeY);
+
+const feather=
+Math.min(1,edge/.08);
+
+let local=
+.5+
+(value-.5)*mask.contrast;
+
+local+=mask.brightness/200;
+
+local=
+Math.max(
+0,
+Math.min(1,local)
+);
+
+value=
+value+
+(local-value)*feather;
+
+});
+
+return Math.max(
+0,
+Math.min(1,value)
+);
+
+}
+
+
+/* =========================================================
+   SEPARADOR DE FONDO
+========================================================= */
 
 function detectBackground(){
 
 if(!source)
 return null;
 
-
 const maxSize=320;
 
-const scale=Math.min(
+const scale=
+Math.min(
 1,
-maxSize/Math.max(source.width,source.height)
+maxSize/
+Math.max(
+source.width,
+source.height
+)
 );
 
-const w=Math.max(
+const w=
+Math.max(
 1,
 Math.round(source.width*scale)
 );
 
-const h=Math.max(
+const h=
+Math.max(
 1,
 Math.round(source.height*scale)
 );
 
-
-const c=document.createElement("canvas");
+const c=
+document.createElement("canvas");
 
 c.width=w;
 c.height=h;
 
-const ctx=c.getContext("2d",{
+const ctx=
+c.getContext("2d",{
 willReadFrequently:true
 });
 
-ctx.drawImage(source,0,0,w,h);
+ctx.drawImage(
+source,
+0,
+0,
+w,
+h
+);
 
 const data=
-ctx.getImageData(0,0,w,h).data;
+ctx.getImageData(
+0,
+0,
+w,
+h
+).data;
 
 
-/* promedio de los bordes */
+/* promedio de bordes */
 
-let br=0,bg=0,bb=0,count=0;
+let br=0;
+let bg=0;
+let bb=0;
+let count=0;
 
 function sample(x,y){
 
-const i=(y*w+x)*4;
+const i=
+(y*w+x)*4;
 
 br+=data[i];
 bg+=data[i+1];
@@ -1163,7 +2284,6 @@ sample(x,h-1);
 
 }
 
-
 for(let y=1;y<h-1;y++){
 
 sample(0,y);
@@ -1171,53 +2291,57 @@ sample(w-1,y);
 
 }
 
-
 br/=count;
 bg/=count;
 bb/=count;
 
 
-/* máscara */
-
 const mask=
 new Uint8Array(w*h);
-
-
-/*
-   Umbral adaptativo.
-   A mayor separación solicitada,
-   más estricta es la detección.
-*/
 
 const strength=
 Number($("separatorStrength").value);
 
 const threshold=
-55-(strength*.32);
-
-
-/* Flood fill desde los bordes */
+55-
+strength*.32;
 
 const queue=[];
 
+
 function push(x,y){
 
-if(x<0||x>=w||y<0||y>=h)
+if(
+x<0||
+x>=w||
+y<0||
+y>=h
+)
 return;
 
-const index=y*w+x;
+const index=
+y*w+x;
 
 if(mask[index])
 return;
 
 const i=index*4;
 
-const dr=data[i]-br;
-const dg=data[i+1]-bg;
-const db=data[i+2]-bb;
+const dr=
+data[i]-br;
+
+const dg=
+data[i+1]-bg;
+
+const db=
+data[i+2]-bb;
 
 const distance=
-Math.sqrt(dr*dr+dg*dg+db*db);
+Math.sqrt(
+dr*dr+
+dg*dg+
+db*db
+);
 
 if(distance<=threshold){
 
@@ -1249,10 +2373,13 @@ let pos=0;
 
 while(pos<queue.length){
 
-const index=queue[pos++];
+const index=
+queue[pos++];
 
 const x=index%w;
-const y=Math.floor(index/w);
+
+const y=
+Math.floor(index/w);
 
 push(x+1,y);
 push(x-1,y);
@@ -1261,11 +2388,6 @@ push(x,y-1);
 
 }
 
-
-/*
-   Guardamos la máscara a resolución pequeña.
-   Luego se interpola al tamaño de la cuadrícula.
-*/
 
 backgroundMask={
 mask,
@@ -1278,9 +2400,9 @@ return backgroundMask;
 }
 
 
-/* ================================
-   PROCESAMIENTO DEL FONDO
-================================ */
+/* =========================================================
+   SEPARACION DE FONDO
+========================================================= */
 
 function applyBackgroundSeparation(){
 
@@ -1293,30 +2415,47 @@ detectBackground();
 if(!backgroundMask)
 return null;
 
-
 const w=source.width;
+
 const h=source.height;
 
-const c=document.createElement("canvas");
+const c=
+document.createElement("canvas");
 
 c.width=w;
 c.height=h;
 
-const ctx=c.getContext("2d",{
+const ctx=
+c.getContext("2d",{
 willReadFrequently:true
 });
 
-ctx.drawImage(source,0,0,w,h);
+ctx.drawImage(
+source,
+0,
+0,
+w,
+h
+);
 
 const image=
-ctx.getImageData(0,0,w,h);
+ctx.getImageData(
+0,
+0,
+w,
+h
+);
 
 const data=image.data;
 
-const mask=backgroundMask.mask;
+const mask=
+backgroundMask.mask;
 
-const mw=backgroundMask.w;
-const mh=backgroundMask.h;
+const mw=
+backgroundMask.w;
+
+const mh=
+backgroundMask.h;
 
 const strength=
 Number($("separatorStrength").value)/100;
@@ -1347,7 +2486,8 @@ Math.floor(y/h*mh)
 const isBg=
 mask[my*mw+mx]>0;
 
-const i=(y*w+x)*4;
+const i=
+(y*w+x)*4;
 
 let r=data[i];
 let g=data[i+1];
@@ -1356,58 +2496,48 @@ let b=data[i+2];
 
 if(isBg){
 
-/*
-   Fondo:
-   se reduce su presencia para que el objeto
-   sea más dominante.
-*/
-
 let gray=
 .299*r+
 .587*g+
 .114*b;
 
-
 if(bgMode==="light"){
 
-gray=
-gray+(255-gray)*strength*.75;
+gray+=
+(255-gray)*
+strength*
+.75;
 
 }
 
 else if(bgMode==="dark"){
 
-gray=
-gray*(1-strength*.65);
+gray*=
+1-strength*.65;
 
 }
 
 else if(bgMode==="neutral"){
 
 gray=
-128+(gray-128)*(1-strength*.75);
+128+
+(gray-128)*
+(1-strength*.75);
 
 }
 
 else{
 
-/* automático */
-
 gray=
-128+(gray-128)*(1-strength*.45);
+128+
+(gray-128)*
+(1-strength*.45);
 
 }
 
-
 r=g=b=gray;
 
-
 }else{
-
-/*
-   Objeto:
-   aumenta suavemente el contraste.
-*/
 
 const gray=
 .299*r+
@@ -1415,12 +2545,17 @@ const gray=
 .114*b;
 
 let value=
-128+(gray-128)*(1+objectContrast*.9);
+128+
+(gray-128)*
+(1+objectContrast*.9);
 
 value=
 Math.max(
 0,
-Math.min(255,value)
+Math.min(
+255,
+value
+)
 );
 
 r=g=b=value;
@@ -1437,7 +2572,11 @@ data[i+2]=b;
 }
 
 
-ctx.putImageData(image,0,0);
+ctx.putImageData(
+image,
+0,
+0
+);
 
 processedSource=c;
 
@@ -1446,19 +2585,17 @@ return c;
 }
 
 
-/* ================================
-   PREVIEW DEL SEPARADOR
-================================ */
+/* =========================================================
+   PREVIEW SEPARADOR
+========================================================= */
 
 function showSeparatorPreview(){
 
 if(!source)
 return;
 
-
 if(!backgroundMask)
 detectBackground();
-
 
 const c=
 applyBackgroundSeparation();
@@ -1466,8 +2603,8 @@ applyBackgroundSeparation();
 if(!c)
 return;
 
-
-const preview=$("separatorPreview");
+const preview=
+$("separatorPreview");
 
 preview.classList.remove("hidden");
 
@@ -1477,21 +2614,20 @@ const canvas=
 document.createElement("canvas");
 
 canvas.width=c.width;
+
 canvas.height=c.height;
 
-const ctx=
-canvas.getContext("2d");
-
-ctx.drawImage(c,0,0);
+canvas.getContext("2d")
+.drawImage(c,0,0);
 
 preview.appendChild(canvas);
 
 }
 
 
-/* ================================
-   GENERACIÓN
-================================ */
+/* =========================================================
+   GENERACION
+========================================================= */
 
 function regenerateIfPossible(){
 
@@ -1511,7 +2647,6 @@ return;
 
 }
 
-
 if(active.size<1){
 
 alert("Selecciona al menos un patrón.");
@@ -1520,26 +2655,18 @@ return;
 
 }
 
-
-/*
-   IMPORTANTE:
-   las filas se calculan según el aspecto
-   exacto de la imagen.
-*/
-
 const cols=
 Number($("cols").value);
 
 const rows=
 calculateRows();
 
-
-$("rowsVal").textContent=rows;
+$("rowsVal").textContent=
+rows;
 
 
 /*
-   Procesamos la imagen únicamente
-   si el separador está activo.
+   Fuente.
 */
 
 let imgSource=source;
@@ -1547,7 +2674,8 @@ let imgSource=source;
 if($("separatorEnabled").checked){
 
 imgSource=
-applyBackgroundSeparation() || source;
+applyBackgroundSeparation() ||
+source;
 
 }else{
 
@@ -1556,10 +2684,15 @@ processedSource=null;
 }
 
 
+/*
+   Canvas de muestreo.
+*/
+
 const c=
 document.createElement("canvas");
 
 c.width=cols;
+
 c.height=rows;
 
 const ctx=
@@ -1567,11 +2700,7 @@ c.getContext("2d",{
 willReadFrequently:true
 });
 
-
-/*
-   Como las filas respetan el aspecto,
-   ya no hay letterboxing ni cuadros vacíos.
-*/
+ctx.imageSmoothingEnabled=true;
 
 ctx.drawImage(
 imgSource,
@@ -1580,7 +2709,6 @@ imgSource,
 cols,
 rows
 );
-
 
 const data=
 ctx.getImageData(
@@ -1594,7 +2722,9 @@ rows
 const arr=
 patterns
 .filter(p=>active.has(p.id))
-.sort((a,b)=>a.density-b.density);
+.sort(
+(a,b)=>a.density-b.density
+);
 
 
 cells=[];
@@ -1607,20 +2737,49 @@ for(let x=0;x<cols;x++){
 const i=
 (y*cols+x)*4;
 
-const g=
+let gray=
+(
 .299*data[i]+
 .587*data[i+1]+
-.114*data[i+2];
+.114*data[i+2]
+);
 
-const t=
-tonal(g);
+
+/*
+   Convertimos a luminosidad normalizada.
+*/
+
+let light=
+gray/255;
+
+
+/*
+   Aplicamos las 10 zonas tonales.
+*/
+
+light=
+1-tonal(gray);
+
+
+/*
+   Aplicamos las máscaras DESPUÉS
+   del ajuste tonal global.
+*/
+
+light=
+applyMasks(
+light,
+x/Math.max(1,cols-1),
+y/Math.max(1,rows-1),
+cols,
+rows
+);
 
 
 let idx=
 Math.round(
-t*(arr.length-1)
+light*(arr.length-1)
 );
-
 
 idx=
 Math.max(
@@ -1633,19 +2792,22 @@ idx
 
 
 cells.push({
+
 x,
 y,
-p:arr[idx],
-tone:t
-});
 
-}
+p:arr[idx],
+
+tone:light
+
+});
 
 }
 
 
 draw();
 
+updatePrintSheet();
 
 $("status").textContent=
 `Generado: ${cols} × ${rows} = ${(cols*rows).toLocaleString("es-CL")} cuadrados`;
@@ -1653,11 +2815,14 @@ $("status").textContent=
 }
 
 
-/* ================================
+/* =========================================================
    DIBUJO
-================================ */
+========================================================= */
 
 function draw(){
+
+if(!cells.length)
+return;
 
 const cols=
 Number($("cols").value);
@@ -1666,13 +2831,26 @@ const rows=
 calculateRows();
 
 
+/*
+   Tamaño adaptativo.
+   Se genera una resolución razonable para
+   que la vista previa pueda mostrarla completa.
+*/
+
+const maxPreviewWidth=1500;
+
+const maxPreviewHeight=1100;
+
+const scale=
+Math.min(
+maxPreviewWidth/cols,
+maxPreviewHeight/rows
+);
+
 const cell=
 Math.max(
-3,
-Math.min(
-9,
-Math.floor(1000/cols)
-)
+1,
+Math.floor(scale)
 );
 
 
@@ -1689,7 +2867,6 @@ rows*cell;
 const ctx=
 canvas.getContext("2d");
 
-
 ctx.fillStyle="#fff";
 
 ctx.fillRect(
@@ -1702,15 +2879,22 @@ canvas.height
 
 cells.forEach(c=>{
 
-const x=c.x*cell;
-const y=c.y*cell;
+const x=
+c.x*cell;
+
+const y=
+c.y*cell;
 
 
 if(mode==="template"){
 
-ctx.strokeStyle="#ddd";
+ctx.strokeStyle="#d5d5d5";
 
-ctx.lineWidth=.5;
+ctx.lineWidth=
+Math.max(
+.35,
+cell*.04
+);
 
 ctx.strokeRect(
 x,
@@ -1719,11 +2903,13 @@ cell,
 cell
 );
 
-
 ctx.fillStyle="#111";
 
 ctx.font=
-`${Math.max(7,cell*.62)}px Arial`;
+`${Math.max(
+5,
+cell*.62
+)}px Arial`;
 
 ctx.textAlign="center";
 
@@ -1736,7 +2922,6 @@ p=>p.id===c.p.id
 x+cell/2,
 y+cell/2
 );
-
 
 }else{
 
@@ -1757,12 +2942,19 @@ $("preview").innerHTML="";
 
 $("preview").appendChild(canvas);
 
+
+/*
+   Actualiza orientación.
+*/
+
+updateOrientation();
+
 }
 
 
-/* ================================
-   PATRONES FINALES
-================================ */
+/* =========================================================
+   PATRONES
+========================================================= */
 
 function drawPattern(ctx,p,x,y,s){
 
@@ -1779,7 +2971,10 @@ ctx.strokeStyle="#111";
 ctx.fillStyle="#111";
 
 ctx.lineWidth=
-Math.max(.7,s*.10);
+Math.max(
+.7,
+s*.10
+);
 
 const m=s*.18;
 
@@ -1795,7 +2990,12 @@ return;
 
 if(p.type==="solid"){
 
-ctx.fillRect(x,y,s,s);
+ctx.fillRect(
+x,
+y,
+s,
+s
+);
 
 ctx.restore();
 
@@ -1811,7 +3011,10 @@ ctx.beginPath();
 ctx.arc(
 x+s/2,
 y+s/2,
-Math.max(.7,s*.10),
+Math.max(
+.7,
+s*.10
+),
 0,
 Math.PI*2
 );
@@ -2067,16 +3270,9 @@ ctx.restore();
 }
 
 
-/* ================================
-   AJUSTES AUTOMÁTICOS
-================================ */
-
-/*
-   Evalúa distintas configuraciones.
-   No busca simplemente "más contraste":
-   intenta maximizar variación tonal,
-   uso de patrones y preservación de detalle.
-*/
+/* =========================================================
+   AJUSTES AUTOMATICOS
+========================================================= */
 
 function evaluateSettings(){
 
@@ -2086,14 +3282,9 @@ return;
 
 const candidates=[];
 
-
-/*
-   Combinaciones deliberadamente variadas.
-*/
-
 const contrasts=[
-0.75,
-1.0,
+.75,
+1,
 1.25,
 1.5,
 1.8,
@@ -2148,18 +3339,16 @@ curve
 }
 
 
-/*
-   Para no hacer cientos de renders grandes,
-   usamos una copia pequeña de la imagen.
-*/
-
 const maxSize=180;
 
 const scale=
 Math.min(
 1,
 maxSize/
-Math.max(source.width,source.height)
+Math.max(
+source.width,
+source.height
+)
 );
 
 const w=
@@ -2179,6 +3368,7 @@ const c=
 document.createElement("canvas");
 
 c.width=w;
+
 c.height=h;
 
 const ctx=
@@ -2203,6 +3393,57 @@ h
 ).data;
 
 
+function oldTonal(gray,settings){
+
+let x=
+1-gray/255;
+
+x=
+.5+
+(x-.5)*
+settings.contrast;
+
+x=
+Math.max(
+0,
+Math.min(1,x)
+);
+
+x=
+Math.pow(
+x,
+1-Math.min(
+.8,
+settings.black/100*.8
+)
+);
+
+const d=
+settings.detail/100;
+
+x=
+Math.max(
+0,
+Math.min(
+1,
+(x-.5)*(1+d*.5)+.5
+)
+);
+
+if(settings.curve==="photo")
+x=Math.pow(x,1.15);
+
+if(settings.curve==="graphic")
+x=Math.pow(x,.78);
+
+if(settings.curve==="shadow")
+x=Math.pow(x,.62);
+
+return x;
+
+}
+
+
 function score(settings){
 
 const bins=
@@ -2210,11 +3451,7 @@ new Array(12).fill(0);
 
 let mean=0;
 
-let variance=0;
-
 let edges=0;
-
-let previous=0;
 
 
 for(let y=0;y<h;y++){
@@ -2229,48 +3466,8 @@ const gray=
 .587*data[i+1]+
 .114*data[i+2];
 
-const original=
-gray/255;
-
-let v=
-1-original;
-
-v=.5+(v-.5)*settings.contrast;
-
-v=Math.max(
-0,
-Math.min(1,v)
-);
-
-v=Math.pow(
-v,
-1-Math.min(
-.8,
-settings.black/100*.8
-)
-);
-
-const d=
-settings.detail/100;
-
-v=
-Math.max(
-0,
-Math.min(
-1,
-(v-.5)*(1+d*.5)+.5
-)
-);
-
-if(settings.curve==="photo")
-v=Math.pow(v,1.15);
-
-if(settings.curve==="graphic")
-v=Math.pow(v,.78);
-
-if(settings.curve==="shadow")
-v=Math.pow(v,.62);
-
+const v=
+oldTonal(gray,settings);
 
 const bin=
 Math.min(
@@ -2282,8 +3479,6 @@ bins[bin]++;
 
 mean+=v;
 
-
-/* bordes */
 
 if(x>0){
 
@@ -2320,39 +3515,31 @@ Math.abs(gray-pg)/255;
 }
 
 
-mean/=(w*h);
+mean/=
+w*h;
 
 
-/*
-   Variedad tonal.
-*/
+let variance=0;
 
 for(const n of bins){
 
 const p=n/(w*h);
 
 variance+=
-p*Math.pow(
-n>0 ? Math.log(1+p*11) : 0,
+p*
+Math.pow(
+n>0?
+Math.log(1+p*11):
+0,
 2
 );
 
 }
 
 
-/*
-   Penaliza imágenes demasiado negras
-   o demasiado blancas.
-*/
-
 const balance=
-1-Math.abs(mean-.5)*1.6;
-
-
-/*
-   El detalle aporta información,
-   pero no queremos ruido extremo.
-*/
+1-
+Math.abs(mean-.5)*1.6;
 
 const edgeScore=
 Math.min(
@@ -2360,21 +3547,11 @@ Math.min(
 edges/(w*h)*5
 );
 
-
-/*
-   Evita configuraciones que aplasten
-   demasiado los tonos.
-*/
-
 const tonalSpread=
 bins.filter(
-n=>n>(w*h*.015)
+n=>n>w*h*.015
 ).length/12;
 
-
-/*
-   Puntuación final.
-*/
 
 return
 balance*.28+
@@ -2407,34 +3584,99 @@ best=candidate;
 
 if(best){
 
-$("contrast").value=
+/*
+   En lugar de tener solamente un ajuste global,
+   distribuimos el resultado sobre los 10 puntos.
+*/
+
+const baseContrast=
 best.contrast;
 
-$("black").value=
+const baseBlack=
 best.black;
 
-$("detail").value=
+const detail=
 best.detail;
 
-$("curve").value=
-best.curve;
+
+/*
+   Construcción progresiva:
+   sombras ligeramente más contrastadas,
+   medios equilibrados,
+   luces más suaves.
+*/
+
+tonePoints=[
+{
+brightness:-baseBlack*.18,
+contrast:baseContrast*1.05
+},
+{
+brightness:-baseBlack*.12,
+contrast:baseContrast*1.08
+},
+{
+brightness:-baseBlack*.08,
+contrast:baseContrast*1.10
+},
+{
+brightness:-baseBlack*.04,
+contrast:baseContrast*1.06
+},
+{
+brightness:0,
+contrast:baseContrast
+},
+{
+brightness:detail*.03,
+contrast:baseContrast*.98
+},
+{
+brightness:detail*.05,
+contrast:baseContrast*.95
+},
+{
+brightness:detail*.08,
+contrast:baseContrast*.92
+},
+{
+brightness:detail*.10,
+contrast:baseContrast*.88
+},
+{
+brightness:detail*.12,
+contrast:baseContrast*.82
+}
+];
+
+tonePoints=
+tonePoints.map(p=>({
+
+brightness:Math.max(
+-100,
+Math.min(
+100,
+p.brightness
+)
+),
+
+contrast:Math.max(
+.1,
+Math.min(
+4,
+p.contrast
+)
+
+}));
 
 
-$("contrastVal").textContent=
-`${best.contrast.toFixed(2)}×`;
-
-$("blackVal").textContent=
-best.black;
-
-$("detailVal").textContent=
-best.detail;
-
+renderToneControls();
 
 regenerateIfPossible();
 
 
 $("status").textContent=
-`Ajustes automáticos aplicados · contraste ${best.contrast.toFixed(2)}× · negros ${best.black} · detalle ${best.detail}`;
+`Ajustes automáticos aplicados · 10 zonas tonales optimizadas`;
 
 }
 
@@ -2452,8 +3694,7 @@ return;
 }
 
 $("status").textContent=
-"Analizando combinaciones…";
-
+"Analizando combinaciones tonales…";
 
 setTimeout(
 evaluateSettings,
@@ -2463,9 +3704,47 @@ evaluateSettings,
 };
 
 
-/* ================================
+/* =========================================================
    SEPARADOR
-================================ */
+========================================================= */
+
+$("separatorEnabled").addEventListener(
+"change",
+regenerateIfPossible
+);
+
+
+$("separatorStrength").addEventListener(
+"input",
+()=>{
+
+$("separatorStrengthVal").textContent=
+$("separatorStrength").value;
+
+regenerateIfPossible();
+
+}
+);
+
+
+$("objectContrast").addEventListener(
+"input",
+()=>{
+
+$("objectContrastVal").textContent=
+$("objectContrast").value;
+
+regenerateIfPossible();
+
+}
+);
+
+
+$("backgroundMode").addEventListener(
+"change",
+regenerateIfPossible
+);
+
 
 $("detectBackground").onclick=()=>{
 
@@ -2511,9 +3790,9 @@ $("status").textContent=
 };
 
 
-/* ================================
+/* =========================================================
    MODOS
-================================ */
+========================================================= */
 
 document
 .querySelectorAll(".modes button")
@@ -2529,7 +3808,8 @@ x.classList.remove("active")
 
 b.classList.add("active");
 
-mode=b.dataset.mode;
+mode=
+b.dataset.mode;
 
 if(cells.length)
 draw();
@@ -2541,17 +3821,195 @@ regenerateIfPossible();
 });
 
 
-/* ================================
-   BOTONES
-================================ */
+/* =========================================================
+   ORIENTACION AUTOMATICA
+========================================================= */
+
+function updateOrientation(){
+
+if(!source)
+return;
+
+const landscape=
+source.width>source.height;
+
+document.body.dataset.orientation=
+landscape?
+"landscape":
+"portrait";
+
+}
+
+
+/* =========================================================
+   LEYENDA
+========================================================= */
+
+function createLegend(){
+
+const legend=$("printLegend");
+
+legend.innerHTML="";
+
+patterns.forEach((p,i)=>{
+
+const item=
+document.createElement("div");
+
+item.className=
+"print-legend-item";
+
+item.innerHTML=`
+
+<span class="print-legend-symbol">
+${i+1}
+</span>
+
+<span>
+${p.name.replace(
+/^[0-9]+\s·\s/,
+""
+)}
+</span>
+
+`;
+
+legend.appendChild(item);
+
+});
+
+}
+
+
+/* =========================================================
+   PREPARAR IMPRESION
+========================================================= */
+
+function updatePrintSheet(){
+
+if(!cells.length)
+return;
+
+const sourceCanvas=
+$("preview").querySelector("canvas");
+
+if(!sourceCanvas)
+return;
+
+const printCanvas=
+$("printCanvas");
+
+printCanvas.width=
+sourceCanvas.width;
+
+printCanvas.height=
+sourceCanvas.height;
+
+const ctx=
+printCanvas.getContext("2d");
+
+ctx.clearRect(
+0,
+0,
+printCanvas.width,
+printCanvas.height
+);
+
+ctx.drawImage(
+sourceCanvas,
+0,
+0
+);
+
+createLegend();
+
+updateOrientation();
+
+}
+
+
+/* =========================================================
+   PRINT DINAMICO A4
+========================================================= */
+
+window.addEventListener(
+"beforeprint",
+()=>{
+
+updatePrintSheet();
+
+const oldStyle=
+document.getElementById(
+"dynamicPrintStyle"
+);
+
+if(oldStyle)
+oldStyle.remove();
+
+const style=
+document.createElement("style");
+
+style.id=
+"dynamicPrintStyle";
+
+const landscape=
+source &&
+source.width>source.height;
+
+style.textContent=
+landscape
+?
+`@media print{
+@page{
+size:A4 landscape;
+margin:7mm;
+}
+}`
+:
+`@media print{
+@page{
+size:A4 portrait;
+margin:7mm;
+}
+}`;
+
+document.head.appendChild(style);
+
+}
+);
+
+
+$("print").onclick=()=>{
+
+if(!source){
+
+alert("Primero carga una foto.");
+
+return;
+
+}
+
+updatePrintSheet();
+
+setTimeout(
+()=>window.print(),
+50
+);
+
+};
+
+
+/* =========================================================
+   GENERAR
+========================================================= */
 
 $("generate").onclick=
 generate;
 
 
-$("print").onclick=
-()=>window.print();
-
+/* =========================================================
+   LIMPIAR
+========================================================= */
 
 $("clear").onclick=()=>{
 
@@ -2563,6 +4021,10 @@ backgroundMask=null;
 
 cells=[];
 
+masks=[];
+
+selectedMask=-1;
+
 $("preview").innerHTML=
 '<span class="status">Carga una foto y presiona Generar.</span>';
 
@@ -2571,17 +4033,46 @@ $("separatorPreview").innerHTML="";
 $("separatorPreview")
 .classList.add("hidden");
 
+$("maskList").innerHTML="";
+
+$("maskSettings")
+.classList.add("hidden");
+
 $("status").textContent=
 "Sin imagen.";
 
 $("rowsVal").textContent=
 "—";
 
+updateMaskEditor();
+
 };
 
+
+/* =========================================================
+   REDIBUJO AL CAMBIAR TAMAÑO
+========================================================= */
+
+window.addEventListener(
+"resize",
+()=>{
+
+if(cells.length)
+draw();
+
+}
+);
+
+
+/* =========================================================
+   INICIALIZAR
+========================================================= */
+
+updateMaskEditor();
+
+createLegend();
 
 </script>
 
 </body>
 </html>
-```
