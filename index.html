@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>PIXEL HATCH — Monochrome Grid Studio</title>
 
@@ -11,21 +11,22 @@
 <link
 rel="icon"
 type="image/svg+xml"
-href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23101114'/%3E%3Cg fill='%23ff0094'%3E%3Crect x='7' y='7' width='14' height='14'/%3E%3Crect x='25' y='7' width='14' height='14'/%3E%3Crect x='43' y='7' width='14' height='14'/%3E%3Crect x='7' y='25' width='14' height='14'/%3E%3Crect x='25' y='25' width='14' height='14'/%3E%3Crect x='43' y='25' width='14' height='14'/%3E%3Crect x='7' y='43' width='14' height='14'/%3E%3Crect x='25' y='43' width='14' height='14'/%3E%3Crect x='43' y='43' width='14' height='14'/%3E%3C/g%3E%3C/svg%3E"
+sizes="any"
+href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23101114'/%3E%3Cg fill='%23ff0094'%3E%3Crect x='7' y='7' width='14' height='14'/%3E%3Crect x='25' y='7' width='14' height='14'/%3E%3Crect x='43' y='7' width='14' height='14'/%3E%3Crect x='7' y='25' width='14' height='14'/%3E%3Crect x='25' y='25' width='14' height='14'/%3E%3Crect x='43' y='25' width='14' height='14'/%3E%3Crect x='7' y='43' width='14' height='14'/%3E%3Crect x='25' y='43' width='14' height='14'/%3E%3Crect x='43' y='43' width='14' height='14'/%3E%3C/g%3E%3C/svg%3E"
 >
 
 <style>
 
 :root{
     --black:#101114;
-    --dark:#17181c;
+    --dark:#18191d;
     --pink:#ff0094;
-    --pink2:#ff5bb8;
-    --white:#ffffff;
+    --pink-dark:#d9007b;
+    --white:#fff;
     --paper:#fafafa;
-    --gray:#ececef;
-    --line:#d6d6dc;
-    --muted:#777981;
+    --gray:#ededf0;
+    --line:#d5d5da;
+    --muted:#70727a;
 }
 
 *{
@@ -36,6 +37,9 @@ html,
 body{
     margin:0;
     min-height:100%;
+}
+
+body{
     font-family:
         Inter,
         -apple-system,
@@ -43,13 +47,21 @@ body{
         "Segoe UI",
         sans-serif;
 
+    color:var(--black);
+
     background:
-        linear-gradient(rgba(16,17,20,.035) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(16,17,20,.035) 1px,transparent 1px),
-        #ededf0;
+        linear-gradient(
+            rgba(16,17,20,.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(16,17,20,.035) 1px,
+            transparent 1px
+        ),
+        #ececef;
 
     background-size:16px 16px;
-    color:var(--black);
 }
 
 button,
@@ -61,6 +73,10 @@ select{
 button{
     cursor:pointer;
 }
+
+/* =========================================================
+   APP
+========================================================= */
 
 .app{
     width:min(1500px,100%);
@@ -74,14 +90,15 @@ button{
 
 .header{
     height:76px;
-    background:var(--black);
-    color:white;
 
     display:flex;
     align-items:center;
     justify-content:space-between;
 
     padding:0 20px;
+
+    background:var(--black);
+    color:white;
 
     border:1px solid #000;
 }
@@ -95,23 +112,28 @@ button{
 .logo{
     width:44px;
     height:44px;
+    flex:none;
 }
 
 .brand h1{
     margin:0;
+
     font-size:19px;
-    letter-spacing:.12em;
     font-weight:900;
+
+    letter-spacing:.12em;
 }
 
 .brand small{
     display:block;
+
     margin-top:3px;
 
-    color:#a9a9b0;
+    color:#aaaab0;
 
     font-family:monospace;
     font-size:9px;
+
     letter-spacing:.2em;
 }
 
@@ -121,11 +143,13 @@ button{
 
     font-family:monospace;
     font-size:9px;
+
     letter-spacing:.1em;
 }
 
 .badge{
     padding:7px 9px;
+
     border:1px solid #414149;
 }
 
@@ -139,7 +163,11 @@ button{
 
 .workspace{
     display:grid;
-    grid-template-columns:390px minmax(0,1fr);
+
+    grid-template-columns:
+        390px
+        minmax(0,1fr);
+
     gap:14px;
 
     margin-top:14px;
@@ -147,20 +175,26 @@ button{
 
 .sidebar{
     background:#fafafa;
+
     border:1px solid var(--line);
 
-    max-height:calc(100vh - 122px);
+    max-height:
+        calc(100vh - 122px);
+
     overflow:auto;
 }
 
 .section{
     padding:15px;
-    border-bottom:1px solid var(--line);
+
+    border-bottom:
+        1px solid var(--line);
 }
 
 .section-title{
     display:flex;
     align-items:center;
+
     gap:8px;
 
     margin-bottom:12px;
@@ -168,22 +202,32 @@ button{
     font-family:monospace;
     font-size:10px;
     font-weight:900;
+
     letter-spacing:.14em;
     text-transform:uppercase;
 }
 
-.section-title:before{
+.section-title::before{
     content:"";
+
     width:8px;
     height:8px;
+
     background:var(--pink);
+
+    flex:none;
 }
 
 .row{
     display:grid;
-    grid-template-columns:1fr auto;
-    gap:10px;
+
+    grid-template-columns:
+        1fr
+        auto;
+
     align-items:center;
+
+    gap:10px;
 
     margin:9px 0;
 }
@@ -204,6 +248,11 @@ output{
 
 input[type="range"]{
     width:100%;
+
+    accent-color:var(--pink);
+}
+
+input[type="checkbox"]{
     accent-color:var(--pink);
 }
 
@@ -212,18 +261,19 @@ select{
     height:34px;
 
     border:1px solid #c9c9cf;
+
     background:white;
 
     padding:0 9px;
 }
 
-input[type="checkbox"]{
-    accent-color:var(--pink);
-}
-
 .control-grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
     gap:8px;
 }
 
@@ -231,12 +281,14 @@ input[type="checkbox"]{
     min-height:36px;
 
     border:1px solid var(--black);
+
     background:white;
 
     padding:8px 10px;
 
     font-size:10px;
     font-weight:800;
+
     letter-spacing:.03em;
 }
 
@@ -247,6 +299,7 @@ input[type="checkbox"]{
 .btn.primary{
     background:var(--pink);
     border-color:var(--pink);
+
     color:white;
 }
 
@@ -259,6 +312,7 @@ input[type="checkbox"]{
     padding:12px;
 
     border:1px dashed #aaa;
+
     background:white;
 
     font-size:11px;
@@ -266,7 +320,33 @@ input[type="checkbox"]{
 
 .file input{
     width:100%;
+
     margin-top:7px;
+}
+
+.drop-zone{
+    margin-top:8px;
+
+    padding:11px;
+
+    border:1px dashed #bbb;
+
+    text-align:center;
+
+    font-family:monospace;
+    font-size:9px;
+
+    color:#777;
+
+    transition:.15s;
+}
+
+.drop-zone.drag{
+    border-color:var(--pink);
+
+    background:#fff0f8;
+
+    color:var(--pink-dark);
 }
 
 .note{
@@ -289,7 +369,11 @@ input[type="checkbox"]{
 
 .tone-row{
     display:grid;
-    grid-template-columns:18px 1fr 42px;
+
+    grid-template-columns:
+        20px
+        1fr
+        42px;
 
     align-items:center;
 
@@ -301,40 +385,70 @@ input[type="checkbox"]{
     font-size:9px;
 }
 
+.tone-name{
+    font-size:9px;
+}
+
 /* =========================================================
    PATTERNS
 ========================================================= */
 
 .patterns{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+
+    grid-template-columns:
+        repeat(5,1fr);
+
     gap:6px;
 }
 
 .pattern-btn{
-    height:54px;
+    min-height:68px;
 
     border:1px solid #ccc;
+
     background:white;
 
-    font-size:9px;
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:3px;
+}
+
+.pattern-btn:hover{
+    border-color:#888;
 }
 
 .pattern-btn.active{
     border:2px solid var(--pink);
 }
 
-.pattern-btn span{
+.symbol-box{
+    width:34px;
+    height:34px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:1px solid #ddd;
+
+    background:#fff;
+}
+
+.symbol-box svg{
+    width:28px;
+    height:28px;
+
     display:block;
-
-    height:25px;
-
-    font-size:18px;
-    line-height:23px;
 }
 
 .pattern-btn small{
     font-size:7px;
+    line-height:1;
 }
 
 /* =========================================================
@@ -345,6 +459,7 @@ input[type="checkbox"]{
     min-width:0;
 
     background:white;
+
     border:1px solid var(--line);
 
     padding:14px;
@@ -352,6 +467,7 @@ input[type="checkbox"]{
 
 .preview-toolbar{
     display:flex;
+
     align-items:center;
     justify-content:space-between;
 
@@ -365,7 +481,9 @@ input[type="checkbox"]{
 
     font-family:monospace;
     font-size:9px;
+
     letter-spacing:.06em;
+
     text-transform:uppercase;
 }
 
@@ -377,6 +495,7 @@ input[type="checkbox"]{
 
 .mode button{
     border:0;
+
     background:white;
 
     padding:7px 11px;
@@ -391,21 +510,20 @@ input[type="checkbox"]{
 }
 
 /*
-   IMPORTANTE:
-   El alto de este escenario es fijo.
-   El canvas nunca modifica el alto del escenario.
+    ALTO FIJO
+
+    La cantidad de columnas no modifica
+    el tamaño del escenario.
 */
 
 .preview-stage{
-
-    height:720px;
-
-    min-height:720px;
-    max-height:720px;
+    position:relative;
 
     width:100%;
 
-    position:relative;
+    height:720px;
+    min-height:720px;
+    max-height:720px;
 
     display:flex;
     align-items:center;
@@ -419,7 +537,6 @@ input[type="checkbox"]{
 }
 
 .canvas-wrap{
-
     width:100%;
     height:100%;
 
@@ -427,21 +544,15 @@ input[type="checkbox"]{
     align-items:center;
     justify-content:center;
 
-    padding:18px;
-
     position:relative;
+
+    padding:18px;
 
     overflow:hidden;
 }
 
 #previewCanvas{
-
     display:block;
-
-    /*
-      Nunca crece más que el escenario.
-      Mantiene proporción.
-    */
 
     max-width:100%;
     max-height:100%;
@@ -458,7 +569,6 @@ input[type="checkbox"]{
 }
 
 #maskCanvas{
-
     position:absolute;
 
     display:none;
@@ -467,11 +577,12 @@ input[type="checkbox"]{
 }
 
 .empty{
-
     position:absolute;
+
     inset:0;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
@@ -488,6 +599,7 @@ input[type="checkbox"]{
     margin-bottom:5px;
 
     color:#222;
+
     font-size:15px;
 }
 
@@ -498,7 +610,9 @@ input[type="checkbox"]{
 .mask-tools{
     display:none;
 
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+        1fr
+        1fr;
 
     gap:8px;
 
@@ -511,6 +625,7 @@ input[type="checkbox"]{
 
 .mask-list{
     display:grid;
+
     gap:5px;
 
     margin-top:8px;
@@ -519,7 +634,10 @@ input[type="checkbox"]{
 .mask-item{
     display:grid;
 
-    grid-template-columns:1fr auto auto;
+    grid-template-columns:
+        1fr
+        auto
+        auto;
 
     align-items:center;
 
@@ -591,216 +709,255 @@ input[type="checkbox"]{
 
 <header class="header">
 
-<div class="brand">
+    <div class="brand">
 
-<svg class="logo" viewBox="0 0 44 44">
+        <svg class="logo" viewBox="0 0 44 44">
 
-<rect width="44" height="44" fill="#101114"/>
+            <rect
+                width="44"
+                height="44"
+                fill="#101114"
+            />
 
-<g fill="#ff0094">
+            <g fill="#ff0094">
 
-<rect x="5" y="5" width="7" height="7"/>
-<rect x="14" y="5" width="7" height="7"/>
-<rect x="23" y="5" width="7" height="7"/>
+                <rect x="5" y="5" width="7" height="7"/>
+                <rect x="14" y="5" width="7" height="7"/>
+                <rect x="23" y="5" width="7" height="7"/>
 
-<rect x="5" y="14" width="7" height="7"/>
-<rect x="14" y="14" width="7" height="7"/>
-<rect x="23" y="14" width="7" height="7"/>
+                <rect x="5" y="14" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+                <rect x="23" y="14" width="7" height="7"/>
 
-<rect x="5" y="23" width="7" height="7"/>
-<rect x="14" y="23" width="7" height="7"/>
-<rect x="23" y="23" width="7" height="7"/>
+                <rect x="5" y="23" width="7" height="7"/>
+                <rect x="14" y="23" width="7" height="7"/>
+                <rect x="23" y="23" width="7" height="7"/>
 
-</g>
+            </g>
 
-<rect x="32" y="5" width="7" height="7" fill="#fff"/>
-<rect x="32" y="14" width="7" height="7" fill="#fff"/>
-<rect x="32" y="23" width="7" height="7" fill="#fff"/>
+            <rect x="32" y="5" width="7" height="7" fill="#fff"/>
+            <rect x="32" y="14" width="7" height="7" fill="#fff"/>
+            <rect x="32" y="23" width="7" height="7" fill="#fff"/>
 
-</svg>
+        </svg>
 
-<div>
+        <div>
 
-<h1>PIXEL HATCH</h1>
+            <h1>PIXEL HATCH</h1>
 
-<small>
-MONOCHROME GRID STUDIO
-</small>
+            <small>
+                MONOCHROME GRID STUDIO
+            </small>
 
-</div>
+        </div>
 
-</div>
+    </div>
 
-<div class="status">
+    <div class="status">
 
-<span class="badge">
-PIXEL / <b>01</b>
-</span>
+        <span class="badge">
+            PIXEL / <b>01</b>
+        </span>
 
-<span class="badge" id="statusText">
-SIN IMAGEN
-</span>
+        <span
+            class="badge"
+            id="statusText"
+        >
+            SIN IMAGEN
+        </span>
 
-</div>
+    </div>
 
 </header>
 
 
 <div class="workspace">
 
-
-<!-- ======================================================
-     SIDEBAR
-======================================================= -->
-
 <aside class="sidebar">
 
-
-<!-- IMAGE -->
+<!-- =====================================================
+     IMAGEN
+====================================================== -->
 
 <div class="section">
 
 <div class="section-title">
-01 · Imagen
+    01 · Imagen
 </div>
 
 <div class="file">
 
-Carga una imagen
+    Carga una imagen
 
-<input
-id="imageInput"
-type="file"
-accept="image/*"
+    <input
+        id="imageInput"
+        type="file"
+        accept="image/*"
+    >
+
+</div>
+
+<div
+    id="dropZone"
+    class="drop-zone"
 >
-
+    ARRASTRA UNA IMAGEN AQUÍ<br>
+    O PÉGALA CON ⌘V / CTRL+V
 </div>
 
 <div class="note">
-
-La imagen siempre se mantiene completa dentro de la previsualización.
-
+    Puedes cargar, arrastrar o pegar una imagen directamente desde el portapapeles.
 </div>
 
 </div>
 
 
-<!-- GRID -->
+<!-- =====================================================
+     GRILLA
+====================================================== -->
 
 <div class="section">
 
 <div class="section-title">
-02 · Grilla
+    02 · Grilla
 </div>
 
 <div class="row">
 
 <label>
-Columnas
+    Columnas
 </label>
 
 <output id="colsOut">
-70
+    70
 </output>
 
 </div>
 
 <input
-id="cols"
-type="range"
-min="10"
-max="180"
-value="70"
+    id="cols"
+    type="range"
+    min="10"
+    max="180"
+    value="70"
 >
 
 <div class="note">
-
-Las filas se calculan automáticamente para mantener exactamente la proporción de la imagen.
-
+    Las filas se calculan automáticamente para conservar la proporción exacta de la imagen.
 </div>
 
 </div>
 
 
-<!-- IMAGE -->
+<!-- =====================================================
+     CONTRASTE
+====================================================== -->
 
 <div class="section">
 
 <div class="section-title">
-03 · Imagen / Contraste
+    03 · Imagen / Contraste
 </div>
 
-
 <div class="row">
-<label>Contraste</label>
-<output id="contrastOut">100%</output>
+
+<label>
+    Contraste
+</label>
+
+<output id="contrastOut">
+    100%
+</output>
+
 </div>
 
 <input
-id="contrast"
-type="range"
-min="50"
-max="180"
-value="100"
+    id="contrast"
+    type="range"
+    min="50"
+    max="180"
+    value="100"
 >
 
 
 <div class="row">
-<label>Profundidad negros</label>
-<output id="blackOut">0</output>
+
+<label>
+    Profundidad negros
+</label>
+
+<output id="blackOut">
+    0
+</output>
+
 </div>
 
 <input
-id="blackDepth"
-type="range"
-min="-40"
-max="40"
-value="0"
+    id="blackDepth"
+    type="range"
+    min="-40"
+    max="40"
+    value="0"
 >
 
 
 <div class="row">
-<label>Detalle</label>
-<output id="detailOut">50</output>
+
+<label>
+    Detalle
+</label>
+
+<output id="detailOut">
+    50
+</output>
+
 </div>
 
 <input
-id="detail"
-type="range"
-min="0"
-max="100"
-value="50"
+    id="detail"
+    type="range"
+    min="0"
+    max="100"
+    value="50"
 >
 
 
 <div class="row">
-<label>Curva</label>
-<output id="curveOut">1.00</output>
+
+<label>
+    Curva
+</label>
+
+<output id="curveOut">
+    1.00
+</output>
+
 </div>
 
 <input
-id="curve"
-type="range"
-min="60"
-max="160"
-value="100"
+    id="curve"
+    type="range"
+    min="60"
+    max="160"
+    value="100"
 >
 
+<br>
 
 <div class="control-grid">
 
 <button
-class="btn primary"
-id="autoBtn"
+    class="btn primary"
+    id="autoBtn"
 >
-AJUSTE AUTOMÁTICO
+    AJUSTE AUTOMÁTICO
 </button>
 
 <button
-class="btn"
-id="resetBtn"
+    class="btn"
+    id="resetBtn"
 >
-REINICIAR
+    REINICIAR
 </button>
 
 </div>
@@ -808,23 +965,25 @@ REINICIAR
 </div>
 
 
-<!-- BACKGROUND -->
+<!-- =====================================================
+     FONDO
+====================================================== -->
 
 <div class="section">
 
 <div class="section-title">
-04 · Separador de fondo
+    04 · Separador de fondo
 </div>
 
 <div class="row">
 
 <label>
-Activar
+    Activar
 </label>
 
 <input
-id="bgSep"
-type="checkbox"
+    id="bgSep"
+    type="checkbox"
 >
 
 </div>
@@ -833,57 +992,57 @@ type="checkbox"
 <div class="row">
 
 <label>
-Fuerza
+    Fuerza
 </label>
 
 <output id="bgStrengthOut">
-55
+    55
 </output>
 
 </div>
 
 <input
-id="bgStrength"
-type="range"
-min="0"
-max="100"
-value="55"
+    id="bgStrength"
+    type="range"
+    min="0"
+    max="100"
+    value="55"
 >
 
 
 <div class="row">
 
 <label>
-Umbral
+    Umbral
 </label>
 
 <output id="bgThreshOut">
-32
+    32
 </output>
 
 </div>
 
 <input
-id="bgThresh"
-type="range"
-min="5"
-max="90"
-value="32"
+    id="bgThresh"
+    type="range"
+    min="5"
+    max="90"
+    value="32"
 >
 
 
 <select id="bgMode">
 
 <option value="light">
-Fondo más claro
+    Fondo más claro
 </option>
 
 <option value="dark">
-Fondo más oscuro
+    Fondo más oscuro
 </option>
 
 <option value="neutral">
-Fondo neutro
+    Fondo neutro
 </option>
 
 </select>
@@ -891,90 +1050,75 @@ Fondo neutro
 </div>
 
 
-<!-- 10 LEVELS -->
+<!-- =====================================================
+     10 TONOS
+====================================================== -->
 
 <div class="section">
 
 <div class="section-title">
-05 · Niveles tonales
+    05 · Niveles tonales
 </div>
 
 <div
-class="tonal"
-id="toneControls"
+    class="tonal"
+    id="toneControls"
 ></div>
 
 <div class="note">
-
-10 zonas independientes de luces y sombras.
-El ajuste automático también optimiza estos niveles.
-
+    Cada uno de los 10 niveles puede modificarse individualmente.
+    El ajuste automático también analiza y modifica estos niveles.
 </div>
 
 </div>
 
 
-<!-- MASK -->
+<!-- =====================================================
+     MASCARAS
+====================================================== -->
 
 <div class="section">
 
 <div class="section-title">
-06 · Máscaras
+    06 · Máscaras
 </div>
 
 <div class="control-grid">
 
 <button
-class="btn dark"
-id="addMask"
+    class="btn dark"
+    id="addMask"
 >
-+ MÁSCARA
+    + MÁSCARA
 </button>
 
 <button
-class="btn"
-id="clearMasks"
+    class="btn"
+    id="clearMasks"
 >
-BORRAR
+    BORRAR
 </button>
 
 </div>
 
 
 <div
-id="maskTools"
-class="mask-tools"
+    id="maskTools"
+    class="mask-tools"
 >
 
 <div>
 
 <label>
-Brillo
+    Brillo
 </label>
 
 <input
-id="maskBrightness"
-type="range"
-min="-100"
-max="100"
-value="0"
->
-
-</div>
-
-
-<div>
-
-<label>
-Contraste
-</label>
-
-<input
-id="maskContrast"
-type="range"
-min="-100"
-max="100"
-value="0"
+    id="maskBrightness"
+    type="range"
+    min="-100"
+    max="100"
+    value="0"
 >
 
 </div>
@@ -983,107 +1127,133 @@ value="0"
 <div>
 
 <label>
-Pincel
+    Contraste
 </label>
 
 <input
-id="brushSize"
-type="range"
-min="5"
-max="100"
-value="30"
+    id="maskContrast"
+    type="range"
+    min="-100"
+    max="100"
+    value="0"
+>
+
+</div>
+
+
+<div>
+
+<label>
+    Pincel
+</label>
+
+<input
+    id="brushSize"
+    type="range"
+    min="5"
+    max="100"
+    value="30"
 >
 
 </div>
 
 
 <button
-class="btn"
-id="paintMode"
+    class="btn"
+    id="paintMode"
 >
-PINTAR
+    PINTAR
 </button>
 
 <button
-class="btn"
-id="eraseMode"
+    class="btn"
+    id="eraseMode"
 >
-BORRAR
+    BORRAR
 </button>
 
 <button
-class="btn"
-id="clearCurrentMask"
+    class="btn"
+    id="clearCurrentMask"
 >
-LIMPIAR
+    LIMPIAR
 </button>
 
 </div>
 
 
 <div
-id="maskList"
-class="mask-list"
+    id="maskList"
+    class="mask-list"
 ></div>
 
 </div>
 
 
-<!-- PATTERNS -->
+<!-- =====================================================
+     PATRONES
+====================================================== -->
 
 <div class="section">
 
 <div class="section-title">
-07 · Patrones
+    07 · Símbolos
 </div>
 
 <div
-id="patterns"
-class="patterns"
+    id="patterns"
+    class="patterns"
 ></div>
+
+<div class="note">
+    Los símbolos están construidos dentro de un cuadrado simétrico.
+    Cada icono representa exactamente el trazo que debe repetirse.
+</div>
 
 </div>
 
 
-<!-- PRINT -->
+<!-- =====================================================
+     FORMATO
+====================================================== -->
 
 <div class="section">
 
 <div class="section-title">
-08 · Formato de salida
+    08 · Formato de salida
 </div>
 
 
 <div class="row">
 
 <label>
-Papel
+    Papel
 </label>
 
 <select id="paper">
 
 <option value="letter">
-Carta
+    Carta
 </option>
 
 <option value="a4">
-A4
+    A4
 </option>
 
 <option value="a3">
-A3
+    A3
 </option>
 
 <option value="a5">
-A5
+    A5
 </option>
 
 <option value="legal">
-Legal
+    Legal
 </option>
 
 <option value="oficio">
-Oficio Chile
+    Oficio Chile
 </option>
 
 </select>
@@ -1094,21 +1264,21 @@ Oficio Chile
 <div class="row">
 
 <label>
-Orientación
+    Orientación
 </label>
 
 <select id="orientation">
 
 <option value="auto">
-Automática
+    Automática
 </option>
 
 <option value="portrait">
-Vertical
+    Vertical
 </option>
 
 <option value="landscape">
-Horizontal
+    Horizontal
 </option>
 
 </select>
@@ -1119,55 +1289,55 @@ Horizontal
 <div class="row">
 
 <label>
-Margen
+    Margen
 </label>
 
 <output id="marginOut">
-8
+    6
 </output>
 
 </div>
 
 <input
-id="margin"
-type="range"
-min="2"
-max="20"
-value="8"
+    id="margin"
+    type="range"
+    min="2"
+    max="20"
+    value="6"
 >
 
 
 <div class="row">
 
 <label>
-Separación
+    Separación
 </label>
 
 <output id="gapOut">
-0
+    0
 </output>
 
 </div>
 
 <input
-id="gap"
-type="range"
-min="0"
-max="2"
-value="0"
+    id="gap"
+    type="range"
+    min="0"
+    max="10"
+    value="0"
 >
 
 
 <div class="row">
 
 <label>
-Título
+    Mostrar título
 </label>
 
 <input
-id="showTitle"
-type="checkbox"
-checked
+    id="showTitle"
+    type="checkbox"
+    checked
 >
 
 </div>
@@ -1176,13 +1346,13 @@ checked
 <div class="row">
 
 <label>
-Leyenda
+    Mostrar leyenda
 </label>
 
 <input
-id="showLegend"
-type="checkbox"
-checked
+    id="showLegend"
+    type="checkbox"
+    checked
 >
 
 </div>
@@ -1191,49 +1361,54 @@ checked
 <div class="row">
 
 <label>
-Leyenda
+    Leyenda
 </label>
 
 <select id="legendPos">
 
 <option value="bottom">
-Abajo
+    Abajo
 </option>
 
 <option value="side">
-Lateral
+    Al costado
+</option>
+
+<option value="none">
+    Ninguna
 </option>
 
 </select>
 
 </div>
 
-
 <div class="note">
-
-La grilla calcula automáticamente el mayor tamaño físico posible dentro del área útil de la hoja.
-
+    La grilla se escala automáticamente hasta ocupar la mayor superficie posible del papel disponible.
 </div>
 
 </div>
 
+
+<!-- =====================================================
+     ACCIONES
+====================================================== -->
 
 <div class="section">
 
 <div class="control-grid">
 
 <button
-class="btn primary"
-id="printBtn"
+    class="btn primary"
+    id="printBtn"
 >
-IMPRIMIR / PDF
+    IMPRIMIR / PDF
 </button>
 
 <button
-class="btn"
-id="clearBtn"
+    class="btn"
+    id="clearBtn"
 >
-LIMPIAR
+    LIMPIAR
 </button>
 
 </div>
@@ -1243,35 +1418,35 @@ LIMPIAR
 </aside>
 
 
-<!-- ======================================================
+<!-- =====================================================
      PREVIEW
-======================================================= -->
+====================================================== -->
 
 <main class="preview-panel">
 
 <div class="preview-toolbar">
 
 <div
-class="meta"
-id="gridMeta"
+    class="meta"
+    id="gridMeta"
 >
-Carga una imagen para comenzar
+    Carga una imagen para comenzar
 </div>
 
 
 <div class="mode">
 
 <button
-id="modeFinal"
-class="active"
+    id="modeFinal"
+    class="active"
 >
-VISTA FINAL
+    VISTA FINAL
 </button>
 
 <button
-id="modeTemplate"
+    id="modeTemplate"
 >
-PLANTILLA
+    PLANTILLA
 </button>
 
 </div>
@@ -1282,31 +1457,31 @@ PLANTILLA
 <div class="preview-stage">
 
 <div
-class="canvas-wrap"
-id="canvasWrap"
+    class="canvas-wrap"
+    id="canvasWrap"
 >
 
 <canvas
-id="previewCanvas"
+    id="previewCanvas"
 ></canvas>
 
 <canvas
-id="maskCanvas"
+    id="maskCanvas"
 ></canvas>
 
 
 <div
-class="empty"
-id="empty"
+    class="empty"
+    id="empty"
 >
 
 <div>
 
 <strong>
-PIXEL HATCH
+    PIXEL HATCH
 </strong>
 
-Carga una imagen para generar la grilla.
+Carga, arrastra o pega una imagen para comenzar.
 
 </div>
 
@@ -1323,9 +1498,9 @@ Carga una imagen para generar la grilla.
 </div>
 
 
-<!-- ======================================================
+<!-- =====================================================
      PRINT SHEET
-======================================================= -->
+====================================================== -->
 
 <div id="printSheet">
 
@@ -1346,18 +1521,194 @@ Carga una imagen para generar la grilla.
 
 "use strict";
 
-
 /* =========================================================
    HELPERS
 ========================================================= */
 
-const $ = id => document.getElementById(id);
+const $ = id =>
+    document.getElementById(id);
 
-const clamp = (v,a=0,b=1) =>
-    Math.max(a,Math.min(b,v));
+const clamp = (
+    v,
+    a=0,
+    b=1
+) =>
+    Math.max(
+        a,
+        Math.min(b,v)
+    );
 
-const lerp = (a,b,t) =>
+const lerp = (
+    a,
+    b,
+    t
+) =>
     a+(b-a)*t;
+
+
+/* =========================================================
+   PATTERN SVG
+========================================================= */
+
+function symbolSVG(type){
+
+    const stroke =
+        '#101114';
+
+    const common =
+        `fill="none"
+         stroke="${stroke}"
+         stroke-width="2.2"
+         stroke-linecap="round"
+         stroke-linejoin="round"`;
+
+    if(type === "empty"){
+        return `
+        <svg viewBox="0 0 32 32">
+            <rect
+                x="3"
+                y="3"
+                width="26"
+                height="26"
+                ${common}
+                stroke="#d8d8dc"
+                stroke-width="1"
+            />
+        </svg>`;
+    }
+
+    if(type === "dot"){
+        return `
+        <svg viewBox="0 0 32 32">
+            <circle
+                cx="16"
+                cy="16"
+                r="2.8"
+                fill="${stroke}"
+            />
+        </svg>`;
+    }
+
+    if(type === "horizontal"){
+        return `
+        <svg viewBox="0 0 32 32">
+            <line
+                x1="5"
+                y1="16"
+                x2="27"
+                y2="16"
+                ${common}
+            />
+        </svg>`;
+    }
+
+    if(type === "vertical"){
+        return `
+        <svg viewBox="0 0 32 32">
+            <line
+                x1="16"
+                y1="5"
+                x2="16"
+                y2="27"
+                ${common}
+            />
+        </svg>`;
+    }
+
+    if(type === "diag1"){
+        return `
+        <svg viewBox="0 0 32 32">
+            <line
+                x1="5"
+                y1="27"
+                x2="27"
+                y2="5"
+                ${common}
+            />
+        </svg>`;
+    }
+
+    if(type === "diag2"){
+        return `
+        <svg viewBox="0 0 32 32">
+            <line
+                x1="5"
+                y1="5"
+                x2="27"
+                y2="27"
+                ${common}
+            />
+        </svg>`;
+    }
+
+    if(type === "plus"){
+        return `
+        <svg viewBox="0 0 32 32">
+            <line
+                x1="5"
+                y1="16"
+                x2="27"
+                y2="16"
+                ${common}
+            />
+            <line
+                x1="16"
+                y1="5"
+                x2="16"
+                y2="27"
+                ${common}
+            />
+        </svg>`;
+    }
+
+    if(type === "cross"){
+        return `
+        <svg viewBox="0 0 32 32">
+            <line
+                x1="7"
+                y1="7"
+                x2="25"
+                y2="25"
+                ${common}
+            />
+            <line
+                x1="25"
+                y1="7"
+                x2="7"
+                y2="25"
+                ${common}
+            />
+        </svg>`;
+    }
+
+    if(type === "square"){
+        return `
+        <svg viewBox="0 0 32 32">
+            <rect
+                x="7"
+                y="7"
+                width="18"
+                height="18"
+                ${common}
+            />
+        </svg>`;
+    }
+
+    if(type === "solid"){
+        return `
+        <svg viewBox="0 0 32 32">
+            <rect
+                x="7"
+                y="7"
+                width="18"
+                height="18"
+                fill="${stroke}"
+            />
+        </svg>`;
+    }
+
+    return "";
+}
 
 
 /* =========================================================
@@ -1366,23 +1717,149 @@ const lerp = (a,b,t) =>
 
 const patterns = [
 
-    {id:1,name:"Blanco",symbol:"□"},
-    {id:2,name:"Punto",symbol:"·"},
-    {id:3,name:"Horizontal",symbol:"≡"},
-    {id:4,name:"Vertical",symbol:"║"},
-    {id:5,name:"Diagonal /",symbol:"╱"},
-    {id:6,name:"Diagonal \\",symbol:"╲"},
-    {id:7,name:"Plus",symbol:"+"},
-    {id:8,name:"Cruz",symbol:"×"},
-    {id:9,name:"Doble horizontal",symbol:"═"},
-    {id:10,name:"Doble vertical",symbol:"║"},
-    {id:11,name:"Estrella",symbol:"✦"},
-    {id:12,name:"Sólido",symbol:"■"}
+    {
+        id:1,
+        name:"Vacío",
+        type:"empty"
+    },
+
+    {
+        id:2,
+        name:"Punto",
+        type:"dot"
+    },
+
+    {
+        id:3,
+        name:"Horizontal",
+        type:"horizontal"
+    },
+
+    {
+        id:4,
+        name:"Vertical",
+        type:"vertical"
+    },
+
+    {
+        id:5,
+        name:"Diagonal /",
+        type:"diag1"
+    },
+
+    {
+        id:6,
+        name:"Diagonal \\",
+        type:"diag2"
+    },
+
+    {
+        id:7,
+        name:"Plus",
+        type:"plus"
+    },
+
+    {
+        id:8,
+        name:"Cruz",
+        type:"cross"
+    },
+
+    {
+        id:9,
+        name:"Cuadrado",
+        type:"square"
+    },
+
+    {
+        id:10,
+        name:"Sólido",
+        type:"solid"
+    }
 
 ];
 
 let activePatterns =
-    patterns.map(p=>p.id);
+    patterns.map(
+        p=>p.id
+    );
+
+
+function buildPatternButtons(){
+
+    const box =
+        $("patterns");
+
+    box.innerHTML = "";
+
+    patterns.forEach(
+        p=>{
+
+            const button =
+                document.createElement("button");
+
+            button.className =
+                "pattern-btn active";
+
+            button.dataset.id =
+                p.id;
+
+            button.innerHTML = `
+                <div class="symbol-box">
+                    ${symbolSVG(p.type)}
+                </div>
+                <small>${p.id} · ${p.name}</small>
+            `;
+
+            button.addEventListener(
+                "click",
+                ()=>{
+
+                    if(
+                        activePatterns.includes(
+                            p.id
+                        )
+                    ){
+
+                        if(
+                            activePatterns.length > 1
+                        ){
+
+                            activePatterns =
+                                activePatterns.filter(
+                                    id=>id!==p.id
+                                );
+
+                            button.classList.remove(
+                                "active"
+                            );
+                        }
+
+                    }else{
+
+                        activePatterns.push(
+                            p.id
+                        );
+
+                        activePatterns.sort(
+                            (a,b)=>a-b
+                        );
+
+                        button.classList.add(
+                            "active"
+                        );
+                    }
+
+                    rebuild();
+                }
+            );
+
+            box.appendChild(
+                button
+            );
+        }
+    );
+}
 
 
 /* =========================================================
@@ -1391,13 +1868,15 @@ let activePatterns =
 
 let image = null;
 
-let sourceCanvas =
+const sourceCanvas =
     document.createElement("canvas");
 
-let sourceCtx =
+const sourceCtx =
     sourceCanvas.getContext(
         "2d",
-        {willReadFrequently:true}
+        {
+            willReadFrequently:true
+        }
     );
 
 let sourceData = null;
@@ -1407,25 +1886,10 @@ let rows = 1;
 
 let mode = "final";
 
-
-/* =========================================================
-   TONES
-========================================================= */
-
 let toneOffsets =
     new Array(10).fill(0);
 
-
-/* =========================================================
-   BACKGROUND
-========================================================= */
-
 let backgroundMask = null;
-
-
-/* =========================================================
-   MASKS
-========================================================= */
 
 let masks = [];
 
@@ -1435,84 +1899,326 @@ let paintMode = "paint";
 
 
 /* =========================================================
-   IMAGE INPUT
+   TONAL CONTROLS
 ========================================================= */
 
-$("imageInput").addEventListener(
+const toneNames = [
+    "Negro profundo",
+    "Sombras profundas",
+    "Sombras",
+    "Medios oscuros",
+    "Medios",
+    "Medios claros",
+    "Luces",
+    "Luces altas",
+    "Blanco suave",
+    "Blanco"
+];
+
+
+function buildToneControls(){
+
+    const box =
+        $("toneControls");
+
+    box.innerHTML = "";
+
+    toneNames.forEach(
+        (name,index)=>{
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+            row.className =
+                "tone-row";
+
+            row.innerHTML = `
+                <b>${index+1}</b>
+                <div>
+                    <div class="tone-name">
+                        ${name}
+                    </div>
+                    <input
+                        id="tone${index}"
+                        type="range"
+                        min="-100"
+                        max="100"
+                        value="0"
+                    >
+                </div>
+                <output id="toneOut${index}">
+                    0
+                </output>
+            `;
+
+            box.appendChild(
+                row
+            );
+
+            const input =
+                $(`tone${index}`);
+
+            const output =
+                $(`toneOut${index}`);
+
+            input.addEventListener(
+                "input",
+                ()=>{
+
+                    toneOffsets[index] =
+                        Number(
+                            input.value
+                        );
+
+                    output.textContent =
+                        input.value;
+
+                    rebuild();
+                }
+            );
+        }
+    );
+}
+
+
+/* =========================================================
+   IMAGE LOADING
+========================================================= */
+
+function loadImageFile(file){
+
+    if(
+        !file ||
+        !file.type.startsWith("image/")
+    )
+        return;
+
+    const url =
+        URL.createObjectURL(
+            file
+        );
+
+    const img =
+        new Image();
+
+    img.onload = ()=>{
+
+        image = img;
+
+        URL.revokeObjectURL(
+            url
+        );
+
+        $("empty").style.display =
+            "none";
+
+        $("statusText").textContent =
+            "IMAGEN LISTA";
+
+        rebuild();
+    };
+
+    img.onerror = ()=>{
+
+        URL.revokeObjectURL(
+            url
+        );
+
+        alert(
+            "No fue posible cargar esta imagen."
+        );
+    };
+
+    img.src = url;
+}
+
+
+$("imageInput")
+.addEventListener(
     "change",
-    event => {
+    event=>{
 
         const file =
             event.target.files[0];
 
-        if(!file) return;
-
-        const url =
-            URL.createObjectURL(file);
-
-        const img =
-            new Image();
-
-        img.onload = () => {
-
-            image = img;
-
-            URL.revokeObjectURL(url);
-
-            $("empty").style.display =
-                "none";
-
-            $("statusText").textContent =
-                "IMAGEN LISTA";
-
-            rebuild();
-
-        };
-
-        img.src = url;
-
+        loadImageFile(
+            file
+        );
     }
 );
 
 
 /* =========================================================
-   REBUILD
+   PEGAR IMAGEN
 ========================================================= */
 
-function rebuild(){
+/*
+    IMPORTANTE:
 
-    if(!image) return;
+    El listener está en document para permitir:
 
-    cols =
-        Number($("cols").value);
+    ⌘V
+    Ctrl+V
 
-    rows =
-        Math.max(
+    desde cualquier parte de la aplicación.
+*/
+
+document.addEventListener(
+    "paste",
+    event=>{
+
+        const items =
+            event.clipboardData &&
+            event.clipboardData.items;
+
+        if(!items)
+            return;
+
+        for(
+            const item of items
+        ){
+
+            if(
+                item.type.startsWith(
+                    "image/"
+                )
+            ){
+
+                const file =
+                    item.getAsFile();
+
+                if(file){
+
+                    loadImageFile(
+                        file
+                    );
+
+                    event.preventDefault();
+
+                    return;
+                }
+            }
+        }
+    }
+);
+
+
+/* =========================================================
+   DRAG & DROP
+========================================================= */
+
+const dropZone =
+    $("dropZone");
+
+[
+    "dragenter",
+    "dragover"
+].forEach(
+    eventName=>{
+
+        dropZone.addEventListener(
+            eventName,
+            event=>{
+
+                event.preventDefault();
+
+                dropZone.classList.add(
+                    "drag"
+                );
+            }
+        );
+    }
+);
+
+[
+    "dragleave",
+    "drop"
+].forEach(
+    eventName=>{
+
+        dropZone.addEventListener(
+            eventName,
+            event=>{
+
+                event.preventDefault();
+
+                dropZone.classList.remove(
+                    "drag"
+                );
+            }
+        );
+    }
+);
+
+
+dropZone.addEventListener(
+    "drop",
+    event=>{
+
+        const files =
+            event.dataTransfer.files;
+
+        if(
+            files &&
+            files.length
+        ){
+
+            loadImageFile(
+                files[0]
+            );
+        }
+    }
+);
+
+
+/* =========================================================
+   SOURCE IMAGE
+========================================================= */
+
+function prepareSource(){
+
+    if(!image)
+        return;
+
+    /*
+        Limitamos solamente el tamaño interno
+        de procesamiento.
+
+        La imagen original sigue siendo la
+        fuente visual.
+    */
+
+    const maxSize =
+        1400;
+
+    const ratio =
+        Math.min(
             1,
-            Math.round(
-                cols *
-                image.height /
-                image.width
+            maxSize /
+            Math.max(
+                image.width,
+                image.height
             )
         );
 
-    /*
-       Source limitado a 1800px para
-       evitar cálculos innecesariamente
-       pesados.
-    */
-
     sourceCanvas.width =
-        Math.min(
-            image.width,
-            1800
+        Math.max(
+            1,
+            Math.round(
+                image.width *
+                ratio
+            )
         );
 
     sourceCanvas.height =
-        Math.round(
-            sourceCanvas.width *
-            image.height /
-            image.width
+        Math.max(
+            1,
+            Math.round(
+                image.height *
+                ratio
+            )
         );
 
     sourceCtx.clearRect(
@@ -1536,252 +2242,70 @@ function rebuild(){
             0,
             sourceCanvas.width,
             sourceCanvas.height
-        ).data;
-
-    detectBackground();
-
-    resizeMasks();
-
-    updateMeta();
-
-    render();
-
-}
-
-
-/* =========================================================
-   META
-========================================================= */
-
-function updateMeta(){
-
-    if(!image) return;
-
-    $("gridMeta").textContent =
-        `${cols} × ${rows} · ` +
-        `${image.width} × ${image.height} · ` +
-        `${mode==="final"
-            ? "vista final"
-            : "plantilla"}`;
-
-}
-
-
-/* =========================================================
-   TONAL CONTROLS
-========================================================= */
-
-const toneNames = [
-
-    "Negro profundo",
-    "Sombras profundas",
-    "Sombras",
-    "Medios oscuros",
-    "Medios",
-    "Medios claros",
-    "Luces",
-    "Luces altas",
-    "Blanco suave",
-    "Blanco"
-
-];
-
-toneNames.forEach(
-    (name,index)=>{
-
-        const row =
-            document.createElement("div");
-
-        row.className =
-            "tone-row";
-
-        row.innerHTML = `
-
-            <b>${index+1}</b>
-
-            <input
-                type="range"
-                min="-100"
-                max="100"
-                value="0"
-                title="${name}"
-            >
-
-            <output>0</output>
-
-        `;
-
-        const slider =
-            row.querySelector("input");
-
-        const output =
-            row.querySelector("output");
-
-        slider.addEventListener(
-            "input",
-            ()=>{
-
-                toneOffsets[index] =
-                    Number(slider.value);
-
-                output.textContent =
-                    slider.value;
-
-                render();
-
-            }
         );
-
-        $("toneControls")
-            .appendChild(row);
-
-    }
-);
-
-
-/* =========================================================
-   GLOBAL CONTROLS
-========================================================= */
-
-function bindRange(
-    id,
-    output,
-    formatter = v => v
-){
-
-    $(id).addEventListener(
-        "input",
-        ()=>{
-
-            $(output).textContent =
-                formatter($(id).value);
-
-            if(
-                id === "cols" &&
-                image
-            ){
-
-                cols =
-                    Number($(id).value);
-
-                rebuild();
-
-            }
-            else{
-
-                render();
-
-            }
-
-        }
-    );
-
 }
 
-bindRange(
-    "cols",
-    "colsOut"
-);
 
-bindRange(
-    "contrast",
-    "contrastOut",
-    v=>v+"%"
-);
+/* =========================================================
+   ROWS AUTOMÁTICAS
+========================================================= */
 
-bindRange(
-    "blackDepth",
-    "blackOut"
-);
+function calculateRows(){
 
-bindRange(
-    "detail",
-    "detailOut"
-);
+    if(!image)
+        return 1;
 
-bindRange(
-    "curve",
-    "curveOut",
-    v=>(Number(v)/100).toFixed(2)
-);
-
-bindRange(
-    "bgStrength",
-    "bgStrengthOut"
-);
-
-bindRange(
-    "bgThresh",
-    "bgThreshOut"
-);
-
-bindRange(
-    "margin",
-    "marginOut"
-);
-
-bindRange(
-    "gap",
-    "gapOut"
-);
+    return Math.max(
+        1,
+        Math.round(
+            cols *
+            image.height /
+            image.width
+        )
+    );
+}
 
 
 /* =========================================================
-   TEN POINT CURVE
+   10 POINT CURVE
 ========================================================= */
 
-function applyToneCurve(value){
+function applyToneCurve(v){
 
-    value =
-        clamp(value);
+    v =
+        clamp(v);
 
-    const position =
-        value * 9;
+    const pos =
+        v * 9;
 
     const index =
         Math.min(
             8,
-            Math.floor(position)
+            Math.floor(pos)
         );
 
-    const fraction =
-        position-index;
+    const t =
+        pos-index;
 
     const a =
         clamp(
             index/9 +
-            toneOffsets[index]/250
+            toneOffsets[index]/300
         );
 
     const b =
         clamp(
             (index+1)/9 +
-            toneOffsets[index+1]/250
+            toneOffsets[index+1]/300
         );
 
     return clamp(
         lerp(
             a,
             b,
-            fraction
+            t
         )
     );
-
-}
-
-
-/* =========================================================
-   GRAYSCALE
-========================================================= */
-
-function grayscale(data,index){
-
-    return (
-        0.2126 * data[index] +
-        0.7152 * data[index+1] +
-        0.0722 * data[index+2]
-    ) / 255;
-
 }
 
 
@@ -1791,563 +2315,531 @@ function grayscale(data,index){
 
 function detectBackground(){
 
-    if(
-        !image ||
-        !$("bgSep").checked
-    ){
+    if(!sourceData)
+        return null;
 
-        backgroundMask = null;
-
-        return;
-
-    }
-
-    const width =
+    const w =
         sourceCanvas.width;
 
-    const height =
+    const h =
         sourceCanvas.height;
 
-    const data =
-        sourceData;
-
-    const threshold =
-        Number($("bgThresh").value) *
-        2.4;
+    const total =
+        w*h;
 
     const mask =
         new Uint8Array(
-            width*height
+            total
         );
 
-    const visited =
-        new Uint8Array(
-            width*height
-        );
-
-    const queue =
-        new Int32Array(
-            width*height
-        );
-
-    let head = 0;
-    let tail = 0;
+    /*
+        Color medio de los bordes.
+    */
 
     let r=0;
     let g=0;
     let b=0;
-    let count=0;
+    let n=0;
 
-
-    function addBorder(x,y){
-
-        const p =
-            y*width+x;
-
-        if(visited[p])
-            return;
-
-        const i =
-            p*4;
-
-        r += data[i];
-        g += data[i+1];
-        b += data[i+2];
-
-        count++;
-
-        queue[tail++] =
-            p;
-
-    }
-
+    const border =
+        Math.max(
+            2,
+            Math.round(
+                Math.min(w,h)*.035
+            )
+        );
 
     for(
-        let x=0;
-        x<width;
-        x++
-    ){
-
-        addBorder(x,0);
-
-        if(height>1)
-            addBorder(
-                x,
-                height-1
-            );
-
-    }
-
-
-    for(
-        let y=1;
-        y<height-1;
+        let y=0;
+        y<h;
         y++
     ){
 
-        addBorder(0,y);
-
-        if(width>1)
-            addBorder(
-                width-1,
-                y
-            );
-
-    }
-
-
-    const br=r/count;
-    const bg=g/count;
-    const bb=b/count;
-
-
-    while(head<tail){
-
-        const p =
-            queue[head++];
-
-        if(visited[p])
-            continue;
-
-        visited[p]=1;
-
-        mask[p]=1;
-
-        const x =
-            p % width;
-
-        const y =
-            Math.floor(
-                p / width
-            );
-
-
-        const neighbors = [
-
-            [x+1,y],
-            [x-1,y],
-            [x,y+1],
-            [x,y-1]
-
-        ];
-
-
         for(
-            const [nx,ny]
-            of neighbors
+            let x=0;
+            x<w;
+            x++
         ){
 
             if(
-                nx<0 ||
-                ny<0 ||
-                nx>=width ||
-                ny>=height
-            )
-                continue;
-
-            const np =
-                ny*width+nx;
-
-            if(visited[np])
-                continue;
-
-            const i =
-                np*4;
-
-            const distance =
-                Math.sqrt(
-
-                    Math.pow(
-                        data[i]-br,
-                        2
-                    ) +
-
-                    Math.pow(
-                        data[i+1]-bg,
-                        2
-                    ) +
-
-                    Math.pow(
-                        data[i+2]-bb,
-                        2
-                    )
-
-                );
-
-            if(
-                distance<=threshold
+                x<border ||
+                y<border ||
+                x>=w-border ||
+                y>=h-border
             ){
 
-                queue[tail++] =
-                    np;
+                const i =
+                    (y*w+x)*4;
 
+                r +=
+                    sourceData.data[i];
+
+                g +=
+                    sourceData.data[i+1];
+
+                b +=
+                    sourceData.data[i+2];
+
+                n++;
             }
-
         }
-
     }
 
-    backgroundMask =
-        mask;
+    r/=n;
+    g/=n;
+    b/=n;
 
+    const threshold =
+        Number(
+            $("bgThresh").value
+        );
+
+    /*
+        Flood fill desde bordes.
+    */
+
+    const queue = [];
+
+    const visited =
+        new Uint8Array(
+            total
+        );
+
+    function add(x,y){
+
+        if(
+            x<0 ||
+            y<0 ||
+            x>=w ||
+            y>=h
+        )
+            return;
+
+        const idx =
+            y*w+x;
+
+        if(
+            visited[idx]
+        )
+            return;
+
+        const i =
+            idx*4;
+
+        const dr =
+            sourceData.data[i]-r;
+
+        const dg =
+            sourceData.data[i+1]-g;
+
+        const db =
+            sourceData.data[i+2]-b;
+
+        const distance =
+            Math.sqrt(
+                dr*dr+
+                dg*dg+
+                db*db
+            );
+
+        if(
+            distance >
+            threshold*4.41
+        )
+            return;
+
+        visited[idx]=1;
+
+        queue.push(idx);
+    }
+
+    for(
+        let x=0;
+        x<w;
+        x++
+    ){
+
+        add(x,0);
+
+        add(
+            x,
+            h-1
+        );
+    }
+
+    for(
+        let y=0;
+        y<h;
+        y++
+    ){
+
+        add(0,y);
+
+        add(
+            w-1,
+            y
+        );
+    }
+
+    let q=0;
+
+    while(
+        q<queue.length
+    ){
+
+        const idx =
+            queue[q++];
+
+        mask[idx]=1;
+
+        const x =
+            idx%w;
+
+        const y =
+            Math.floor(
+                idx/w
+            );
+
+        add(x+1,y);
+        add(x-1,y);
+        add(x,y+1);
+        add(x,y-1);
+    }
+
+    return mask;
 }
 
 
 /* =========================================================
-   PROCESS PIXEL
+   PIXEL SAMPLING
 ========================================================= */
 
-function processPixel(
-    x,
-    y
+function samplePixel(
+    gx,
+    gy
 ){
 
-    const width =
+    const w =
         sourceCanvas.width;
 
-    const height =
+    const h =
         sourceCanvas.height;
 
-
-    const ix =
+    const x =
         clamp(
-            Math.round(x),
+            Math.floor(
+                (
+                    gx+.5
+                )/
+                cols*
+                w
+            ),
             0,
-            width-1
+            w-1
         );
 
-    const iy =
+    const y =
         clamp(
-            Math.round(y),
+            Math.floor(
+                (
+                    gy+.5
+                )/
+                rows*
+                h
+            ),
             0,
-            height-1
+            h-1
         );
 
+    const idx =
+        (
+            y*w+x
+        )*4;
 
-    const p =
-        iy*width+ix;
+    let r =
+        sourceData.data[idx];
 
-    const i =
-        p*4;
+    let g =
+        sourceData.data[idx+1];
 
+    let b =
+        sourceData.data[idx+2];
 
-    let value =
-        grayscale(
-            sourceData,
-            i
-        );
+    /*
+        Luminancia.
+    */
 
+    let gray =
+        (
+            .2126*r+
+            .7152*g+
+            .0722*b
+        )/255;
 
-    /* GLOBAL CONTRAST */
+    /*
+        Global contrast.
+    */
 
     const contrast =
         Number(
             $("contrast").value
-        ) / 100;
+        )/100;
 
-    value =
+    gray =
         clamp(
-            (value-.5) *
-            contrast +
+            (
+                gray-.5
+            )*
+            contrast+
             .5
         );
 
+    /*
+        Black depth.
+    */
 
-    /* BLACK DEPTH */
-
-    const blackDepth =
+    const black =
         Number(
             $("blackDepth").value
-        ) / 100;
+        )/100;
 
-    value =
+    gray =
         clamp(
-            value -
-            blackDepth*.25
+            gray-
+            black*.25
         );
 
-
-    /* CURVE */
+    /*
+        Curve.
+    */
 
     const curve =
         Number(
             $("curve").value
-        ) / 100;
+        )/100;
 
-    value =
-        Math.pow(
-            value,
-            curve
+    gray =
+        clamp(
+            Math.pow(
+                gray,
+                curve
+            )
         );
 
-
-    /* BACKGROUND SEPARATOR */
+    /*
+        Background.
+    */
 
     if(
-        backgroundMask &&
-        $("bgSep").checked
+        $("bgSep").checked &&
+        backgroundMask
     ){
 
-        const strength =
-            Number(
-                $("bgStrength").value
-            ) / 100;
-
         const isBackground =
-            backgroundMask[p] === 1;
-
+            backgroundMask[
+                y*w+x
+            ];
 
         if(isBackground){
 
-            const backgroundMode =
+            const strength =
+                Number(
+                    $("bgStrength").value
+                )/100;
+
+            const bgMode =
                 $("bgMode").value;
 
+            let target =
+                gray;
 
             if(
-                backgroundMode === "light"
-            ){
-
-                value =
-                    lerp(
-                        value,
-                        1,
-                        strength*.78
-                    );
-
-            }
-
-            else if(
-                backgroundMode === "dark"
-            ){
-
-                value =
-                    lerp(
-                        value,
-                        0,
-                        strength*.68
-                    );
-
-            }
-
-            else{
-
-                value =
-                    lerp(
-                        value,
-                        .5,
-                        strength*.55
-                    );
-
-            }
-
-        }
-        else{
-
-            value =
-                clamp(
-                    .5 +
-                    (value-.5) *
-                    (1+strength*.8)
-                );
-
-        }
-
-    }
-
-
-    /* MASKS */
-
-    masks.forEach(
-        mask=>{
-
-            if(
-                !mask.enabled ||
-                !mask.data
+                bgMode === "light"
             )
-                return;
+                target =
+                    1;
 
+            if(
+                bgMode === "dark"
+            )
+                target =
+                    0;
 
-            const mx =
-                clamp(
-                    Math.round(
-                        ix /
-                        width *
-                        mask.canvas.width
-                    ),
-                    0,
-                    mask.canvas.width-1
-                );
+            if(
+                bgMode === "neutral"
+            )
+                target =
+                    .5;
 
-
-            const my =
-                clamp(
-                    Math.round(
-                        iy /
-                        height *
-                        mask.canvas.height
-                    ),
-                    0,
-                    mask.canvas.height-1
-                );
-
-
-            const alpha =
-                mask.data[
-                    my*mask.canvas.width+mx
-                ] / 255;
-
-
-            if(alpha<=0)
-                return;
-
-
-            const localContrast =
-                1 +
-                mask.contrast/100*2;
-
-
-            const local =
-                clamp(
-
-                    .5 +
-                    (value-.5) *
-                    localContrast +
-
-                    mask.brightness/200
-
-                );
-
-
-            value =
+            gray =
                 lerp(
-                    value,
-                    local,
-                    alpha
+                    gray,
+                    target,
+                    strength
                 );
 
-        }
-    );
+        }else{
 
+            /*
+                Leve aumento del contraste
+                del objeto principal.
+            */
 
-    return applyToneCurve(
-        value
-    );
+            const strength =
+                Number(
+                    $("bgStrength").value
+                )/100;
 
-}
-
-
-/* =========================================================
-   CELL VALUE
-========================================================= */
-
-function getCellValue(
-    column,
-    row
-){
-
-    const cellWidth =
-        sourceCanvas.width /
-        cols;
-
-    const cellHeight =
-        sourceCanvas.height /
-        rows;
-
-
-    const detail =
-        Number(
-            $("detail").value
-        ) / 100;
-
-
-    const sampleCount =
-        detail > .7
-            ? 5
-            : detail > .3
-                ? 3
-                : 2;
-
-
-    let total=0;
-    let count=0;
-
-
-    for(
-        let sy=0;
-        sy<sampleCount;
-        sy++
-    ){
-
-        for(
-            let sx=0;
-            sx<sampleCount;
-            sx++
-        ){
-
-            const x =
-                (
-                    column +
-                    (sx+.5) /
-                    sampleCount
-                ) *
-                cellWidth;
-
-
-            const y =
-                (
-                    row +
-                    (sy+.5) /
-                    sampleCount
-                ) *
-                cellHeight;
-
-
-            total +=
-                processPixel(
-                    x,
-                    y
+            gray =
+                clamp(
+                    .5+
+                    (
+                        gray-.5
+                    )*
+                    (
+                        1+
+                        strength*.55
+                    )
                 );
-
-            count++;
-
         }
-
     }
 
-
-    return total/count;
-
-}
-
-
-/* =========================================================
-   PATTERN LEVEL
-========================================================= */
-
-function getPatternLevel(
-    grayscaleValue
-){
+    /*
+        Masks.
+    */
 
     if(
-        !activePatterns.length
-    )
-        return 1;
+        masks.length
+    ){
+
+        const relX =
+            x /
+            Math.max(
+                1,
+                w-1
+            );
+
+        const relY =
+            y /
+            Math.max(
+                1,
+                h-1
+            );
+
+        masks.forEach(
+            mask=>{
+
+                if(
+                    !mask.enabled ||
+                    !mask.data
+                )
+                    return;
+
+                const mx =
+                    Math.min(
+                        mask.width-1,
+                        Math.floor(
+                            relX*
+                            mask.width
+                        )
+                    );
+
+                const my =
+                    Math.min(
+                        mask.height-1,
+                        Math.floor(
+                            relY*
+                            mask.height
+                        )
+                    );
+
+                const alpha =
+                    mask.data[
+                        my*
+                        mask.width+
+                        mx
+                    ]/255;
+
+                if(
+                    alpha<=0
+                )
+                    return;
+
+                const localContrast =
+                    1+
+                    Number(
+                        mask.contrast
+                    )/100;
+
+                const local =
+                    clamp(
+                        .5+
+                        (
+                            gray-.5
+                        )*
+                        localContrast+
+                        Number(
+                            mask.brightness
+                        )/100*.5
+                    );
+
+                gray =
+                    lerp(
+                        gray,
+                        local,
+                        alpha
+                    );
+            }
+        );
+    }
+
+    /*
+        10 niveles.
+    */
+
+    gray =
+        applyToneCurve(
+            gray
+        );
+
+    return clamp(
+        gray
+    );
+}
 
 
-    const position =
-        (1-grayscaleValue) *
-        activePatterns.length;
+/* =========================================================
+   GRID PATTERN
+========================================================= */
 
+function getPatternForTone(
+    gray
+){
+
+    const list =
+        activePatterns.length
+            ? activePatterns
+            : [1];
+
+    /*
+        Oscuridad = símbolo más denso.
+    */
+
+    const darkness =
+        1-gray;
 
     const index =
         Math.min(
-            activePatterns.length-1,
-            Math.floor(position)
+            list.length-1,
+            Math.floor(
+                darkness*
+                list.length
+            )
         );
 
-
-    return activePatterns[index];
-
+    return patterns.find(
+        p=>p.id===list[index]
+    );
 }
 
 
@@ -2357,385 +2849,259 @@ function getPatternLevel(
 
 function drawPattern(
     ctx,
-    id,
+    type,
     x,
     y,
-    size,
-    showNumber=false
+    size
 ){
+
+    const pad =
+        size*.22;
+
+    const cx =
+        x+
+        size/2;
+
+    const cy =
+        y+
+        size/2;
 
     ctx.save();
 
     ctx.strokeStyle =
-        "#111";
+        "#101114";
 
     ctx.fillStyle =
-        "#111";
+        "#101114";
 
     ctx.lineWidth =
         Math.max(
-            1,
-            size*.055
+            .6,
+            size*.08
         );
 
-
-    const q =
-        size*.18;
-
-
-    switch(id){
-
-        case 1:
-            break;
-
-
-        case 2:
-
-            ctx.beginPath();
-
-            ctx.arc(
-                x+size/2,
-                y+size/2,
-                Math.max(
-                    1,
-                    size*.055
-                ),
-                0,
-                Math.PI*2
-            );
-
-            ctx.fill();
-
-            break;
-
-
-        case 3:
-
-            for(
-                let yy=y+q;
-                yy<y+size;
-                yy+=q*1.8
-            ){
-
-                ctx.beginPath();
-
-                ctx.moveTo(
-                    x,
-                    yy
-                );
-
-                ctx.lineTo(
-                    x+size,
-                    yy
-                );
-
-                ctx.stroke();
-
-            }
-
-            break;
-
-
-        case 4:
-
-            for(
-                let xx=x+q;
-                xx<x+size;
-                xx+=q*1.8
-            ){
-
-                ctx.beginPath();
-
-                ctx.moveTo(
-                    xx,
-                    y
-                );
-
-                ctx.lineTo(
-                    xx,
-                    y+size
-                );
-
-                ctx.stroke();
-
-            }
-
-            break;
-
-
-        case 5:
-
-            for(
-                let k=-size;
-                k<size*2;
-                k+=q*2
-            ){
-
-                ctx.beginPath();
-
-                ctx.moveTo(
-                    x+k,
-                    y+size
-                );
-
-                ctx.lineTo(
-                    x+k+size,
-                    y
-                );
-
-                ctx.stroke();
-
-            }
-
-            break;
-
-
-        case 6:
-
-            for(
-                let k=-size;
-                k<size*2;
-                k+=q*2
-            ){
-
-                ctx.beginPath();
-
-                ctx.moveTo(
-                    x+k,
-                    y
-                );
-
-                ctx.lineTo(
-                    x+k+size,
-                    y+size
-                );
-
-                ctx.stroke();
-
-            }
-
-            break;
-
-
-        case 7:
-
-            ctx.beginPath();
-
-            ctx.moveTo(
-                x+size/2,
-                y
-            );
-
-            ctx.lineTo(
-                x+size/2,
-                y+size
-            );
-
-            ctx.moveTo(
-                x,
-                y+size/2
-            );
-
-            ctx.lineTo(
-                x+size,
-                y+size/2
-            );
-
-            ctx.stroke();
-
-            break;
-
-
-        case 8:
-
-            ctx.beginPath();
-
-            ctx.moveTo(
-                x,
-                y
-            );
-
-            ctx.lineTo(
-                x+size,
-                y+size
-            );
-
-            ctx.moveTo(
-                x+size,
-                y
-            );
-
-            ctx.lineTo(
-                x,
-                y+size
-            );
-
-            ctx.stroke();
-
-            break;
-
-
-        case 9:
-
-            for(
-                let yy=y+q;
-                yy<y+size;
-                yy+=q*2.2
-            ){
-
-                ctx.beginPath();
-
-                ctx.moveTo(
-                    x,
-                    yy
-                );
-
-                ctx.lineTo(
-                    x+size,
-                    yy
-                );
-
-                ctx.stroke();
-
-            }
-
-            break;
-
-
-        case 10:
-
-            for(
-                let xx=x+q;
-                xx<x+size;
-                xx+=q*2.2
-            ){
-
-                ctx.beginPath();
-
-                ctx.moveTo(
-                    xx,
-                    y
-                );
-
-                ctx.lineTo(
-                    xx,
-                    y+size
-                );
-
-                ctx.stroke();
-
-            }
-
-            break;
-
-
-        case 11:
-
-            ctx.font =
-                `${size*.48}px Arial`;
-
-            ctx.textAlign =
-                "center";
-
-            ctx.textBaseline =
-                "middle";
-
-            ctx.fillText(
-                "✦",
-                x+size/2,
-                y+size/2
-            );
-
-            break;
-
-
-        case 12:
-
-            ctx.fillRect(
-                x,
-                y,
-                size,
-                size
-            );
-
-            break;
-
-    }
-
-
-    if(showNumber){
-
-        ctx.font =
-            `${Math.max(
-                5,
-                size*.22
-            )}px monospace`;
-
-        ctx.textAlign =
-            "center";
-
-        ctx.textBaseline =
-            "middle";
-
-        ctx.fillStyle =
-            "#111";
-
-        ctx.fillText(
-            id,
-            x+size/2,
-            y+size/2
+    ctx.lineCap =
+        "round";
+
+    ctx.lineJoin =
+        "round";
+
+    if(
+        type === "dot"
+    ){
+
+        ctx.beginPath();
+
+        ctx.arc(
+            cx,
+            cy,
+            Math.max(
+                .7,
+                size*.055
+            ),
+            0,
+            Math.PI*2
         );
 
+        ctx.fill();
     }
 
+    else if(
+        type === "horizontal"
+    ){
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            x+pad,
+            cy
+        );
+
+        ctx.lineTo(
+            x+size-pad,
+            cy
+        );
+
+        ctx.stroke();
+    }
+
+    else if(
+        type === "vertical"
+    ){
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            cx,
+            y+pad
+        );
+
+        ctx.lineTo(
+            cx,
+            y+size-pad
+        );
+
+        ctx.stroke();
+    }
+
+    else if(
+        type === "diag1"
+    ){
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            x+pad,
+            y+size-pad
+        );
+
+        ctx.lineTo(
+            x+size-pad,
+            y+pad
+        );
+
+        ctx.stroke();
+    }
+
+    else if(
+        type === "diag2"
+    ){
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            x+pad,
+            y+pad
+        );
+
+        ctx.lineTo(
+            x+size-pad,
+            y+size-pad
+        );
+
+        ctx.stroke();
+    }
+
+    else if(
+        type === "plus"
+    ){
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            x+pad,
+            cy
+        );
+
+        ctx.lineTo(
+            x+size-pad,
+            cy
+        );
+
+        ctx.moveTo(
+            cx,
+            y+pad
+        );
+
+        ctx.lineTo(
+            cx,
+            y+size-pad
+        );
+
+        ctx.stroke();
+    }
+
+    else if(
+        type === "cross"
+    ){
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            x+pad,
+            y+pad
+        );
+
+        ctx.lineTo(
+            x+size-pad,
+            y+size-pad
+        );
+
+        ctx.moveTo(
+            x+size-pad,
+            y+pad
+        );
+
+        ctx.lineTo(
+            x+pad,
+            y+size-pad
+        );
+
+        ctx.stroke();
+    }
+
+    else if(
+        type === "square"
+    ){
+
+        ctx.strokeRect(
+            x+pad,
+            y+pad,
+            size-pad*2,
+            size-pad*2
+        );
+    }
+
+    else if(
+        type === "solid"
+    ){
+
+        ctx.fillRect(
+            x+pad,
+            y+pad,
+            size-pad*2,
+            size-pad*2
+        );
+    }
 
     ctx.restore();
-
 }
 
 
 /* =========================================================
-   RENDER PREVIEW
+   GRID CANVAS
 ========================================================= */
 
-function render(){
+function renderGrid(
+    canvas,
+    cellSize
+){
 
     if(!image)
         return;
 
+    const width =
+        Math.round(
+            cols*
+            cellSize
+        );
 
-    sourceData =
-        sourceCtx.getImageData(
-            0,
-            0,
-            sourceCanvas.width,
-            sourceCanvas.height
-        ).data;
-
-
-    /*
-       El canvas interno tiene una dimensión
-       independiente del tamaño visual.
-    */
-
-    const internalCell =
-        10;
-
-    const canvas =
-        $("previewCanvas");
+    const height =
+        Math.round(
+            rows*
+            cellSize
+        );
 
     canvas.width =
-        cols *
-        internalCell;
+        width;
 
     canvas.height =
-        rows *
-        internalCell;
-
+        height;
 
     const ctx =
-        canvas.getContext("2d");
-
+        canvas.getContext(
+            "2d"
+        );
 
     ctx.fillStyle =
         "#fff";
@@ -2743,249 +3109,334 @@ function render(){
     ctx.fillRect(
         0,
         0,
-        canvas.width,
-        canvas.height
+        width,
+        height
     );
 
+    const template =
+        mode === "template";
+
+    /*
+        Cuadrícula.
+    */
 
     for(
-        let row=0;
-        row<rows;
-        row++
+        let gy=0;
+        gy<rows;
+        gy++
     ){
 
         for(
-            let column=0;
-            column<cols;
-            column++
+            let gx=0;
+            gx<cols;
+            gx++
         ){
 
-            const value =
-                getCellValue(
-                    column,
-                    row
+            const gray =
+                samplePixel(
+                    gx,
+                    gy
                 );
 
-
-            const id =
-                getPatternLevel(
-                    value
+            const pattern =
+                getPatternForTone(
+                    gray
                 );
-
-
-            const gap =
-                Number(
-                    $("gap").value
-                );
-
 
             const x =
-                column *
-                internalCell +
-                gap/2;
-
+                gx*cellSize;
 
             const y =
-                row *
-                internalCell +
-                gap/2;
+                gy*cellSize;
 
+            /*
+                Fondo blanco.
+            */
 
-            const size =
-                internalCell-gap;
+            ctx.fillStyle =
+                "#fff";
 
+            ctx.fillRect(
+                x,
+                y,
+                cellSize,
+                cellSize
+            );
+
+            if(
+                !template
+            ){
+
+                if(
+                    pattern.type !==
+                    "empty"
+                ){
+
+                    drawPattern(
+                        ctx,
+                        pattern.type,
+                        x,
+                        y,
+                        cellSize
+                    );
+                }
+
+            }else{
+
+                /*
+                    Plantilla:
+                    número de símbolo.
+                */
+
+                ctx.fillStyle =
+                    "#101114";
+
+                ctx.font =
+                    `${Math.max(
+                        5,
+                        cellSize*.34
+                    )}px monospace`;
+
+                ctx.textAlign =
+                    "center";
+
+                ctx.textBaseline =
+                    "middle";
+
+                ctx.fillText(
+                    pattern.id,
+                    x+cellSize/2,
+                    y+cellSize/2
+                );
+            }
+
+            /*
+                Líneas de cuadrícula.
+            */
 
             ctx.strokeStyle =
-                "#d7d7da";
+                "rgba(16,17,20,.13)";
 
             ctx.lineWidth =
-                .5;
-
+                Math.max(
+                    .35,
+                    cellSize*.025
+                );
 
             ctx.strokeRect(
                 x,
                 y,
-                size,
-                size
+                cellSize,
+                cellSize
             );
-
-
-            drawPattern(
-                ctx,
-                id,
-                x,
-                y,
-                size,
-                mode === "template"
-            );
-
         }
-
     }
 
+    /*
+        Borde exterior.
+    */
 
-    updateMeta();
+    ctx.strokeStyle =
+        "#101114";
 
-    syncMaskPreview();
-
-}
-
-
-/* =========================================================
-   MASK PREVIEW
-========================================================= */
-
-function syncMaskPreview(){
-
-    const maskCanvas =
-        $("maskCanvas");
-
-    const preview =
-        $("previewCanvas");
-
-
-    if(
-        activeMask < 0 ||
-        !masks[activeMask]
-    ){
-
-        maskCanvas.style.display =
-            "none";
-
-        return;
-
-    }
-
-
-    maskCanvas.width =
-        preview.width;
-
-    maskCanvas.height =
-        preview.height;
-
-
-    const rect =
-        preview.getBoundingClientRect();
-
-
-    const wrapRect =
-        $("canvasWrap")
-            .getBoundingClientRect();
-
-
-    maskCanvas.style.display =
-        "block";
-
-    maskCanvas.style.width =
-        rect.width+"px";
-
-    maskCanvas.style.height =
-        rect.height+"px";
-
-    maskCanvas.style.left =
-        (
-            rect.left -
-            wrapRect.left
-        )+"px";
-
-    maskCanvas.style.top =
-        (
-            rect.top -
-            wrapRect.top
-        )+"px";
-
-
-    const ctx =
-        maskCanvas.getContext("2d");
-
-
-    ctx.clearRect(
-        0,
-        0,
-        maskCanvas.width,
-        maskCanvas.height
-    );
-
-
-    ctx.globalAlpha =
-        .28;
-
-    ctx.drawImage(
-        masks[activeMask].canvas,
-        0,
-        0,
-        maskCanvas.width,
-        maskCanvas.height
-    );
-
-    ctx.globalAlpha=1;
-
-}
-
-
-/* =========================================================
-   MASK MANAGEMENT
-========================================================= */
-
-function resizeMasks(){
-
-    masks.forEach(
-        mask=>{
-
-            const canvas =
-                document.createElement(
-                    "canvas"
-                );
-
-            canvas.width =
-                sourceCanvas.width;
-
-            canvas.height =
-                sourceCanvas.height;
-
-
-            if(mask.canvas){
-
-                canvas
-                    .getContext("2d")
-                    .drawImage(
-                        mask.canvas,
-                        0,
-                        0,
-                        canvas.width,
-                        canvas.height
-                    );
-
-            }
-
-
-            mask.canvas =
-                canvas;
-
-            mask.ctx =
-                canvas.getContext("2d");
-
-            mask.data =
-                null;
-
-        }
-    );
-
-}
-
-
-function refreshMaskList(){
-
-    $("maskTools")
-        .classList.toggle(
-            "show",
-            activeMask >= 0
+    ctx.lineWidth =
+        Math.max(
+            1,
+            cellSize*.06
         );
 
+    ctx.strokeRect(
+        0,
+        0,
+        width,
+        height
+    );
+}
 
-    $("maskList").innerHTML =
-        "";
 
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+function renderPreview(){
+
+    if(!image)
+        return;
+
+    const canvas =
+        $("previewCanvas");
+
+    /*
+        Canvas grande interno.
+        CSS se encarga de contenerlo.
+    */
+
+    const previewCell =
+        Math.max(
+            8,
+            Math.min(
+                20,
+                900/
+                Math.max(
+                    cols,
+                    rows
+                )
+            )
+        );
+
+    renderGrid(
+        canvas,
+        previewCell
+    );
+
+    /*
+        Máscara sobre el canvas.
+    */
+
+    updateMaskOverlay();
+
+    $("gridMeta").textContent =
+        `${cols} × ${rows} · ${image.width} × ${image.height}px`;
+}
+
+
+/* =========================================================
+   MASK SYSTEM
+========================================================= */
+
+function createMask(){
+
+    if(!image)
+        return;
+
+    const max =
+        900;
+
+    const ratio =
+        Math.min(
+            1,
+            max/
+            Math.max(
+                image.width,
+                image.height
+            )
+        );
+
+    const width =
+        Math.max(
+            1,
+            Math.round(
+                image.width*
+                ratio
+            )
+        );
+
+    const height =
+        Math.max(
+            1,
+            Math.round(
+                image.height*
+                ratio
+            )
+        );
+
+    const canvas =
+        document.createElement(
+            "canvas"
+        );
+
+    canvas.width =
+        width;
+
+    canvas.height =
+        height;
+
+    const mask = {
+
+        name:
+            `Máscara ${masks.length+1}`,
+
+        width,
+
+        height,
+
+        canvas,
+
+        ctx:
+            canvas.getContext(
+                "2d"
+            ),
+
+        data:null,
+
+        brightness:0,
+
+        contrast:0,
+
+        enabled:true
+    };
+
+    masks.push(
+        mask
+    );
+
+    activeMask =
+        masks.length-1;
+
+    updateMaskControls();
+
+    updateMaskList();
+
+    updateMaskOverlay();
+}
+
+
+function updateMaskData(
+    mask
+){
+
+    mask.data =
+        mask.ctx.getImageData(
+            0,
+            0,
+            mask.width,
+            mask.height
+        ).data;
+
+    /*
+        Guardamos solamente alpha
+        en una matriz Uint8Array.
+    */
+
+    const alpha =
+        new Uint8Array(
+            mask.width*
+            mask.height
+        );
+
+    for(
+        let i=0;
+        i<alpha.length;
+        i++
+    ){
+
+        alpha[i] =
+            mask.data[
+                i*4+3
+            ];
+    }
+
+    mask.data =
+        alpha;
+}
+
+
+function updateMaskList(){
+
+    const box =
+        $("maskList");
+
+    box.innerHTML = "";
 
     masks.forEach(
         (mask,index)=>{
@@ -2998,266 +3449,306 @@ function refreshMaskList(){
             item.className =
                 "mask-item";
 
-
             item.innerHTML = `
-
                 <span>
                     ${mask.name}
                 </span>
 
-                <button class="btn">
-                    ${
-                        index === activeMask
-                            ? "ACTIVA"
-                            : "SELECCIONAR"
-                    }
+                <button
+                    class="btn"
+                    data-select="${index}"
+                >
+                    ${index===activeMask?"ACTIVA":"USAR"}
                 </button>
 
-                <button class="btn">
+                <button
+                    class="btn"
+                    data-delete="${index}"
+                >
                     ×
                 </button>
-
             `;
 
+            box.appendChild(
+                item
+            );
+        }
+    );
 
-            item
-                .children[1]
-                .onclick = () => {
+    box
+    .querySelectorAll(
+        "[data-select]"
+    )
+    .forEach(
+        button=>{
+
+            button.addEventListener(
+                "click",
+                ()=>{
 
                     activeMask =
-                        index;
+                        Number(
+                            button.dataset.select
+                        );
 
-                    $("maskBrightness")
-                        .value =
-                        mask.brightness;
+                    updateMaskControls();
 
-                    $("maskContrast")
-                        .value =
-                        mask.contrast;
+                    updateMaskList();
 
-                    refreshMaskList();
+                    updateMaskOverlay();
+                }
+            );
+        }
+    );
 
-                    syncMaskPreview();
+    box
+    .querySelectorAll(
+        "[data-delete]"
+    )
+    .forEach(
+        button=>{
 
-                };
+            button.addEventListener(
+                "click",
+                ()=>{
 
-
-            item
-                .children[2]
-                .onclick = () => {
+                    const index =
+                        Number(
+                            button.dataset.delete
+                        );
 
                     masks.splice(
                         index,
                         1
                     );
 
-                    activeMask =
-                        Math.min(
-                            activeMask,
-                            masks.length-1
-                        );
+                    if(
+                        activeMask>=
+                        masks.length
+                    ){
 
-                    refreshMaskList();
+                        activeMask =
+                            masks.length-1;
+                    }
 
-                    render();
+                    updateMaskControls();
 
-                };
+                    updateMaskList();
 
-
-            $("maskList")
-                .appendChild(item);
-
+                    rebuild();
+                }
+            );
         }
     );
-
 }
 
 
-/* =========================================================
-   ADD MASK
-========================================================= */
+function updateMaskControls(){
 
-$("addMask").onclick =
-    ()=>{
+    const tools =
+        $("maskTools");
 
-        if(!image)
-            return;
+    if(
+        activeMask<0 ||
+        !masks[activeMask]
+    ){
 
-
-        const canvas =
-            document.createElement(
-                "canvas"
-            );
-
-
-        canvas.width =
-            sourceCanvas.width;
-
-        canvas.height =
-            sourceCanvas.height;
-
-
-        masks.push({
-
-            name:
-                "Máscara "+
-                (masks.length+1),
-
-            canvas,
-
-            ctx:
-                canvas.getContext("2d"),
-
-            brightness:0,
-
-            contrast:0,
-
-            enabled:true,
-
-            data:null
-
-        });
-
-
-        activeMask =
-            masks.length-1;
-
-
-        refreshMaskList();
-
-        render();
-
-    };
-
-
-/* =========================================================
-   MASK CONTROLS
-========================================================= */
-
-$("maskBrightness").oninput =
-    event => {
-
-        if(activeMask<0)
-            return;
-
-        masks[activeMask]
-            .brightness =
-            Number(
-                event.target.value
-            );
-
-        render();
-
-    };
-
-
-$("maskContrast").oninput =
-    event => {
-
-        if(activeMask<0)
-            return;
-
-        masks[activeMask]
-            .contrast =
-            Number(
-                event.target.value
-            );
-
-        render();
-
-    };
-
-
-$("clearMasks").onclick =
-    ()=>{
-
-        masks=[];
-
-        activeMask=-1;
-
-        refreshMaskList();
-
-        render();
-
-    };
-
-
-$("clearCurrentMask").onclick =
-    ()=>{
-
-        if(activeMask<0)
-            return;
-
-        const mask =
-            masks[activeMask];
-
-
-        mask.ctx.clearRect(
-            0,
-            0,
-            mask.canvas.width,
-            mask.canvas.height
+        tools.classList.remove(
+            "show"
         );
 
+        return;
+    }
 
-        mask.data=null;
+    tools.classList.add(
+        "show"
+    );
 
-        render();
+    const mask =
+        masks[activeMask];
 
-    };
+    $("maskBrightness").value =
+        mask.brightness;
+
+    $("maskContrast").value =
+        mask.contrast;
+}
 
 
-$("paintMode").onclick =
-    ()=>{
-        paintMode="paint";
-    };
+function clearCurrentMask(){
 
+    if(
+        activeMask<0 ||
+        !masks[activeMask]
+    )
+        return;
 
-$("eraseMode").onclick =
-    ()=>{
-        paintMode="erase";
-    };
+    const mask =
+        masks[activeMask];
+
+    mask.ctx.clearRect(
+        0,
+        0,
+        mask.width,
+        mask.height
+    );
+
+    updateMaskData(
+        mask
+    );
+
+    updateMaskOverlay();
+
+    rebuild();
+}
 
 
 /* =========================================================
    MASK PAINT
 ========================================================= */
 
-let painting=false;
+function paintMaskAt(
+    event
+){
+
+    if(
+        activeMask<0 ||
+        !masks[activeMask]
+    )
+        return;
+
+    const mask =
+        masks[activeMask];
+
+    const canvas =
+        $("maskCanvas");
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+    const px =
+        (
+            event.clientX-
+            rect.left
+        )/
+        rect.width;
+
+    const py =
+        (
+            event.clientY-
+            rect.top
+        )/
+        rect.height;
+
+    const x =
+        px*
+        mask.width;
+
+    const y =
+        py*
+        mask.height;
+
+    const brush =
+        Number(
+            $("brushSize").value
+        )/100*
+        Math.min(
+            mask.width,
+            mask.height
+        );
+
+    const ctx =
+        mask.ctx;
+
+    ctx.save();
+
+    if(
+        paintMode ===
+        "erase"
+    ){
+
+        ctx.globalCompositeOperation =
+            "destination-out";
+
+    }else{
+
+        ctx.globalCompositeOperation =
+            "source-over";
+
+        ctx.fillStyle =
+            "rgba(0,0,0,1)";
+    }
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x,
+        y,
+        brush/2,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+    ctx.restore();
+
+    updateMaskData(
+        mask
+    );
+
+    updateMaskOverlay();
+
+    rebuild();
+}
 
 
-$("maskCanvas").addEventListener(
+let painting = false;
+
+
+$("maskCanvas")
+.addEventListener(
     "pointerdown",
     event=>{
 
-        if(activeMask<0)
+        if(
+            activeMask<0
+        )
             return;
 
         painting=true;
 
         $("maskCanvas")
-            .setPointerCapture(
-                event.pointerId
-            );
+        .setPointerCapture(
+            event.pointerId
+        );
 
-        paintMask(event);
-
+        paintMaskAt(
+            event
+        );
     }
 );
 
 
-$("maskCanvas").addEventListener(
+$("maskCanvas")
+.addEventListener(
     "pointermove",
     event=>{
 
-        if(painting)
-            paintMask(event);
+        if(
+            painting
+        ){
 
+            paintMaskAt(
+                event
+            );
+        }
     }
 );
 
 
-$("maskCanvas").addEventListener(
+$("maskCanvas")
+.addEventListener(
     "pointerup",
     ()=>{
         painting=false;
@@ -3265,7 +3756,8 @@ $("maskCanvas").addEventListener(
 );
 
 
-$("maskCanvas").addEventListener(
+$("maskCanvas")
+.addEventListener(
     "pointercancel",
     ()=>{
         painting=false;
@@ -3273,731 +3765,644 @@ $("maskCanvas").addEventListener(
 );
 
 
-function paintMask(event){
+function updateMaskOverlay(){
+
+    const overlay =
+        $("maskCanvas");
+
+    if(
+        activeMask<0 ||
+        !masks[activeMask] ||
+        !image
+    ){
+
+        overlay.style.display =
+            "none";
+
+        return;
+    }
+
+    overlay.style.display =
+        "block";
+
+    const preview =
+        $("previewCanvas");
+
+    /*
+        Posicionamos o canvas de máscara
+        exatamente sobre o preview.
+    */
+
+    const pRect =
+        preview.getBoundingClientRect();
+
+    const wrapRect =
+        $("canvasWrap")
+        .getBoundingClientRect();
+
+    overlay.style.width =
+        pRect.width+"px";
+
+    overlay.style.height =
+        pRect.height+"px";
+
+    overlay.style.left =
+        (
+            pRect.left-
+            wrapRect.left
+        )+"px";
+
+    overlay.style.top =
+        (
+            pRect.top-
+            wrapRect.top
+        )+"px";
+
+    overlay.width =
+        Math.max(
+            1,
+            Math.round(
+                pRect.width
+            )
+        );
+
+    overlay.height =
+        Math.max(
+            1,
+            Math.round(
+                pRect.height
+            )
+        );
+
+    const ctx =
+        overlay.getContext(
+            "2d"
+        );
+
+    ctx.clearRect(
+        0,
+        0,
+        overlay.width,
+        overlay.height
+    );
+
+    /*
+        Mostrar la máscara activa
+        de manera semitransparente.
+    */
 
     const mask =
         masks[activeMask];
 
+    ctx.save();
 
-    const rect =
-        $("maskCanvas")
-            .getBoundingClientRect();
+    ctx.globalAlpha =
+        .22;
 
-
-    const x =
-        (
-            event.clientX -
-            rect.left
-        ) /
-        rect.width *
-        mask.canvas.width;
-
-
-    const y =
-        (
-            event.clientY -
-            rect.top
-        ) /
-        rect.height *
-        mask.canvas.height;
-
-
-    const brush =
-        Number(
-            $("brushSize").value
-        );
-
-
-    const radius =
-        brush/100 *
-        Math.min(
-            mask.canvas.width,
-            mask.canvas.height
-        )/2;
-
-
-    mask.ctx.save();
-
-
-    mask.ctx.globalCompositeOperation =
-        paintMode === "erase"
-            ? "destination-out"
-            : "source-over";
-
-
-    mask.ctx.fillStyle =
-        "#ff0094";
-
-
-    mask.ctx.beginPath();
-
-    mask.ctx.arc(
-        x,
-        y,
-        radius,
+    ctx.drawImage(
+        mask.canvas,
         0,
-        Math.PI*2
+        0,
+        overlay.width,
+        overlay.height
     );
 
-    mask.ctx.fill();
-
-
-    mask.ctx.restore();
-
-
-    const data =
-        mask.ctx.getImageData(
-            0,
-            0,
-            mask.canvas.width,
-            mask.canvas.height
-        ).data;
-
-
-    mask.data =
-        new Uint8Array(
-            data.length/4
-        );
-
-
-    for(
-        let i=0,j=0;
-        i<data.length;
-        i+=4,j++
-    ){
-
-        mask.data[j] =
-            data[i+3];
-
-    }
-
-
-    render();
-
+    ctx.restore();
 }
 
 
 /* =========================================================
-   PATTERN BUTTONS
+   AUTOMATIC ADJUSTMENT
 ========================================================= */
 
-patterns.forEach(
-    pattern=>{
+function analyzeImage(){
 
-        const button =
-            document.createElement(
-                "button"
-            );
+    if(!sourceData)
+        return null;
 
+    const values = [];
 
-        button.className =
-            "pattern-btn active";
+    const data =
+        sourceData.data;
 
+    const step =
+        Math.max(
+            1,
+            Math.floor(
+                (
+                    sourceCanvas.width*
+                    sourceCanvas.height
+                )/
+                12000
+            )
+        );
 
-        button.innerHTML = `
+    let sum=0;
+    let sum2=0;
+    let count=0;
 
-            <span>
-                ${pattern.symbol}
-            </span>
+    for(
+        let i=0;
+        i<data.length;
+        i+=4*step
+    ){
 
-            <small>
-                ${pattern.id} ·
-                ${pattern.name}
-            </small>
+        const gray =
+            (
+                .2126*
+                data[i]+
+                .7152*
+                data[i+1]+
+                .0722*
+                data[i+2]
+            )/255;
 
-        `;
+        values.push(
+            gray
+        );
 
+        sum +=
+            gray;
 
-        button.onclick =
-            ()=>{
+        sum2 +=
+            gray*gray;
 
-                const index =
-                    activePatterns
-                        .indexOf(
-                            pattern.id
-                        );
-
-
-                if(index>=0){
-
-                    if(
-                        activePatterns.length===1
-                    )
-                        return;
-
-                    activePatterns.splice(
-                        index,
-                        1
-                    );
-
-                    button.classList
-                        .remove(
-                            "active"
-                        );
-
-                }
-                else{
-
-                    activePatterns.push(
-                        pattern.id
-                    );
-
-                    activePatterns.sort(
-                        (a,b)=>a-b
-                    );
-
-                    button.classList
-                        .add(
-                            "active"
-                        );
-
-                }
-
-
-                render();
-
-            };
-
-
-        $("patterns")
-            .appendChild(
-                button
-            );
-
+        count++;
     }
-);
 
+    values.sort(
+        (a,b)=>a-b
+    );
 
-/* =========================================================
-   MODES
-========================================================= */
+    function percentile(p){
 
-$("modeFinal").onclick =
-    ()=>{
+        if(!values.length)
+            return .5;
 
-        mode="final";
-
-        $("modeFinal")
-            .classList.add(
-                "active"
+        const index =
+            Math.floor(
+                p*
+                (
+                    values.length-1
+                )
             );
 
-        $("modeTemplate")
-            .classList.remove(
-                "active"
-            );
+        return values[
+            clamp(
+                index,
+                0,
+                values.length-1
+            )
+        ];
+    }
 
-        render();
+    const mean =
+        sum/
+        Math.max(
+            1,
+            count
+        );
 
+    const variance =
+        Math.max(
+            0,
+            sum2/count-
+            mean*mean
+        );
+
+    const std =
+        Math.sqrt(
+            variance
+        );
+
+    return {
+
+        p02:
+            percentile(.02),
+
+        p10:
+            percentile(.10),
+
+        p20:
+            percentile(.20),
+
+        p30:
+            percentile(.30),
+
+        p40:
+            percentile(.40),
+
+        p50:
+            percentile(.50),
+
+        p60:
+            percentile(.60),
+
+        p70:
+            percentile(.70),
+
+        p80:
+            percentile(.80),
+
+        p90:
+            percentile(.90),
+
+        p98:
+            percentile(.98),
+
+        mean,
+
+        std
     };
+}
 
-
-$("modeTemplate").onclick =
-    ()=>{
-
-        mode="template";
-
-        $("modeTemplate")
-            .classList.add(
-                "active"
-            );
-
-        $("modeFinal")
-            .classList.remove(
-                "active"
-            );
-
-        render();
-
-    };
-
-
-/* =========================================================
-   AUTO ADJUST
-========================================================= */
-
-/*
-   Esta es la parte nueva importante.
-
-   El sistema prueba automáticamente
-   diferentes combinaciones y mide:
-
-   1. distribución tonal
-   2. contraste
-   3. cantidad de niveles utilizados
-   4. separación entre niveles
-   5. cantidad de celdas casi iguales
-   6. pérdida de detalle
-   7. dispersión del histograma
-
-   Además calcula automáticamente
-   los 10 puntos de la curva.
-*/
 
 function autoAdjust(){
 
     if(!image)
         return;
 
+    prepareSource();
 
-    /*
-       Muestreamos la imagen para
-       mantener la operación rápida.
-    */
+    const stats =
+        analyzeImage();
 
-    const width =
-        sourceCanvas.width;
-
-    const height =
-        sourceCanvas.height;
-
-    const data =
-        sourceData;
-
-
-    const samples=[];
-
-
-    const step =
-        Math.max(
-            1,
-            Math.floor(
-                Math.sqrt(
-                    width*height /
-                    5000
-                )
-            )
-        );
-
-
-    for(
-        let y=0;
-        y<height;
-        y+=step
-    ){
-
-        for(
-            let x=0;
-            x<width;
-            x+=step
-        ){
-
-            const i =
-                (y*width+x)*4;
-
-            samples.push(
-                grayscale(
-                    data,
-                    i
-                )
-            );
-
-        }
-
-    }
-
-
-    if(!samples.length)
+    if(!stats)
         return;
 
-
     /*
-       Estadísticas.
+        -----------------------------------------------------
+        CONTRASTE
+        -----------------------------------------------------
     */
-
-    let sum=0;
-
-    let sum2=0;
-
-    let min=1;
-
-    let max=0;
-
-
-    samples.forEach(
-        v=>{
-
-            sum+=v;
-
-            sum2+=v*v;
-
-            min=Math.min(min,v);
-
-            max=Math.max(max,v);
-
-        }
-    );
-
-
-    const mean =
-        sum/samples.length;
-
-
-    const variance =
-        Math.max(
-            0,
-            sum2/samples.length -
-            mean*mean
-        );
-
-
-    const deviation =
-        Math.sqrt(
-            variance
-        );
-
 
     const dynamicRange =
-        max-min;
+        stats.p98-
+        stats.p02;
 
-
-    /*
-       Ajuste base.
-    */
-
-    const optimalContrast =
+    const contrast =
         clamp(
-            1.12 +
-            (
-                .42 -
-                deviation
-            )*.95,
-            .95,
+            .88/
+            Math.max(
+                .35,
+                dynamicRange
+            ),
+            .75,
             1.55
         );
 
-
-    const optimalBlack =
-        clamp(
-            (
-                .46 -
-                mean
-            )*55,
-            -20,
-            28
-        );
-
-
-    const optimalCurve =
-        clamp(
-            100 +
-            (
-                mean-.5
-            )*45,
-            82,
-            122
-        );
-
-
-    const optimalDetail =
-        clamp(
-            deviation*220,
-            25,
-            92
-        );
-
-
     $("contrast").value =
         Math.round(
-            optimalContrast*100
+            contrast*100
         );
 
 
-    $("blackDepth").value =
-        Math.round(
-            optimalBlack
-        );
+    /*
+        -----------------------------------------------------
+        CURVA
+        -----------------------------------------------------
+    */
 
+    let curve = 1;
+
+    if(
+        stats.mean>.57
+    ){
+
+        curve =
+            1.10;
+
+    }else if(
+        stats.mean<.43
+    ){
+
+        curve =
+            .90;
+    }
 
     $("curve").value =
         Math.round(
-            optimalCurve
+            curve*100
         );
 
+
+    /*
+        -----------------------------------------------------
+        NEGROS
+        -----------------------------------------------------
+    */
+
+    let black =
+        0;
+
+    if(
+        stats.p02>.18
+    ){
+
+        black =
+            Math.round(
+                (
+                    stats.p02-
+                    .08
+                )*
+                80
+            );
+
+    }else if(
+        stats.p02<.025
+    ){
+
+        black =
+            -8;
+    }
+
+    $("blackDepth").value =
+        clamp(
+            black,
+            -40,
+            40
+        );
+
+
+    /*
+        -----------------------------------------------------
+        DETALLE
+        -----------------------------------------------------
+    */
+
+    const detail =
+        clamp(
+            45+
+            stats.std*
+            110,
+            25,
+            90
+        );
 
     $("detail").value =
         Math.round(
-            optimalDetail
+            detail
         );
 
 
     /*
-       ------------------------------------------------------
-       OPTIMIZACIÓN DE LOS 10 NIVELES
-       ------------------------------------------------------
-
-       Creamos histograma.
-
-       Después buscamos percentiles
-       para que los niveles tengan
-       aproximadamente cantidades
-       equilibradas de información.
+        -----------------------------------------------------
+        FONDO
+        -----------------------------------------------------
     */
 
-    const histogram =
-        new Array(101)
-            .fill(0);
+    backgroundMask =
+        detectBackground();
 
+    let bgCount=0;
 
-    samples.forEach(
-        value=>{
+    if(backgroundMask){
 
-            const index =
-                Math.round(
-                    value*100
-                );
+        for(
+            let i=0;
+            i<backgroundMask.length;
+            i++
+        ){
 
-            histogram[index]++;
-
+            if(
+                backgroundMask[i]
+            )
+                bgCount++;
         }
-    );
-
-
-    const total =
-        samples.length;
-
-
-    const percentiles =
-        [
-            .02,
-            .08,
-            .18,
-            .30,
-            .42,
-            .56,
-            .68,
-            .80,
-            .91,
-            .98
-        ];
-
-
-    const targets =
-        percentiles.map(
-            percentile=>{
-
-                const target =
-                    total*percentile;
-
-                let accumulated=0;
-
-                for(
-                    let i=0;
-                    i<histogram.length;
-                    i++
-                ){
-
-                    accumulated +=
-                        histogram[i];
-
-                    if(
-                        accumulated>=target
-                    )
-                        return i/100;
-
-                }
-
-                return 1;
-
-            }
-        );
-
-
-    /*
-       Convertimos los percentiles
-       en offsets para nuestra curva
-       de 10 puntos.
-
-       El offset se limita para no
-       destruir completamente la imagen.
-    */
-
-    targets.forEach(
-        (target,index)=>{
-
-            const identity =
-                index/9;
-
-
-            const difference =
-                target-identity;
-
-
-            toneOffsets[index] =
-                clamp(
-                    difference*250,
-                    -65,
-                    65
-                );
-
-        }
-    );
-
-
-    /*
-       Fondo:
-
-       Si los bordes tienen muy poca
-       variación, es probable que exista
-       un fondo uniforme.
-
-       Lo activamos automáticamente.
-    */
-
-    let borderMean=0;
-    let borderVariance=0;
-    let borderCount=0;
-
-
-    function sampleBorder(x,y){
-
-        const i =
-            (y*width+x)*4;
-
-        const v =
-            grayscale(
-                data,
-                i
-            );
-
-        borderMean+=v;
-
-        borderCount++;
-
     }
 
-
-    for(
-        let x=0;
-        x<width;
-        x+=step
-    ){
-
-        sampleBorder(x,0);
-
-        sampleBorder(
-            x,
-            height-1
-        );
-
-    }
-
-
-    for(
-        let y=0;
-        y<height;
-        y+=step
-    ){
-
-        sampleBorder(0,y);
-
-        sampleBorder(
-            width-1,
-            y
-        );
-
-    }
-
-
-    borderMean /=
-        borderCount;
-
-
-    for(
-        let x=0;
-        x<width;
-        x+=step
-    ){
-
-        const top =
-            grayscale(
-                data,
-                x*4
-            );
-
-        const bottom =
-            grayscale(
-                data,
-                (
-                    (height-1)*width+x
-                )*4
-            );
-
-        borderVariance +=
-            Math.abs(
-                top-bottom
-            );
-
-    }
-
-
-    /*
-       Activar separador cuando
-       el fondo parece uniforme.
-    */
-
-    const backgroundLikely =
-        dynamicRange > .25 &&
-        borderVariance /
+    const bgRatio =
+        bgCount/
         Math.max(
             1,
-            width/step
-        ) < .08;
+            sourceCanvas.width*
+            sourceCanvas.height
+        );
 
+    if(
+        bgRatio>.05 &&
+        bgRatio<.80
+    ){
 
-    $("bgSep").checked =
-        backgroundLikely;
-
-
-    if(backgroundLikely){
+        $("bgSep").checked =
+            true;
 
         $("bgStrength").value =
             Math.round(
                 clamp(
-                    55 +
-                    (deviation-.18)*100,
+                    55+
+                    (bgRatio-.25)*80,
                     35,
-                    85
+                    90
                 )
             );
 
+        /*
+            Fondo normalmente claro:
+            lo detectamos por los bordes.
+        */
 
-        $("bgThresh").value =
-            Math.round(
-                clamp(
-                    25 +
-                    deviation*45,
-                    18,
-                    55
-                )
+        let borderMean=0;
+        let borderN=0;
+
+        const w =
+            sourceCanvas.width;
+
+        const h =
+            sourceCanvas.height;
+
+        for(
+            let y=0;
+            y<h;
+            y++
+        ){
+
+            for(
+                let x=0;
+                x<w;
+                x++
+            ){
+
+                if(
+                    x<3 ||
+                    y<3 ||
+                    x>=w-3 ||
+                    y>=h-3
+                ){
+
+                    const i =
+                        (
+                            y*w+x
+                        )*4;
+
+                    borderMean +=
+                        (
+                            .2126*
+                            sourceData.data[i]+
+                            .7152*
+                            sourceData.data[i+1]+
+                            .0722*
+                            sourceData.data[i+2]
+                        )/255;
+
+                    borderN++;
+                }
+            }
+        }
+
+        borderMean /=
+            Math.max(
+                1,
+                borderN
             );
 
         $("bgMode").value =
-            "light";
+            borderMean>.55
+                ? "light"
+                : "dark";
 
+        $("bgThresh").value =
+            32;
+
+    }else{
+
+        $("bgSep").checked =
+            false;
     }
 
 
-    updateOutputLabels();
+    /*
+        -----------------------------------------------------
+        10 NIVELES
+        -----------------------------------------------------
 
-    detectBackground();
+        Cada punto se compara contra una curva
+        objetivo.
 
-    render();
+        Esto evita dejar los diez puntos
+        simplemente en cero.
+    */
 
+    const target =
+        [
+            0,
+            .055,
+            .17,
+            .30,
+            .42,
+            .54,
+            .66,
+            .78,
+            .91,
+            1
+        ];
+
+    const observed =
+        [
+            stats.p02,
+            stats.p10,
+            stats.p20,
+            stats.p30,
+            stats.p40,
+            stats.p50,
+            stats.p60,
+            stats.p70,
+            stats.p90,
+            stats.p98
+        ];
+
+    for(
+        let i=0;
+        i<10;
+        i++
+    ){
+
+        /*
+            Si la distribución real está
+            demasiado comprimida en una zona,
+            ampliamos ese nivel.
+        */
+
+        const delta =
+            target[i]-
+            observed[i];
+
+        toneOffsets[i] =
+            clamp(
+                delta*180,
+                -45,
+                45
+            );
+
+        const input =
+            $(`tone${i}`);
+
+        const output =
+            $(`toneOut${i}`);
+
+        input.value =
+            Math.round(
+                toneOffsets[i]
+            );
+
+        output.textContent =
+            Math.round(
+                toneOffsets[i]
+            );
+    }
+
+    /*
+        -----------------------------------------------------
+        Generamos.
+    */
+
+    rebuild();
 }
 
 
 /* =========================================================
-   UPDATE OUTPUT LABELS
+   REBUILD
 ========================================================= */
 
-function updateOutputLabels(){
+function rebuild(){
+
+    if(!image)
+        return;
+
+    cols =
+        Number(
+            $("cols").value
+        );
+
+    rows =
+        calculateRows();
+
+    prepareSource();
+
+    backgroundMask =
+        $("bgSep").checked
+            ? detectBackground()
+            : null;
+
+    renderPreview();
+
+    updateOutputs();
+
+    updateMaskOverlay();
+}
+
+
+/* =========================================================
+   OUTPUTS
+========================================================= */
+
+function updateOutputs(){
 
     $("colsOut").textContent =
-        $("cols").value;
+        cols;
 
     $("contrastOut").textContent =
-        $("contrast").value+"%";
+        `${$("contrast").value}%`;
 
     $("blackOut").textContent =
         $("blackDepth").value;
@@ -4018,103 +4423,290 @@ function updateOutputLabels(){
     $("bgThreshOut").textContent =
         $("bgThresh").value;
 
-    document
-        .querySelectorAll(
-            "#toneControls .tone-row"
-        )
-        .forEach(
-            (row,index)=>{
+    $("marginOut").textContent =
+        $("margin").value;
 
-                const slider =
-                    row.querySelector(
-                        "input"
-                    );
-
-                const output =
-                    row.querySelector(
-                        "output"
-                    );
-
-                slider.value =
-                    toneOffsets[index];
-
-                output.textContent =
-                    toneOffsets[index];
-
-            }
-        );
-
+    $("gapOut").textContent =
+        $("gap").value;
 }
 
 
 /* =========================================================
-   AUTO BUTTON
+   CONTROL EVENTS
 ========================================================= */
 
-$("autoBtn").onclick =
-    ()=>{
+[
+    "cols",
+    "contrast",
+    "blackDepth",
+    "detail",
+    "curve",
+    "bgStrength",
+    "bgThresh"
+].forEach(
+    id=>{
 
-        if(!image)
-            return;
+        $(id).addEventListener(
+            "input",
+            ()=>{
 
-        autoAdjust();
+                updateOutputs();
 
-    };
+                rebuild();
+            }
+        );
+    }
+);
+
+
+$("bgSep")
+.addEventListener(
+    "change",
+    rebuild
+);
+
+
+$("bgMode")
+.addEventListener(
+    "change",
+    rebuild
+);
+
+
+$("autoBtn")
+.addEventListener(
+    "click",
+    autoAdjust
+);
 
 
 /* =========================================================
    RESET
 ========================================================= */
 
-$("resetBtn").onclick =
-    ()=>{
+function resetAll(){
 
-        $("contrast").value=100;
-        $("blackDepth").value=0;
-        $("detail").value=50;
-        $("curve").value=100;
+    $("cols").value =
+        70;
 
-        $("bgSep").checked=false;
+    $("contrast").value =
+        100;
 
-        $("bgStrength").value=55;
-        $("bgThresh").value=32;
+    $("blackDepth").value =
+        0;
 
-        toneOffsets =
-            new Array(10).fill(0);
+    $("detail").value =
+        50;
 
-        updateOutputLabels();
+    $("curve").value =
+        100;
 
-        detectBackground();
+    $("bgSep").checked =
+        false;
 
-        render();
+    $("bgStrength").value =
+        55;
 
-    };
+    $("bgThresh").value =
+        32;
 
+    $("bgMode").value =
+        "light";
 
-/* =========================================================
-   BACKGROUND EVENTS
-========================================================= */
+    toneOffsets =
+        new Array(10).fill(0);
 
-[
-    "bgSep",
-    "bgStrength",
-    "bgThresh",
-    "bgMode"
-]
-.forEach(
-    id=>{
+    for(
+        let i=0;
+        i<10;
+        i++
+    ){
 
-        $(id).addEventListener(
-            "change",
-            ()=>{
+        $(`tone${i}`).value =
+            0;
 
-                detectBackground();
+        $(`toneOut${i}`).textContent =
+            "0";
+    }
 
-                render();
+    activePatterns =
+        patterns.map(
+            p=>p.id
+        );
 
+    document
+        .querySelectorAll(
+            ".pattern-btn"
+        )
+        .forEach(
+            button=>{
+                button.classList.add(
+                    "active"
+                );
             }
         );
 
+    masks=[];
+
+    activeMask=-1;
+
+    updateMaskControls();
+
+    updateMaskList();
+
+    rebuild();
+}
+
+
+$("resetBtn")
+.addEventListener(
+    "click",
+    resetAll
+);
+
+
+$("clearMasks")
+.addEventListener(
+    "click",
+    ()=>{
+
+        masks=[];
+
+        activeMask=-1;
+
+        updateMaskControls();
+
+        updateMaskList();
+
+        rebuild();
+    }
+);
+
+
+$("addMask")
+.addEventListener(
+    "click",
+    createMask
+);
+
+
+$("clearCurrentMask")
+.addEventListener(
+    "click",
+    clearCurrentMask
+);
+
+
+$("paintMode")
+.addEventListener(
+    "click",
+    ()=>{
+
+        paintMode =
+            "paint";
+    }
+);
+
+
+$("eraseMode")
+.addEventListener(
+    "click",
+    ()=>{
+
+        paintMode =
+            "erase";
+    }
+);
+
+
+$("maskBrightness")
+.addEventListener(
+    "input",
+    ()=>{
+
+        if(
+            activeMask<0
+        )
+            return;
+
+        masks[
+            activeMask
+        ].brightness =
+            Number(
+                $("maskBrightness").value
+            );
+
+        rebuild();
+    }
+);
+
+
+$("maskContrast")
+.addEventListener(
+    "input",
+    ()=>{
+
+        if(
+            activeMask<0
+        )
+            return;
+
+        masks[
+            activeMask
+        ].contrast =
+            Number(
+                $("maskContrast").value
+            );
+
+        rebuild();
+    }
+);
+
+
+/* =========================================================
+   MODE
+========================================================= */
+
+$("modeFinal")
+.addEventListener(
+    "click",
+    ()=>{
+
+        mode="final";
+
+        $("modeFinal")
+        .classList.add(
+            "active"
+        );
+
+        $("modeTemplate")
+        .classList.remove(
+            "active"
+        );
+
+        rebuild();
+    }
+);
+
+
+$("modeTemplate")
+.addEventListener(
+    "click",
+    ()=>{
+
+        mode="template";
+
+        $("modeTemplate")
+        .classList.add(
+            "active"
+        );
+
+        $("modeFinal")
+        .classList.remove(
+            "active"
+        );
+
+        rebuild();
     }
 );
 
@@ -4125,34 +4717,40 @@ $("resetBtn").onclick =
 
 const paperSizes = {
 
-    letter:
-        [216,279.4],
+    letter:[
+        216,
+        279.4
+    ],
 
-    a4:
-        [210,297],
+    a4:[
+        210,
+        297
+    ],
 
-    a3:
-        [297,420],
+    a3:[
+        297,
+        420
+    ],
 
-    a5:
-        [148,210],
+    a5:[
+        148,
+        210
+    ],
 
-    legal:
-        [215.9,355.6],
+    legal:[
+        215.9,
+        355.6
+    ],
 
-    oficio:
-        [216,330]
+    oficio:[
+        216,
+        330
+    ]
 
 };
 
 
 function getOrientation(){
-
-    const paper =
-        paperSizes[
-            $("paper").value
-        ];
-
 
     if(
         $("orientation").value ===
@@ -4160,24 +4758,20 @@ function getOrientation(){
     )
         return "portrait";
 
-
     if(
         $("orientation").value ===
         "landscape"
     )
         return "landscape";
 
-
     if(
         image &&
-        image.width >
+        image.width>
         image.height
     )
         return "landscape";
 
-
     return "portrait";
-
 }
 
 
@@ -4192,16 +4786,13 @@ function updatePrintCSS(){
             $("paper").value
         ];
 
-
     const orientation =
         getOrientation();
-
 
     const margin =
         Number(
             $("margin").value
         );
-
 
     let width =
         paper[0];
@@ -4209,20 +4800,23 @@ function updatePrintCSS(){
     let height =
         paper[1];
 
-
     if(
         orientation ===
         "landscape"
     ){
 
-        [width,height] =
-            [height,width];
-
+        [
+            width,
+            height
+        ] =
+        [
+            height,
+            width
+        ];
     }
 
-
     $("dynamicPrintStyle")
-        .textContent = `
+    .textContent = `
 
         @media print{
 
@@ -4234,7 +4828,6 @@ function updatePrintCSS(){
 
                 margin:
                     ${margin}mm;
-
             }
 
             #printSheet{
@@ -4244,595 +4837,36 @@ function updatePrintCSS(){
 
                 height:
                     ${height-2*margin}mm;
-
             }
-
         }
-
     `;
-
 }
 
 
 /* =========================================================
-   PRINT LAYOUT
+   LEGEND SYMBOL
 ========================================================= */
 
-function buildPrint(){
-
-    if(!image)
-        return;
-
-
-    updatePrintCSS();
-
-
-    const paper =
-        paperSizes[
-            $("paper").value
-        ];
-
-
-    const orientation =
-        getOrientation();
-
-
-    let pageWidth =
-        paper[0];
-
-    let pageHeight =
-        paper[1];
-
-
-    if(
-        orientation ===
-        "landscape"
-    ){
-
-        [pageWidth,pageHeight] =
-            [pageHeight,pageWidth];
-
-    }
-
-
-    const margin =
-        Number(
-            $("margin").value
-        );
-
-
-    const usableWidth =
-        pageWidth -
-        margin*2;
-
-
-    const usableHeight =
-        pageHeight -
-        margin*2;
-
-
-    const showTitle =
-        $("showTitle").checked;
-
-
-    const showLegend =
-        $("showLegend").checked;
-
-
-    const legendSide =
-        $("legendPos").value ===
-        "side";
-
-
-    /*
-       ------------------------------------------------------
-       IMPORTANTE
-       ------------------------------------------------------
-
-       Reservamos muy poco espacio
-       para la leyenda.
-
-       La grilla recibe TODO el
-       espacio restante.
-
-       Esto evita que la grilla sea
-       achicada innecesariamente.
-    */
-
-    const titleHeight =
-        showTitle
-            ? 7
-            : 0;
-
-
-    const legendHeight =
-        showLegend &&
-        !legendSide
-            ? 14
-            : 0;
-
-
-    const legendWidth =
-        showLegend &&
-        legendSide
-            ? 36
-            : 0;
-
-
-    const gap =
-        3;
-
-
-    const gridAreaWidth =
-        usableWidth -
-        legendWidth -
-        (
-            legendSide
-                ? gap
-                : 0
-        );
-
-
-    const gridAreaHeight =
-        usableHeight -
-        titleHeight -
-        legendHeight -
-        (
-            !legendSide &&
-            showLegend
-                ? gap
-                : 0
-        );
-
-
-    /*
-       ESCALA MÁXIMA POSIBLE
-
-       Esta es la parte fundamental.
-
-       La escala se obtiene directamente
-       comparando la proporción de la
-       grilla con el área disponible.
-
-       Nunca se usa una escala arbitraria.
-    */
-
-    const cellWidth =
-        gridAreaWidth /
-        cols;
-
-
-    const cellHeight =
-        gridAreaHeight /
-        rows;
-
-
-    const cellSize =
-        Math.min(
-            cellWidth,
-            cellHeight
-        );
-
-
-    const finalGridWidth =
-        cellSize *
-        cols;
-
-
-    const finalGridHeight =
-        cellSize *
-        rows;
-
-
-    /*
-       Sheet
-    */
-
-    const sheet =
-        $("printSheet");
-
-
-    sheet.style.width =
-        usableWidth+"mm";
-
-    sheet.style.height =
-        usableHeight+"mm";
-
-
-    sheet.style.display =
-        "flex";
-
-    sheet.style.flexDirection =
-        "column";
-
-
-    sheet.style.background =
-        "#fff";
-
-
-    sheet.style.overflow =
-        "hidden";
-
-
-    /*
-       TITLE
-    */
-
-    const title =
-        $("printTitle");
-
-
-    title.style.display =
-        showTitle
-            ? "block"
-            : "none";
-
-
-    title.style.height =
-        titleHeight+"mm";
-
-
-    title.style.flex =
-        "0 0 "+titleHeight+"mm";
-
-
-    title.style.textAlign =
-        "center";
-
-
-    title.style.font =
-        "800 9pt Arial";
-
-
-    title.style.letterSpacing =
-        ".05em";
-
-
-    title.style.padding =
-        "0";
-
-
-    title.style.lineHeight =
-        titleHeight+"mm";
-
-
-    title.textContent =
-        `PIXEL HATCH · ${cols} × ${rows}`;
-
-
-    /*
-       BODY
-    */
-
-    const body =
-        $("printBody");
-
-
-    body.style.display =
-        "flex";
-
-
-    body.style.flex =
-        "1";
-
-
-    body.style.minHeight =
-        "0";
-
-
-    body.style.minWidth =
-        "0";
-
-
-    body.style.flexDirection =
-        legendSide
-            ? "row"
-            : "column";
-
-
-    body.style.gap =
-        gap+"mm";
-
-
-    /*
-       CANVAS
-    */
-
-    const canvas =
-        $("printCanvas");
-
-
-    /*
-       Resolución interna alta.
-
-       No depende de la escala CSS.
-    */
-
-    const internalScale =
-        Math.max(
-            5,
-            Math.min(
-                18,
-                1800 /
-                Math.max(
-                    cols,
-                    rows
-                )
-            )
-        );
-
-
-    canvas.width =
-        Math.round(
-            cols*
-            internalScale
-        );
-
-
-    canvas.height =
-        Math.round(
-            rows*
-            internalScale
-        );
-
-
-    canvas.style.width =
-        finalGridWidth+"mm";
-
-
-    canvas.style.height =
-        finalGridHeight+"mm";
-
-
-    canvas.style.display =
-        "block";
-
-
-    canvas.style.alignSelf =
-        "center";
-
-
-    /*
-       Canvas rendering
-    */
-
-    const ctx =
-        canvas.getContext(
-            "2d"
-        );
-
-
-    ctx.fillStyle =
-        "#fff";
-
-
-    ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-
-    for(
-        let row=0;
-        row<rows;
-        row++
-    ){
-
-        for(
-            let column=0;
-            column<cols;
-            column++
-        ){
-
-            const value =
-                getCellValue(
-                    column,
-                    row
-                );
-
-
-            const id =
-                getPatternLevel(
-                    value
-                );
-
-
-            const g =
-                Number(
-                    $("gap").value
-                );
-
-
-            const x =
-                column*
-                internalScale +
-                g/2;
-
-
-            const y =
-                row*
-                internalScale +
-                g/2;
-
-
-            const size =
-                internalScale-g;
-
-
-            ctx.strokeStyle =
-                "#d4d4d4";
-
-
-            ctx.lineWidth =
-                Math.max(
-                    .4,
-                    internalScale*.012
-                );
-
-
-            ctx.strokeRect(
-                x,
-                y,
-                size,
-                size
-            );
-
-
-            drawPattern(
-                ctx,
-                id,
-                x,
-                y,
-                size,
-                mode==="template"
-            );
-
-        }
-
-    }
-
-
-    /*
-       LEGEND
-    */
-
-    const legend =
-        $("printLegend");
-
-
-    legend.style.display =
-        showLegend
-            ? "flex"
-            : "none";
-
-
-    if(legendSide){
-
-        legend.style.width =
-            legendWidth+"mm";
-
-        legend.style.flex =
-            "0 0 "+legendWidth+"mm";
-
-        legend.style.height =
-            "100%";
-
-        legend.style.flexDirection =
-            "column";
-
-        legend.style.justifyContent =
-            "center";
-
-        legend.style.alignItems =
-            "flex-start";
-
-        legend.style.gap =
-            "2mm";
-
-        legend.style.borderLeft =
-            ".25mm solid #999";
-
-        legend.style.paddingLeft =
-            "4mm";
-
-    }
-    else{
-
-        legend.style.width =
-            "100%";
-
-        legend.style.height =
-            legendHeight+"mm";
-
-        legend.style.flex =
-            "0 0 "+legendHeight+"mm";
-
-        legend.style.flexDirection =
-            "row";
-
-        legend.style.alignItems =
-            "center";
-
-        legend.style.justifyContent =
-            "space-around";
-
-        legend.style.gap =
-            "1.5mm";
-
-        legend.style.borderTop =
-            ".25mm solid #999";
-
-        legend.style.padding =
-            "1mm 0 0";
-
-    }
-
-
-    legend.innerHTML =
-        "";
-
-
-    patterns.forEach(
-        pattern=>{
-
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-
-            item.style.display =
-                "flex";
-
-
-            item.style.alignItems =
-                "center";
-
-
-            item.style.gap =
-                "1mm";
-
-
-            item.style.whiteSpace =
-                "nowrap";
-
-
-            item.style.font =
-                "5.5pt Arial";
-
-
-            item.innerHTML = `
-
-                <span
-                    style="
-                        width:5mm;
-                        height:5mm;
-                        display:inline-flex;
-                        align-items:center;
-                        justify-content:center;
-                        border:.2mm solid #888;
-                        font-size:8pt;
-                    "
-                >
-                    ${pattern.symbol}
-                </span>
-
-                <span>
-                    ${pattern.id}
-                </span>
-
-            `;
-
-
-            legend.appendChild(
-                item
-            );
-
-        }
-    );
-
+function legendSymbol(
+    pattern
+){
+
+    return `
+        <div
+            style="
+                width:9mm;
+                height:9mm;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                border:0.2mm solid #ddd;
+            "
+        >
+            ${symbolSVG(
+                pattern.type
+            )}
+        </div>
+    `;
 }
 
 
@@ -4840,66 +4874,513 @@ function buildPrint(){
    PRINT
 ========================================================= */
 
-$("printBtn").onclick =
+function buildPrint(){
+
+    if(!image)
+        return;
+
+    updatePrintCSS();
+
+    const paper =
+        paperSizes[
+            $("paper").value
+        ];
+
+    const orientation =
+        getOrientation();
+
+    let pageWidth =
+        paper[0];
+
+    let pageHeight =
+        paper[1];
+
+    if(
+        orientation ===
+        "landscape"
+    ){
+
+        [
+            pageWidth,
+            pageHeight
+        ] =
+        [
+            pageHeight,
+            pageWidth
+        ];
+    }
+
+    const margin =
+        Number(
+            $("margin").value
+        );
+
+    const usableWidth =
+        pageWidth-
+        margin*2;
+
+    const usableHeight =
+        pageHeight-
+        margin*2;
+
+    const showTitle =
+        $("showTitle").checked;
+
+    const showLegend =
+        $("showLegend").checked &&
+        $("legendPos").value!=="none";
+
+    const legendSide =
+        $("legendPos").value ===
+        "side";
+
+    /*
+        Reservamos únicamente
+        lo indispensable.
+    */
+
+    const titleHeight =
+        showTitle
+            ? 6
+            : 0;
+
+    /*
+        Leyenda muy compacta.
+    */
+
+    const legendHeight =
+        showLegend &&
+        !legendSide
+            ? 12
+            : 0;
+
+    const legendWidth =
+        showLegend &&
+        legendSide
+            ? 27
+            : 0;
+
+    const gap =
+        Number(
+            $("gap").value
+        );
+
+    const gridAreaWidth =
+        usableWidth-
+        legendWidth-
+        (
+            legendSide
+                ? gap
+                : 0
+        );
+
+    const gridAreaHeight =
+        usableHeight-
+        titleHeight-
+        legendHeight-
+        (
+            !legendSide &&
+            showLegend
+                ? gap
+                : 0
+        );
+
+    /*
+        =====================================================
+        ESCALA MÁXIMA
+        =====================================================
+
+        La celda es cuadrada.
+
+        La grilla utiliza el máximo tamaño
+        posible en ambas dimensiones.
+    */
+
+    const cellSize =
+        Math.min(
+            gridAreaWidth/cols,
+            gridAreaHeight/rows
+        );
+
+    const finalGridWidth =
+        cellSize*cols;
+
+    const finalGridHeight =
+        cellSize*rows;
+
+
+    const sheet =
+        $("printSheet");
+
+    sheet.style.width =
+        usableWidth+"mm";
+
+    sheet.style.height =
+        usableHeight+"mm";
+
+    sheet.style.display =
+        "flex";
+
+    sheet.style.flexDirection =
+        "column";
+
+    sheet.style.background =
+        "#fff";
+
+    sheet.style.overflow =
+        "hidden";
+
+
+    /*
+        TITLE
+    */
+
+    const title =
+        $("printTitle");
+
+    title.style.display =
+        showTitle
+            ? "block"
+            : "none";
+
+    title.style.height =
+        titleHeight+"mm";
+
+    title.style.flex =
+        "0 0 "+
+        titleHeight+
+        "mm";
+
+    title.style.textAlign =
+        "center";
+
+    title.style.font =
+        "800 8pt Arial";
+
+    title.style.lineHeight =
+        titleHeight+
+        "mm";
+
+    title.textContent =
+        `PIXEL HATCH · ${cols} × ${rows}`;
+
+
+    /*
+        BODY
+    */
+
+    const body =
+        $("printBody");
+
+    body.style.display =
+        "flex";
+
+    body.style.flex =
+        "1";
+
+    body.style.minHeight =
+        "0";
+
+    body.style.minWidth =
+        "0";
+
+    body.style.flexDirection =
+        legendSide
+            ? "row"
+            : "column";
+
+    body.style.gap =
+        gap+"mm";
+
+
+    /*
+        CANVAS
+
+        Alta resolución proporcional
+        a la cantidad de columnas.
+    */
+
+    const internalScale =
+        Math.max(
+            5,
+            Math.min(
+                24,
+                2200/
+                Math.max(
+                    cols,
+                    rows
+                )
+            )
+        );
+
+    const canvas =
+        $("printCanvas");
+
+    canvas.width =
+        Math.round(
+            cols*
+            internalScale
+        );
+
+    canvas.height =
+        Math.round(
+            rows*
+            internalScale
+        );
+
+    /*
+        Renderizamos temporalmente
+        independientemente de la
+        escala física.
+    */
+
+    const previousMode =
+        mode;
+
+    mode =
+        "final";
+
+    renderGrid(
+        canvas,
+        internalScale
+    );
+
+    mode =
+        previousMode;
+
+
+    canvas.style.width =
+        finalGridWidth+
+        "mm";
+
+    canvas.style.height =
+        finalGridHeight+
+        "mm";
+
+    canvas.style.display =
+        "block";
+
+    canvas.style.flex =
+        "0 0 auto";
+
+    canvas.style.alignSelf =
+        "center";
+
+
+    /*
+        LEYENDA
+    */
+
+    const legend =
+        $("printLegend");
+
+    if(
+        !showLegend
+    ){
+
+        legend.style.display =
+            "none";
+
+    }else{
+
+        legend.style.display =
+            "grid";
+
+        legend.style.boxSizing =
+            "border-box";
+
+        legend.style.border =
+            "0.2mm solid #bbb";
+
+        legend.style.padding =
+            "1.5mm";
+
+        legend.style.background =
+            "#fff";
+
+        legend.style.font =
+            "5.5pt Arial";
+
+        legend.style.color =
+            "#101114";
+
+        if(
+            legendSide
+        ){
+
+            legend.style.width =
+                legendWidth+"mm";
+
+            legend.style.height =
+                "100%";
+
+            legend.style.flex =
+                "0 0 "+
+                legendWidth+
+                "mm";
+
+            legend.style.gridTemplateColumns =
+                "1fr";
+
+            legend.style.gridAutoRows =
+                "auto";
+
+        }else{
+
+            legend.style.width =
+                "100%";
+
+            legend.style.height =
+                legendHeight+"mm";
+
+            legend.style.flex =
+                "0 0 "+
+                legendHeight+
+                "mm";
+
+            legend.style.gridTemplateColumns =
+                "repeat(10,1fr)";
+
+            legend.style.gridAutoRows =
+                "1fr";
+        }
+
+        legend.innerHTML =
+            patterns.map(
+                p=>`
+                    <div
+                        style="
+                            display:flex;
+                            align-items:center;
+                            gap:1mm;
+                            min-width:0;
+                            overflow:hidden;
+                        "
+                    >
+
+                        ${legendSymbol(p)}
+
+                        <span>
+                            <b>${p.id}</b>
+                            ${p.name}
+                        </span>
+
+                    </div>
+                `
+            ).join("");
+    }
+
+
+    /*
+        CENTRADO REAL
+
+        En vez de forzar el canvas al
+        100%, lo centramos dentro del
+        espacio disponible.
+
+        Así la grilla mantiene su
+        proporción exacta.
+    */
+
+    body.style.alignItems =
+        "center";
+
+    body.style.justifyContent =
+        "center";
+
+    if(
+        legendSide
+    ){
+
+        body.style.alignItems =
+            "stretch";
+
+        body.style.justifyContent =
+            "center";
+
+        canvas.style.alignSelf =
+            "center";
+    }
+}
+
+
+/* =========================================================
+   PRINT EVENTS
+========================================================= */
+
+$("printBtn")
+.addEventListener(
+    "click",
     ()=>{
 
         if(!image){
 
             alert(
-                "Carga una imagen primero."
+                "Primero carga o pega una imagen."
             );
 
             return;
-
         }
-
 
         buildPrint();
 
+        /*
+            Damos tiempo al navegador
+            para construir el layout.
+        */
 
         setTimeout(
             ()=>{
                 window.print();
             },
-            100
+            80
         );
+    }
+);
 
-    };
-
-
-/* =========================================================
-   FORMAT EVENTS
-========================================================= */
 
 [
     "paper",
     "orientation",
     "margin",
+    "gap",
     "showTitle",
     "showLegend",
-    "legendPos",
-    "gap"
-]
-.forEach(
+    "legendPos"
+].forEach(
     id=>{
 
         $(id).addEventListener(
-            "change",
-            updatePrintCSS
+            "input",
+            ()=>{
+                updateOutputs();
+                updatePrintCSS();
+            }
         );
 
+        $(id).addEventListener(
+            "change",
+            ()=>{
+                updateOutputs();
+                updatePrintCSS();
+            }
+        );
     }
 );
 
 
 /* =========================================================
-   CLEAR
+   CLEAR IMAGE
 ========================================================= */
 
-$("clearBtn").onclick =
+$("clearBtn")
+.addEventListener(
+    "click",
     ()=>{
 
         image=null;
+
+        sourceData=null;
 
         backgroundMask=null;
 
@@ -4911,25 +5392,28 @@ $("clearBtn").onclick =
             "";
 
         $("previewCanvas")
-            .width=1;
+        .width=0;
 
         $("previewCanvas")
-            .height=1;
+        .height=0;
 
-        $("empty").style.display =
+        $("empty")
+        .style.display =
             "flex";
 
         $("statusText")
-            .textContent =
+        .textContent =
             "SIN IMAGEN";
 
         $("gridMeta")
-            .textContent =
+        .textContent =
             "Carga una imagen para comenzar";
 
-        refreshMaskList();
+        updateMaskControls();
 
-    };
+        updateMaskList();
+    }
+);
 
 
 /* =========================================================
@@ -4939,21 +5423,37 @@ $("clearBtn").onclick =
 window.addEventListener(
     "resize",
     ()=>{
-
-        if(activeMask>=0)
-            syncMaskPreview();
-
+        updateMaskOverlay();
     }
 );
 
 
 /* =========================================================
-   INITIAL
+   PRINT AFTER
 ========================================================= */
 
-updatePrintCSS();
+window.addEventListener(
+    "afterprint",
+    ()=>{
 
-refreshMaskList();
+        $("printSheet")
+        .style.display =
+            "none";
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+buildPatternButtons();
+
+buildToneControls();
+
+updateOutputs();
+
+updatePrintCSS();
 
 </script>
 
