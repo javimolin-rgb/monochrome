@@ -6,175 +6,2653 @@
 <title>PIXEL HATCH — Monochrome Grid Studio</title>
 <meta name="theme-color" content="#101114">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23101114'/%3E%3Cg fill='%23ff0094'%3E%3Cpath d='M7 7h14v14H7zM25 7h14v14H25zM43 7h14v14H43zM7 25h14v14H7zM25 25h14v14H25zM43 25h14v14H43zM7 43h14v14H7zM25 43h14v14H25zM43 43h14v14H43z'/%3E%3C/g%3E%3C/svg%3E">
+
 <style>
-:root{--b:#101114;--p:#ff0094;--g:#777981;--l:#d6d6dc;--paper:#fff}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#ededf0;color:var(--b)}
-button,input,select{font:inherit}button{cursor:pointer}.app{max-width:1500px;margin:auto;padding:18px}
-.header{height:76px;background:var(--b);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border:1px solid #000}
-.brand{display:flex;align-items:center;gap:13px}.logo{width:44px;height:44px}.brand h1{margin:0;font-size:19px;letter-spacing:.12em}.brand small,.status{font:9px monospace;letter-spacing:.12em}.brand small{display:block;color:#aaa;margin-top:3px}.status{display:flex;gap:8px}.badge{padding:7px 9px;border:1px solid #414149}.badge b{color:var(--p)}
-.workspace{display:grid;grid-template-columns:390px minmax(0,1fr);gap:14px;margin-top:14px}.sidebar{background:#fafafa;border:1px solid var(--l);max-height:calc(100vh - 122px);overflow:auto}.section{padding:15px;border-bottom:1px solid var(--l)}.section-title{display:flex;gap:8px;align-items:center;margin-bottom:12px;font:900 10px monospace;letter-spacing:.14em;text-transform:uppercase}.section-title:before{content:"";width:8px;height:8px;background:var(--p)}
-.row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;margin:9px 0}label{font-size:12px}output{min-width:45px;text-align:right;font:700 10px monospace}input[type=range]{width:100%;accent-color:var(--p)}select{width:100%;height:34px;border:1px solid #c9c9cf;background:#fff;padding:0 9px}input[type=checkbox]{accent-color:var(--p)}
-.control-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.btn{min-height:36px;border:1px solid var(--b);background:#fff;padding:8px 10px;font-size:10px;font-weight:800}.btn.primary{background:var(--p);border-color:var(--p);color:#fff}.btn.dark{background:var(--b);color:#fff}.note{margin-top:8px;color:var(--g);font-size:10px;line-height:1.45}.file{padding:12px;border:1px dashed #aaa;background:#fff;font-size:11px}.file input{width:100%;margin-top:7px}
-.tonal{display:grid;gap:5px}.tone-row{display:grid;grid-template-columns:18px 1fr 42px;align-items:center;gap:6px}.tone-row b{font:9px monospace}
-.patterns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.pattern-btn{height:54px;border:1px solid #ccc;background:#fff;font-size:9px}.pattern-btn.active{border:2px solid var(--p)}.pattern-btn svg{width:24px;height:24px;display:block;margin:2px auto}.pattern-btn small{font-size:7px}
-.preview-panel{min-width:0;background:#fff;border:1px solid var(--l);padding:14px}.preview-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.meta{color:var(--g);font:9px monospace;text-transform:uppercase}.mode{display:flex;border:1px solid var(--b)}.mode button{border:0;background:#fff;padding:7px 11px;font-size:9px;font-weight:800}.mode button.active{background:var(--b);color:#fff}
-.preview-stage{height:720px;min-height:720px;max-height:720px;width:100%;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#e7e7ea;border:1px solid #d0d0d4}.canvas-wrap{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:18px;position:relative;overflow:hidden}#previewCanvas{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.14)}#maskCanvas{position:absolute;display:none;pointer-events:auto}.empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;color:#777;font-size:12px}.empty strong{display:block;margin-bottom:5px;color:#222;font-size:15px}
-.mask-tools{display:none;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.mask-tools.show{display:grid}.mask-list{display:grid;gap:5px;margin-top:8px}.mask-item{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:5px;padding:5px 7px;border:1px solid #ddd;background:#fff;font-size:10px}
-#printSheet{display:none}
-@media(max-width:1000px){.workspace{grid-template-columns:1fr}.sidebar{max-height:none}.preview-stage{height:650px;min-height:650px;max-height:650px}}
-@media print{html,body{background:#fff!important}body>*:not(#printSheet){display:none!important}#printSheet{display:flex!important;background:#fff;overflow:hidden}}
+:root{
+ --b:#101114;
+ --p:#ff0094;
+ --g:#777981;
+ --l:#d6d6dc;
+ --paper:#fff
+}
+
+*{box-sizing:border-box}
+
+html,body{
+ margin:0;
+ min-height:100%;
+ font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+ background:#ededf0;
+ color:var(--b)
+}
+
+button,input,select{font:inherit}
+button{cursor:pointer}
+
+.app{
+ max-width:1500px;
+ margin:auto;
+ padding:18px
+}
+
+.header{
+ height:76px;
+ background:var(--b);
+ color:#fff;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 20px;
+ border:1px solid #000
+}
+
+.brand{
+ display:flex;
+ align-items:center;
+ gap:13px
+}
+
+.logo{
+ width:44px;
+ height:44px
+}
+
+.brand h1{
+ margin:0;
+ font-size:19px;
+ letter-spacing:.12em
+}
+
+.brand small,.status{
+ font:9px monospace;
+ letter-spacing:.12em
+}
+
+.brand small{
+ display:block;
+ color:#aaa;
+ margin-top:3px
+}
+
+.status{
+ display:flex;
+ gap:8px
+}
+
+.badge{
+ padding:7px 9px;
+ border:1px solid #414149
+}
+
+.badge b{
+ color:var(--p)
+}
+
+.workspace{
+ display:grid;
+ grid-template-columns:390px minmax(0,1fr);
+ gap:14px;
+ margin-top:14px
+}
+
+.sidebar{
+ background:#fafafa;
+ border:1px solid var(--l);
+ max-height:calc(100vh - 122px);
+ overflow:auto
+}
+
+.section{
+ padding:15px;
+ border-bottom:1px solid var(--l)
+}
+
+.section-title{
+ display:flex;
+ gap:8px;
+ align-items:center;
+ margin-bottom:12px;
+ font:900 10px monospace;
+ letter-spacing:.14em;
+ text-transform:uppercase
+}
+
+.section-title:before{
+ content:"";
+ width:8px;
+ height:8px;
+ background:var(--p)
+}
+
+.row{
+ display:grid;
+ grid-template-columns:1fr auto;
+ gap:10px;
+ align-items:center;
+ margin:9px 0
+}
+
+label{font-size:12px}
+
+output{
+ min-width:45px;
+ text-align:right;
+ font:700 10px monospace
+}
+
+input[type=range]{
+ width:100%;
+ accent-color:var(--p)
+}
+
+select{
+ width:100%;
+ height:34px;
+ border:1px solid #c9c9cf;
+ background:#fff;
+ padding:0 9px
+}
+
+input[type=checkbox]{
+ accent-color:var(--p)
+}
+
+.control-grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:8px
+}
+
+.btn{
+ min-height:36px;
+ border:1px solid var(--b);
+ background:#fff;
+ padding:8px 10px;
+ font-size:10px;
+ font-weight:800
+}
+
+.btn.primary{
+ background:var(--p);
+ border-color:var(--p);
+ color:#fff
+}
+
+.btn.dark{
+ background:var(--b);
+ color:#fff
+}
+
+.note{
+ margin-top:8px;
+ color:var(--g);
+ font-size:10px;
+ line-height:1.45
+}
+
+.file{
+ padding:12px;
+ border:1px dashed #aaa;
+ background:#fff;
+ font-size:11px
+}
+
+.file input{
+ width:100%;
+ margin-top:7px
+}
+
+.tonal{
+ display:grid;
+ gap:5px
+}
+
+.tone-row{
+ display:grid;
+ grid-template-columns:18px 1fr 42px;
+ align-items:center;
+ gap:6px
+}
+
+.tone-row b{
+ font:9px monospace
+}
+
+.patterns{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:6px
+}
+
+.pattern-btn{
+ height:54px;
+ border:1px solid #ccc;
+ background:#fff;
+ font-size:9px
+}
+
+.pattern-btn.active{
+ border:2px solid var(--p)
+}
+
+.pattern-btn svg{
+ width:24px;
+ height:24px;
+ display:block;
+ margin:2px auto
+}
+
+.pattern-btn small{
+ font-size:7px
+}
+
+.preview-panel{
+ min-width:0;
+ background:#fff;
+ border:1px solid var(--l);
+ padding:14px
+}
+
+.preview-toolbar{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:10px;
+ margin-bottom:10px
+}
+
+.meta{
+ color:var(--g);
+ font:9px monospace;
+ text-transform:uppercase
+}
+
+.mode{
+ display:flex;
+ border:1px solid var(--b)
+}
+
+.mode button{
+ border:0;
+ background:#fff;
+ padding:7px 11px;
+ font-size:9px;
+ font-weight:800
+}
+
+.mode button.active{
+ background:var(--b);
+ color:#fff
+}
+
+/*
+ IMPORTANTE:
+ La altura de la zona de preview es fija.
+ El canvas se escala dentro de ella sin recortarse.
+*/
+.preview-stage{
+ height:720px;
+ min-height:720px;
+ max-height:720px;
+ width:100%;
+ position:relative;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ overflow:hidden;
+ background:#e7e7ea;
+ border:1px solid #d0d0d4
+}
+
+.canvas-wrap{
+ width:100%;
+ height:100%;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:18px;
+ position:relative;
+ overflow:hidden
+}
+
+#previewCanvas{
+ display:block;
+ max-width:100%;
+ max-height:100%;
+ width:auto;
+ height:auto;
+ object-fit:contain;
+ background:#fff;
+ box-shadow:0 8px 24px rgba(0,0,0,.14)
+}
+
+#maskCanvas{
+ position:absolute;
+ display:none;
+ pointer-events:auto
+}
+
+.empty{
+ position:absolute;
+ inset:0;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ color:#777;
+ font-size:12px
+}
+
+.empty strong{
+ display:block;
+ margin-bottom:5px;
+ color:#222;
+ font-size:15px
+}
+
+.mask-tools{
+ display:none;
+ grid-template-columns:1fr 1fr;
+ gap:8px;
+ margin-top:9px
+}
+
+.mask-tools.show{
+ display:grid
+}
+
+.mask-list{
+ display:grid;
+ gap:5px;
+ margin-top:8px
+}
+
+.mask-item{
+ display:grid;
+ grid-template-columns:1fr auto auto;
+ align-items:center;
+ gap:5px;
+ padding:5px 7px;
+ border:1px solid #ddd;
+ background:#fff;
+ font-size:10px
+}
+
+#printSheet{
+ display:none
+}
+
+@media(max-width:1000px){
+ .workspace{
+  grid-template-columns:1fr
+ }
+
+ .sidebar{
+  max-height:none
+ }
+
+ .preview-stage{
+  height:650px;
+  min-height:650px;
+  max-height:650px
+ }
+}
+
+@media print{
+ html,body{
+  background:#fff!important
+ }
+
+ body>*:not(#printSheet){
+  display:none!important
+ }
+
+ #printSheet{
+  display:flex!important;
+  background:#fff;
+  overflow:hidden
+ }
+}
 </style>
+
 <style id="dynamicPrintStyle"></style>
 </head>
+
 <body>
+
 <div class="app">
-<header class="header"><div class="brand">
-<svg class="logo" viewBox="0 0 44 44"><rect width="44" height="44" fill="#101114"/><g fill="#ff0094"><path d="M5 5h7v7H5zM14 5h7v7h-7zM23 5h7v7h-7zM5 14h7v7H5zM14 14h7v7h-7zM23 14h7v7h-7zM5 23h7v7H5zM14 23h7v7h-7zM23 23h7v7h-7z"/></g><path fill="#fff" d="M32 5h7v7h-7zM32 14h7v7h-7zM32 23h7v7h-7z"/></svg>
-<div><h1>PIXEL HATCH</h1><small>MONOCHROME GRID STUDIO</small></div></div>
-<div class="status"><span class="badge">PIXEL / <b>01</b></span><span class="badge" id="statusText">SIN IMAGEN</span></div></header>
-<div class="workspace"><aside class="sidebar">
-<div class="section"><div class="section-title">01 · Imagen</div><div class="file">Carga una imagen<input id="imageInput" type="file" accept="image/*"></div><div class="note">También puedes arrastrar o pegar una imagen directamente.</div></div>
-<div class="section"><div class="section-title">02 · Grilla</div><div class="row"><label>Columnas</label><output id="colsOut">70</output></div><input id="cols" type="range" min="10" max="180" value="70"><div class="note">Las filas se calculan automáticamente para conservar la proporción.</div></div>
-<div class="section"><div class="section-title">03 · Imagen / Contraste</div>
-<div class="row"><label>Contraste</label><output id="contrastOut">100%</output></div><input id="contrast" type="range" min="50" max="180" value="100">
-<div class="row"><label>Profundidad negros</label><output id="blackOut">0</output></div><input id="blackDepth" type="range" min="-40" max="40" value="0">
-<div class="row"><label>Detalle</label><output id="detailOut">50</output></div><input id="detail" type="range" min="0" max="100" value="50">
-<div class="row"><label>Curva</label><output id="curveOut">1.00</output></div><input id="curve" type="range" min="60" max="160" value="100">
-<div class="control-grid"><button class="btn primary" id="autoBtn">AJUSTE AUTOMÁTICO</button><button class="btn" id="resetBtn">REINICIAR</button></div></div>
-<div class="section"><div class="section-title">04 · Separador de fondo</div>
-<div class="row"><label>Activar</label><input id="bgSep" type="checkbox"></div>
-<div class="row"><label>Fuerza</label><output id="bgStrengthOut">55</output></div><input id="bgStrength" type="range" min="0" max="100" value="55">
-<div class="row"><label>Umbral</label><output id="bgThreshOut">32</output></div><input id="bgThresh" type="range" min="5" max="90" value="32">
-<select id="bgMode"><option value="light">Fondo más claro</option><option value="dark">Fondo más oscuro</option><option value="neutral">Fondo neutro</option></select></div>
-<div class="section"><div class="section-title">05 · Niveles tonales</div><div class="tonal" id="toneControls"></div><div class="note">10 zonas independientes. El ajuste automático también optimiza estos niveles.</div></div>
-<div class="section"><div class="section-title">06 · Máscaras</div><div class="control-grid"><button class="btn dark" id="addMask">+ MÁSCARA</button><button class="btn" id="clearMasks">BORRAR</button></div>
-<div id="maskTools" class="mask-tools"><div><label>Brillo</label><input id="maskBrightness" type="range" min="-100" max="100" value="0"></div><div><label>Contraste</label><input id="maskContrast" type="range" min="-100" max="100" value="0"></div><div><label>Pincel</label><input id="brushSize" type="range" min="5" max="100" value="30"></div><button class="btn" id="paintMode">PINTAR</button><button class="btn" id="eraseMode">BORRAR</button><button class="btn" id="clearCurrentMask">LIMPIAR</button></div><div id="maskList" class="mask-list"></div></div>
-<div class="section"><div class="section-title">07 · Patrones</div><div id="patterns" class="patterns"></div></div>
-<div class="section"><div class="section-title">08 · Formato de salida</div>
-<div class="row"><label>Papel</label><select id="paper"><option value="letter">Carta</option><option value="a4">A4</option><option value="a3">A3</option><option value="a5">A5</option><option value="legal">Legal</option><option value="oficio">Oficio Chile</option></select></div>
-<div class="row"><label>Orientación</label><select id="orientation"><option value="auto">Automática</option><option value="portrait">Vertical</option><option value="landscape">Horizontal</option></select></div>
-<div class="row"><label>Margen</label><output id="marginOut">8</output></div><input id="margin" type="range" min="2" max="20" value="8">
-<div class="row"><label>Separación</label><output id="gapOut">0</output></div><input id="gap" type="range" min="0" max="4" value="0">
-<div class="control-grid"><label><input id="showTitle" type="checkbox" checked> Título</label><label><input id="showLegend" type="checkbox" checked> Leyenda</label></div></div>
-<div class="section"><button class="btn primary" id="printBtn" style="width:100%">IMPRIMIR / PDF</button><button class="btn" id="clearBtn" style="width:100%;margin-top:8px">LIMPIAR IMAGEN</button></div>
+
+<header class="header">
+
+<div class="brand">
+
+<svg class="logo" viewBox="0 0 44 44">
+<rect width="44" height="44" fill="#101114"/>
+<g fill="#ff0094">
+<path d="M5 5h7v7H5zM14 5h7v7h-7zM23 5h7v7h-7zM5 14h7v7H5zM14 14h7v7h-7zM23 14h7v7h-7zM5 23h7v7H5zM14 23h7v7h-7zM23 23h7v7h-7z"/>
+</g>
+<path fill="#fff" d="M32 5h7v7h-7zM32 14h7v7h-7zM32 23h7v7h-7z"/>
+</svg>
+
+<div>
+<h1>PIXEL HATCH</h1>
+<small>MONOCHROME GRID STUDIO</small>
+</div>
+
+</div>
+
+<div class="status">
+<span class="badge">PIXEL / <b>01</b></span>
+<span class="badge" id="statusText">SIN IMAGEN</span>
+</div>
+
+</header>
+
+<div class="workspace">
+
+<aside class="sidebar">
+
+<div class="section">
+
+<div class="section-title">01 · Imagen</div>
+
+<div class="file">
+Carga una imagen
+<input id="imageInput" type="file" accept="image/*">
+</div>
+
+<div class="note">
+También puedes arrastrar o pegar una imagen directamente.
+</div>
+
+</div>
+
+
+<div class="section">
+
+<div class="section-title">02 · Grilla</div>
+
+<div class="row">
+<label>Columnas</label>
+<output id="colsOut">70</output>
+</div>
+
+<input id="cols" type="range" min="10" max="180" value="70">
+
+<div class="note">
+Las filas se calculan automáticamente para conservar la proporción.
+</div>
+
+</div>
+
+
+<div class="section">
+
+<div class="section-title">03 · Imagen / Contraste</div>
+
+<div class="row">
+<label>Contraste</label>
+<output id="contrastOut">100%</output>
+</div>
+<input id="contrast" type="range" min="50" max="180" value="100">
+
+<div class="row">
+<label>Profundidad negros</label>
+<output id="blackOut">0</output>
+</div>
+<input id="blackDepth" type="range" min="-40" max="40" value="0">
+
+<div class="row">
+<label>Detalle</label>
+<output id="detailOut">50</output>
+</div>
+<input id="detail" type="range" min="0" max="100" value="50">
+
+<div class="row">
+<label>Curva</label>
+<output id="curveOut">1.00</output>
+</div>
+<input id="curve" type="range" min="60" max="160" value="100">
+
+<div class="control-grid">
+<button class="btn primary" id="autoBtn">AJUSTE AUTOMÁTICO</button>
+<button class="btn" id="resetBtn">REINICIAR</button>
+</div>
+
+</div>
+
+
+<div class="section">
+
+<div class="section-title">04 · Separador de fondo</div>
+
+<div class="row">
+<label>Activar</label>
+<input id="bgSep" type="checkbox">
+</div>
+
+<div class="row">
+<label>Fuerza</label>
+<output id="bgStrengthOut">55</output>
+</div>
+<input id="bgStrength" type="range" min="0" max="100" value="55">
+
+<div class="row">
+<label>Umbral</label>
+<output id="bgThreshOut">32</output>
+</div>
+<input id="bgThresh" type="range" min="5" max="90" value="32">
+
+<select id="bgMode">
+<option value="light">Fondo más claro</option>
+<option value="dark">Fondo más oscuro</option>
+<option value="neutral">Fondo neutro</option>
+</select>
+
+</div>
+
+
+<div class="section">
+
+<div class="section-title">05 · Niveles tonales</div>
+
+<div class="tonal" id="toneControls"></div>
+
+<div class="note">
+10 zonas independientes. El ajuste automático también optimiza estos niveles.
+</div>
+
+</div>
+
+
+<div class="section">
+
+<div class="section-title">06 · Máscaras</div>
+
+<div class="control-grid">
+<button class="btn dark" id="addMask">+ MÁSCARA</button>
+<button class="btn" id="clearMasks">BORRAR</button>
+</div>
+
+<div id="maskTools" class="mask-tools">
+
+<div>
+<label>Brillo</label>
+<input id="maskBrightness" type="range" min="-100" max="100" value="0">
+</div>
+
+<div>
+<label>Contraste</label>
+<input id="maskContrast" type="range" min="-100" max="100" value="0">
+</div>
+
+<div>
+<label>Pincel</label>
+<input id="brushSize" type="range" min="5" max="100" value="30">
+</div>
+
+<button class="btn" id="paintMode">PINTAR</button>
+<button class="btn" id="eraseMode">BORRAR</button>
+<button class="btn" id="clearCurrentMask">LIMPIAR</button>
+
+</div>
+
+<div id="maskList" class="mask-list"></div>
+
+</div>
+
+
+<div class="section">
+
+<div class="section-title">07 · Patrones</div>
+
+<div id="patterns" class="patterns"></div>
+
+</div>
+
+
+<div class="section">
+
+<div class="section-title">08 · Formato de salida</div>
+
+<div class="row">
+<label>Papel</label>
+
+<select id="paper">
+<option value="letter">Carta</option>
+<option value="a4">A4</option>
+<option value="a3">A3</option>
+<option value="a5">A5</option>
+<option value="legal">Legal</option>
+<option value="oficio">Oficio Chile</option>
+</select>
+
+</div>
+
+<div class="row">
+<label>Orientación</label>
+
+<select id="orientation">
+<option value="auto">Automática</option>
+<option value="portrait">Vertical</option>
+<option value="landscape">Horizontal</option>
+</select>
+
+</div>
+
+<div class="row">
+<label>Margen</label>
+<output id="marginOut">8</output>
+</div>
+
+<input id="margin" type="range" min="2" max="20" value="8">
+
+<div class="row">
+<label>Separación</label>
+<output id="gapOut">0</output>
+</div>
+
+<input id="gap" type="range" min="0" max="4" value="0">
+
+<div class="control-grid">
+
+<label>
+<input id="showTitle" type="checkbox" checked>
+Título
+</label>
+
+<label>
+<input id="showLegend" type="checkbox" checked>
+Leyenda
+</label>
+
+</div>
+
+</div>
+
+
+<div class="section">
+
+<button class="btn primary" id="printBtn" style="width:100%">
+IMPRIMIR / PDF
+</button>
+
+<button class="btn" id="clearBtn" style="width:100%;margin-top:8px">
+LIMPIAR IMAGEN
+</button>
+
+</div>
+
 </aside>
-<main class="preview-panel"><div class="preview-toolbar"><div><div class="meta" id="gridMeta">Carga una imagen para comenzar</div></div><div class="mode"><button id="modeFinal" class="active">VISTA FINAL</button><button id="modeTemplate">PLANTILLA</button></div></div>
-<div class="preview-stage"><div class="canvas-wrap" id="canvasWrap"><canvas id="previewCanvas"></canvas><canvas id="maskCanvas"></canvas><div class="empty" id="empty"><div><strong>PIXEL HATCH</strong>Carga, arrastra o pega una imagen para comenzar.</div></div></div></div></main></div></div>
-<div id="printSheet"><div id="printBody"></div></div>
+
+
+<main class="preview-panel">
+
+<div class="preview-toolbar">
+
+<div>
+<div class="meta" id="gridMeta">
+Carga una imagen para comenzar
+</div>
+</div>
+
+<div class="mode">
+<button id="modeFinal" class="active">VISTA FINAL</button>
+<button id="modeTemplate">PLANTILLA</button>
+</div>
+
+</div>
+
+
+<div class="preview-stage">
+
+<div class="canvas-wrap" id="canvasWrap">
+
+<canvas id="previewCanvas"></canvas>
+
+<canvas id="maskCanvas"></canvas>
+
+<div class="empty" id="empty">
+
+<div>
+<strong>PIXEL HATCH</strong>
+Carga, arrastra o pega una imagen para comenzar.
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+</div>
+
+
+<div id="printSheet">
+<div id="printBody"></div>
+</div>
+
+
 <script>
-const $=id=>document.getElementById(id), clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
-let image=null, source=null, cols=70, rows=1, template=false, activePatterns=[1,2,3,4,5,6,7,8,9], masks=[],activeMask=-1,paintMode="paint",toneOffsets=Array(10).fill(0),backgroundMask=null;
+
+const $=id=>document.getElementById(id);
+
+const clamp=(v,a=0,b=1)=>
+ Math.max(a,Math.min(b,v));
+
+let image=null;
+let source=null;
+let cols=70;
+let rows=1;
+let template=false;
+
+let activePatterns=[
+ 1,2,3,4,5,6,7,8,9
+];
+
+let masks=[];
+let activeMask=-1;
+let paintMode="paint";
+
+let toneOffsets=Array(10).fill(0);
+let backgroundMask=null;
+
+
 const patterns=[
-{id:1,name:"Blanco",type:"empty"},{id:2,name:"Punto",type:"dot"},{id:3,name:"Horizontal",type:"horizontal"},
-{id:4,name:"Vertical",type:"vertical"},{id:5,name:"Diagonal /",type:"diag1"},{id:6,name:"Diagonal \\",type:"diag2"},
-{id:7,name:"Plus",type:"plus"},{id:8,name:"X",type:"x"},{id:9,name:"Sólido",type:"solid"}];
-const toneNames=["Negro profundo","Sombras profundas","Sombras","Medios oscuros","Medios","Medios claros","Luces","Luces altas","Blanco suave","Blanco"];
+
+{id:1,name:"Blanco",type:"empty"},
+
+{id:2,name:"Punto",type:"dot"},
+
+{id:3,name:"Horizontal",type:"horizontal"},
+
+{id:4,name:"Vertical",type:"vertical"},
+
+{id:5,name:"Diagonal /",type:"diag1"},
+
+{id:6,name:"Diagonal \\",type:"diag2"},
+
+{id:7,name:"Plus",type:"plus"},
+
+{id:8,name:"X",type:"x"},
+
+{id:9,name:"Sólido",type:"solid"}
+
+];
+
+
+const toneNames=[
+"Negro profundo",
+"Sombras profundas",
+"Sombras",
+"Medios oscuros",
+"Medios",
+"Medios claros",
+"Luces",
+"Luces altas",
+"Blanco suave",
+"Blanco"
+];
+
 
 function icon(type){
- const s={empty:`<rect x="3" y="3" width="18" height="18" fill="none"/>`,dot:`<circle cx="12" cy="12" r="2.5" fill="currentColor"/>`,horizontal:`<line x1="3" y1="12" x2="21" y2="12"/>`,vertical:`<line x1="12" y1="3" x2="12" y2="21"/>`,diag1:`<line x1="3" y1="21" x2="21" y2="3"/>`,diag2:`<line x1="3" y1="3" x2="21" y2="21"/>`,plus:`<path d="M3 12h18M12 3v18"/>`,x:`<path d="M3 3l18 18M21 3L3 21"/>`,solid:`<rect x="4" y="4" width="16" height="16" fill="currentColor"/>`}[type];
- return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="miter">${s}</svg>`;
+
+const s={
+
+empty:
+`<rect x="3" y="3" width="18" height="18" fill="none"/>`,
+
+dot:
+`<circle cx="12" cy="12" r="2.5" fill="currentColor"/>`,
+
+horizontal:
+`<line x1="3" y1="12" x2="21" y2="12"/>`,
+
+vertical:
+`<line x1="12" y1="3" x2="12" y2="21"/>`,
+
+diag1:
+`<line x1="3" y1="21" x2="21" y2="3"/>`,
+
+diag2:
+`<line x1="3" y1="3" x2="21" y2="21"/>`,
+
+plus:
+`<path d="M3 12h18M12 3v18"/>`,
+
+x:
+`<path d="M3 3l18 18M21 3L3 21"/>`,
+
+solid:
+`<rect x="4" y="4" width="16" height="16" fill="currentColor"/>`
+
+}[type];
+
+return `
+<svg
+ viewBox="0 0 24 24"
+ fill="none"
+ stroke="currentColor"
+ stroke-width="1.6"
+ stroke-linecap="square"
+ stroke-linejoin="miter">
+${s}
+</svg>`;
+
 }
+
+
 function buildPatterns(){
- $("patterns").innerHTML="";
- patterns.forEach(p=>{const b=document.createElement("button");b.className="pattern-btn "+(activePatterns.includes(p.id)?"active":"");b.innerHTML=icon(p.type)+`<small>${p.name}</small>`;b.onclick=()=>{if(activePatterns.includes(p.id)){if(activePatterns.length>1)activePatterns=activePatterns.filter(x=>x!==p.id)}else activePatterns.push(p.id);buildPatterns();renderPreview()};$("patterns").appendChild(b)});
+
+$("patterns").innerHTML="";
+
+patterns.forEach(p=>{
+
+const b=document.createElement("button");
+
+b.className=
+"pattern-btn "+
+(activePatterns.includes(p.id)?"active":"");
+
+b.innerHTML=
+icon(p.type)+
+`<small>${p.name}</small>`;
+
+b.onclick=()=>{
+
+if(activePatterns.includes(p.id)){
+
+if(activePatterns.length>1){
+
+activePatterns=
+activePatterns.filter(x=>x!==p.id);
+
 }
+
+}else{
+
+activePatterns.push(p.id);
+
+}
+
+buildPatterns();
+renderPreview();
+
+};
+
+$("patterns").appendChild(b);
+
+});
+
+}
+
+
 function buildTones(){
- $("toneControls").innerHTML="";
- toneNames.forEach((n,i)=>{const d=document.createElement("div");d.className="tone-row";d.innerHTML=`<b>${i+1}</b><input data-tone="${i}" type="range" min="-100" max="100" value="${toneOffsets[i]}"><output id="toneOut${i}">${toneOffsets[i]}</output>`;$("toneControls").appendChild(d)});
- document.querySelectorAll("[data-tone]").forEach(e=>e.oninput=()=>{toneOffsets[+e.dataset.tone]=+e.value;$("toneOut"+e.dataset.tone).textContent=e.value;renderPreview()});
+
+$("toneControls").innerHTML="";
+
+toneNames.forEach((n,i)=>{
+
+const d=document.createElement("div");
+
+d.className="tone-row";
+
+d.innerHTML=`
+<b>${i+1}</b>
+<input
+ data-tone="${i}"
+ type="range"
+ min="-100"
+ max="100"
+ value="${toneOffsets[i]}">
+
+<output id="toneOut${i}">
+${toneOffsets[i]}
+</output>
+`;
+
+$("toneControls").appendChild(d);
+
+});
+
+document
+.querySelectorAll("[data-tone]")
+.forEach(e=>{
+
+e.oninput=()=>{
+
+toneOffsets[
+ +e.dataset.tone
+]=+e.value;
+
+$("toneOut"+e.dataset.tone)
+.textContent=e.value;
+
+renderPreview();
+
+};
+
+});
+
 }
+
+
 function loadImageFile(file){
- if(!file||!file.type.startsWith("image/"))return;
- const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{image=im;source=document.createElement("canvas");source.width=im.naturalWidth;source.height=im.naturalHeight;source.getContext("2d",{willReadFrequently:true}).drawImage(im,0,0);cols=+$("cols").value;calcRows();$("empty").style.display="none";$("statusText").textContent="IMAGEN CARGADA";renderPreview();};im.src=r.result};r.readAsDataURL(file);
+
+if(!file||!file.type.startsWith("image/"))
+return;
+
+const r=new FileReader();
+
+r.onload=()=>{
+
+const im=new Image();
+
+im.onload=()=>{
+
+image=im;
+
+source=document.createElement("canvas");
+
+source.width=im.naturalWidth;
+source.height=im.naturalHeight;
+
+source
+.getContext("2d",{willReadFrequently:true})
+.drawImage(im,0,0);
+
+cols=+$("cols").value;
+
+calcRows();
+
+$("empty").style.display="none";
+
+$("statusText").textContent="IMAGEN CARGADA";
+
+renderPreview();
+
+};
+
+im.src=r.result;
+
+};
+
+r.readAsDataURL(file);
+
 }
-$("imageInput").onchange=e=>loadImageFile(e.target.files[0]);
-window.addEventListener("paste",e=>{const item=[...(e.clipboardData?.items||[])].find(x=>x.type.startsWith("image/"));if(item){e.preventDefault();loadImageFile(item.getAsFile())}});
-$("canvasWrap").addEventListener("dragover",e=>{e.preventDefault()});$("canvasWrap").addEventListener("drop",e=>{e.preventDefault();loadImageFile(e.dataTransfer.files[0])});
-function calcRows(){if(!image)return;rows=Math.max(1,Math.round(cols*image.naturalHeight/image.naturalWidth));}
+
+
+$("imageInput").onchange=e=>
+loadImageFile(e.target.files[0]);
+
+
+/*
+ PASTE DE IMÁGENES:
+ funciona con capturas de pantalla,
+ Photoshop, Illustrator, navegador, etc.
+*/
+window.addEventListener("paste",e=>{
+
+const item=[
+ ...(e.clipboardData?.items||[])
+].find(x=>x.type.startsWith("image/"));
+
+if(item){
+
+e.preventDefault();
+
+loadImageFile(item.getAsFile());
+
+}
+
+});
+
+
+$("canvasWrap").addEventListener(
+"dragover",
+e=>e.preventDefault()
+);
+
+
+$("canvasWrap").addEventListener(
+"drop",
+e=>{
+
+e.preventDefault();
+
+loadImageFile(
+ e.dataTransfer.files[0]
+);
+
+});
+
+
+function calcRows(){
+
+if(!image)return;
+
+rows=Math.max(
+ 1,
+ Math.round(
+  cols*
+  image.naturalHeight/
+  image.naturalWidth
+ )
+);
+
+}
+
+
 function sourceGray(w=160,h=160){
- const c=document.createElement("canvas");c.width=w;c.height=h;const x=c.getContext("2d",{willReadFrequently:true});x.drawImage(source,0,0,w,h);const d=x.getImageData(0,0,w,h).data,a=new Float32Array(w*h);
- for(let i=0,j=0;i<a.length;i++,j+=4)a[i]=(d[j]*.2126+d[j+1]*.7152+d[j+2]*.0722)/255;return {a,w,h};
+
+const c=document.createElement("canvas");
+
+c.width=w;
+c.height=h;
+
+const x=c.getContext(
+ "2d",
+ {willReadFrequently:true}
+);
+
+x.drawImage(
+ source,
+ 0,0,w,h
+);
+
+const d=x.getImageData(
+ 0,0,w,h
+).data;
+
+const a=new Float32Array(w*h);
+
+for(
+ let i=0,j=0;
+ i<a.length;
+ i++,j+=4
+){
+
+a[i]=
+(
+ d[j]*.2126+
+ d[j+1]*.7152+
+ d[j+2]*.0722
+)/255;
+
 }
+
+return {a,w,h};
+
+}
+
+
 function autoAdjust(){
- if(!image)return;
- const g=sourceGray(140,140), a=[...g.a].sort((x,y)=>x-y), pct=p=>a[Math.floor((a.length-1)*p)];
- const lo=pct(.03),hi=pct(.97),spread=Math.max(.15,hi-lo),mid=pct(.5);
- $("contrast").value=Math.round(clamp(.78/spread,.5,1.8)*100);
- $("blackDepth").value=Math.round((.5-mid)*35);
- $("detail").value=55;
- $("curve").value=Math.round(clamp(1+(0.5-mid)*.35,.6,1.6)*100);
- const vals=Array.from({length:10},(_,i)=>clamp(pct(i/9),0,1));
- toneOffsets=vals.map((v,i)=>Math.round(clamp(((i/9)-v)*150,-60,60)));
- toneOffsets=toneOffsets.map((v,i)=>Math.round((v+(toneOffsets[i-1]||v)+(toneOffsets[i+1]??v))/3));
- const border=[...a.slice(0,Math.max(1,Math.floor(a.length*.08))),...a.slice(Math.floor(a.length*.92))], bm=border.reduce((s,v)=>s+v,0)/border.length,cm=a.reduce((s,v)=>s+v,0)/a.length;
- $("bgSep").checked=Math.abs(bm-cm)>.10;$("bgStrength").value=65;$("bgThresh").value=Math.round(clamp(Math.abs(bm-cm)*220,12,60));$("bgMode").value=bm>cm?"light":bm<cm?"dark":"neutral";
- buildTones();updateOutputs();renderPreview();
+
+if(!image)return;
+
+const g=sourceGray(140,140);
+
+const a=[...g.a]
+.sort((x,y)=>x-y);
+
+const pct=p=>
+ a[
+  Math.floor(
+   (a.length-1)*p
+  )
+ ];
+
+const lo=pct(.03);
+const hi=pct(.97);
+const spread=Math.max(.15,hi-lo);
+const mid=pct(.5);
+
+$("contrast").value=
+Math.round(
+ clamp(.78/spread,.5,1.8)*100
+);
+
+$("blackDepth").value=
+Math.round(
+ (0.5-mid)*35
+);
+
+$("detail").value=55;
+
+$("curve").value=
+Math.round(
+ clamp(
+  1+(0.5-mid)*.35,
+  .6,
+  1.6
+ )*100
+);
+
+
+const vals=
+Array.from(
+ {length:10},
+ (_,i)=>
+ clamp(
+  pct(i/9),
+  0,
+  1
+ )
+);
+
+
+toneOffsets=
+vals.map(
+ (v,i)=>
+ Math.round(
+  clamp(
+   ((i/9)-v)*150,
+   -60,
+   60
+  )
+ )
+);
+
+
+toneOffsets=
+toneOffsets.map(
+ (v,i)=>
+ Math.round(
+  (
+   v+
+   (toneOffsets[i-1]||v)+
+   (toneOffsets[i+1]??v)
+  )/3
+ )
+);
+
+
+const border=[
+ ...a.slice(
+  0,
+  Math.max(
+   1,
+   Math.floor(a.length*.08)
+  )
+ ),
+ ...a.slice(
+  Math.floor(a.length*.92)
+ )
+];
+
+const bm=
+ border.reduce(
+  (s,v)=>s+v,
+  0
+ )/border.length;
+
+const cm=
+ a.reduce(
+  (s,v)=>s+v,
+  0
+ )/a.length;
+
+
+$("bgSep").checked=
+ Math.abs(bm-cm)>.10;
+
+$("bgStrength").value=65;
+
+$("bgThresh").value=
+Math.round(
+ clamp(
+  Math.abs(bm-cm)*220,
+  12,
+  60
+ )
+);
+
+$("bgMode").value=
+ bm>cm
+ ?"light"
+ :bm<cm
+ ?"dark"
+ :"neutral";
+
+buildTones();
+
+updateOutputs();
+
+renderPreview();
+
 }
-function toneMap(v){v=clamp(v);const p=v*9,i=Math.min(8,Math.floor(p)),f=p-i,a=clamp(i/9+toneOffsets[i]/250),b=clamp((i+1)/9+toneOffsets[i+1]/250);return clamp(a+(b-a)*f)}
+
+
+function toneMap(v){
+
+v=clamp(v);
+
+const p=v*9;
+
+const i=Math.min(
+ 8,
+ Math.floor(p)
+);
+
+const f=p-i;
+
+const a=clamp(
+ i/9+
+ toneOffsets[i]/250
+);
+
+const b=clamp(
+ (i+1)/9+
+ toneOffsets[i+1]/250
+);
+
+return clamp(
+ a+(b-a)*f
+);
+
+}
+
+
 function sampleGray(gx,gy){
- const sw=source.width,sh=source.height,x=Math.floor((gx+.5)*sw/cols),y=Math.floor((gy+.5)*sh/rows),ctx=source.getContext("2d",{willReadFrequently:true}),d=ctx.getImageData(Math.max(0,x-1),Math.max(0,y-1),1,1).data;
- let v=(d[0]*.2126+d[1]*.7152+d[2]*.0722)/255;
- const c=+$("contrast").value/100,bd=+$("blackDepth").value/100,v0=.5+(v-.5)*c+bd*.18;
- v=clamp(v0);v=clamp(Math.pow(v,1/(+$("curve").value/100)));
- return toneMap(v);
+
+const sw=source.width;
+const sh=source.height;
+
+const x=Math.floor(
+ (gx+.5)*sw/cols
+);
+
+const y=Math.floor(
+ (gy+.5)*sh/rows
+);
+
+const ctx=
+source.getContext(
+ "2d",
+ {willReadFrequently:true}
+);
+
+const d=
+ctx.getImageData(
+ Math.max(0,x-1),
+ Math.max(0,y-1),
+ 1,
+ 1
+).data;
+
+let v=
+(
+ d[0]*.2126+
+ d[1]*.7152+
+ d[2]*.0722
+)/255;
+
+
+const c=
++$("contrast").value/100;
+
+const bd=
++$("blackDepth").value/100;
+
+const v0=
+.5+
+(v-.5)*c+
+bd*.18;
+
+v=clamp(v0);
+
+v=clamp(
+ Math.pow(
+  v,
+  1/(+$("curve").value/100)
+ )
+);
+
+return toneMap(v);
+
 }
-function getPattern(gray){const dark=1-gray,i=Math.min(activePatterns.length-1,Math.floor(dark*activePatterns.length));return patterns.find(p=>p.id===activePatterns[i])||patterns[0]}
-function drawPattern(ctx,type,x,y,s,print=false){
- const pad=s*.22,cx=x+s/2,cy=y+s/2;
- ctx.save();ctx.strokeStyle="#101114";ctx.fillStyle="#101114";ctx.lineWidth=print?Math.max(.55,s*.045):Math.max(.22,s*.007);ctx.lineCap="square";ctx.lineJoin="miter";
- if(type==="dot"){ctx.beginPath();ctx.arc(cx,cy,Math.max(.45,s*.045),0,Math.PI*2);ctx.fill()}
- else if(type==="horizontal"){ctx.beginPath();ctx.moveTo(x+pad,cy);ctx.lineTo(x+s-pad,cy);ctx.stroke()}
- else if(type==="vertical"){ctx.beginPath();ctx.moveTo(cx,y+pad);ctx.lineTo(cx,y+s-pad);ctx.stroke()}
- else if(type==="diag1"){ctx.beginPath();ctx.moveTo(x+pad,y+s-pad);ctx.lineTo(x+s-pad,y+pad);ctx.stroke()}
- else if(type==="diag2"){ctx.beginPath();ctx.moveTo(x+pad,y+pad);ctx.lineTo(x+s-pad,y+s-pad);ctx.stroke()}
- else if(type==="plus"){ctx.beginPath();ctx.moveTo(x+pad,cy);ctx.lineTo(x+s-pad,cy);ctx.moveTo(cx,y+pad);ctx.lineTo(cx,y+s-pad);ctx.stroke()}
- else if(type==="x"){ctx.beginPath();ctx.moveTo(x+pad,y+pad);ctx.lineTo(x+s-pad,y+s-pad);ctx.moveTo(x+s-pad,y+pad);ctx.lineTo(x+pad,y+s-pad);ctx.stroke()}
- else if(type==="solid")ctx.fillRect(x+s*.2,y+s*.2,s*.6,s*.6);
- ctx.restore();
+
+
+function getPattern(gray){
+
+const dark=1-gray;
+
+const i=Math.min(
+ activePatterns.length-1,
+ Math.floor(
+  dark*activePatterns.length
+ )
+);
+
+return patterns.find(
+ p=>p.id===activePatterns[i]
+)||patterns[0];
+
 }
-function renderGrid(canvas,cell,print=false){
- const w=Math.round(cols*cell),h=Math.round(rows*cell);canvas.width=w;canvas.height=h;const ctx=canvas.getContext("2d");ctx.fillStyle="#fff";ctx.fillRect(0,0,w,h);
- for(let gy=0;gy<rows;gy++)for(let gx=0;gx<cols;gx++){const p=getPattern(sampleGray(gx,gy)),x=gx*cell,y=gy*cell;if(!template&&p.type!=="empty")drawPattern(ctx,p.type,x,y,cell,print);else if(template){ctx.fillStyle="#101114";ctx.font=`${Math.max(5,cell*.34)}px monospace`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(p.id,x+cell/2,y+cell/2)}
- if(print){ctx.strokeStyle="rgba(16,17,20,.22)";ctx.lineWidth=Math.max(.45,cell*.012)}else{ctx.strokeStyle="rgba(16,17,20,.065)";ctx.lineWidth=Math.max(.12,cell*.007)}
- ctx.strokeRect(x+.5*ctx.lineWidth,y+.5*ctx.lineWidth,cell,cell)}
- ctx.strokeStyle=print?"#101114":"rgba(16,17,20,.45)";ctx.lineWidth=print?Math.max(.7,cell*.025):Math.max(.2,cell*.006);ctx.strokeRect(0,0,w,h);
+
+
+/*
+ Los símbolos mantienen una geometría simétrica.
+ Las líneas de los símbolos son independientes
+ de las líneas de separación de la grilla.
+*/
+function drawPattern(
+ ctx,
+ type,
+ x,
+ y,
+ s,
+ print=false
+){
+
+const pad=s*.22;
+
+const cx=x+s/2;
+const cy=y+s/2;
+
+ctx.save();
+
+ctx.strokeStyle="#101114";
+ctx.fillStyle="#101114";
+
+/*
+ Las líneas de los símbolos son finas,
+ pero permanecen visibles.
+*/
+ctx.lineWidth=
+ print
+ ?Math.max(.55,s*.045)
+ :Math.max(.22,s*.007);
+
+ctx.lineCap="square";
+ctx.lineJoin="miter";
+
+
+if(type==="dot"){
+
+ctx.beginPath();
+
+ctx.arc(
+ cx,
+ cy,
+ Math.max(.45,s*.045),
+ 0,
+ Math.PI*2
+);
+
+ctx.fill();
+
 }
+
+
+else if(type==="horizontal"){
+
+ctx.beginPath();
+
+ctx.moveTo(
+ x+pad,
+ cy
+);
+
+ctx.lineTo(
+ x+s-pad,
+ cy
+);
+
+ctx.stroke();
+
+}
+
+
+else if(type==="vertical"){
+
+ctx.beginPath();
+
+ctx.moveTo(
+ cx,
+ y+pad
+);
+
+ctx.lineTo(
+ cx,
+ y+s-pad
+);
+
+ctx.stroke();
+
+}
+
+
+else if(type==="diag1"){
+
+ctx.beginPath();
+
+ctx.moveTo(
+ x+pad,
+ y+s-pad
+);
+
+ctx.lineTo(
+ x+s-pad,
+ y+pad
+);
+
+ctx.stroke();
+
+}
+
+
+else if(type==="diag2"){
+
+ctx.beginPath();
+
+ctx.moveTo(
+ x+pad,
+ y+pad
+);
+
+ctx.lineTo(
+ x+s-pad,
+ y+s-pad
+);
+
+ctx.stroke();
+
+}
+
+
+else if(type==="plus"){
+
+ctx.beginPath();
+
+ctx.moveTo(
+ x+pad,
+ cy
+);
+
+ctx.lineTo(
+ x+s-pad,
+ cy
+);
+
+ctx.moveTo(
+ cx,
+ y+pad
+);
+
+ctx.lineTo(
+ cx,
+ y+s-pad
+);
+
+ctx.stroke();
+
+}
+
+
+else if(type==="x"){
+
+ctx.beginPath();
+
+ctx.moveTo(
+ x+pad,
+ y+pad
+);
+
+ctx.lineTo(
+ x+s-pad,
+ y+s-pad
+);
+
+ctx.moveTo(
+ x+s-pad,
+ y+pad
+);
+
+ctx.lineTo(
+ x+pad,
+ y+s-pad
+);
+
+ctx.stroke();
+
+}
+
+
+else if(type==="solid"){
+
+ctx.fillRect(
+ x+s*.2,
+ y+s*.2,
+ s*.6,
+ s*.6
+);
+
+}
+
+ctx.restore();
+
+}
+
+
+/*
+ =====================================================
+ RENDER DE GRILLA
+ =====================================================
+
+ IMPORTANTE:
+ NO se dibuja ningún stroke alrededor de cada celda.
+
+ Esto hace que:
+ - no existan espacios blancos entre bloques
+ - las celdas queden completamente pegadas
+ - la imagen se vea continua
+ - no aparezca una cuadrícula blanca que distorsione
+   la lectura de la imagen
+*/
+function renderGrid(
+ canvas,
+ cell,
+ print=false
+){
+
+const w=
+Math.round(cols*cell);
+
+const h=
+Math.round(rows*cell);
+
+canvas.width=w;
+canvas.height=h;
+
+const ctx=
+canvas.getContext("2d");
+
+ctx.fillStyle="#fff";
+
+ctx.fillRect(
+ 0,
+ 0,
+ w,
+ h
+);
+
+
+for(
+ let gy=0;
+ gy<rows;
+ gy++
+){
+
+for(
+ let gx=0;
+ gx<cols;
+ gx++
+){
+
+const p=
+getPattern(
+ sampleGray(gx,gy)
+);
+
+const x=
+gx*cell;
+
+const y=
+gy*cell;
+
+
+if(
+ !template &&
+ p.type!=="empty"
+){
+
+drawPattern(
+ ctx,
+ p.type,
+ x,
+ y,
+ cell,
+ print
+);
+
+}
+
+
+else if(template){
+
+ctx.fillStyle="#101114";
+
+ctx.font=
+`${Math.max(5,cell*.34)}px monospace`;
+
+ctx.textAlign="center";
+ctx.textBaseline="middle";
+
+ctx.fillText(
+ p.id,
+ x+cell/2,
+ y+cell/2
+);
+
+}
+
+}
+
+}
+
+
+/*
+ SOLO borde exterior.
+ No existe ninguna línea entre celdas.
+*/
+ctx.strokeStyle=
+ print
+ ?"#101114"
+ :"rgba(16,17,20,.20)";
+
+ctx.lineWidth=
+ print
+ ?Math.max(.7,cell*.025)
+ :Math.max(.12,cell*.003);
+
+ctx.strokeRect(
+ 0,
+ 0,
+ w,
+ h
+);
+
+}
+
+
 function renderPreview(){
- if(!image)return;calcRows();const c=$("previewCanvas");const cell=Math.max(12,Math.min(20,900/Math.max(cols,rows)));renderGrid(c,cell,false);updateMaskOverlay();$("gridMeta").textContent=`${cols} × ${rows} · ${image.width} × ${image.height}px`;
+
+if(!image)return;
+
+calcRows();
+
+const c=$("previewCanvas");
+
+const cell=
+Math.max(
+ 12,
+ Math.min(
+ 20,
+ 900/Math.max(cols,rows)
+ )
+);
+
+renderGrid(
+ c,
+ cell,
+ false
+);
+
+updateMaskOverlay();
+
+$("gridMeta").textContent=
+`${cols} × ${rows} · ${image.width} × ${image.height}px`;
+
 }
-function createMask(){if(!image)return;const scale=Math.min(1,900/Math.max(image.width,image.height)),w=Math.max(1,Math.round(image.width*scale)),h=Math.max(1,Math.round(image.height*scale)),c=document.createElement("canvas");c.width=w;c.height=h;masks.push({name:`Máscara ${masks.length+1}`,canvas:c,ctx:c.getContext("2d"),brightness:0,contrast:0});activeMask=masks.length-1;updateMaskList();updateMaskControls();updateMaskOverlay()}
-function updateMaskList(){const el=$("maskList");el.innerHTML="";masks.forEach((m,i)=>{const d=document.createElement("div");d.className="mask-item";d.innerHTML=`<span>${m.name}</span><button class="btn" data-m="${i}">${i===activeMask?"ACTIVA":"USAR"}</button><button class="btn" data-del="${i}">×</button>`;el.appendChild(d)});el.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{activeMask=+b.dataset.m;updateMaskList();updateMaskControls();updateMaskOverlay()});el.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{masks.splice(+b.dataset.del,1);activeMask=Math.min(activeMask,masks.length-1);updateMaskList();updateMaskControls();updateMaskOverlay();renderPreview()})}
-function updateMaskControls(){const show=activeMask>=0&&masks[activeMask];$("maskTools").classList.toggle("show",!!show);if(show){$("maskBrightness").value=masks[activeMask].brightness;$("maskContrast").value=masks[activeMask].contrast}}
-function updateMaskOverlay(){const o=$("maskCanvas");if(activeMask<0||!masks[activeMask]||!image){o.style.display="none";return}o.style.display="block";const p=$("previewCanvas"),r=p.getBoundingClientRect(),w=$("canvasWrap").getBoundingClientRect(),pr=o.getBoundingClientRect();o.width=Math.max(1,Math.round(r.width));o.height=Math.max(1,Math.round(r.height));o.style.width=r.width+"px";o.style.height=r.height+"px";o.style.left=(r.left-w.left)+"px";o.style.top=(r.top-w.top)+"px";const ctx=o.getContext("2d");ctx.clearRect(0,0,o.width,o.height);ctx.drawImage(masks[activeMask].canvas,0,0,o.width,o.height);ctx.globalCompositeOperation="source-in";ctx.fillStyle="rgba(255,0,148,.22)";ctx.fillRect(0,0,o.width,o.height)}
-function paint(e){if(activeMask<0)return;const o=$("maskCanvas"),r=o.getBoundingClientRect(),x=(e.clientX-r.left)*masks[activeMask].canvas.width/r.width,y=(e.clientY-r.top)*masks[activeMask].canvas.height/r.height,c=masks[activeMask].ctx,rad=+$("brushSize").value*masks[activeMask].canvas.width/Math.max(r.width,1)/2;c.save();c.globalCompositeOperation=paintMode==="erase"?"destination-out":"source-over";c.fillStyle="rgba(255,255,255,1)";c.beginPath();c.arc(x,y,rad,0,Math.PI*2);c.fill();c.restore();updateMaskOverlay();renderPreview()}
-$("maskCanvas").addEventListener("pointerdown",e=>{e.preventDefault();$("maskCanvas").setPointerCapture(e.pointerId);paint(e)});$("maskCanvas").addEventListener("pointermove",e=>{if(e.buttons)paint(e)});
-$("addMask").onclick=createMask;$("clearMasks").onclick=()=>{masks=[];activeMask=-1;updateMaskList();updateMaskControls();updateMaskOverlay();renderPreview()};
-$("paintMode").onclick=()=>paintMode="paint";$("eraseMode").onclick=()=>paintMode="erase";$("clearCurrentMask").onclick=()=>{if(activeMask>=0){masks[activeMask].ctx.clearRect(0,0,masks[activeMask].canvas.width,masks[activeMask].canvas.height);updateMaskOverlay();renderPreview()}};
-["maskBrightness","maskContrast"].forEach(id=>$(id).oninput=()=>{if(activeMask>=0){masks[activeMask][id==="maskBrightness"?"brightness":"contrast"]=+$(id).value;renderPreview()}});
-function updateOutputs(){const map=[["cols","colsOut",v=>v],["contrast","contrastOut",v=>v+"%"],["blackDepth","blackOut",v=>v],["detail","detailOut",v=>v],["curve","curveOut",v=>(v/100).toFixed(2)],["bgStrength","bgStrengthOut",v=>v],["bgThresh","bgThreshOut",v=>v],["margin","marginOut",v=>v],["gap","gapOut",v=>v]];map.forEach(([a,b,f])=>$(b).textContent=f($(a).value))}
-["cols","contrast","blackDepth","detail","curve","bgStrength","bgThresh","margin","gap"].forEach(id=>$(id).addEventListener("input",()=>{if(id==="cols"){cols=+$("cols").value;calcRows()}updateOutputs();renderPreview();updatePrintCSS()}));
-["bgSep","bgMode","showTitle","showLegend","paper","orientation"].forEach(id=>$(id).addEventListener("change",()=>{updatePrintCSS();renderPreview()}));
-$("modeFinal").onclick=()=>{template=false;$("modeFinal").classList.add("active");$("modeTemplate").classList.remove("active");renderPreview()};
-$("modeTemplate").onclick=()=>{template=true;$("modeTemplate").classList.add("active");$("modeFinal").classList.remove("active");renderPreview()};
-$("autoBtn").onclick=autoAdjust;
-$("resetBtn").onclick=()=>{["contrast","blackDepth","detail","curve","bgStrength","bgThresh","margin","gap","cols"].forEach((id,i)=>$(id).value=["100","0","50","100","55","32","8","0","70"][i]);$("bgSep").checked=false;cols=70;toneOffsets=Array(10).fill(0);activePatterns=patterns.map(p=>p.id);buildTones();buildPatterns();updateOutputs();renderPreview()};
-$("clearBtn").onclick=()=>{image=null;source=null;masks=[];activeMask=-1;$("previewCanvas").width=0;$("previewCanvas").height=0;$("maskCanvas").style.display="none";$("empty").style.display="flex";$("statusText").textContent="SIN IMAGEN";$("gridMeta").textContent="Carga una imagen para comenzar";updateMaskList();updateMaskControls()};
-window.addEventListener("resize",updateMaskOverlay);
-function paperSize(){return {letter:[216,279.4],a4:[210,297],a3:[297,420],a5:[148,210],legal:[215.9,355.6],oficio:[216,330]}[$("paper").value]}
-function updatePrintCSS(){const [pw,ph]=paperSize(),ori=$("orientation").value==="auto"?(image&&image.width>image.height?"landscape":"portrait"):$("orientation").value;const w=ori==="landscape"?ph:pw,h=ori==="landscape"?pw:ph;$("dynamicPrintStyle").textContent=`@media print{@page{size:${w}mm ${h}mm;margin:${+$("margin").value}mm}#printSheet{width:${w}mm;height:${h}mm}}`}
-function buildPrint(){
- if(!image)return alert("Carga una imagen primero.");const [pw,ph]=paperSize(),ori=$("orientation").value==="auto"?(image.width>image.height?"landscape":"portrait"):$("orientation").value,w=(ori==="landscape"?ph:pw)-+$("margin").value*2,h=(ori==="landscape"?pw:ph)-+$("margin").value*2;
- let reserveTitle=$("showTitle").checked?12:0,reserveLegend=$("showLegend").checked?20:0,gw=w,gh=h-reserveTitle-reserveLegend;
- const cell=Math.min(gw/cols,gh/rows),fw=cell*cols,fh=cell*rows;
- const maxPx=2600,pc=document.createElement("canvas"),scale=Math.min(maxPx/fw,10),pcell=Math.max(.5,cell*scale);renderGrid(pc,pcell,true);
- const body=$("printBody");body.innerHTML="";body.style.cssText=`width:100%;height:100%;display:flex;flex-direction:column;align-items:center;overflow:hidden;font-family:Arial,sans-serif`;
- if(reserveTitle){const t=document.createElement("div");t.textContent="PIXEL HATCH — MONOCHROME GRID";t.style.cssText=`height:${reserveTitle}mm;flex:0 0 ${reserveTitle}mm;font-size:8pt;font-weight:bold;letter-spacing:.12em;display:flex;align-items:center`;body.appendChild(t)}
- const wrap=document.createElement("div");wrap.style.cssText=`height:${gh}mm;flex:0 0 ${gh}mm;width:${w}mm;display:flex;align-items:center;justify-content:center`;pc.style.width=fw+"mm";pc.style.height=fh+"mm";pc.style.display="block";wrap.appendChild(pc);body.appendChild(wrap);
- if(reserveLegend){const l=document.createElement("div");l.style.cssText=`height:${reserveLegend}mm;flex:0 0 ${reserveLegend}mm;width:${w}mm;display:flex;align-items:center;justify-content:center;gap:7px;font-size:6pt;border-top:.2mm solid #ddd`;l.innerHTML=patterns.filter(p=>activePatterns.includes(p.id)).map(p=>`<span style="display:inline-flex;align-items:center;gap:2px">${icon(p.type)} ${p.name}</span>`).join("");body.appendChild(l)}
+
+
+function createMask(){
+
+if(!image)return;
+
+const scale=
+Math.min(
+ 1,
+ 900/
+ Math.max(
+  image.width,
+  image.height
+ )
+);
+
+const w=
+Math.max(
+ 1,
+ Math.round(
+  image.width*scale
+ )
+);
+
+const h=
+Math.max(
+ 1,
+ Math.round(
+  image.height*scale
+ )
+);
+
+const c=
+document.createElement("canvas");
+
+c.width=w;
+c.height=h;
+
+masks.push({
+
+name:`Máscara ${masks.length+1}`,
+
+canvas:c,
+
+ctx:c.getContext("2d"),
+
+brightness:0,
+
+contrast:0
+
+});
+
+activeMask=masks.length-1;
+
+updateMaskList();
+updateMaskControls();
+updateMaskOverlay();
+
+}
+
+
+function updateMaskList(){
+
+const el=$("maskList");
+
+el.innerHTML="";
+
+masks.forEach((m,i)=>{
+
+const d=
+document.createElement("div");
+
+d.className="mask-item";
+
+d.innerHTML=`
+<span>${m.name}</span>
+
+<button
+ class="btn"
+ data-m="${i}">
+ ${i===activeMask?"ACTIVA":"USAR"}
+</button>
+
+<button
+ class="btn"
+ data-del="${i}">
+ ×
+</button>
+`;
+
+el.appendChild(d);
+
+});
+
+
+el
+.querySelectorAll("[data-m]")
+.forEach(b=>{
+
+b.onclick=()=>{
+
+activeMask=
++b.dataset.m;
+
+updateMaskList();
+updateMaskControls();
+updateMaskOverlay();
+
+};
+
+});
+
+
+el
+.querySelectorAll("[data-del]")
+.forEach(b=>{
+
+b.onclick=()=>{
+
+masks.splice(
+ +b.dataset.del,
+ 1
+);
+
+activeMask=
+Math.min(
+ activeMask,
+ masks.length-1
+);
+
+updateMaskList();
+updateMaskControls();
+updateMaskOverlay();
+renderPreview();
+
+};
+
+});
+
+}
+
+
+function updateMaskControls(){
+
+const show=
+ activeMask>=0 &&
+ masks[activeMask];
+
+$("maskTools")
+.classList.toggle(
+ "show",
+ !!show
+);
+
+if(show){
+
+$("maskBrightness").value=
+masks[activeMask].brightness;
+
+$("maskContrast").value=
+masks[activeMask].contrast;
+
+}
+
+}
+
+
+function updateMaskOverlay(){
+
+const o=$("maskCanvas");
+
+if(
+ activeMask<0 ||
+ !masks[activeMask] ||
+ !image
+){
+
+o.style.display="none";
+
+return;
+
+}
+
+o.style.display="block";
+
+const p=$("previewCanvas");
+
+const r=
+p.getBoundingClientRect();
+
+const w=
+$("canvasWrap").getBoundingClientRect();
+
+o.width=
+Math.max(
+ 1,
+ Math.round(r.width)
+);
+
+o.height=
+Math.max(
+ 1,
+ Math.round(r.height)
+);
+
+o.style.width=
+r.width+"px";
+
+o.style.height=
+r.height+"px";
+
+o.style.left=
+(r.left-w.left)+"px";
+
+o.style.top=
+(r.top-w.top)+"px";
+
+
+const ctx=
+o.getContext("2d");
+
+ctx.clearRect(
+ 0,
+ 0,
+ o.width,
+ o.height
+);
+
+ctx.drawImage(
+ masks[activeMask].canvas,
+ 0,
+ 0,
+ o.width,
+ o.height
+);
+
+ctx.globalCompositeOperation=
+"source-in";
+
+ctx.fillStyle=
+"rgba(255,0,148,.22)";
+
+ctx.fillRect(
+ 0,
+ 0,
+ o.width,
+ o.height
+);
+
+}
+
+
+function paint(e){
+
+if(activeMask<0)return;
+
+const o=$("maskCanvas");
+
+const r=
+o.getBoundingClientRect();
+
+const x=
+(e.clientX-r.left)*
+masks[activeMask].canvas.width/
+r.width;
+
+const y=
+(e.clientY-r.top)*
+masks[activeMask].canvas.height/
+r.height;
+
+const c=
+masks[activeMask].ctx;
+
+const rad=
++$("brushSize").value*
+masks[activeMask].canvas.width/
+Math.max(r.width,1)/
+2;
+
+c.save();
+
+c.globalCompositeOperation=
+paintMode==="erase"
+ ?"destination-out"
+ :"source-over";
+
+c.fillStyle=
+"rgba(255,255,255,1)";
+
+c.beginPath();
+
+c.arc(
+ x,
+ y,
+ rad,
+ 0,
+ Math.PI*2
+);
+
+c.fill();
+
+c.restore();
+
+updateMaskOverlay();
+
+renderPreview();
+
+}
+
+
+$("maskCanvas")
+.addEventListener(
+ "pointerdown",
+ e=>{
+
+ e.preventDefault();
+
+ $("maskCanvas")
+ .setPointerCapture(
+  e.pointerId
+ );
+
+ paint(e);
+
+ }
+);
+
+
+$("maskCanvas")
+.addEventListener(
+ "pointermove",
+ e=>{
+
+ if(e.buttons)
+ paint(e);
+
+ }
+);
+
+
+$("addMask").onclick=
+createMask;
+
+
+$("clearMasks").onclick=()=>{
+
+masks=[];
+
+activeMask=-1;
+
+updateMaskList();
+updateMaskControls();
+updateMaskOverlay();
+renderPreview();
+
+};
+
+
+$("paintMode").onclick=()=>
+paintMode="paint";
+
+$("eraseMode").onclick=()=>
+paintMode="erase";
+
+
+$("clearCurrentMask").onclick=()=>{
+
+if(activeMask>=0){
+
+masks[
+ activeMask
+].ctx.clearRect(
+ 0,
+ 0,
+ masks[activeMask].canvas.width,
+ masks[activeMask].canvas.height
+);
+
+updateMaskOverlay();
+renderPreview();
+
+}
+
+};
+
+
+[
+ "maskBrightness",
+ "maskContrast"
+]
+.forEach(id=>{
+
+$(id).oninput=()=>{
+
+if(activeMask>=0){
+
+masks[
+ activeMask
+][
+ id==="maskBrightness"
+ ?"brightness"
+ :"contrast"
+]=+$(id).value;
+
+renderPreview();
+
+}
+
+};
+
+});
+
+
+function updateOutputs(){
+
+const map=[
+
+["cols","colsOut",v=>v],
+
+["contrast",
+ "contrastOut",
+ v=>v+"%"],
+
+["blackDepth",
+ "blackOut",
+ v=>v],
+
+["detail",
+ "detailOut",
+ v=>v],
+
+["curve",
+ "curveOut",
+ v=>(v/100).toFixed(2)],
+
+["bgStrength",
+ "bgStrengthOut",
+ v=>v],
+
+["bgThresh",
+ "bgThreshOut",
+ v=>v],
+
+["margin",
+ "marginOut",
+ v=>v],
+
+["gap",
+ "gapOut",
+ v=>v]
+
+];
+
+map.forEach(
+ ([a,b,f])=>
+ $(b).textContent=
+ f($(a).value)
+);
+
+}
+
+
+[
+ "cols",
+ "contrast",
+ "blackDepth",
+ "detail",
+ "curve",
+ "bgStrength",
+ "bgThresh",
+ "margin",
+ "gap"
+]
+.forEach(id=>{
+
+$(id).addEventListener(
+ "input",
+ ()=>{
+
+ if(id==="cols"){
+
+ cols=+$("cols").value;
+
+ calcRows();
+
+ }
+
+ updateOutputs();
+
+ renderPreview();
+
  updatePrintCSS();
+
+ }
+);
+
+});
+
+
+[
+ "bgSep",
+ "bgMode",
+ "showTitle",
+ "showLegend",
+ "paper",
+ "orientation"
+]
+.forEach(id=>{
+
+$(id).addEventListener(
+ "change",
+ ()=>{
+
+ updatePrintCSS();
+
+ renderPreview();
+
+ }
+);
+
+});
+
+
+$("modeFinal").onclick=()=>{
+
+template=false;
+
+$("modeFinal")
+.classList.add("active");
+
+$("modeTemplate")
+.classList.remove("active");
+
+renderPreview();
+
+};
+
+
+$("modeTemplate").onclick=()=>{
+
+template=true;
+
+$("modeTemplate")
+.classList.add("active");
+
+$("modeFinal")
+.classList.remove("active");
+
+renderPreview();
+
+};
+
+
+$("autoBtn").onclick=
+autoAdjust;
+
+
+$("resetBtn").onclick=()=>{
+
+[
+ "contrast",
+ "blackDepth",
+ "detail",
+ "curve",
+ "bgStrength",
+ "bgThresh",
+ "margin",
+ "gap",
+ "cols"
+]
+.forEach(
+ (id,i)=>
+ $(id).value=
+ [
+  "100",
+  "0",
+  "50",
+  "100",
+  "55",
+  "32",
+  "8",
+  "0",
+  "70"
+ ][i]
+);
+
+$("bgSep").checked=false;
+
+cols=70;
+
+toneOffsets=
+Array(10).fill(0);
+
+activePatterns=
+patterns.map(
+ p=>p.id
+);
+
+buildTones();
+buildPatterns();
+
+updateOutputs();
+
+renderPreview();
+
+};
+
+
+$("clearBtn").onclick=()=>{
+
+image=null;
+
+source=null;
+
+masks=[];
+
+activeMask=-1;
+
+$("previewCanvas").width=0;
+$("previewCanvas").height=0;
+
+$("maskCanvas").style.display="none";
+
+$("empty").style.display="flex";
+
+$("statusText").textContent=
+"SIN IMAGEN";
+
+$("gridMeta").textContent=
+"Carga una imagen para comenzar";
+
+updateMaskList();
+updateMaskControls();
+
+};
+
+
+window.addEventListener(
+ "resize",
+ updateMaskOverlay
+);
+
+
+function paperSize(){
+
+return {
+
+letter:[216,279.4],
+
+a4:[210,297],
+
+a3:[297,420],
+
+a5:[148,210],
+
+legal:[215.9,355.6],
+
+oficio:[216,330]
+
+}[$("paper").value];
+
 }
-$("printBtn").onclick=()=>{buildPrint();setTimeout(()=>window.print(),80)};
-buildPatterns();buildTones();updateOutputs();updatePrintCSS();
+
+
+function updatePrintCSS(){
+
+const [pw,ph]=paperSize();
+
+const ori=
+$("orientation").value==="auto"
+
+?
+(
+ image&&
+ image.width>image.height
+ ?"landscape"
+ :"portrait"
+)
+
+:
+$("orientation").value;
+
+const w=
+ori==="landscape"
+?ph
+:pw;
+
+const h=
+ori==="landscape"
+?pw
+:ph;
+
+
+$("dynamicPrintStyle").textContent=
+`
+@media print{
+
+ @page{
+  size:${w}mm ${h}mm;
+  margin:${+$("margin").value}mm
+ }
+
+ #printSheet{
+  width:${w}mm;
+  height:${h}mm
+ }
+
+}
+`;
+
+}
+
+
+function buildPrint(){
+
+if(!image){
+
+alert(
+ "Carga una imagen primero."
+);
+
+return;
+
+}
+
+
+const [pw,ph]=paperSize();
+
+const ori=
+$("orientation").value==="auto"
+
+?
+(
+ image.width>image.height
+ ?"landscape"
+ :"portrait"
+)
+
+:
+$("orientation").value;
+
+
+const w=
+(
+ ori==="landscape"
+ ?ph
+ :pw
+)
+-
++$("margin").value*2;
+
+
+const h=
+(
+ ori==="landscape"
+ ?pw
+ :ph
+)
+-
++$("margin").value*2;
+
+
+let reserveTitle=
+$("showTitle").checked
+?12
+:0;
+
+let reserveLegend=
+$("showLegend").checked
+?20
+:0;
+
+let gw=w;
+
+let gh=
+h-
+reserveTitle-
+reserveLegend;
+
+
+/*
+ El tamaño se calcula usando el máximo
+ espacio físico disponible.
+*/
+const cell=
+Math.min(
+ gw/cols,
+ gh/rows
+);
+
+const fw=
+cell*cols;
+
+const fh=
+cell*rows;
+
+
+const maxPx=2600;
+
+const pc=
+document.createElement("canvas");
+
+const scale=
+Math.min(
+ maxPx/fw,
+ 10
+);
+
+const pcell=
+Math.max(
+ .5,
+ cell*scale
+);
+
+
+renderGrid(
+ pc,
+ pcell,
+ true
+);
+
+
+const body=
+$("printBody");
+
+body.innerHTML="";
+
+body.style.cssText=
+`
+width:100%;
+height:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
+overflow:hidden;
+font-family:Arial,sans-serif
+`;
+
+
+if(reserveTitle){
+
+const t=
+document.createElement("div");
+
+t.textContent=
+"PIXEL HATCH — MONOCHROME GRID";
+
+t.style.cssText=
+`
+height:${reserveTitle}mm;
+flex:0 0 ${reserveTitle}mm;
+font-size:8pt;
+font-weight:bold;
+letter-spacing:.12em;
+display:flex;
+align-items:center
+`;
+
+body.appendChild(t);
+
+}
+
+
+const wrap=
+document.createElement("div");
+
+wrap.style.cssText=
+`
+height:${gh}mm;
+flex:0 0 ${gh}mm;
+width:${w}mm;
+display:flex;
+align-items:center;
+justify-content:center
+`;
+
+pc.style.width=
+fw+"mm";
+
+pc.style.height=
+fh+"mm";
+
+pc.style.display="block";
+
+wrap.appendChild(pc);
+
+body.appendChild(wrap);
+
+
+if(reserveLegend){
+
+const l=
+document.createElement("div");
+
+l.style.cssText=
+`
+height:${reserveLegend}mm;
+flex:0 0 ${reserveLegend}mm;
+width:${w}mm;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:7px;
+font-size:6pt;
+border-top:.2mm solid #ddd
+`;
+
+l.innerHTML=
+patterns
+.filter(
+ p=>activePatterns.includes(p.id)
+)
+.map(
+ p=>
+ `<span style="
+ display:inline-flex;
+ align-items:center;
+ gap:2px">
+ ${icon(p.type)}
+ ${p.name}
+ </span>`
+)
+.join("");
+
+body.appendChild(l);
+
+}
+
+updatePrintCSS();
+
+}
+
+
+$("printBtn").onclick=()=>{
+
+buildPrint();
+
+setTimeout(
+ ()=>window.print(),
+ 80
+);
+
+};
+
+
+buildPatterns();
+
+buildTones();
+
+updateOutputs();
+
+updatePrintCSS();
+
 </script>
+
 </body>
 </html>
